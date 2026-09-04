@@ -189,7 +189,7 @@ class NumerologyService
         // Parse the date
         $date = \DateTime::createFromFormat('Y-m-d', $birthDate);
 
-        if (!$date) {
+        if (! $date) {
             throw new \InvalidArgumentException('Invalid date format. Use Y-m-d.');
         }
 

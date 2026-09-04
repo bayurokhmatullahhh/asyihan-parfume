@@ -12,7 +12,7 @@ class NumerologyServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->service = new NumerologyService();
+        $this->service = new NumerologyService;
     }
 
     public function test_it_calculates_core_number_accurately_from_birth_date(): void

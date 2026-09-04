@@ -61,12 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     const sidebarForm = document.getElementById('sidebar-calc-form');
     if (sidebarForm) {
+        const romanNumerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+
         sidebarForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('sidebar-calc-btn');
             const name = document.getElementById('sidebar_name').value;
             const birthDate = document.getElementById('sidebar_birth_date').value;
-            const resContainer = document.getElementById('sidebar-result');
+            const resCard = document.getElementById('sidebar-result-card');
 
             if (!name || !birthDate) return;
 
@@ -90,14 +92,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (data.success && data.data) {
                     const r = data.data;
-                    document.getElementById('res-number').textContent = r.core_number;
-                    document.getElementById('res-archetype').textContent = r.archetype.name;
-                    document.getElementById('res-desc').textContent = r.archetype.description;
-                    document.getElementById('res-essence-name').textContent = r.archetype.essence_name;
-                    document.getElementById('res-link').href = `/essence/${r.archetype.slug}`;
+                    const arch = r.archetype;
+                    const romanNum = romanNumerals[arch.number] || arch.number;
 
-                    resContainer.classList.remove('hidden');
-                    resContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    const elRoman = document.getElementById('res-essence-roman');
+                    const elArchTitle = document.getElementById('res-archetype-title');
+                    const elBottleLabel = document.getElementById('res-bottle-label');
+                    const elDesc = document.getElementById('res-description');
+                    const elTop = document.getElementById('res-note-top');
+                    const elMid = document.getElementById('res-note-mid');
+                    const elBase = document.getElementById('res-note-base');
+                    const elPrice = document.getElementById('res-price');
+                    const elOrderLink = document.getElementById('res-order-link');
+                    const elDetailLink = document.getElementById('res-detail-link');
+
+                    if (elRoman) elRoman.textContent = `ESSENCE ${romanNum}`;
+                    if (elArchTitle) elArchTitle.textContent = arch.name.toUpperCase();
+                    if (elBottleLabel) elBottleLabel.textContent = `ESSENCE ${romanNum}`;
+                    if (elDesc) elDesc.textContent = arch.description;
+                    if (elTop) elTop.textContent = arch.notes.top;
+                    if (elMid) elMid.textContent = arch.notes.middle;
+                    if (elBase) elBase.textContent = arch.notes.base;
+                    if (elPrice) elPrice.textContent = `Rp ${arch.price.toLocaleString('id-ID')}`;
+                    if (elOrderLink) elOrderLink.href = `/order?essence=${arch.number}`;
+                    if (elDetailLink) elDetailLink.href = `/essence/${arch.slug}`;
+
+                    if (resCard) {
+                        resCard.classList.remove('hidden');
+                        resCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 }
             } catch (err) {
                 console.error('Calculation error:', err);

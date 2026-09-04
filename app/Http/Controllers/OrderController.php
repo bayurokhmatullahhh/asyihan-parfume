@@ -55,7 +55,7 @@ class OrderController extends Controller
         // Build WhatsApp message
         $message = $this->buildWhatsAppMessage($order, $essence);
         $phone = '6281234567890'; // Default WhatsApp number
-        $waUrl = 'https://wa.me/' . $phone . '?text=' . urlencode($message);
+        $waUrl = 'https://wa.me/'.$phone.'?text='.urlencode($message);
 
         return redirect()->away($waUrl);
     }
@@ -68,17 +68,17 @@ class OrderController extends Controller
         $totalFormatted = number_format($order->total_price, 0, ',', '.');
 
         return "✨ *ORDER ASYIHAN* ✨\n\n"
-            . "Nama: {$order->name}\n"
-            . "Telepon: {$order->phone}\n"
-            . ($order->email ? "Email: {$order->email}\n" : "")
-            . "\n"
-            . "Produk: {$order->essence_name}\n"
-            . "Jumlah: {$order->quantity}\n"
-            . "Total: Rp {$totalFormatted}\n"
-            . ($order->notes ? "\nCatatan: {$order->notes}\n" : "")
-            . "\n"
-            . "Order ID: #{$order->id}\n"
-            . "---\n"
-            . "From Asih, Comes Essence.";
+            ."Nama: {$order->name}\n"
+            ."Telepon: {$order->phone}\n"
+            .($order->email ? "Email: {$order->email}\n" : '')
+            ."\n"
+            ."Produk: {$order->essence_name}\n"
+            ."Jumlah: {$order->quantity}\n"
+            ."Total: Rp {$totalFormatted}\n"
+            .($order->notes ? "\nCatatan: {$order->notes}\n" : '')
+            ."\n"
+            ."Order ID: #{$order->id}\n"
+            ."---\n"
+            .'From Asih, Comes Essence.';
     }
 }

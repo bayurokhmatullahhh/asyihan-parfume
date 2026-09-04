@@ -47,7 +47,7 @@ class PageController extends Controller
     {
         $essence = $this->numerology->getArchetypeBySlug($slug);
 
-        if (!$essence) {
+        if (! $essence) {
             abort(404);
         }
 
