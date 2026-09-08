@@ -146,7 +146,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                                 </svg>
                             </span>
-                            <span class="text-gray-300 tracking-wide">+62 812-3456-7890</span>
+                            <span class="text-gray-300 tracking-wide">08112144113</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <span class="text-gold-400 shrink-0">
@@ -154,7 +154,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </span>
-                            <span class="text-gray-300 tracking-wide">info@asyihan.com</span>
+                            <span class="text-gray-300 tracking-wide">info@asyihan.id</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <span class="text-gold-400 shrink-0">
@@ -171,7 +171,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
                             </span>
-                            <span class="text-gray-300 tracking-wide leading-relaxed">Bandung, West Java,<br>Indonesia</span>
+                            <span class="text-gray-300 tracking-wide leading-relaxed">Jl. Tamblong No.46, Braga, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40112</span>
                         </li>
                     </ul>
                 </div>
