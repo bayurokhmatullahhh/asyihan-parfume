@@ -396,3 +396,256 @@ input[type="date"].input-dark {
 .mobile-menu.active {
     transform: translateX(0);
 }
+
+/* ========================================
+   Mystical Orbit & Particle Animations
+   ======================================== */
+
+@keyframes orbit {
+    from { transform: rotate(0deg) translateX(var(--orbit-radius, 80px)) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(var(--orbit-radius, 80px)) rotate(-360deg); }
+}
+
+@keyframes orbit-reverse {
+    from { transform: rotate(360deg) translateX(var(--orbit-radius, 60px)) rotate(-360deg); }
+    to { transform: rotate(0deg) translateX(var(--orbit-radius, 60px)) rotate(0deg); }
+}
+
+@keyframes constellation-pulse {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes constellation-twinkle {
+    0%, 100% { opacity: 0.1; }
+    25% { opacity: 0.8; }
+    50% { opacity: 0.3; }
+    75% { opacity: 0.9; }
+}
+
+@keyframes sacred-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes sacred-rotate-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@keyframes text-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes float-particle {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    10% { opacity: 0.8; }
+    50% { transform: translateY(-40px) translateX(15px) scale(1.2); opacity: 0.5; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-80px) translateX(-10px) scale(0.6); opacity: 0; }
+}
+
+@keyframes glow-breathe {
+    0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.3)) drop-shadow(0 0 20px rgba(197, 160, 89, 0.15));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.7)) drop-shadow(0 0 50px rgba(197, 160, 89, 0.35));
+    }
+}
+
+@keyframes rune-flicker {
+    0%, 100% { opacity: 0.15; }
+    30% { opacity: 0.6; }
+    60% { opacity: 0.25; }
+    80% { opacity: 0.7; }
+}
+
+@keyframes energy-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(197, 160, 89, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+}
+
+@keyframes line-draw {
+    from { stroke-dashoffset: 1000; }
+    to { stroke-dashoffset: 0; }
+}
+
+/* Animation utility classes */
+.animate-orbit {
+    animation: orbit 20s linear infinite;
+}
+
+.animate-orbit-reverse {
+    animation: orbit-reverse 25s linear infinite;
+}
+
+.animate-constellation-pulse {
+    animation: constellation-pulse 3s ease-in-out infinite;
+}
+
+.animate-constellation-twinkle {
+    animation: constellation-twinkle 4s ease-in-out infinite;
+}
+
+.animate-sacred-rotate {
+    animation: sacred-rotate 45s linear infinite;
+}
+
+.animate-sacred-rotate-reverse {
+    animation: sacred-rotate-reverse 35s linear infinite;
+}
+
+.animate-text-reveal {
+    animation: text-reveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+}
+
+.animate-float-particle {
+    animation: float-particle 4s ease-in-out infinite;
+}
+
+.animate-glow-breathe {
+    animation: glow-breathe 4s ease-in-out infinite;
+}
+
+.animate-rune-flicker {
+    animation: rune-flicker 5s ease-in-out infinite;
+}
+
+.animate-energy-pulse {
+    animation: energy-pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+   Mystical Decoration Elements
+   ======================================== */
+
+/* Sacred geometry ring container */
+.sacred-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(197, 160, 89, 0.15);
+    pointer-events: none;
+}
+
+.sacred-ring::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1px dashed rgba(197, 160, 89, 0.08);
+}
+
+/* Orbit particle dot */
+.orbit-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-gold-400);
+    box-shadow: 0 0 8px rgba(197, 160, 89, 0.6);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -2px 0 0 -2px;
+}
+
+/* Constellation star */
+.constellation-star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(197, 160, 89, 0.6);
+    box-shadow: 0 0 6px rgba(197, 160, 89, 0.4);
+}
+
+/* Sacred ornament divider */
+.sacred-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.sacred-divider::before,
+.sacred-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to var(--dir, right), transparent, rgba(197, 160, 89, 0.4), transparent);
+}
+
+.sacred-divider::after {
+    --dir: left;
+}
+
+/* Mystical card glow on hover */
+.mystical-card-hover {
+    position: relative;
+    overflow: hidden;
+}
+
+.mystical-card-hover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(197, 160, 89, 0.06) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.mystical-card-hover:hover::before {
+    opacity: 1;
+}
+
+/* Gold shimmer line */
+.gold-shimmer-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(197, 160, 89, 0.6) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Essence card number ring */
+.essence-num-ring {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.essence-num-ring::before {
+    content: '';
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    animation: sacred-rotate 15s linear infinite;
+}
+
+.essence-num-ring::after {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px dashed rgba(197, 160, 89, 0.1);
+    animation: sacred-rotate-reverse 20s linear infinite;
+}

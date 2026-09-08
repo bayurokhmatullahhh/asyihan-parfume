@@ -95,13 +95,39 @@ document.addEventListener('DOMContentLoaded', () => {
                     const arch = r.archetype;
                     const romanNum = romanNumerals[arch.number] || arch.number;
 
+                    // Bagian 1: Analisis Numerologi & Karakter
+                    const elUserName = document.getElementById('res-user-name');
+                    const elCoreNumber = document.getElementById('res-core-number');
+                    const elArchName = document.getElementById('res-archetype-name');
+                    const elElementBadge = document.getElementById('res-element-badge');
+                    const elTraitsContainer = document.getElementById('res-traits-container');
+                    const elCharDesc = document.getElementById('res-character-desc');
+
+                    if (elUserName) elUserName.textContent = r.name;
+                    if (elCoreNumber) elCoreNumber.textContent = r.core_number;
+                    if (elArchName) elArchName.textContent = arch.name;
+                    if (elElementBadge) elElementBadge.textContent = `Elemen: ${arch.element}`;
+                    if (elCharDesc) elCharDesc.textContent = arch.description;
+
+                    if (elTraitsContainer && Array.isArray(arch.traits)) {
+                        elTraitsContainer.innerHTML = '';
+                        arch.traits.forEach(t => {
+                            const span = document.createElement('span');
+                            span.className = 'text-[9px] uppercase tracking-wider px-2 py-0.5 rounded bg-black/80 border border-gold-400/20 text-gold-300';
+                            span.textContent = t;
+                            elTraitsContainer.appendChild(span);
+                        });
+                    }
+
+                    // Bagian 2: Rekomendasi Parfum
                     const elRoman = document.getElementById('res-essence-roman');
                     const elArchTitle = document.getElementById('res-archetype-title');
                     const elBottleLabel = document.getElementById('res-bottle-label');
-                    const elDesc = document.getElementById('res-description');
+                    const elFragDesc = document.getElementById('res-fragrance-desc');
                     const elTop = document.getElementById('res-note-top');
                     const elMid = document.getElementById('res-note-mid');
                     const elBase = document.getElementById('res-note-base');
+                    const elAjian = document.getElementById('res-ajian-snippet');
                     const elPrice = document.getElementById('res-price');
                     const elOrderLink = document.getElementById('res-order-link');
                     const elDetailLink = document.getElementById('res-detail-link');
@@ -109,10 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (elRoman) elRoman.textContent = `ESSENCE ${romanNum}`;
                     if (elArchTitle) elArchTitle.textContent = arch.name.toUpperCase();
                     if (elBottleLabel) elBottleLabel.textContent = `ESSENCE ${romanNum}`;
-                    if (elDesc) elDesc.textContent = arch.description;
-                    if (elTop) elTop.textContent = arch.notes.top;
-                    if (elMid) elMid.textContent = arch.notes.middle;
-                    if (elBase) elBase.textContent = arch.notes.base;
+                    if (elFragDesc) elFragDesc.textContent = arch.fragrance_description || arch.description;
+                    if (elTop && arch.notes) elTop.textContent = arch.notes.top;
+                    if (elMid && arch.notes) elMid.textContent = arch.notes.middle;
+                    if (elBase && arch.notes) elBase.textContent = arch.notes.base;
+                    if (elAjian) elAjian.textContent = `"${arch.ajian}"`;
                     if (elPrice) elPrice.textContent = `Rp ${arch.price.toLocaleString('id-ID')}`;
                     if (elOrderLink) elOrderLink.href = `/order?essence=${arch.number}`;
                     if (elDetailLink) elDetailLink.href = `/essence/${arch.slug}`;
