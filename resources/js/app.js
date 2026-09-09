@@ -57,24 +57,179 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
-    // 3. Sidebar Numerology Form (Home page)
+    // 3. Numerology Form (Home page with 3 manual date inputs)
     // ----------------------------------------------------
     const sidebarForm = document.getElementById('sidebar-calc-form');
     if (sidebarForm) {
         const romanNumerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+        const dayInput = document.getElementById('home_calc_day');
+        const monthInput = document.getElementById('home_calc_month');
+        const yearInput = document.getElementById('home_calc_year');
+        const dateError = document.getElementById('home_calc_date_error');
+        const dateErrorMsg = document.getElementById('home_calc_date_error_msg');
+        const placeholderBox = document.getElementById('home_calc_placeholder');
+        const resCard = document.getElementById('sidebar-result-card');
+        const resetBtn = document.getElementById('home_calc_reset_btn');
+
+        // Helper functions for error handling
+        const showDateError = (msg) => {
+            if (dateError && dateErrorMsg) {
+                dateErrorMsg.textContent = msg;
+                dateError.classList.remove('hidden');
+            }
+        };
+
+        const hideDateError = () => {
+            if (dateError) {
+                dateError.classList.add('hidden');
+            }
+        };
+
+        // Date input auto-advance, keydown backspace, and smart paste
+        if (dayInput && monthInput && yearInput) {
+            const inputs = [dayInput, monthInput, yearInput];
+
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    hideDateError();
+                    // Strip non-digits
+                    e.target.value = e.target.value.replace(/\D/g, '');
+
+                    // Auto-advance
+                    if (input === dayInput && dayInput.value.length === 2) {
+                        monthInput.focus();
+                        monthInput.select();
+                    } else if (input === monthInput && monthInput.value.length === 2) {
+                        yearInput.focus();
+                        yearInput.select();
+                    }
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && input.value === '') {
+                        if (index > 0) {
+                            inputs[index - 1].focus();
+                        }
+                    }
+                });
+
+                // Paste support (DD-MM-YYYY, DD/MM/YYYY, YYYY-MM-DD, 17081995)
+                input.addEventListener('paste', (e) => {
+                    const pasteData = (e.clipboardData || window.clipboardData).getData('text').trim();
+                    const clean = pasteData.replace(/[^\d\/-]/g, '');
+                    const parts = clean.split(/[\/-]/);
+
+                    if (parts.length === 3) {
+                        e.preventDefault();
+                        if (parts[0].length === 4) {
+                            yearInput.value = parts[0].slice(0, 4);
+                            monthInput.value = parts[1].slice(0, 2);
+                            dayInput.value = parts[2].slice(0, 2);
+                        } else {
+                            dayInput.value = parts[0].slice(0, 2);
+                            monthInput.value = parts[1].slice(0, 2);
+                            yearInput.value = parts[2].slice(0, 4);
+                        }
+                        hideDateError();
+                    } else if (clean.length === 8 && /^\d+$/.test(clean)) {
+                        e.preventDefault();
+                        dayInput.value = clean.slice(0, 2);
+                        monthInput.value = clean.slice(2, 4);
+                        yearInput.value = clean.slice(4, 8);
+                        hideDateError();
+                    }
+                });
+            });
+        }
+
+        // Reset button
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                if (resCard) resCard.classList.add('hidden');
+                if (placeholderBox) placeholderBox.classList.remove('hidden');
+                hideDateError();
+                document.getElementById('sidebar_name')?.focus();
+            });
+        }
 
         sidebarForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            hideDateError();
+
             const btn = document.getElementById('sidebar-calc-btn');
-            const name = document.getElementById('sidebar_name').value;
-            const birthDate = document.getElementById('sidebar_birth_date').value;
+            const name = document.getElementById('sidebar_name')?.value?.trim();
             const resCard = document.getElementById('sidebar-result-card');
 
-            if (!name || !birthDate) return;
+            if (!name) {
+                showDateError('Silakan masukkan nama lengkap Anda.');
+                document.getElementById('sidebar_name')?.focus();
+                return;
+            }
 
-            // UI loading
+            let birthDate = '';
+            if (dayInput && monthInput && yearInput) {
+                const dayVal = dayInput.value.trim();
+                const monthVal = monthInput.value.trim();
+                const yearVal = yearInput.value.trim();
+
+                if (!dayVal || !monthVal || !yearVal) {
+                    showDateError('Silakan isi ketiga kolom tanggal lahir (Hari, Bulan, Tahun).');
+                    return;
+                }
+
+                const d = parseInt(dayVal, 10);
+                const m = parseInt(monthVal, 10);
+                const y = parseInt(yearVal, 10);
+                const currentYear = new Date().getFullYear();
+
+                if (isNaN(d) || isNaN(m) || isNaN(y)) {
+                    showDateError('Format tanggal harus berupa angka.');
+                    return;
+                }
+
+                if (d < 1 || d > 31) {
+                    showDateError('Hari harus di antara angka 1 sampai 31.');
+                    dayInput.focus();
+                    return;
+                }
+
+                if (m < 1 || m > 12) {
+                    showDateError('Bulan harus di antara angka 1 sampai 12.');
+                    monthInput.focus();
+                    return;
+                }
+
+                if (y < 1900 || y > currentYear) {
+                    showDateError(`Tahun harus di antara 1900 sampai ${currentYear}.`);
+                    yearInput.focus();
+                    return;
+                }
+
+                const checkDate = new Date(y, m - 1, d);
+                if (
+                    checkDate.getFullYear() !== y ||
+                    checkDate.getMonth() !== m - 1 ||
+                    checkDate.getDate() !== d
+                ) {
+                    showDateError('Kombinasi tanggal tidak valid untuk kalender (misal: 31 Februari).');
+                    return;
+                }
+
+                if (checkDate > new Date()) {
+                    showDateError('Tanggal lahir tidak boleh di masa depan.');
+                    return;
+                }
+
+                birthDate = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+            } else {
+                birthDate = document.getElementById('sidebar_birth_date')?.value;
+            }
+
+            if (!birthDate) return;
+
+            // UI loading state
             const origText = btn.innerHTML;
-            btn.innerHTML = `<span class="inline-block animate-spin mr-2">✦</span> Menghitung...`;
+            btn.innerHTML = `<span class="inline-block animate-spin mr-2">✦</span> Menghitung Esensi...`;
             btn.disabled = true;
 
             try {
@@ -144,13 +299,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (elOrderLink) elOrderLink.href = `/order?essence=${arch.number}`;
                     if (elDetailLink) elDetailLink.href = `/essence/${arch.slug}`;
 
+                    // Toggle placeholder off, result card on
+                    if (placeholderBox) {
+                        placeholderBox.classList.add('hidden');
+                    }
                     if (resCard) {
                         resCard.classList.remove('hidden');
-                        resCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        resCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
+                } else if (data.message) {
+                    showDateError(data.message);
                 }
             } catch (err) {
                 console.error('Calculation error:', err);
+                showDateError('Terjadi kendala saat menghitung esensi jiwa. Silakan coba kembali.');
             } finally {
                 btn.innerHTML = origText;
                 btn.disabled = false;

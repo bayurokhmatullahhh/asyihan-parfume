@@ -49,7 +49,7 @@
                         Kemudian kami memberinya sebuah perjalanan baru: <strong class="text-gold-300">ASIHAN menjadi ASYIHAN</strong>.
                     </p>
                 </div>
-                <div class="bg-black/50 border border-gold-400/20 rounded-xl p-6 text-center">
+                <div class="bg-blue/50 border border-gold-400/20 rounded-xl p-6 text-center">
                     <div class="text-3xl font-serif text-gold-400 mb-2">A • S • Y • I • H • A • N</div>
                     <p class="text-[11px] text-gray-400 italic">
                         Sebuah nama yang akarnya tetap berpijak di tanah Sunda, tetapi aromanya mengembara jauh menuju negeri-negeri tempat Oud dibakar, Musk diwariskan, Amber dihangatkan, dan wewangian menjadi bagian dari kehormatan serta identitas seseorang.
