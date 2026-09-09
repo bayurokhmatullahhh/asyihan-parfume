@@ -103,11 +103,7 @@
                             From Asih, Comes Essence. From Character, Comes Scent. From Scent, Remains a Memory.
                         </p>
                     </div>
-                    <div>
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-mono">
-                            &copy; 2026 ASYIHAN. SACRED ALL RIGHTS RESERVED.
-                        </p>
-                    </div>
+                    
                 </div>
 
                 {{-- Col 2: Navigation (2.5 cols) --}}
@@ -146,7 +142,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                                 </svg>
                             </span>
-                            <span class="text-gray-300 tracking-wide">08112144113</span>
+                            <span class="text-gray-300 tracking-wide">+62 8112144113</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <span class="text-gold-400 shrink-0">
@@ -198,7 +194,7 @@
             {{-- Bottom Center Credit --}}
             <div class="border-t border-white/5 pt-8 text-center">
                 <p class="text-xs text-gray-500 tracking-widest font-serif">
-                    &copy; 2026 ASYIHAN Parfume. Born from Asih.
+                    &copy; Copyright 2026 PT. Lasuarindo | Asyihan.id.
                 </p>
             </div>
         </div>
