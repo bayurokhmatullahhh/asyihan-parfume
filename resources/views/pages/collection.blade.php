@@ -13,11 +13,11 @@
         </h1>
         <p class="text-gray-300 font-light text-xs sm:text-sm tracking-wide flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
             <span class="text-gold-400 text-xs">✦</span>
-            <span>Essence,</span>
+            <span>9 Essence,</span>
             <span class="text-gold-400 text-xs">✦</span>
-            <span>Karakter,</span>
+            <span>9 Karakter,</span>
             <span class="text-gold-400 text-xs">✦</span>
-            <span>Aroma.</span>
+            <span>9 Aroma.</span>
             <span class="text-gray-400 ml-1">Temukan yang paling sesuai dengan dirimu.</span>
         </p>
     </div>
