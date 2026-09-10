@@ -28,3 +28,8 @@ Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 // Contact
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+
+// Legal Pages
+Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/terms-of-service', [PageController::class, 'termsOfService'])->name('terms-of-service');
+Route::get('/shipping-returns', [PageController::class, 'shippingReturns'])->name('shipping-returns');

@@ -198,17 +198,17 @@
                     </h5>
                     <ul class="space-y-3 text-xs tracking-wider">
                         <li>
-                            <a href="{{ route('about') }}" class="text-slate-300 hover:text-gold-400 transition-colors inline-flex items-center gap-1.5 group">
+                            <a href="{{ route('privacy-policy') }}" class="{{ request()->routeIs('privacy-policy') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-400' }} transition-colors inline-flex items-center gap-1.5 group">
                                 <span class="text-gold-400/40 group-hover:text-gold-400 transition-colors">&rsaquo;</span> Privacy Policy
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('about') }}" class="text-slate-300 hover:text-gold-400 transition-colors inline-flex items-center gap-1.5 group">
+                            <a href="{{ route('terms-of-service') }}" class="{{ request()->routeIs('terms-of-service') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-400' }} transition-colors inline-flex items-center gap-1.5 group">
                                 <span class="text-gold-400/40 group-hover:text-gold-400 transition-colors">&rsaquo;</span> Terms of Service
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('order') }}" class="text-slate-300 hover:text-gold-400 transition-colors inline-flex items-center gap-1.5 group">
+                            <a href="{{ route('shipping-returns') }}" class="{{ request()->routeIs('shipping-returns') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-400' }} transition-colors inline-flex items-center gap-1.5 group">
                                 <span class="text-gold-400/40 group-hover:text-gold-400 transition-colors">&rsaquo;</span> Shipping & Returns
                             </a>
                         </li>
