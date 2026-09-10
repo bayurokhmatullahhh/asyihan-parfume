@@ -38,7 +38,7 @@ class NumerologyService
             'element' => 'Api',
             'color' => '#C41E3A',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/bottle_1.png',
+            'bottle_image' => 'images/cards/clean/card_1_bottle.png',
         ],
         2 => [
             'number' => 2,
@@ -70,7 +70,7 @@ class NumerologyService
             'element' => 'Air',
             'color' => '#6B9BD2',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/bottle_2.png',
+            'bottle_image' => 'images/cards/clean/card_2_bottle.png',
         ],
         3 => [
             'number' => 3,
@@ -102,7 +102,7 @@ class NumerologyService
             'element' => 'Udara',
             'color' => '#FFB347',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/bottle_3.png',
+            'bottle_image' => 'images/cards/clean/card_3_bottle.png',
         ],
         4 => [
             'number' => 4,
@@ -134,7 +134,7 @@ class NumerologyService
             'element' => 'Tanah',
             'color' => '#8B7355',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/bottle_4.png',
+            'bottle_image' => 'images/cards/clean/card_4_bottle.png',
         ],
         5 => [
             'number' => 5,
@@ -166,7 +166,7 @@ class NumerologyService
             'element' => 'Angin',
             'color' => '#2E8B57',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/bottle_5.png',
+            'bottle_image' => 'images/cards/clean/card_5_bottle.png',
         ],
         6 => [
             'number' => 6,
@@ -198,7 +198,7 @@ class NumerologyService
             'element' => 'Bumi',
             'color' => '#CD5C5C',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/bottle_6.png',
+            'bottle_image' => 'images/cards/clean/card_6_bottle.png',
         ],
         7 => [
             'number' => 7,
@@ -230,7 +230,7 @@ class NumerologyService
             'element' => 'Ether',
             'color' => '#4B0082',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/card_7_bottle.png',
+            'bottle_image' => 'images/cards/clean/card_7_bottle.png',
         ],
         8 => [
             'number' => 8,
@@ -262,7 +262,7 @@ class NumerologyService
             'element' => 'Logam',
             'color' => '#B8860B',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/bottle_8.png',
+            'bottle_image' => 'images/cards/clean/card_8_bottle.png',
         ],
         9 => [
             'number' => 9,
@@ -294,7 +294,7 @@ class NumerologyService
             'element' => 'Cahaya',
             'color' => '#9370DB',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/bottle_9.png',
+            'bottle_image' => 'images/cards/clean/card_9_bottle.png',
         ],
     ];
 

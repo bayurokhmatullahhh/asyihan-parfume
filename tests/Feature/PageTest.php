@@ -71,4 +71,34 @@ class PageTest extends TestCase
         $response->assertSee('HUBUNGI KAMI');
         $response->assertSee('WhatsApp Concierge');
     }
+
+    public function test_privacy_policy_page_is_accessible(): void
+    {
+        $response = $this->get('/privacy-policy');
+
+        $response->assertStatus(200);
+        $response->assertSee('PRIVACY POLICY');
+        $response->assertSee('Kami menghargai privasi Anda');
+        $response->assertSee('Data tidak dibagikan ke pihak ketiga tanpa izin');
+    }
+
+    public function test_terms_of_service_page_is_accessible(): void
+    {
+        $response = $this->get('/terms-of-service');
+
+        $response->assertStatus(200);
+        $response->assertSee('TERMS OF SERVICE');
+        $response->assertSee('Dengan menggunakan layanan ini, Anda setuju');
+        $response->assertSee('Konten hanya untuk penggunaan pribadi');
+    }
+
+    public function test_shipping_returns_page_is_accessible(): void
+    {
+        $response = $this->get('/shipping-returns');
+
+        $response->assertStatus(200);
+        $response->assertSee('SHIPPING &amp; RETURNS');
+        $response->assertSee('Estimasi pengiriman: 3–7 hari kerja');
+        $response->assertSee('Barang dapat dikembalikan dalam 14 hari');
+    }
 }
