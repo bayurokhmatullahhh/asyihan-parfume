@@ -12,7 +12,7 @@
     <section class="calc-hero relative overflow-hidden py-16 sm:py-24 text-center">
         {{-- Ambient overlays --}}
         <div class="absolute inset-0 z-0 bg-cover bg-center opacity-25 pointer-events-none" style="background-image: url('{{ asset('images/background.png') }}');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-b from-blue-900/85 via-blue-900/75 to-blue-900 pointer-events-none"></div>
+        <!-- <div class="absolute inset-0 z-0 bg-gradient-to-b from-blue-100/15 via-blue-100/15 to-blue-100/15 pointer-events-none"></div> -->
 
         {{-- Constellation Stars --}}
         <div class="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
@@ -414,7 +414,7 @@
                         {{-- Inner Resonant Scent Box --}}
                         <div class="p-3 rounded-xl bg-black/60 border border-gold-400/15 mb-4 space-y-0.5">
                             <span class="text-[9px] uppercase tracking-wider text-gold-400/80 font-mono block">
-                                Aroma Resonan:
+                                TOKOH INSPIRATIF SEJIWA:
                             </span>
                             <p class="text-[11px] text-gray-300 font-light">
                                 {{ $arch['aroma_resonan'] }}
