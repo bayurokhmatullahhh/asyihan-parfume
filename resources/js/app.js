@@ -325,19 +325,93 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     const fullCalcForm = document.getElementById('full-calculator-form');
     if (fullCalcForm) {
+        const dayInput = document.getElementById('calc_day');
+        const monthInput = document.getElementById('calc_month');
+        const yearInput = document.getElementById('calc_year');
+        const birthDateInput = document.getElementById('calc_birth_date');
+        const nameInput = document.getElementById('calc_name');
+
+        const reduceNum = (n) => {
+            let s = String(Math.abs(n)).split('').reduce((a, b) => a + Number(b), 0);
+            while (s > 9) {
+                s = String(s).split('').reduce((a, b) => a + Number(b), 0);
+            }
+            return s;
+        };
+
+        const updateDateInputs = () => {
+            const dVal = dayInput?.value?.trim();
+            const mVal = monthInput?.value?.trim();
+            const yVal = yearInput?.value?.trim();
+            const previewText = document.getElementById('calc-preview-text');
+
+            if (!dVal || !mVal || !yVal) {
+                if (birthDateInput) birthDateInput.value = '';
+                if (previewText) {
+                    previewText.innerHTML = '<span class="text-gold-400/60 font-mono text-[10px]">Masukkan tanggal lahir Anda untuk melihat reduksi angka Pythagoras</span>';
+                }
+                return;
+            }
+
+            const d = parseInt(dVal, 10);
+            const m = parseInt(mVal, 10);
+            const y = parseInt(yVal, 10);
+
+            if (isNaN(d) || isNaN(m) || isNaN(y) || d < 1 || d > 31 || m < 1 || m > 12 || y < 1900 || y > 2050) {
+                if (birthDateInput) birthDateInput.value = '';
+                return;
+            }
+
+            // Pad month & day
+            const dd = String(d).padStart(2, '0');
+            const mm = String(m).padStart(2, '0');
+            if (birthDateInput) {
+                birthDateInput.value = `${y}-${mm}-${dd}`;
+            }
+
+            // Calculation preview text
+            if (previewText) {
+                const dDigits = String(d).split('');
+                const dSum = dDigits.reduce((a, b) => a + Number(b), 0);
+                const dFormatted = dDigits.length > 1 ? `${d} (${dDigits.join('+')}=${dSum})` : `${d}`;
+
+                const yDigits = String(y).split('');
+                const ySum = yDigits.reduce((a, b) => a + Number(b), 0);
+                const yRed = reduceNum(ySum);
+                const yFormatted = `${y} (${yDigits.join('+')}=${ySum}→${yRed})`;
+
+                previewText.innerHTML = `ANGKA DASAR: <span class="text-gold-300 font-bold">${dFormatted}</span> | BULAN: <span class="text-gold-300 font-bold">${m}</span> | TAHUN: <span class="text-gold-300 font-bold">${yFormatted}</span>`;
+            }
+        };
+
+        [dayInput, monthInput, yearInput].forEach(inp => {
+            if (inp) {
+                inp.addEventListener('input', updateDateInputs);
+                inp.addEventListener('change', updateDateInputs);
+            }
+        });
+
         fullCalcForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            updateDateInputs();
+
             const btn = document.getElementById('calc-submit-btn');
             const loading = document.getElementById('calc-loading');
-            const resultBox = document.getElementById('calculator-result-container');
-            const name = document.getElementById('calc_name').value;
-            const birthDate = document.getElementById('calc_birth_date').value;
+            const name = nameInput?.value?.trim() || '';
+            const birthDate = birthDateInput?.value || '';
 
-            if (!name || !birthDate) return;
+            if (!name) {
+                nameInput?.focus();
+                return;
+            }
+
+            if (!birthDate) {
+                dayInput?.focus();
+                return;
+            }
 
             btn.disabled = true;
             if (loading) loading.classList.remove('hidden');
-            if (resultBox) resultBox.classList.add('hidden');
 
             try {
                 const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
@@ -356,40 +430,101 @@ document.addEventListener('DOMContentLoaded', () => {
                     const r = data.data;
                     const arch = r.archetype;
 
-                    document.getElementById('out-name').textContent = r.name;
-                    document.getElementById('out-core-number').textContent = r.core_number;
-                    document.getElementById('out-archetype-name').textContent = arch.name;
-                    document.getElementById('out-element').textContent = `Elemen: ${arch.element}`;
+                    // Expand layout to 2 columns
+                    const mainSection = document.getElementById('calc-main-section');
+                    if (mainSection) {
+                        mainSection.classList.remove('max-w-2xl');
+                        mainSection.classList.add('max-w-7xl');
+                    }
 
-                    // Traits badges
-                    const traitsContainer = document.getElementById('out-traits');
-                    traitsContainer.innerHTML = '';
-                    arch.traits.forEach(t => {
-                        const span = document.createElement('span');
-                        span.className = 'text-[11px] uppercase tracking-wider px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300';
-                        span.textContent = t;
-                        traitsContainer.appendChild(span);
+                    const gridContainer = document.getElementById('calc-grid-container');
+                    if (gridContainer) {
+                        gridContainer.classList.remove('space-y-6');
+                        gridContainer.classList.add('grid', 'grid-cols-1', 'lg:grid-cols-12', 'gap-6', 'lg:gap-8', 'items-start');
+                    }
+
+                    const formCol = document.getElementById('calc-form-column');
+                    if (formCol) {
+                        formCol.classList.add('lg:col-span-5');
+                    }
+
+                    const resultWrapper = document.getElementById('calc-result-wrapper');
+                    if (resultWrapper) {
+                        resultWrapper.classList.remove('hidden');
+                        resultWrapper.classList.add('lg:col-span-7');
+                    }
+
+                    // Update result panel elements
+                    const coreNumEl = document.getElementById('out-core-number');
+                    if (coreNumEl) coreNumEl.textContent = r.core_number;
+
+                    const archNameEl = document.getElementById('out-archetype-name');
+                    if (archNameEl) archNameEl.textContent = arch.name;
+
+                    const subtitleIdEl = document.getElementById('out-subtitle-id');
+                    if (subtitleIdEl) subtitleIdEl.textContent = arch.subtitle_id || '';
+
+                    const elementEl = document.getElementById('out-element');
+                    if (elementEl) elementEl.textContent = arch.element;
+
+                    const aromaMainEl = document.getElementById('out-aroma-main');
+                    if (aromaMainEl) aromaMainEl.textContent = arch.aroma_resonan || (arch.notes?.top + ', ' + arch.notes?.base);
+
+                    const descEl = document.getElementById('out-description');
+                    if (descEl) descEl.textContent = arch.description;
+
+                    const notesTopTitle = document.getElementById('out-notes-top-title');
+                    if (notesTopTitle) notesTopTitle.textContent = arch.aroma_notes_top_title || arch.notes?.top;
+
+                    const notesTopDesc = document.getElementById('out-notes-top-desc');
+                    if (notesTopDesc) notesTopDesc.textContent = arch.aroma_notes_top_desc || 'Menenangkan pikiran dan membuka intuisi batin';
+
+                    const notesBaseTitle = document.getElementById('out-notes-base-title');
+                    if (notesBaseTitle) notesBaseTitle.textContent = arch.aroma_notes_base_title || arch.notes?.base;
+
+                    const notesBaseDesc = document.getElementById('out-notes-base-desc');
+                    if (notesBaseDesc) notesBaseDesc.textContent = arch.aroma_notes_base_desc || 'Memberi ketenangan dan rasa grounding spiritual';
+
+                    const formulaNum = document.getElementById('out-formula-num');
+                    if (formulaNum) formulaNum.textContent = arch.number;
+
+                    const essenceTitle = document.getElementById('out-essence-title');
+                    if (essenceTitle) essenceTitle.textContent = arch.essence_name;
+
+                    const formulaExtract = document.getElementById('out-formula-extract');
+                    if (formulaExtract) formulaExtract.textContent = arch.formula_extract || arch.fragrance_description;
+
+                    const priceEl = document.getElementById('out-price');
+                    if (priceEl) priceEl.textContent = `Rp ${arch.price.toLocaleString('id-ID')}`;
+
+                    const orderLink = document.getElementById('out-order-link');
+                    if (orderLink) orderLink.href = `/order?essence=${arch.number}`;
+
+                    const bottleImg = document.getElementById('out-bottle-img');
+                    if (bottleImg) {
+                        bottleImg.src = `/images/cards/card_${arch.number}_hd.png`;
+                    }
+
+                    // Update active archetype card highlight in 9-grid
+                    document.querySelectorAll('.archetype-grid-card').forEach(card => {
+                        card.className = 'archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border border-gold-400/20 bg-gradient-to-b from-[#0e1322] via-[#090d18] to-[#060912] hover:border-gold-400/50 hover:-translate-y-1';
                     });
+                    const activeCard = document.getElementById(`arch-card-${arch.number}`);
+                    if (activeCard) {
+                        activeCard.className = 'archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border-2 border-gold-400 bg-gradient-to-b from-[#151c30] via-[#0d1322] to-[#070b16] shadow-[0_0_25px_rgba(197,160,89,0.25)]';
+                    }
 
-                    // Details
-                    document.getElementById('out-description').textContent = arch.description;
-                    document.getElementById('out-essence-title').textContent = arch.essence_name;
-                    document.getElementById('out-fragrance-desc').textContent = arch.fragrance_description;
+                    // Update social share link
+                    const shareWa = document.getElementById('share-wa');
+                    if (shareWa) {
+                        const shareText = encodeURIComponent(`Halo! Angka inti numerologi jiwa saya adalah ${arch.number} (${arch.name} - ${arch.subtitle_id}) dengan aroma resonan ${arch.aroma_resonan}. Coba hitung getaran jiwamu di ASYIHAN: ${window.location.href}`);
+                        shareWa.href = `https://api.whatsapp.com/send?text=${shareText}`;
+                    }
 
-                    document.getElementById('out-notes-top').textContent = arch.notes.top;
-                    document.getElementById('out-notes-mid').textContent = arch.notes.middle;
-                    document.getElementById('out-notes-base').textContent = arch.notes.base;
-
-                    document.getElementById('out-ajian').textContent = `"${arch.ajian}"`;
-                    document.getElementById('out-sugesti').textContent = arch.sugesti;
-
-                    document.getElementById('out-price').textContent = `Rp ${arch.price.toLocaleString('id-ID')}`;
-                    document.getElementById('out-detail-link').href = `/essence/${arch.slug}`;
-                    document.getElementById('out-order-link').href = `/order?essence=${arch.number}`;
-
-                    if (resultBox) {
-                        resultBox.classList.remove('hidden');
-                        resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Smooth scroll to result
+                    const resultContainer = document.getElementById('calculator-result-container');
+                    if (resultContainer) {
+                        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }
             } catch (err) {
@@ -399,5 +534,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (loading) loading.classList.add('hidden');
             }
         });
+
+        // Copy Result Link
+        const copyBtn = document.getElementById('copy-result-link');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    const originalHTML = copyBtn.innerHTML;
+                    copyBtn.innerHTML = `<span class="text-[9px] text-gold-300 font-bold">✓</span>`;
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalHTML;
+                    }, 2000);
+                } catch (e) {
+                    console.error('Failed to copy link', e);
+                }
+            });
+        }
+
+        // Instagram Share Button (Copy Link)
+        const igBtn = document.getElementById('share-ig');
+        if (igBtn) {
+            igBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    alert('Tautan kalkulator ASYIHAN berhasil disalin! Anda dapat menempelkannya di Instagram Story.');
+                } catch (e) {
+                    console.error('Failed to copy link', e);
+                }
+            });
+        }
     }
 });

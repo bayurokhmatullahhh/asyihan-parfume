@@ -20,6 +20,7 @@ class NumerologyController extends Controller
     {
         return view('pages.calculator', [
             'archetypes' => $this->numerology->getAllArchetypes(),
+            'defaultArchetype' => $this->numerology->getArchetype(7),
         ]);
     }
 

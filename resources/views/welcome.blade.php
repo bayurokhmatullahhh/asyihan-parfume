@@ -397,7 +397,7 @@
                 <div class="lg:col-span-7">
                     
                     {{-- STATE A: DEFAULT MYSTIC PORTAL SHOWCASE (Shown before calculation) --}}
-                    <div id="home_calc_placeholder" class="rounded-xl overflow-hidden border border-gold-400/30 bg-gradient-to-b from-blue/80 via-[#3F51B5] to-purple-700 p-5 sm:p-6 shadow-xl relative group">
+                    <div id="home_calc_placeholder" class="rounded-xl overflow-hidden border border-gold-400/30 bg-gradient-to-b from-dark blue-800/80 via-dark blue-800/70 to-dark blue-800 p-5 sm:p-6 shadow-xl relative group">
                         {{-- Subtle background glow --}}
                         <div class="absolute inset-0 bg-radial-gradient from-gold-400/10 via-transparent to-transparent pointer-events-none"></div>
 
