@@ -32,9 +32,9 @@ class PageTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('ESSENCE COLLECTION');
-        $response->assertSee('The Leader');
-        $response->assertSee('The Seeker');
-        $response->assertSee('The Visionary');
+        $response->assertSee('Sang Penggagas');
+        $response->assertSee('Sang Analis');
+        $response->assertSee('Sang Pembimbing');
     }
 
     public function test_essence_detail_page_is_accessible_for_valid_slug(): void
@@ -42,7 +42,7 @@ class PageTest extends TestCase
         $response = $this->get('/essence/the-seeker');
 
         $response->assertStatus(200);
-        $response->assertSee('The Seeker');
+        $response->assertSee('Sang Analis');
         $response->assertSee('Piramida Aroma');
         $response->assertSee('Ajian Afirmasi Jiwa');
     }
@@ -60,7 +60,7 @@ class PageTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('AJIAN');
-        $response->assertSee('9 Ajian Arketipe');
+        $response->assertSee('Mantra Ajian');
     }
 
     public function test_contact_page_is_accessible(): void
@@ -69,7 +69,7 @@ class PageTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('HUBUNGI KAMI');
-        $response->assertSee('WhatsApp Concierge');
+        $response->assertSee('WhatsApp');
     }
 
     public function test_privacy_policy_page_is_accessible(): void
@@ -97,7 +97,7 @@ class PageTest extends TestCase
         $response = $this->get('/shipping-returns');
 
         $response->assertStatus(200);
-        $response->assertSee('SHIPPING &amp; RETURNS');
+        $response->assertSee('SHIPPING & RETURNS', false);
         $response->assertSee('Estimasi pengiriman: 3–7 hari kerja');
         $response->assertSee('Barang dapat dikembalikan dalam 14 hari');
     }
