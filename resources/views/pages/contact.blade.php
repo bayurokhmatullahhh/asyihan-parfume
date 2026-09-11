@@ -61,11 +61,11 @@
                     Simak ajian mingguan, kupas tuntas 9 karakter wewangian, dan live sniffing virtual.
                 </p>
                 <div class="mb-4">
-                    <span class="text-sm font-semibold text-white block">@asyihan.official</span>
+                    <span class="text-sm font-semibold text-white block">@asyihan.id</span>
                     <span class="text-[10px] text-gray-500 font-mono">UPDATE & INSPIRASI HARIAN</span>
                 </div>
             </div>
-            <a href="https://instagram.com/asyihan.official" target="_blank" class="btn-gold-outline text-[10px] tracking-[0.2em] py-2.5 rounded text-center block w-full mt-2">
+            <a href="https://instagram.com/asyihan.id" target="_blank" class="btn-gold-outline text-[10px] tracking-[0.2em] py-2.5 rounded text-center block w-full mt-2">
                 IKUTI INSTAGRAM ›
             </a>
         </div>

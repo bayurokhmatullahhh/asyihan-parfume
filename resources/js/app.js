@@ -299,6 +299,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (elOrderLink) elOrderLink.href = `/order?essence=${arch.number}`;
                     if (elDetailLink) elDetailLink.href = `/essence/${arch.slug}`;
 
+                    // Tokoh Inspiratif Sejiwa
+                    const tokoh = r.tokoh;
+                    const elTokohName = document.getElementById('res-tokoh-name');
+                    const elTokohAsal = document.getElementById('res-tokoh-asal');
+                    const elTokohLahir = document.getElementById('res-tokoh-lahir');
+                    const elTokohDesc = document.getElementById('res-tokoh-desc');
+
+                    if (tokoh) {
+                        if (elTokohName) elTokohName.textContent = tokoh.nama || '-';
+                        if (elTokohAsal) elTokohAsal.textContent = tokoh.asal || '-';
+                        if (elTokohLahir) elTokohLahir.textContent = 'Lahir: ' + (tokoh.lahir || '-');
+                        if (elTokohDesc) elTokohDesc.textContent = tokoh.deskripsi || '-';
+                    }
+
                     // Toggle placeholder off, result card on
                     if (placeholderBox) {
                         placeholderBox.classList.add('hidden');
@@ -318,13 +332,88 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.disabled = false;
             }
         });
+
+        // Download PDF Button for Home Calculator
+        const homePdfBtn = document.getElementById('home-download-pdf-btn');
+        if (homePdfBtn) {
+            homePdfBtn.addEventListener('click', async () => {
+                const btn = homePdfBtn;
+                const origHtml = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = `<span class="inline-block animate-spin mr-1">✦</span><span>Menyiapkan...</span>`;
+
+                try {
+                    const card = document.getElementById('sidebar-result-card');
+                    if (!card) return;
+
+                    const canvas = await window.html2canvas(card, {
+                        backgroundColor: '#030818',
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        logging: false,
+                    });
+
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF({
+                        orientation: 'portrait',
+                        unit: 'mm',
+                        format: 'a4',
+                    });
+
+                    const pageW = pdf.internal.pageSize.getWidth();
+                    const pageH = pdf.internal.pageSize.getHeight();
+                    const margin = 12;
+                    const imgW = pageW - margin * 2;
+                    const imgH = (canvas.height * imgW) / canvas.width;
+
+                    pdf.setFillColor(3, 8, 24);
+                    pdf.rect(0, 0, pageW, pageH, 'F');
+
+                    pdf.setDrawColor(197, 160, 89);
+                    pdf.setLineWidth(0.5);
+                    pdf.line(margin, 10, pageW - margin, 10);
+
+                    pdf.setTextColor(197, 160, 89);
+                    pdf.setFontSize(10);
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.text('ASYIHAN — HASIL NUMEROLOGI SAKRAL', pageW / 2, 7, { align: 'center' });
+
+                    const yStart = 14;
+                    if (imgH + yStart <= pageH - margin) {
+                        pdf.addImage(imgData, 'PNG', margin, yStart, imgW, imgH);
+                    } else {
+                        const scaledH = pageH - margin - yStart;
+                        const scaledW = (canvas.width * scaledH) / canvas.height;
+                        const xOffset = (pageW - scaledW) / 2;
+                        pdf.addImage(imgData, 'PNG', xOffset, yStart, scaledW, scaledH);
+                    }
+
+                    pdf.setTextColor(120, 120, 140);
+                    pdf.setFontSize(7);
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.text('asyihan.com • Sacred Numerology & Fragrance', pageW / 2, pageH - 5, { align: 'center' });
+                    pdf.line(margin, pageH - 8, pageW - margin, pageH - 8);
+
+                    const archName = (document.getElementById('res-archetype-name')?.textContent || 'Hasil').trim().replace(/\s+/g, '-').toLowerCase();
+                    pdf.save(`ASYIHAN-Numerologi-${archName}.pdf`);
+                } catch (err) {
+                    console.error('PDF error:', err);
+                    alert('Gagal membuat PDF. Silakan coba screenshot layar.');
+                } finally {
+                    btn.innerHTML = origHtml;
+                    btn.disabled = false;
+                }
+            });
+        }
     }
 
     // ----------------------------------------------------
     // 4. Full Calculator Page
     // ----------------------------------------------------
     const fullCalcForm = document.getElementById('full-calculator-form');
-    if (fullCalcForm) {
+    if (fullCalcForm && !window.hasCustomCalcHandler) {
         const dayInput = document.getElementById('calc_day');
         const monthInput = document.getElementById('calc_month');
         const yearInput = document.getElementById('calc_year');

@@ -40,6 +40,12 @@ class NumerologyController extends Controller
                 $validated['name']
             );
 
+            // Enrich tokoh data directly at top level for easy JS access
+            $reading['tokoh'] = $this->numerology->getTokohForDate(
+                $reading['core_number'],
+                $validated['birth_date']
+            );
+
             return response()->json([
                 'success' => true,
                 'data' => $reading,

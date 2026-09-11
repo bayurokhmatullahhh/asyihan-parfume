@@ -430,10 +430,10 @@
                                 </p>
 
                                 <div class="pt-2 flex flex-wrap gap-2">
-                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">1. The Pioneer</span>
-                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">5. The Catalyst</span>
-                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">7. The Seeker</span>
-                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">9 Essence Jiwa</span>
+                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">1. Sang Penggagas</span>
+                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">5. Sang Penjelajah</span>
+                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">7. Sang Analis</span>
+                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">9 Dimensi Arketipe</span>
                                 </div>
                             </div>
                         </div>
@@ -449,7 +449,7 @@
                                 <h4 id="res-user-name" class="text-base sm:text-lg font-serif text-white font-medium capitalize mt-0.5">Nama Anda</h4>
                             </div>
                             <div class="flex items-center gap-3">
-                                <button id="home_calc_reset_btn" type="button" class="text-[10px] uppercase tracking-wider text-gray-400 hover:text-gold-300 border border-white/10 hover:border-gold-400/40 px-2.5 py-1 rounded transition-colors font-mono">
+                                <button id="home_calc_reset_btn" type="button" class="text-[10px] uppercase tracking-wider text-gray-400 hover:text-gold-300 border border-white/10 hover:border-gold-400/40 px-2.5 py-1 rounded transition-colors font-mono cursor-pointer">
                                     Hitung Ulang ↺
                                 </button>
                                 <div class="text-right">
@@ -465,7 +465,7 @@
 
                             <div class="flex items-center justify-between">
                                 <h3 id="res-archetype-name" class="font-serif text-base sm:text-lg text-gold-300 font-semibold tracking-wide">
-                                    The Seeker
+                                    Sang Analis
                                 </h3>
                                 <span id="res-element-badge" class="text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded bg-gold-400/15 border border-gold-400/30 text-gold-300 font-mono">
                                     Elemen: Ether
@@ -484,6 +484,35 @@
                             </div>
                         </div>
 
+                        {{-- BAGIAN TOKOH INSPIRATIF SEJIWA --}}
+                        <div class="bg-gradient-to-r from-black/80 via-[#0d1324] to-black/80 rounded-xl p-4 sm:p-5 border border-gold-400/30 relative overflow-hidden shadow-lg">
+                            <div class="absolute top-2 right-3 text-gold-400/20 text-3xl font-serif pointer-events-none select-none">✦</div>
+                            <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/80 font-mono block mb-2.5">
+                                TOKOH INSPIRATIF SEJIWA DENGANMU
+                            </span>
+                            <div class="flex items-start sm:items-center gap-3.5">
+                                <div class="w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-400/5 border border-gold-400/30 flex items-center justify-center text-xl shadow-md">
+                                    ⭐
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                                        <h4 id="res-tokoh-name" class="text-sm sm:text-base font-serif text-gold-300 font-semibold tracking-wide">
+                                            Albert Einstein
+                                        </h4>
+                                        <span id="res-tokoh-asal" class="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded bg-gold-400/10 border border-gold-400/20 text-gold-400/80 font-mono">
+                                            Jerman / AS
+                                        </span>
+                                    </div>
+                                    <p id="res-tokoh-lahir" class="text-[10px] text-gray-400 font-mono mb-1">
+                                        Lahir: 14 Maret 1879
+                                    </p>
+                                    <p id="res-tokoh-desc" class="text-xs text-gray-300 font-light leading-relaxed">
+                                        Fisikawan genius — analisis mendalam terhadap alam semesta menghasilkan teori relativitas yang mengubah sains.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         {{-- BAGIAN 2: REKOMENDASI PARFUM ESENSI JIWA --}}
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
                             {{-- Luxury Perfume Bottle Presentation --}}
@@ -497,7 +526,7 @@
                                             ESSENCE VII
                                         </h3>
                                         <p id="res-archetype-title" class="text-white/80 text-[10px] tracking-[0.25em] uppercase font-light mt-0.5">
-                                            THE SEEKER
+                                            SANG ANALIS
                                         </p>
                                     </div>
 
@@ -549,11 +578,20 @@
                                     Rp 1.380.000
                                 </span>
                             </div>
-                            <div class="flex items-center gap-3 w-full sm:w-auto">
+                            <div class="flex flex-wrap items-center gap-2.5 w-full sm:w-auto justify-end">
+                                {{-- Download PDF Button --}}
+                                <button id="home-download-pdf-btn" type="button"
+                                    class="btn-gold-outline py-2 px-3 text-[10px] uppercase tracking-wider rounded-[2px] font-medium inline-flex items-center gap-1.5 hover:bg-gold-400/10 transition-colors cursor-pointer"
+                                    title="Unduh Hasil Numerologi (PDF)">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                    <span>UNDUH PDF</span>
+                                </button>
                                 <a id="res-detail-link" href="{{ route('collection') }}" class="text-[10px] text-gold-400/80 hover:text-white uppercase tracking-widest text-center transition-colors">
                                     Ritual Lengkap &rarr;
                                 </a>
-                                <a id="res-order-link" href="{{ route('order') }}" class="btn-gold px-5 py-2 text-xs uppercase tracking-wider rounded-[2px] font-medium flex-1 sm:flex-none text-center">
+                                <a id="res-order-link" href="{{ route('order') }}" class="btn-gold px-5 py-2 text-xs uppercase tracking-wider rounded-[2px] font-medium text-center">
                                     ORDER SEKARANG
                                 </a>
                             </div>

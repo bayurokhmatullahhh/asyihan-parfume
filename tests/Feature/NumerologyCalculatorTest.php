@@ -11,7 +11,8 @@ class NumerologyCalculatorTest extends TestCase
         $response = $this->get('/calculator');
 
         $response->assertStatus(200);
-        $response->assertSee('KALKULATOR NUMEROLOGI');
+        $response->assertSee('ARKETIPE NUMEROLOGI');
+        $response->assertSee('SANG PENGGAGAS');
     }
 
     public function test_calculator_api_returns_correct_json_for_valid_input(): void
@@ -30,8 +31,20 @@ class NumerologyCalculatorTest extends TestCase
                 'core_number' => 4,
                 'archetype' => [
                     'number' => 4,
-                    'name' => 'The Stabilizer',
+                    'name' => 'Sang Pembangun',
+                    'display_title' => 'SANG PEMBANGUN',
                     'element' => 'Tanah',
+                ],
+            ],
+        ]);
+        $response->assertJsonStructure([
+            'success',
+            'data' => [
+                'tokoh' => [
+                    'nama',
+                    'asal',
+                    'lahir',
+                    'deskripsi',
                 ],
             ],
         ]);
