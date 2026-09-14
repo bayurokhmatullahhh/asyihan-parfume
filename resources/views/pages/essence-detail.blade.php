@@ -73,7 +73,7 @@
                 </div>
 
                 {{-- Fragrance Pyramid --}}
-                <div class="bg-black/50 rounded-xl p-5 border border-gold-400/20 space-y-3">
+                <div class="rounded-xl p-5 border border-gold-400/20 space-y-3">
                     <h3 class="font-serif text-gold-400 text-xs uppercase tracking-[0.2em]">Piramida Aroma</h3>
                     <div class="space-y-2 text-xs">
                         <div class="flex items-center justify-between pb-2 border-b border-white/5">
@@ -92,7 +92,7 @@
                 </div>
 
                 {{-- Ajian (Mantra) Section --}}
-                <div class="bg-black/70 rounded-xl p-5 border border-gold-400/30">
+                <div class="rounded-xl p-5 border border-gold-400/30">
                     <span class="text-[10px] uppercase tracking-[0.25em] text-gold-400 font-serif block mb-2">Ajian Afirmasi Jiwa</span>
                     <p class="text-xs sm:text-sm text-gold-200 font-serif italic leading-relaxed">
                         "{{ $essence['ajian'] }}"

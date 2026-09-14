@@ -21,7 +21,7 @@
     </div>
 
     {{-- Main Narrative --}}
-    <section class="bg-panel rounded-2xl p-8 sm:p-12 border border-gold-400/20 mb-12 relative overflow-hidden">
+    <section class="rounded-2xl p-8 sm:p-12 border border-gold-400/20 mb-12 relative overflow-hidden">
         <div class="absolute -top-32 -left-32 w-80 h-80 bg-gold-400/5 rounded-full blur-3xl"></div>
         
         <div class="prose prose-invert max-w-none text-gray-300 font-light leading-loose space-y-6 text-sm sm:text-base">
@@ -49,8 +49,8 @@
                         Kemudian kami memberinya sebuah perjalanan baru: <strong class="text-gold-300">ASIHAN menjadi ASYIHAN</strong>.
                     </p>
                 </div>
-                <div class="bg-blue/50 border border-gold-400/20 rounded-xl p-6 text-center">
-                    <div class="text-3xl font-serif text-gold-400 mb-2">A • S • Y • I • H • A • N</div>
+                <div class="border border-gold-400/20 rounded-xl p-6 text-center">
+                    <div class="text-2xl sm:text-3xl font-serif text-gold-400 mb-2 whitespace-nowrap overflow-hidden"><span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">S</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">Y</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">I</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">H</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">N</span></div>
                     <p class="text-[11px] text-gray-400 italic">
                         Sebuah nama yang akarnya tetap berpijak di tanah Sunda, tetapi aromanya mengembara jauh menuju negeri-negeri tempat Oud dibakar, Musk diwariskan, Amber dihangatkan, dan wewangian menjadi bagian dari kehormatan serta identitas seseorang.
                     </p>
@@ -73,7 +73,7 @@
     </section>
 
     {{-- Scent Translation Formula --}}
-    <section class="bg-panel rounded-2xl p-8 sm:p-10 border border-gold-400/20 mb-12">
+    <section class="rounded-2xl p-8 sm:p-10 border border-gold-400/20 mb-12">
         <div class="text-center mb-8">
             <span class="text-xs uppercase tracking-[0.25em] text-gold-400 font-serif">The Olfactory Translation</span>
             <h2 class="text-2xl font-serif text-white tracking-wide mt-1">Karakter Diterjemahkan Menjadi Aroma</h2>
@@ -81,33 +81,75 @@
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div class="p-4 bg-black/40 rounded-xl border border-white/5 text-center">
-                <span class="text-2xl mb-2 block">🪵</span>
+            <div class="p-4 rounded-xl border border-gold-400/15 text-center">
+                <span class="text-2xl mb-2 block text-gold-400">
+                    <svg class="w-8 h-8 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                        <path d="M4 20c0 0 2-4 4-8s2-8 4-8c2 0 2 4 4 8s4 8 4 8" stroke-linecap="round"/>
+                        <path d="M6 18c1-2 2-5 3-8" stroke-linecap="round" opacity="0.4"/>
+                        <path d="M14 10c1 3 2 6 3 8" stroke-linecap="round" opacity="0.4"/>
+                        <line x1="4" y1="20" x2="20" y2="20" stroke-linecap="round" opacity="0.5"/>
+                    </svg>
+                </span>
                 <h4 class="font-serif text-gold-300 text-sm">KAYU</h4>
                 <p class="text-[11px] text-gray-400 mt-1">Untuk Keteguhan & Ketabahan</p>
             </div>
-            <div class="p-4 bg-black/40 rounded-xl border border-white/5 text-center">
-                <span class="text-2xl mb-2 block">🏺</span>
+            <div class="p-4 rounded-xl border border-gold-400/15 text-center">
+                <span class="text-2xl mb-2 block text-gold-400">
+                    <svg class="w-8 h-8 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                        <path d="M12 2c0 0-4 4-4 8a4 4 0 008 0c0-4-4-8-4-8z" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 18c0 0 0.5-2 3-2s3 2 3 2" stroke-linecap="round" opacity="0.5"/>
+                        <path d="M12 14v4" stroke-linecap="round" opacity="0.3"/>
+                        <path d="M8 20c0 1.1 1.8 2 4 2s4-.9 4-2" stroke-linecap="round" opacity="0.6"/>
+                    </svg>
+                </span>
                 <h4 class="font-serif text-gold-300 text-sm">OUD</h4>
                 <p class="text-[11px] text-gray-400 mt-1">Untuk Kedalaman & Spiritual</p>
             </div>
-            <div class="p-4 bg-black/40 rounded-xl border border-white/5 text-center">
-                <span class="text-2xl mb-2 block">✨</span>
+            <div class="p-4 rounded-xl border border-gold-400/15 text-center">
+                <span class="text-2xl mb-2 block text-gold-400">
+                    <svg class="w-8 h-8 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                        <circle cx="12" cy="12" r="5" stroke-linecap="round"/>
+                        <circle cx="12" cy="12" r="2" opacity="0.5"/>
+                        <path d="M12 2v3m0 14v3M2 12h3m14 0h3" stroke-linecap="round" opacity="0.4"/>
+                        <path d="M5.64 5.64l2.12 2.12m8.48 8.48l2.12 2.12M5.64 18.36l2.12-2.12m8.48-8.48l2.12-2.12" stroke-linecap="round" opacity="0.25"/>
+                    </svg>
+                </span>
                 <h4 class="font-serif text-gold-300 text-sm">AMBER</h4>
                 <p class="text-[11px] text-gray-400 mt-1">Untuk Kehangatan & Daya Tarik</p>
             </div>
-            <div class="p-4 bg-black/40 rounded-xl border border-white/5 text-center">
-                <span class="text-2xl mb-2 block">🕊️</span>
+            <div class="p-4 rounded-xl border border-gold-400/15 text-center">
+                <span class="text-2xl mb-2 block text-gold-400">
+                    <svg class="w-8 h-8 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                        <path d="M12 3c-3 0-6 3-6 7 0 5 3 8 6 11 3-3 6-6 6-11 0-4-3-7-6-7z" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 7v8" stroke-linecap="round" opacity="0.3"/>
+                        <path d="M9 11c0 0 1.5 1 3 1s3-1 3-1" stroke-linecap="round" opacity="0.4"/>
+                    </svg>
+                </span>
                 <h4 class="font-serif text-gold-300 text-sm">MUSK</h4>
                 <p class="text-[11px] text-gray-400 mt-1">Untuk Keintiman & Memori</p>
             </div>
-            <div class="p-4 bg-black/40 rounded-xl border border-white/5 text-center">
-                <span class="text-2xl mb-2 block">🌿</span>
+            <div class="p-4 rounded-xl border border-gold-400/15 text-center">
+                <span class="text-2xl mb-2 block text-gold-400">
+                    <svg class="w-8 h-8 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                        <path d="M12 22c-2 0-4-1-5-3" stroke-linecap="round" opacity="0.5"/>
+                        <path d="M7 19c-1-2-1-5 0-7" stroke-linecap="round" opacity="0.5"/>
+                        <path d="M7 12c0-3 2-6 5-8" stroke-linecap="round"/>
+                        <path d="M12 4c1 2 2 4 2 6" stroke-linecap="round" opacity="0.6"/>
+                        <path d="M14 10c0 2-0.5 4-2 6" stroke-linecap="round" opacity="0.4"/>
+                        <path d="M16 8c1 1 2 3 2 5s-1 4-2 6" stroke-linecap="round" opacity="0.35"/>
+                    </svg>
+                </span>
                 <h4 class="font-serif text-gold-300 text-sm">REMPAH</h4>
                 <p class="text-[11px] text-gray-400 mt-1">Untuk Keberanian & Semangat</p>
             </div>
-            <div class="p-4 bg-black/40 rounded-xl border border-white/5 text-center">
-                <span class="text-2xl mb-2 block">🌸</span>
+            <div class="p-4 rounded-xl border border-gold-400/15 text-center">
+                <span class="text-2xl mb-2 block text-gold-400">
+                    <svg class="w-8 h-8 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                        <path d="M12 3c-1.5 2-3 4-3 6.5C9 12 10.3 14 12 14s3-2 3-4.5C15 7 13.5 5 12 3z" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 10c-2 1-3.5 3-3.5 5.5 0 3.5 3.8 5.5 8.5 5.5s8.5-2 8.5-5.5c0-2.5-1.5-4.5-3.5-5.5" stroke-linecap="round" opacity="0.5"/>
+                        <path d="M9 15c0 0 1.2 1 3 1s3-1 3-1" stroke-linecap="round" opacity="0.3"/>
+                    </svg>
+                </span>
                 <h4 class="font-serif text-gold-300 text-sm">BUNGA</h4>
                 <p class="text-[11px] text-gray-400 mt-1">Untuk Kelembutan & Kasih Sayang</p>
             </div>
@@ -115,7 +157,7 @@
     </section>
 
     {{-- Logo Philosophy --}}
-    <section class="bg-panel rounded-2xl p-8 sm:p-10 border border-gold-400/20 mb-12">
+    <section class="rounded-2xl p-8 sm:p-10 border border-gold-400/20 mb-12">
         <div class="text-center mb-8">
             <span class="text-xs uppercase tracking-[0.25em] text-gold-400 font-serif">Sacred Geometry</span>
             <h2 class="text-2xl font-serif text-white tracking-wide mt-1">Simbol & Filosofi Logo ASYIHAN</h2>
@@ -123,7 +165,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="flex gap-4 p-4 bg-black/30 rounded-xl border border-gold-400/10">
+            <div class="flex gap-4 p-4 rounded-xl border border-gold-400/10">
                 <div class="w-12 h-12 rounded-full border border-gold-400/40 flex items-center justify-center shrink-0 font-serif text-gold-400 text-lg">
                     A
                 </div>
@@ -135,7 +177,7 @@
                 </div>
             </div>
 
-            <div class="flex gap-4 p-4 bg-black/30 rounded-xl border border-gold-400/10">
+            <div class="flex gap-4 p-4 rounded-xl border border-gold-400/10">
                 <div class="w-12 h-12 rounded-full border border-gold-400/40 flex items-center justify-center shrink-0 font-serif text-gold-400 text-lg">
                     ◯
                 </div>
@@ -147,7 +189,7 @@
                 </div>
             </div>
 
-            <div class="flex gap-4 p-4 bg-black/30 rounded-xl border border-gold-400/10">
+            <div class="flex gap-4 p-4 rounded-xl border border-gold-400/10">
                 <div class="w-12 h-12 rounded-full border border-gold-400/40 flex items-center justify-center shrink-0 font-serif text-gold-400 text-sm">
                     1-9
                 </div>
@@ -159,7 +201,7 @@
                 </div>
             </div>
 
-            <div class="flex gap-4 p-4 bg-black/30 rounded-xl border border-gold-400/10">
+            <div class="flex gap-4 p-4 rounded-xl border border-gold-400/10">
                 <div class="w-12 h-12 rounded-full border border-gold-400/40 flex items-center justify-center shrink-0 font-serif text-gold-400 text-sm">
                     ✦
                 </div>

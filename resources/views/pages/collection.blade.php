@@ -28,7 +28,7 @@
             {{-- Each card wrapped in a container for inline detail injection --}}
             <div id="essence-wrapper-{{ $essence['number'] }}" class="essence-wrapper" data-essence-num="{{ $essence['number'] }}">
                 <div id="essence-card-{{ $essence['number'] }}" 
-                     class="essence-card group cursor-pointer relative rounded-2xl overflow-hidden border border-gold-400/20 hover:border-gold-400/80 transition-all duration-300 bg-[#0c0c0c] hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(197,160,89,0.3)] flex flex-col justify-end aspect-[600/620]"
+                     class="essence-card group cursor-pointer relative rounded-2xl overflow-hidden border border-gold-400/20 hover:border-gold-400/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(197,160,89,0.3)] flex flex-col justify-end aspect-[600/620]"
                      onclick="toggleInlineDetail({{ $essence['number'] }})"
                      title="Klik untuk melihat detail {{ $essence['name'] }}">
                     
@@ -48,7 +48,7 @@
                     </div>
 
                     {{-- Typography Overlay (Divider, Title, Traits) --}}
-                    <div class="relative z-10 w-full p-4 sm:p-5 text-left bg-gradient-to-t from-[#0c0c0c] via-[#0c0c0c]/85 to-transparent pt-6">
+                    <div class="relative z-10 w-full p-4 sm:p-5 text-left bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-6">
                         <div class="w-full h-px bg-gold-400/30 mb-2.5"></div>
                         <h3 class="text-sm sm:text-base font-serif font-semibold tracking-[0.18em] text-gold-200 group-hover:text-gold-100 uppercase transition-colors glow-gold">
                             {{ $essence['name'] }}
@@ -69,7 +69,7 @@
     <template id="inline-detail-template">
         <div class="inline-detail-panel" 
              style="grid-column: 1 / -1; overflow: hidden;">
-            <div class="inline-detail-inner bg-[#0c0c0c] border border-gold-400/40 rounded-2xl p-5 sm:p-7 md:p-8 shadow-[0_0_40px_rgba(0,0,0,0.9),0_0_25px_rgba(197,160,89,0.25)] relative overflow-hidden">
+            <div class="inline-detail-inner border border-gold-400/40 rounded-2xl p-5 sm:p-7 md:p-8 shadow-[0_0_40px_rgba(0,0,0,0.9),0_0_25px_rgba(197,160,89,0.25)] relative overflow-hidden">
                 
                 {{-- Ambient Background Glow --}}
                 <div class="absolute -top-32 -right-32 w-80 h-80 bg-gold-400/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -86,7 +86,7 @@
                     
                     {{-- Left Column: Perfume Bottle --}}
                     <div class="md:col-span-5 flex justify-center">
-                        <div class="relative w-full max-w-[240px] sm:max-w-[280px] aspect-square rounded-xl overflow-hidden border border-gold-400/30 bg-gradient-to-b from-[#141414] to-[#060606] p-4 flex items-center justify-center shadow-2xl">
+                        <div class="relative w-full max-w-[240px] sm:max-w-[280px] aspect-square rounded-xl overflow-hidden border border-gold-400/30 p-4 flex items-center justify-center shadow-2xl">
                             <div class="absolute inset-0 bg-cover bg-center opacity-35 pointer-events-none" style="background-image: url('{{ asset('images/background.png') }}');"></div>
                             <img class="inline-bottle-img w-full h-full object-contain relative z-10 drop-shadow-[0_10px_20px_rgba(0,0,0,0.95)]" src="" alt="">
                         </div>
@@ -110,7 +110,7 @@
                         {{-- Scent Notes & Ajian (Mantra) Grid --}}
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
                             {{-- Scent Notes --}}
-                            <div class="space-y-1.5 bg-black/40 p-3 rounded-lg border border-gold-400/15">
+                            <div class="space-y-1.5 p-3 rounded-lg border border-gold-400/15">
                                 <span class="text-[10px] uppercase tracking-widest text-gold-400 font-mono font-semibold block">
                                     Scent Notes
                                 </span>
@@ -126,7 +126,7 @@
                             </div>
 
                             {{-- Ajian (Mantra) --}}
-                            <div class="space-y-1.5 bg-black/40 p-3 rounded-lg border border-gold-400/15">
+                            <div class="space-y-1.5 p-3 rounded-lg border border-gold-400/15">
                                 <span class="text-[10px] uppercase tracking-widest text-gold-400 font-mono font-semibold block">
                                     Ajian (Mantra)
                                 </span>
@@ -324,7 +324,7 @@
         // Populate all data fields
         panel.querySelector('.inline-bottle-img').src = essence.bottle_image 
             ? `/${essence.bottle_image}` 
-            : `/images/cards/clean/card_${essence.number}_bottle.png`;
+            : `/images/bottle/${essence.number === 1 ? 'bottle_1.png' : 'bottle_' + essence.number + '.jpg'}`;
         panel.querySelector('.inline-bottle-img').alt = essence.name;
         panel.querySelector('.inline-detail-number').textContent = essence.number;
         panel.querySelector('.inline-detail-title').textContent = essence.name.toUpperCase();

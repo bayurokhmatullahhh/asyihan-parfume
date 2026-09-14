@@ -12,13 +12,11 @@
     <div class="flex flex-col gap-10 lg:gap-14">
         
         {{-- 1. Hero Visual Box with Celestial/Numerology Chart --}}
-        <section class="rounded-2xl p-6 sm:p-10 lg:p-12 relative overflow-hidden border border-gold-400/25 bg-[#071126]/90 min-h-[520px] sm:min-h-[480px] flex flex-col justify-center shadow-2xl">
+        <section class="rounded-2xl p-6 sm:p-10 lg:p-12 relative overflow-hidden border border-gold-400/30 bg-[#040919] min-h-[520px] sm:min-h-[480px] flex flex-col justify-center shadow-2xl">
             {{-- Background Chart Overlay --}}
-            <div class="absolute inset-0 z-0 bg-cover bg-center opacity-65 sm:opacity-70 pointer-events-none" style="background-image: url('{{ asset('images/background.png') }}');"></div>
-            {{-- Lighter gradient so mystical background shows through --}}
-            <div class="absolute inset-0 z-0 bg-gradient-to-r from-[#030818]/90 via-[#030818]/70 sm:via-[#030818]/55 to-[#030818]/25 sm:to-transparent pointer-events-none"></div>
-            {{-- Additional top-bottom gradient for text readability --}}
-            <div class="absolute inset-0 z-0 bg-gradient-to-b from-[#030818]/50 via-transparent to-[#030818]/60 pointer-events-none"></div>
+            <div class="absolute inset-0 z-0 bg-cover bg-center opacity-40 pointer-events-none" style="background-image: url('{{ asset('images/background.png') }}');"></div>
+            <div class="absolute inset-0 z-0 bg-gradient-to-r from-[#040919]/90 via-[#040919]/70 sm:via-[#040919]/55 to-[#040919]/25 sm:to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 z-0 bg-gradient-to-b from-[#040919]/50 via-transparent to-[#040919]/60 pointer-events-none"></div>
 
             {{-- SVG Constellation Particles Overlay --}}
             <div class="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
@@ -162,7 +160,7 @@
         </section>
 
         {{-- 3. Essence Collection Box (6 Cards Grid) --}}
-        <section class="bg-panel rounded-2xl p-6 sm:p-9 border border-gold-400/20 shadow-xl relative overflow-hidden">
+        <section class="rounded-2xl p-6 sm:p-9 border border-gold-400/30 bg-[#040919] relative overflow-hidden">
             {{-- Background Sacred Geometry SVG --}}
             <svg class="absolute inset-0 w-full h-full opacity-[0.02] pointer-events-none" viewBox="0 0 600 400" fill="none">
                 <circle cx="300" cy="200" r="180" stroke="currentColor" stroke-width="0.5" class="text-gold-400" stroke-dasharray="8 16"/>
@@ -194,12 +192,10 @@
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 relative z-10">
                 @foreach(array_slice($archetypes, 0, 6, true) as $essence)
-                    <a href="{{ route('essence.detail', $essence['slug']) }}" class="mystical-card-hover border border-gold-400/20 rounded-xl p-4 text-center hover:border-gold-400/80 transition-all duration-300 group bg-black/40 hover:-translate-y-1 block relative">
-                        {{-- Mystical Number with Sacred Ring --}}
+                    <a href="{{ route('essence.detail', $essence['slug']) }}" class="mystical-card-hover border border-gold-400/30 bg-[#040919] rounded-xl p-4 text-center hover:border-gold-400/80 transition-all duration-300 group hover:-translate-y-1 block relative">
+                        {{-- Mystical Number with Custom Image --}}
                         <div class="essence-num-ring mx-auto mb-2">
-                            <div class="text-2xl sm:text-3xl font-serif text-gold-400 group-hover:glow-gold-strong font-bold relative z-10 transition-all duration-300">
-                                {{ $essence['number'] }}
-                            </div>
+                            <img src="{{ asset('images/angka/' . $essence['number'] . '.png') }}" alt="Angka {{ $essence['number'] }}" class="w-10 h-10 sm:w-12 sm:h-12 object-contain relative z-10 transition-all duration-300 group-hover:scale-110 drop-shadow-[0_0_8px_rgba(197,160,89,0.4)]">
                         </div>
                         <h3 class="text-[10px] sm:text-xs uppercase tracking-widest text-white mb-1 font-medium group-hover:text-gold-200 relative z-10">
                             {{ $essence['name'] }}
@@ -245,11 +241,7 @@
         </div>
 
         {{-- Main Calculator Card --}}
-        <div class="bg-panel rounded-2xl p-6 sm:p-10 border border-gold-400/25 relative overflow-hidden shadow-2xl">
-            {{-- Background ambient glow & sacred geometry --}}
-            <div class="absolute -top-24 -right-24 w-80 h-80 bg-gold-400/5 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-gold-400/5 rounded-full blur-3xl pointer-events-none"></div>
-
+        <div class="bg-panel rounded-2xl p-6 sm:p-10 border border-gold-400/30 bg-[#040919] relative overflow-hidden shadow-2xl">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start relative z-10">
                 
                 {{-- LEFT COLUMN: INTERACTIVE FORM (5 Cols) --}}
@@ -287,7 +279,7 @@
                                     type="text" 
                                     placeholder="Masukkan nama lengkap Anda" 
                                     required 
-                                    class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-black/60 border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
+                                    class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#040919] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
                                 >
                             </div>
 
@@ -314,7 +306,7 @@
                                                 placeholder="DD" 
                                                 autocomplete="off"
                                                 required 
-                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-black/70 border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider shadow-inner"
+                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-[#040919] border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider"
                                             >
                                             <span class="block text-[9px] uppercase tracking-wider text-gray-400 text-center mt-1 font-mono">TGL</span>
                                         </div>
@@ -335,7 +327,7 @@
                                                 placeholder="MM" 
                                                 autocomplete="off"
                                                 required 
-                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-black/70 border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider shadow-inner"
+                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-[#040919] border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider"
                                             >
                                             <span class="block text-[9px] uppercase tracking-wider text-gray-400 text-center mt-1 font-mono">BLN</span>
                                         </div>
@@ -356,7 +348,7 @@
                                                 placeholder="YYYY" 
                                                 autocomplete="off"
                                                 required 
-                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-black/70 border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider shadow-inner"
+                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-[#040919] border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider"
                                             >
                                             <span class="block text-[9px] uppercase tracking-wider text-gray-400 text-center mt-1 font-mono">THN</span>
                                         </div>
@@ -397,7 +389,7 @@
                 <div class="lg:col-span-7">
                     
                     {{-- STATE A: DEFAULT MYSTIC PORTAL SHOWCASE (Shown before calculation) --}}
-                    <div id="home_calc_placeholder" class="rounded-xl overflow-hidden border border-gold-400/30 bg-gradient-to-b from-dark blue-800/80 via-dark blue-800/70 to-dark blue-800 p-5 sm:p-6 shadow-xl relative group">
+                    <div id="home_calc_placeholder" class="rounded-xl overflow-hidden border border-gold-400/30 p-5 sm:p-6 shadow-xl relative group">
                         {{-- Subtle background glow --}}
                         <div class="absolute inset-0 bg-radial-gradient from-gold-400/10 via-transparent to-transparent pointer-events-none"></div>
 
@@ -460,7 +452,7 @@
                         </div>
 
                         {{-- BAGIAN 1: HASIL ANALISIS NUMEROLOGI & KARAKTER DIRI --}}
-                        <div class="bg-black/60 rounded-xl p-4 sm:p-5 border border-gold-400/25 relative overflow-hidden">
+                        <div class="rounded-xl p-4 sm:p-5 border border-gold-400/25 relative overflow-hidden">
                             <div class="absolute -top-10 -right-10 w-28 h-28 bg-gold-400/10 rounded-full blur-2xl pointer-events-none"></div>
 
                             <div class="flex items-center justify-between">
@@ -485,7 +477,7 @@
                         </div>
 
                         {{-- BAGIAN TOKOH INSPIRATIF SEJIWA --}}
-                        <div class="bg-gradient-to-r from-black/80 via-[#0d1324] to-black/80 rounded-xl p-4 sm:p-5 border border-gold-400/30 relative overflow-hidden shadow-lg">
+                        <div class="rounded-xl p-4 sm:p-5 border border-gold-400/30 relative overflow-hidden shadow-lg">
                             <div class="absolute top-2 right-3 text-gold-400/20 text-3xl font-serif pointer-events-none select-none">✦</div>
                             <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/80 font-mono block mb-2.5">
                                 TOKOH INSPIRATIF SEJIWA DENGANMU
@@ -517,7 +509,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
                             {{-- Luxury Perfume Bottle Presentation --}}
                             <div class="md:col-span-5">
-                                <div class="rounded-xl overflow-hidden border border-gold-400/20 bg-gradient-to-b from-[#1c160e] via-[#0d0d0d] to-black p-4 text-center shadow-xl relative group">
+                                <div class="rounded-xl overflow-hidden border border-gold-400/20 p-4 text-center shadow-xl relative group">
                                     <div class="absolute inset-0 bg-radial-gradient from-gold-400/10 via-transparent to-transparent pointer-events-none"></div>
                                     
                                     <div class="text-center mb-2">
@@ -555,7 +547,7 @@
                                 <p id="res-fragrance-desc" class="text-gray-300 text-xs font-light leading-relaxed"></p>
 
                                 {{-- Notes Pyramid --}}
-                                <div class="bg-black/40 rounded-xl p-3 border border-white/5 space-y-1">
+                                <div class="rounded-xl p-3 border border-gold-400/20 space-y-1">
                                     <p class="text-gold-400 text-[9px] uppercase tracking-widest font-semibold mb-1 font-mono">NOTES PYRAMID</p>
                                     <div class="text-[11px] flex justify-between"><span class="text-gray-500">Top:</span> <span id="res-note-top" class="text-gray-300">Bergamot, Black Pepper</span></div>
                                     <div class="text-[11px] flex justify-between"><span class="text-gray-500">Middle:</span> <span id="res-note-mid" class="text-gray-300">Oud, Frankincense</span></div>
@@ -653,10 +645,10 @@
         {{-- 2. Sub-section: Asal Mula 'Asih' --}}
         <div class="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div class="lg:col-span-6 space-y-4">
-                <h3 class="text-xl sm:text-2xl font-serif text-gold-400 font-medium tracking-wide">
-                    Asal Mula 'Asih'
-                </h3>
-                <div class="bg-[#0a1630]/80 rounded-2xl p-6 sm:p-8 border border-gold-400/20 space-y-4 text-xs sm:text-sm text-gray-300 font-light leading-relaxed shadow-xl relative overflow-hidden">
+                <div class="rounded-2xl p-6 sm:p-8 border border-gold-400/20 space-y-4 text-xs sm:text-sm text-gray-300 font-light leading-relaxed relative overflow-hidden">
+                    <h3 class="text-xl sm:text-2xl font-serif text-gold-400 font-medium tracking-wide mb-2">
+                        Asal Mula 'Asih'
+                    </h3>
                     {{-- Subtle corner sacred geometry --}}
                     <svg class="absolute top-2 right-2 w-12 h-12 opacity-[0.06]" viewBox="0 0 48 48" fill="none">
                         <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="0.5" class="text-gold-400"/>
@@ -674,7 +666,7 @@
             </div>
 
             <div class="lg:col-span-6">
-                <div class="rounded-2xl border border-gold-400/20 overflow-hidden shadow-2xl h-full max-h-[380px] bg-black/40 relative group">
+                <div class="rounded-2xl border border-gold-400/20 overflow-hidden shadow-2xl h-full max-h-[380px] relative group">
                     <img src="{{ asset('images/Background_asalmula.png') }}" alt="Asal Mula Asih - Manuskrip Sunda Kuno" class="w-full h-full object-cover rounded-2xl">
                     {{-- Hover Glow Overlay --}}
                     <div class="absolute inset-0 bg-gradient-to-t from-gold-400/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
@@ -704,8 +696,8 @@
             {{-- 3 Sacred Geometry Cards in Row --}}
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {{-- Card 1: Aksara Awal --}}
-                <div class="mystical-card-hover bg-[#0a1630]/80 rounded-2xl p-6 sm:p-7 border border-gold-400/20 text-center flex flex-col items-center group hover:border-gold-400/60 transition-all shadow-xl">
-                    <div class="w-14 h-14 rounded-full border border-gold-400/50 flex items-center justify-center mb-4 text-gold-400 font-serif text-lg glow-gold bg-black/40 relative animate-energy-pulse group-hover:animate-none group-hover:shadow-[0_0_20px_rgba(197,160,89,0.3)]">
+                <div class="mystical-card-hover rounded-2xl p-6 sm:p-7 border border-gold-400/20 text-center flex flex-col items-center group hover:border-gold-400/60 transition-all">
+                    <div class="w-14 h-14 rounded-full border border-gold-400/50 flex items-center justify-center mb-4 text-gold-400 font-serif text-lg glow-gold relative animate-energy-pulse group-hover:animate-none group-hover:shadow-[0_0_20px_rgba(197,160,89,0.3)]">
                         A
                         <div class="absolute inset-[-4px] rounded-full border border-dashed border-gold-400/15 animate-sacred-rotate"></div>
                     </div>
@@ -718,8 +710,8 @@
                 </div>
 
                 {{-- Card 2: Lingkaran Keabadian --}}
-                <div class="mystical-card-hover bg-[#0a1630]/80 rounded-2xl p-6 sm:p-7 border border-gold-400/20 text-center flex flex-col items-center group hover:border-gold-400/60 transition-all shadow-xl">
-                    <div class="w-14 h-14 rounded-full border border-gold-400/50 flex items-center justify-center mb-4 text-gold-400 text-xl glow-gold bg-black/40 relative animate-energy-pulse group-hover:animate-none group-hover:shadow-[0_0_20px_rgba(197,160,89,0.3)]" style="animation-delay: 0.7s;">
+                <div class="mystical-card-hover rounded-2xl p-6 sm:p-7 border border-gold-400/20 text-center flex flex-col items-center group hover:border-gold-400/60 transition-all">
+                    <div class="w-14 h-14 rounded-full border border-gold-400/50 flex items-center justify-center mb-4 text-gold-400 text-xl glow-gold relative animate-energy-pulse group-hover:animate-none group-hover:shadow-[0_0_20px_rgba(197,160,89,0.3)]" style="animation-delay: 0.7s;">
                         ◯
                         <div class="absolute inset-[-4px] rounded-full border border-dashed border-gold-400/15 animate-sacred-rotate-reverse"></div>
                     </div>
@@ -732,8 +724,8 @@
                 </div>
 
                 {{-- Card 3: Numerologi 1-9 --}}
-                <div class="mystical-card-hover bg-[#0a1630]/80 rounded-2xl p-6 sm:p-7 border border-gold-400/20 text-center flex flex-col items-center group hover:border-gold-400/60 transition-all shadow-xl">
-                    <div class="px-3 py-1.5 rounded-lg border border-gold-400/50 flex items-center justify-center mb-4 text-gold-400 font-serif text-sm font-semibold glow-gold bg-black/40 h-14 min-w-[56px] relative animate-energy-pulse group-hover:animate-none group-hover:shadow-[0_0_20px_rgba(197,160,89,0.3)]" style="animation-delay: 1.4s;">
+                <div class="mystical-card-hover rounded-2xl p-6 sm:p-7 border border-gold-400/20 text-center flex flex-col items-center group hover:border-gold-400/60 transition-all">
+                    <div class="px-3 py-1.5 rounded-lg border border-gold-400/50 flex items-center justify-center mb-4 text-gold-400 font-serif text-sm font-semibold glow-gold h-14 min-w-[56px] relative animate-energy-pulse group-hover:animate-none group-hover:shadow-[0_0_20px_rgba(197,160,89,0.3)]" style="animation-delay: 1.4s;">
                         1-9
                         <div class="absolute inset-[-4px] rounded-lg border border-dashed border-gold-400/15 animate-sacred-rotate"></div>
                     </div>
@@ -747,7 +739,7 @@
             </div>
 
             {{-- Wide Bottom Card: Garis Geometris --}}
-            <div class="mt-6 bg-[#0a1630]/80 rounded-2xl p-6 sm:p-7 border border-gold-400/20 text-center max-w-3xl mx-auto shadow-xl relative overflow-hidden">
+            <div class="mt-6 rounded-2xl p-6 sm:p-7 border border-gold-400/20 text-center max-w-3xl mx-auto relative overflow-hidden">
                 {{-- Connecting Line SVG --}}
                 <svg class="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" viewBox="0 0 600 100" fill="none">
                     <line x1="0" y1="50" x2="600" y2="50" stroke="currentColor" stroke-width="0.5" class="text-gold-400" stroke-dasharray="8 12"/>

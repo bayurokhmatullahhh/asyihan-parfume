@@ -38,7 +38,7 @@ class NumerologyService
             'element' => 'Api',
             'color' => '#C41E3A',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/clean/card_1_bottle.png',
+            'bottle_image' => 'images/bottle/bottle_1.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Ir. Soekarno',
@@ -114,7 +114,7 @@ class NumerologyService
             'element' => 'Air',
             'color' => '#6B9BD2',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/clean/card_2_bottle.png',
+            'bottle_image' => 'images/bottle/bottle_2.jpg',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Abdurrahman Wahid (Gus Dur)',
@@ -190,7 +190,7 @@ class NumerologyService
             'element' => 'Udara',
             'color' => '#FFB347',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/clean/card_3_bottle.png',
+            'bottle_image' => 'images/bottle/bottle_3.jpg',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Pramoedya Ananta Toer',
@@ -266,7 +266,7 @@ class NumerologyService
             'element' => 'Tanah',
             'color' => '#8B7355',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/clean/card_4_bottle.png',
+            'bottle_image' => 'images/bottle/bottle_4.jpg',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Ciputra',
@@ -342,7 +342,7 @@ class NumerologyService
             'element' => 'Angin',
             'color' => '#2E8B57',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/clean/card_5_bottle.png',
+            'bottle_image' => 'images/bottle/bottle_5.jpg',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Richard Branson',
@@ -418,7 +418,7 @@ class NumerologyService
             'element' => 'Bumi',
             'color' => '#CD5C5C',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/clean/card_6_bottle.png',
+            'bottle_image' => 'images/bottle/bottle_6.jpg',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'R.A. Kartini',
@@ -494,7 +494,7 @@ class NumerologyService
             'element' => 'Ether',
             'color' => '#4B0082',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/clean/card_7_bottle.png',
+            'bottle_image' => 'images/bottle/bottle_7.jpg',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Albert Einstein',
@@ -570,7 +570,7 @@ class NumerologyService
             'element' => 'Logam',
             'color' => '#B8860B',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/clean/card_8_bottle.png',
+            'bottle_image' => 'images/bottle/bottle_8.jpg',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Sandiaga Salahuddin Uno',
@@ -646,7 +646,7 @@ class NumerologyService
             'element' => 'Cahaya',
             'color' => '#9370DB',
             'price' => 1380000,
-            'bottle_image' => 'images/cards/clean/card_9_bottle.png',
+            'bottle_image' => 'images/bottle/bottle_9.jpg',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Dalai Lama XIV',
