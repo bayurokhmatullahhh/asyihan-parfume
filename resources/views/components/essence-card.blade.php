@@ -1,14 +1,12 @@
 @props(['essence'])
 
-<div class="bg-panel rounded-xl p-5 border border-gold-400/20 hover:border-gold-400/70 transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between">
-    <div class="absolute -top-10 -right-10 w-24 h-24 bg-gold-400/5 rounded-full blur-xl group-hover:bg-gold-400/15 transition-all"></div>
-    
+<div class="bg-[#040919] rounded-xl p-5 border border-gold-400/30 hover:border-gold-400/80 transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between">
     <div>
         <div class="flex items-center justify-between mb-4">
             <span class="text-2xl font-serif text-gold-400 font-bold tracking-wider group-hover:glow-gold">
                 {{ $essence['number'] }}
             </span>
-            <span class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded bg-black/50 border border-gold-400/20 text-gold-300">
+            <span class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded bg-[#040919] border border-gold-400/30 text-gold-300">
                 {{ $essence['element'] }}
             </span>
         </div>
@@ -26,7 +24,7 @@
         </p>
     </div>
 
-    <div class="pt-3 border-t border-white/5 mt-auto">
+    <div class="pt-3 border-t border-gold-400/20 mt-auto">
         <div class="text-[11px] text-gray-500 mb-3 space-y-1">
             <p><span class="text-gray-400">Notes:</span> {{ $essence['notes']['top'] }}</p>
         </div>

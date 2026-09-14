@@ -4,7 +4,7 @@
 @section('meta_description', 'Hitung angka inti kelahiranmu dan temukan arketipe jiwa serta formula wewangian ASYIHAN yang selaras.')
 
 @section('content')
-<div class="calc-page min-h-screen text-gray-200" style="background: linear-gradient(180deg, #030818 0%, #071126 40%, #030818 100%);">
+<div class="calc-page min-h-screen text-gray-200">
 
     {{-- ============================================================ --}}
     {{-- HERO SECTION                                                  --}}
@@ -12,7 +12,7 @@
     <section class="calc-hero relative overflow-hidden py-16 sm:py-24 text-center">
         {{-- Ambient overlays --}}
         <div class="absolute inset-0 z-0 bg-cover bg-center opacity-25 pointer-events-none" style="background-image: url('{{ asset('images/background.png') }}');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-b from-[#030818]/80 via-transparent to-[#030818]/80 pointer-events-none"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-b from-[#040919]/90 via-transparent to-[#040919]/95 pointer-events-none"></div>
 
         {{-- Constellation Stars --}}
         <div class="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
@@ -25,7 +25,7 @@
 
         <div class="relative z-10 max-w-4xl mx-auto px-4">
             {{-- Sacred Badge --}}
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-400/30 bg-gold-400/5 text-gold-300 text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-6 shadow-[0_0_15px_rgba(197,160,89,0.15)]">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-400/30 bg-[#040919] text-gold-300 text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-6 shadow-[0_0_15px_rgba(197,160,89,0.15)]">
                 <span>✦</span> SACRED NUMEROLOGY CALCULATOR <span>✦</span>
             </div>
 
@@ -61,12 +61,9 @@
             <div id="calc-form-column" class="space-y-6">
 
                 {{-- CARD 1: FORMULIR RESONANSI JIWA --}}
-                <div class="calc-form-panel rounded-2xl p-6 sm:p-8 border border-gold-400/25 relative overflow-hidden shadow-2xl bg-gradient-to-b from-[#0c1228] via-[#071126] to-[#030818]">
-                    {{-- Ambient background glow --}}
-                    <div class="absolute -top-16 -right-16 w-44 h-44 bg-gold-400/10 rounded-full blur-3xl pointer-events-none"></div>
-
+                <div class="calc-form-panel rounded-2xl p-6 sm:p-8 border border-gold-400/30 bg-[#040919] relative overflow-hidden shadow-2xl">
                     {{-- Form Header --}}
-                    <div class="flex items-center justify-between pb-4 mb-6 border-b border-gold-400/15">
+                    <div class="flex items-center justify-between pb-4 mb-6 border-b border-gold-400/20">
                         <div>
                             <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/70 font-mono block mb-1">PENGHITUNGAN INTI</span>
                             <h2 class="font-serif text-white text-lg sm:text-xl font-medium tracking-wide">
@@ -90,7 +87,7 @@
                                 Nama Lengkap (Sesuai Akta / KTP)
                             </label>
                             <input id="calc_name" name="name" type="text" value="" placeholder="Contoh: BudiSantoso" required
-                                class="w-full py-3 px-4 text-sm rounded-lg bg-black/60 border border-gold-400/25 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                class="w-full py-3 px-4 text-sm rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                         </div>
 
                         {{-- Tanggal Lahir (3 Kolom: DD - MM - YYYY) --}}
@@ -102,36 +99,36 @@
                                 {{-- Tanggal (DD) --}}
                                 <div>
                                     <input id="calc_day" type="number" min="1" max="31" value="" placeholder="DD" required
-                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-black/60 border border-gold-400/25 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
-                                    <span class="block text-[9px] uppercase tracking-widest text-center text-gray-500 mt-1">Tanggal</span>
+                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                    <span class="block text-[9px] uppercase tracking-widest text-center text-gray-400 mt-1">Tanggal</span>
                                 </div>
 
                                 {{-- Bulan (MM) --}}
                                 <div>
                                     <input id="calc_month" type="number" min="1" max="12" value="" placeholder="MM" required
-                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-black/60 border border-gold-400/25 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
-                                    <span class="block text-[9px] uppercase tracking-widest text-center text-gray-500 mt-1">Bulan</span>
+                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                    <span class="block text-[9px] uppercase tracking-widest text-center text-gray-400 mt-1">Bulan</span>
                                 </div>
 
                                 {{-- Tahun (YYYY) --}}
                                 <div>
                                     <input id="calc_year" type="number" min="1920" max="2030" value="" placeholder="YYYY" required
-                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-black/60 border border-gold-400/25 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
-                                    <span class="block text-[9px] uppercase tracking-widest text-center text-gray-500 mt-1">Tahun</span>
+                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                    <span class="block text-[9px] uppercase tracking-widest text-center text-gray-400 mt-1">Tahun</span>
                                 </div>
                             </div>
                         </div>
 
                         {{-- Calculation Breakdown Preview --}}
-                        <div class="p-2.5 rounded-lg bg-black/40 border border-gold-400/15 text-center min-h-[38px] flex items-center justify-center">
-                            <p class="text-[10px] text-gold-400/60 font-mono tracking-wider" id="calc-preview-text">
+                        <div class="p-2.5 rounded-lg bg-[#040919] border border-gold-400/30 text-center min-h-[38px] flex items-center justify-center">
+                            <p class="text-[10px] text-gold-400/70 font-mono tracking-wider" id="calc-preview-text">
                                 Masukkan tanggal lahir Anda untuk melihat reduksi angka Pythagoras
                             </p>
                         </div>
 
                         {{-- Submit Button --}}
                         <button id="calc-submit-btn" type="submit"
-                            class="w-full py-3.5 px-4 rounded-lg bg-gradient-to-r from-[#C5A059] via-[#E2C37A] to-[#C5A059] text-black font-semibold text-xs sm:text-sm tracking-[0.2em] uppercase shadow-[0_4px_20px_rgba(197,160,89,0.3)] hover:shadow-[0_4px_30px_rgba(197,160,89,0.5)] hover:brightness-105 active:scale-[0.99] transition-all duration-300 flex items-center justify-center gap-2">
+                            class="w-full py-3.5 px-4 rounded-lg bg-gradient-to-r from-[#C5A059] via-[#E2C37A] to-[#C5A059] text-black font-semibold text-xs sm:text-sm tracking-[0.2em] uppercase shadow-[0_4px_20px_rgba(197,160,89,0.3)] hover:shadow-[0_4px_30px_rgba(197,160,89,0.5)] hover:brightness-105 active:scale-[0.99] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
                             <span>✦ BUKA GERBANG RESONANSI JIWA ✦</span>
                         </button>
                     </form>
@@ -144,9 +141,9 @@
                 </div>
 
                 {{-- CARD 2: METODE PERHITUNGAN PYTHAGORAS --}}
-                <div class="rounded-2xl p-6 sm:p-7 border border-gold-400/20 bg-gradient-to-b from-[#0c1228] via-[#071126] to-[#030818] shadow-xl space-y-4">
+                <div class="rounded-2xl p-6 sm:p-7 border border-gold-400/30 bg-[#040919] shadow-xl space-y-4">
                     {{-- Header with Compass Icon --}}
-                    <div class="flex items-center gap-3 pb-3 border-b border-gold-400/15">
+                    <div class="flex items-center gap-3 pb-3 border-b border-gold-400/20">
                         <div class="w-7 h-7 rounded-full bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 shrink-0">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="9" stroke-width="1.5"></circle>
@@ -160,7 +157,7 @@
 
                     {{-- Step 1 --}}
                     <div class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-black/60 border border-gold-400/30 text-gold-400 text-xs font-mono flex items-center justify-center shrink-0 mt-0.5">
+                        <div class="w-6 h-6 rounded-full bg-[#040919] border border-gold-400/30 text-gold-400 text-xs font-mono flex items-center justify-center shrink-0 mt-0.5">
                             1
                         </div>
                         <div>
@@ -173,7 +170,7 @@
 
                     {{-- Step 2 --}}
                     <div class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-black/60 border border-gold-400/30 text-gold-400 text-xs font-mono flex items-center justify-center shrink-0 mt-0.5">
+                        <div class="w-6 h-6 rounded-full bg-[#040919] border border-gold-400/30 text-gold-400 text-xs font-mono flex items-center justify-center shrink-0 mt-0.5">
                             2
                         </div>
                         <div>
@@ -185,7 +182,7 @@
                     </div>
 
                     {{-- Highlight Note --}}
-                    <div class="p-3.5 rounded-xl bg-gold-400/5 border border-gold-400/25 flex items-start gap-2.5 mt-2">
+                    <div class="p-3.5 rounded-xl bg-[#040919] border border-gold-400/30 flex items-start gap-2.5 mt-2">
                         <span class="text-gold-400 text-xs mt-0.5 shrink-0">✦</span>
                         <p class="text-[11px] text-gray-300 font-light leading-relaxed">
                             <strong class="text-gold-300 font-medium">Angka Inti (Soul Core)</strong> adalah cetak biru energi bawaan. Memadukannya dengan wewangian resonan membantu amplifikasi vibrasi positif dalam hidup.
@@ -197,13 +194,10 @@
 
             {{-- RESULT CARD (HIDDEN INITIALLY UNTIL BUKA GERBANG RESONANSI JIWA DI-KLIK) --}}
             <div id="calc-result-wrapper" class="hidden">
-                <div id="calculator-result-container" class="calc-result-panel rounded-2xl p-6 sm:p-8 border border-gold-400/30 relative overflow-hidden shadow-2xl bg-gradient-to-b from-[#0c1228] via-[#071126] to-[#030818]">
-                    {{-- Ambient background glow --}}
-                    <div class="absolute top-0 right-0 w-80 h-80 bg-gold-400/5 rounded-full blur-3xl pointer-events-none"></div>
-
+                <div id="calculator-result-container" class="calc-result-panel rounded-2xl p-6 sm:p-8 border border-gold-400/30 bg-[#040919] relative overflow-hidden shadow-2xl">
                     {{-- TOP MEDALLION (Glowing Square Box) --}}
                     <div class="flex flex-col items-center justify-center text-center pt-2 pb-6">
-                        <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl border border-gold-400/40 bg-gradient-to-b from-[#12182b] to-[#080c16] flex flex-col items-center justify-center shadow-[0_0_35px_rgba(197,160,89,0.25)] p-2 group transition-transform duration-500 hover:scale-105">
+                        <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl border border-gold-400/40 bg-[#040919] flex flex-col items-center justify-center shadow-[0_0_35px_rgba(197,160,89,0.25)] p-2 group transition-transform duration-500 hover:scale-105">
                             {{-- Inner ornamental border --}}
                             <div class="absolute inset-1.5 rounded-xl border border-gold-400/20 pointer-events-none"></div>
 
@@ -218,7 +212,7 @@
 
                         {{-- Archetype Pill & Title --}}
                         <div class="mt-5">
-                            <span class="inline-block text-[9px] uppercase tracking-[0.25em] px-3 py-1 rounded-full bg-gold-400/10 border border-gold-400/25 text-gold-300 mb-2 font-mono">
+                            <span class="inline-block text-[9px] uppercase tracking-[0.25em] px-3 py-1 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 mb-2 font-mono">
                                 ARKETIPE UTAMA
                             </span>
                             <h2 id="out-archetype-name" class="text-2xl sm:text-3xl font-serif text-white font-medium tracking-wide">
@@ -231,10 +225,10 @@
 
                         {{-- Dominant Elements Badges --}}
                         <div class="flex flex-wrap items-center justify-center gap-2.5 mt-4">
-                            <span class="text-[10px] sm:text-[11px] px-3 py-1 rounded-md bg-black/60 border border-gold-400/20 text-gray-300">
+                            <span class="text-[10px] sm:text-[11px] px-3 py-1 rounded-md bg-[#040919] border border-gold-400/30 text-gray-300">
                                 Elemen Dominan: <strong id="out-element" class="text-gold-300 font-medium">Ether</strong>
                             </span>
-                            <span class="text-[10px] sm:text-[11px] px-3 py-1 rounded-md bg-black/60 border border-gold-400/20 text-gray-300">
+                            <span class="text-[10px] sm:text-[11px] px-3 py-1 rounded-md bg-[#040919] border border-gold-400/30 text-gray-300">
                                 Aroma Utama: <strong id="out-aroma-main" class="text-gold-300 font-medium">Woody & Frankincense</strong>
                             </span>
                         </div>
@@ -248,16 +242,16 @@
                     {{-- ============================================================ --}}
                     {{-- SECTION: TOKOH INSPIRATIF SEJIWA                            --}}
                     {{-- ============================================================ --}}
-                    <div class="mt-5 pt-5 border-t border-gold-400/15">
+                    <div class="mt-5 pt-5 border-t border-gold-400/20">
                         <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/70 font-mono block mb-3 text-center sm:text-left">
                             TOKOH INSPIRATIF SEJIWA DENGANMU
                         </span>
-                        <div class="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-black/70 via-[#0d1324] to-black/70 border border-gold-400/25 relative overflow-hidden">
+                        <div class="p-4 sm:p-5 rounded-xl border border-gold-400/30 bg-[#040919] relative overflow-hidden">
                             {{-- Decorative star --}}
                             <div class="absolute top-3 right-4 text-gold-400/20 text-4xl font-serif pointer-events-none">✦</div>
                             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                                 {{-- Icon area --}}
-                                <div class="w-14 h-14 shrink-0 rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-400/5 border border-gold-400/30 flex items-center justify-center shadow-lg">
+                                <div class="w-14 h-14 shrink-0 rounded-xl bg-[#040919] border border-gold-400/30 flex items-center justify-center shadow-lg">
                                     <span class="text-2xl">⭐</span>
                                 </div>
                                 {{-- Text area --}}
@@ -266,11 +260,11 @@
                                         <h3 id="out-tokoh-name" class="text-base sm:text-lg font-serif text-gold-300 font-semibold tracking-wide">
                                             Albert Einstein
                                         </h3>
-                                        <span id="out-tokoh-asal" class="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded bg-gold-400/10 border border-gold-400/20 text-gold-400/80 font-mono">
+                                        <span id="out-tokoh-asal" class="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded bg-gold-400/10 border border-gold-400/30 text-gold-400/80 font-mono">
                                             Jerman / AS
                                         </span>
                                     </div>
-                                    <p id="out-tokoh-lahir" class="text-[10px] text-gray-500 font-mono mb-1.5">
+                                    <p id="out-tokoh-lahir" class="text-[10px] text-gray-400 font-mono mb-1.5">
                                         Lahir: 14 Maret 1879
                                     </p>
                                     <p id="out-tokoh-desc" class="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
@@ -282,13 +276,13 @@
                     </div>
 
                     {{-- SECTION: CATATAN AROMA (NOTES) --}}
-                    <div class="mt-6 pt-5 border-t border-gold-400/15">
+                    <div class="mt-6 pt-5 border-t border-gold-400/20">
                         <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/70 font-mono block mb-3 text-center sm:text-left">
                             CATATAN AROMA (NOTES)
                         </span>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                             {{-- Top & Heart Notes --}}
-                            <div class="p-4 rounded-xl bg-black/50 border border-gold-400/15 space-y-1">
+                            <div class="p-4 rounded-xl border border-gold-400/30 bg-[#040919] space-y-1">
                                 <span class="text-[9px] uppercase tracking-wider text-gold-400/80 font-mono block">
                                     TOP & HEART NOTES
                                 </span>
@@ -301,7 +295,7 @@
                             </div>
 
                             {{-- Base Notes --}}
-                            <div class="p-4 rounded-xl bg-black/50 border border-gold-400/15 space-y-1">
+                            <div class="p-4 rounded-xl border border-gold-400/30 bg-[#040919] space-y-1">
                                 <span class="text-[9px] uppercase tracking-wider text-gold-400/80 font-mono block">
                                     BASE NOTES
                                 </span>
@@ -316,14 +310,14 @@
                     </div>
 
                     {{-- SECTION: REKOMENDASI FORMULA ASYIHAN --}}
-                    <div class="mt-6 pt-5 border-t border-gold-400/15">
+                    <div class="mt-6 pt-5 border-t border-gold-400/20">
                         <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/70 font-mono block mb-3 text-center sm:text-left">
                             REKOMENDASI FORMULA ASYIHAN
                         </span>
 
-                        <div class="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-black/80 via-[#0d1324] to-black/80 border border-gold-400/30 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 relative">
+                        <div class="p-4 sm:p-5 rounded-xl border border-gold-400/30 bg-[#040919] flex flex-col sm:flex-row items-center gap-4 sm:gap-5 relative">
                             {{-- Bottle Thumbnail --}}
-                            <div class="w-20 h-24 sm:w-24 sm:h-28 shrink-0 rounded-lg overflow-hidden border border-gold-400/25 bg-black/60 flex items-center justify-center p-1.5 relative group">
+                            <div class="w-20 h-24 sm:w-24 sm:h-28 shrink-0 rounded-lg overflow-hidden border border-gold-400/30 bg-[#040919] flex items-center justify-center p-1.5 relative group">
                                 <img id="out-bottle-img"
                                      src="{{ asset('images/cards/card_7_hd.png') }}"
                                      alt="Essence Formula Bottle"
@@ -332,7 +326,7 @@
 
                             {{-- Details & CTA --}}
                             <div class="flex-1 text-center sm:text-left space-y-1.5">
-                                <span id="out-formula-badge" class="inline-block text-[8px] uppercase tracking-[0.2em] px-2 py-0.5 rounded bg-gold-400/10 border border-gold-400/25 text-gold-300 font-mono">
+                                <span id="out-formula-badge" class="inline-block text-[8px] uppercase tracking-[0.2em] px-2 py-0.5 rounded bg-gold-400/10 border border-gold-400/30 text-gold-300 font-mono">
                                     FORMULA KHUSUS NO. <span id="out-formula-num">7</span>
                                 </span>
                                 <h3 id="out-essence-title" class="text-sm sm:text-base font-serif text-white font-medium tracking-wide">
@@ -358,7 +352,7 @@
                     </div>
 
                     {{-- BOTTOM SHARE & PDF & CUSTOM CTA BAR --}}
-                    <div class="mt-6 pt-5 border-t border-gold-400/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="mt-6 pt-5 border-t border-gold-400/20 flex flex-col sm:flex-row items-center justify-between gap-4">
                         {{-- Social Share --}}
                         <div class="flex items-center gap-3">
                             <span class="text-[9px] uppercase tracking-wider text-gray-400 font-mono">
@@ -367,25 +361,25 @@
                             <div class="flex items-center gap-2">
                                 {{-- WhatsApp --}}
                                 <a id="share-wa" href="https://api.whatsapp.com/send?text=Saya%20telah%20menghitung%20angka%20inti%20numerologi%20saya%20di%20ASYIHAN.%20Coba%20di%20{{ urlencode(url()->current()) }}" target="_blank"
-                                   class="w-7 h-7 rounded-full bg-black/60 border border-gold-400/25 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors" title="Bagikan via WhatsApp">
+                                   class="w-7 h-7 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors" title="Bagikan via WhatsApp">
                                     <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.983.541 1.879.827 2.796.827 3.183 0 5.768-2.587 5.769-5.767.001-3.18-2.585-5.766-5.769-5.767zm7.558 5.767c0 4.168-3.39 7.559-7.558 7.559-1.272 0-2.463-.317-3.517-.872l-4.514 1.183 1.205-4.405c-.651-1.096-1.032-2.38-1.032-3.465 0-4.168 3.39-7.558 7.558-7.558 4.168 0 7.558 3.39 7.558 7.558z"/></svg>
                                 </a>
 
                                 {{-- Instagram (Copy link + notice) --}}
                                 <button id="share-ig" type="button"
-                                   class="w-7 h-7 rounded-full bg-black/60 border border-gold-400/25 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors" title="Salin untuk Instagram Story">
+                                   class="w-7 h-7 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors cursor-pointer" title="Salin untuk Instagram Story">
                                     <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                                 </button>
 
                                 {{-- Facebook --}}
                                 <a id="share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"
-                                   class="w-7 h-7 rounded-full bg-black/60 border border-gold-400/25 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors" title="Bagikan via Facebook">
+                                   class="w-7 h-7 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors" title="Bagikan via Facebook">
                                     <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
                                 </a>
 
                                 {{-- Copy Link --}}
                                 <button id="copy-result-link" type="button"
-                                   class="w-7 h-7 rounded-full bg-black/60 border border-gold-400/25 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors" title="Salin Tautan">
+                                   class="w-7 h-7 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors cursor-pointer" title="Salin Tautan">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                                 </button>
                             </div>
@@ -395,7 +389,7 @@
                         <div class="flex flex-wrap items-center gap-3">
                             {{-- Download PDF Button --}}
                             <button id="download-pdf-btn" type="button"
-                                class="btn-gold-outline py-2.5 px-4 text-[10px] sm:text-xs tracking-[0.2em] uppercase rounded-lg font-medium inline-flex items-center gap-2 hover:bg-gold-400/10 transition-all">
+                                class="btn-gold-outline py-2.5 px-4 text-[10px] sm:text-xs tracking-[0.2em] uppercase rounded-lg font-medium inline-flex items-center gap-2 bg-[#040919] border border-gold-400/40 hover:bg-gold-400/10 transition-all cursor-pointer">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
@@ -404,7 +398,7 @@
 
                             {{-- Custom Formulation Button --}}
                             <a href="https://wa.me/6281234567890?text=Halo%20ASYIHAN,%20saya%20tertarik%20untuk%20memesan%20racikan%20custom%20sesuai%20angka%20inti%20saya" target="_blank"
-                               class="btn-gold-outline py-2.5 px-5 text-[10px] sm:text-xs tracking-[0.2em] uppercase rounded-lg font-medium inline-flex items-center gap-2 hover:bg-gold-400/10">
+                               class="btn-gold-outline py-2.5 px-5 text-[10px] sm:text-xs tracking-[0.2em] uppercase rounded-lg font-medium inline-flex items-center gap-2 bg-[#040919] border border-gold-400/40 hover:bg-gold-400/10">
                                 <span>✦ RACIKAN CUSTOM ✦</span>
                             </a>
                         </div>
@@ -436,7 +430,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             @foreach($archetypes as $arch)
                 <div id="arch-card-{{ $arch['number'] }}"
-                     class="archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border border-gold-400/20 bg-gradient-to-b from-[#0c1228] via-[#071126] to-[#030818] hover:border-gold-400/50 hover:-translate-y-1">
+                     class="archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border border-gold-400/30 bg-[#040919] hover:border-gold-400/70 hover:-translate-y-1">
 
                     <div>
                         {{-- Card Header: Number Image & Badge --}}
@@ -447,7 +441,7 @@
                                      alt="Angka {{ $arch['number'] }}"
                                      class="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(197,160,89,0.5)]">
                             </div>
-                            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] px-2.5 py-1 rounded bg-black/60 border border-gold-400/30 text-gold-300 font-mono">
+                            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] px-2.5 py-1 rounded bg-[#040919] border border-gold-400/30 text-gold-300 font-mono">
                                 {{ $arch['badge'] }}
                             </span>
                         </div>
@@ -463,18 +457,18 @@
                         </p>
 
                         {{-- Inner Inspirational Figure Box --}}
-                        <div class="p-3 rounded-xl bg-black/60 border border-gold-400/15 mb-4 space-y-1.5">
+                        <div class="p-3 rounded-xl border border-gold-400/30 bg-[#040919] mb-4 space-y-1.5">
                             <span class="text-[9px] uppercase tracking-wider text-gold-400/80 font-mono block">
                                 TOKOH INSPIRATIF SEJIWA:
                             </span>
                             <div class="flex flex-wrap gap-1.5">
                                 @foreach(array_slice($arch['tokoh_inspiratif'] ?? [], 0, 3) as $tokoh)
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-gold-400/10 border border-gold-400/20 text-gold-300 font-light">
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-[#040919] border border-gold-400/30 text-gold-300 font-light">
                                         {{ $tokoh['nama'] }}
                                     </span>
                                 @endforeach
                                 @if(count($arch['tokoh_inspiratif'] ?? []) > 3)
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-400 font-light">
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-[#040919] border border-gold-400/20 text-gray-400 font-light">
                                         +{{ count($arch['tokoh_inspiratif']) - 3 }} lainnya
                                     </span>
                                 @endif
@@ -483,7 +477,7 @@
                     </div>
 
                     {{-- Bottom Action Link --}}
-                    <div class="pt-3 border-t border-white/5 flex items-center justify-between">
+                    <div class="pt-3 border-t border-gold-400/20 flex items-center justify-between">
                         <a href="{{ route('essence.detail', $arch['slug']) }}"
                            class="text-[10px] sm:text-[11px] text-gold-400 uppercase tracking-wider font-mono inline-flex items-center gap-1 hover:text-gold-300 transition-colors">
                             <span>LIHAT DETAIL ARKETIPE</span>
@@ -503,7 +497,7 @@
     {{-- ============================================================ --}}
     {{-- INSPIRATIONAL QUOTE SECTION                                   --}}
     {{-- ============================================================ --}}
-    <section class="relative overflow-hidden py-16 sm:py-24 text-center bg-gradient-to-b from-transparent via-[#030818] to-black">
+    <section class="relative overflow-hidden py-16 sm:py-24 text-center">
         <div class="max-w-3xl mx-auto px-4 relative z-10 space-y-6">
             {{-- Sacred Emblem Icon --}}
             <div class="w-12 h-12 mx-auto rounded-full bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400">
@@ -557,8 +551,8 @@
             name: 'Sang Penggagas',
             subtitle: 'Sang Penggagas & Perintis Perubahan',
             element: 'Api',
-            aroma: 'Citrus, Cedarwood & Pink Pepper',
-            desc: 'Kamu terlahir sebagai pemimpin — jiwa yang merintis, membuka jalan, dan tak pernah gentar menghadapi kegelapan. Angka 1 membawa energi matahari: terang, tegas, dan penuh daya cipta.',
+            aroma: 'Bergamot, Grapefruit & Pink Pepper',
+            desc: 'Anda adalah pemimpin alami. Berpikir cepat, bertindak lebih cepat. Anda tidak takut mengambil risiko dan selalu mencari cara untuk menciptakan sesuatu yang baru. Ketegasan dan kemandirian Anda menginspirasi orang lain untuk bergerak maju.',
             essenceName: 'ASYIHAN ESSENCE I — SANG PENGGAGAS',
             notesTopTitle: 'Bergamot & Pink Pepper',
             notesTopDesc: 'Memberi kesegaran berani dan memicu fokus kepemimpinan',
@@ -573,8 +567,8 @@
             name: 'Sang Penghubung',
             subtitle: 'Sang Penghubung & Penjaga Harmoni',
             element: 'Air',
-            aroma: 'Jasmine Sambac, Lavender & White Musk',
-            desc: 'Kamu adalah jembatan antar jiwa — pendengar, penjaga keseimbangan, dan pembawa kedamaian. Angka 2 membawa energi bulan: lembut, intuitif, dan penuh kasih.',
+            aroma: 'Pear, Peony & White Musk',
+            desc: 'Anda peka terhadap perasaan orang lain. Anda menghubungkan hati, bukan sekadar kata. Kehadiran Anda menghadirkan rasa aman, dimana pun Anda berada. Anda memiliki kepekaan yang tinggi, intuitif, lembut, dan mampu membuat orang lain merasa dipahami dan aman.',
             essenceName: 'ASYIHAN ESSENCE II — SANG PENGHUBUNG',
             notesTopTitle: 'Lavender & Pear',
             notesTopDesc: 'Menenangkan batin dan menghadirkan kejernihan emosional',
@@ -589,8 +583,8 @@
             name: 'Sang Komunikator',
             subtitle: 'Sang Komunikator & Seniman Jiwa',
             element: 'Udara',
-            aroma: 'Neroli, Sparkling Citrus & Vanilla',
-            desc: 'Kamu adalah seniman kehidupan — yang mewarnai dunia dengan ide, suara, dan keindahan. Angka 3 membawa energi bintang: berkilau, memikat, dan penuh inspirasi.',
+            aroma: 'Lemon, Neroli & Vanilla',
+            desc: 'Anda membawa ide, cerita, dan inspirasi. Kata-kata Anda mampu menggerakkan, menghibur, dan mengangkat energi orang lain. Di mana pun Anda berada, Anda membuat suasana menjadi hidup. Anda ekspresif, kreatif, optimis, dan tidak takut mengekspresikan diri.',
             essenceName: 'ASYIHAN ESSENCE III — SANG KOMUNIKATOR',
             notesTopTitle: 'Grapefruit & Neroli',
             notesTopDesc: 'Membuka kanal inspirasi kreatif dan antusiasme sosial',
@@ -605,8 +599,8 @@
             name: 'Sang Pembangun',
             subtitle: 'Sang Pembangun & Pilar Kehidupan',
             element: 'Tanah',
-            aroma: 'Vetiver, Patchouli & Oakmoss',
-            desc: 'Kamu adalah fondasi — yang membangun dengan kesabaran, ketelitian, dan kesetiaan tanpa batas. Angka 4 membawa energi bumi: kokoh, dapat diandalkan, dan tak tergoyahkan.',
+            aroma: 'Bergamot, Lavender & Cedarwood',
+            desc: 'Anda adalah fondasi yang membuat segalanya berdiri. Praktis, disiplin, dan dapat diandalkan. Anda mengubah kekacauan menjadi keteraturan, ide menjadi kenyataan, dan mimpi menjadi struktur. Anda stabil, bertanggung jawab, dan terstruktur.',
             essenceName: 'ASYIHAN ESSENCE IV — SANG PEMBANGUN',
             notesTopTitle: 'Sage & Juniper Berry',
             notesTopDesc: 'Ketajaman pikiran logis dan disiplin diri yang teguh',
@@ -621,8 +615,8 @@
             name: 'Sang Penjelajah',
             subtitle: 'Sang Penjelajah & Pembawa Perubahan',
             element: 'Angin',
-            aroma: 'Cardamom, Bergamot & Black Pepper',
-            desc: 'Kamu adalah angin — yang tak bisa dikurung, selalu bergerak, dan membawa perubahan ke mana pun kau pergi. Angka 5 membawa energi petualangan: dinamis, penasaran, dan penuh kejutan.',
+            aroma: 'Bergamot, Marine Accord & Ambergris',
+            desc: 'Anda bebas, adaptif, dan penuh rasa ingin tahu. Anda tidak takut perubahan. Anda mencari pengalaman, menjelajah tempat baru, dan menikmati setiap kemungkinan yang datang. Dunia adalah ruang Anda untuk belajar, berkembang, dan menemukan diri.',
             essenceName: 'ASYIHAN ESSENCE V — SANG PENJELAJAH',
             notesTopTitle: 'Lime & Ginger',
             notesTopDesc: 'Percikan energi dinamis dan gairah eksplorasi bebas',
@@ -637,8 +631,8 @@
             name: 'Sang Pengasuh',
             subtitle: 'Sang Pengasuh & Penyembuh Jiwa',
             element: 'Bumi',
-            aroma: 'Damask Rose, Fig & Tonka Bean',
-            desc: 'Kamu adalah rumah — tempat kembali, tempat merasa aman, tempat menemukan cinta. Angka 6 membawa energi kasih sayang: hangat, melindungi, dan menyembuhkan.',
+            aroma: 'Bergamot, Orange Blossom & Mandarin',
+            desc: 'Anda adalah pelindung alami yang penuh kasih. Anda intuitif, sabar, dan selalu hadir untuk orang lain. Anda menciptakan ruang aman, mendukung pertumbuhan, dan menumbuhkan kebaikan di setiap lingkungan yang Anda sentuh. Kehadiran Anda membawa rasa tenang, nyaman, dan penuh kehangatan.',
             essenceName: 'ASYIHAN ESSENCE VI — SANG PENGASUH',
             notesTopTitle: 'Peony & Mandarin',
             notesTopDesc: 'Kelembutan kasih sayang dan ketenangan rumah tangga',
@@ -653,8 +647,8 @@
             name: 'Sang Analis',
             subtitle: 'Sang Analis & Pencari Kebenaran Hakiki',
             element: 'Ether',
-            aroma: 'Woody & Frankincense',
-            desc: 'Individu dengan angka 7 memiliki intuisi mistis yang tajam, haus akan pengetahuan mendalam, serta ketenangan batin yang memikat.',
+            aroma: 'Bergamot, Green Tea & Sandalwood',
+            desc: 'Anda adalah pengamat yang tajam dan pemikir yang mendalam. Anda mampu melihat pola, memahami sebab-akibat, dan menemukan solusi dari setiap tantangan. Anda tidak terburu-buru dalam mengambil keputusan, karena Anda tahu bahwa kebenaran lahir dari pemahaman yang utuh. Kehadiran Anda membawa kejelasan, kearifan, dan arah yang pasti.',
             essenceName: 'ASYIHAN ESSENCE VII — SANG ANALIS',
             notesTopTitle: 'Bergamot Calabria & Olibanum Oman',
             notesTopDesc: 'Menenangkan pikiran dan membuka intuisi batin',
@@ -669,8 +663,8 @@
             name: 'Sang Strategis',
             subtitle: 'Sang Strategis & Penguasa Kelimpahan',
             element: 'Logam',
-            aroma: 'Agarwood (Oud), Amber & Leather',
-            desc: 'Kamu adalah kekuatan — yang mengubah visi menjadi kenyataan, yang membangun kerajaan dari ketiadaan. Angka 8 membawa energi kemakmuran: ambisius, tegas, dan penuh otoritas.',
+            aroma: 'Bergamot, Black Pepper & Cardamom',
+            desc: 'Anda adalah perencana yang visioner dan penuh pertimbangan. Anda mampu melihat peluang, menyusun strategi, dan mengambil keputusan yang tepat waktu. Anda tidak terburu-buru, namun selalu selangkah di depan. Kehadiran Anda membawa arah, ketenangan, dan hasil yang nyata.',
             essenceName: 'ASYIHAN ESSENCE VIII — SANG STRATEGIS',
             notesTopTitle: 'Saffron & Elemi',
             notesTopDesc: 'Aura kemewahan, ketegasan visi, dan keberanian eksekusi',
@@ -685,8 +679,8 @@
             name: 'Sang Pembimbing',
             subtitle: 'Sang Pembimbing & Cahaya Kemanusiaan',
             element: 'Cahaya',
-            aroma: 'Rare Florals, Incense & White Amber',
-            desc: 'Kamu adalah jiwa tua — yang memahami siklus, merasakan semuanya lebih dalam, dan membawa cahaya untuk banyak orang. Angka 9 membawa energi kebijaksanaan universal.',
+            aroma: 'Bergamot, Rose & Sandalwood',
+            desc: 'Anda adalah cahaya bagi orang lain di tengah kegelapan. Anda mampu memberikan arah, inspirasi, dan bimbingan yang tulus. Anda melihat potensi dalam diri dan orang lain, lalu mendorongnya untuk menjadi lebih baik. Kehadiran Anda menjadi penuntun yang bijak. Anda membawa visi, nilai, dan kebijaksanaan yang menginspirasi banyak jiwa.',
             essenceName: 'ASYIHAN ESSENCE IX — SANG PEMBIMBING',
             notesTopTitle: 'Iris Florence & Violet Leaf',
             notesTopDesc: 'Kehalusan rasa cinta semesta dan pandangan visioner',

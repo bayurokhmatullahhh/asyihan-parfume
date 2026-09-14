@@ -16,10 +16,10 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="mystical-bg antialiased">
+<body class="antialiased" style="background-color: #040919;">
 
     {{-- Header --}}
-    <header id="main-header" class="fixed w-full top-0 z-50 bg-[#040c21]/90 backdrop-blur-md border-b border-gold-400/20 shadow-[0_4px_30px_rgba(2,6,20,0.85)] transition-all duration-300">
+    <header id="main-header" class="fixed w-full top-0 z-50 bg-[#040919] border-b border-gold-400/20 shadow-[0_4px_30px_rgba(2,6,20,0.85)] transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             {{-- Logo --}}
             <a href="{{ route('home') }}" class="text-2xl font-serif text-gold-400 tracking-[0.25em] glow-gold hover:text-gold-200 transition-colors font-medium" aria-label="ASYIHAN Home">
@@ -61,7 +61,7 @@
         </div>
 
         {{-- Mobile Menu --}}
-        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-72 h-screen bg-gradient-to-b from-[#06122e] via-[#040c21] to-[#020612] backdrop-blur-xl border-l border-gold-400/25 z-50 flex flex-col p-8 pt-20 lg:hidden shadow-2xl">
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-72 h-screen bg-[#040919] border-l border-gold-400/25 z-50 flex flex-col p-8 pt-20 lg:hidden shadow-2xl">
             <button id="mobile-menu-close" class="absolute top-4 right-4 text-gold-400 hover:text-white transition-colors" aria-label="Close menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
@@ -90,7 +90,7 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="mt-24 border-t border-gold-400/20 bg-gradient-to-b from-[#06122e] via-[#040c21] to-[#020510] pt-16 pb-12 relative z-10 shadow-[0_-12px_40px_rgba(2,5,15,0.85)]">
+    <footer class="mt-24 border-t border-gold-400/20 bg-[#040919] pt-16 pb-12 relative z-10 shadow-[0_-12px_40px_rgba(2,5,15,0.85)]">
         {{-- Ambient top highlight line --}}
         <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-400/40 to-transparent"></div>
 

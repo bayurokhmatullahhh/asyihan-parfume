@@ -205,7 +205,7 @@
                         </div>
 
                         {{-- Image with Overlay --}}
-                        <div class="relative rounded-xl overflow-hidden mb-5 border border-white/10 aspect-[4/3] bg-black/60">
+                        <div class="relative rounded-xl overflow-hidden mb-5 border border-gold-400/20 aspect-[4/3]">
                             <img src="{{ $cardImg }}" alt="{{ $essence['essence_name'] }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                             
@@ -272,7 +272,7 @@
             {{-- Top Row: 3 Boxes + Plus & Equals --}}
             <div class="grid grid-cols-1 md:grid-cols-5 gap-3 items-center text-center">
                 {{-- Box 1 --}}
-                <div class="bg-black/60 border border-gold-400/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[90px]">
+                <div class="border border-gold-400/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[90px]">
                     <span class="text-gold-400 text-lg mb-1">✦</span>
                     <span class="text-xs font-serif font-bold text-white tracking-wider uppercase">ANGKA TAKDIR</span>
                     <span class="text-[10px] text-gray-400">(AKU YANG SEJATI)</span>
@@ -282,7 +282,7 @@
                 <div class="text-gold-400 text-xl font-serif font-bold">+</div>
 
                 {{-- Box 2 --}}
-                <div class="bg-black/60 border border-gold-400/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[90px]">
+                <div class="border border-gold-400/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[90px]">
                     <span class="text-gold-400 text-lg mb-1">💧</span>
                     <span class="text-xs font-serif font-bold text-white tracking-wider uppercase">AROMA PARFUM</span>
                     <span class="text-[10px] text-gray-400">(PENGHUBUNG FREKUENSI)</span>
@@ -292,7 +292,7 @@
                 <div class="text-gold-400 text-xl font-serif font-bold">=</div>
 
                 {{-- Box 3 --}}
-                <div class="bg-black/60 border border-gold-400/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[90px]">
+                <div class="border border-gold-400/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[90px]">
                     <span class="text-gold-400 text-lg mb-1">👑</span>
                     <span class="text-xs font-serif font-bold text-white tracking-wider uppercase">TRINITAS AJIAN</span>
                     <span class="text-[10px] text-gray-400">(HASIL YANG TERBENTUK)</span>
@@ -302,7 +302,7 @@
             {{-- Bottom Row --}}
             <div class="grid grid-cols-1 md:grid-cols-11 gap-3 items-center text-center pt-2">
                 {{-- Box Left (5 cols) --}}
-                <div class="md:col-span-5 bg-black/60 border border-gold-400/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[80px]">
+                <div class="md:col-span-5 border border-gold-400/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[80px]">
                     <span class="text-gold-400 text-base mb-1">📜</span>
                     <span class="text-xs font-serif font-bold text-white tracking-wider uppercase">AFIRMASI JIWA</span>
                     <span class="text-[10px] text-gray-400">(PUNGKASAN NIAT DALAM BATIN)</span>

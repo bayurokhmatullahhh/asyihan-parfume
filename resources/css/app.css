@@ -43,11 +43,10 @@
    ======================================== */
 
 body {
-    background-color: #030611;
+    background-color: #040919;
     color: #e0e0e0;
     font-family: var(--font-sans);
-    background-image: radial-gradient(ellipse at 50% 15%, rgba(18, 36, 76, 0.7) 0%, rgba(7, 16, 38, 0.92) 45%, rgba(2, 5, 14, 1) 100%);
-    background-attachment: fixed;
+    background-image: none;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -79,14 +78,14 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 30px rgba(197, 160, 89, 0.25), 0 0 60px rgba(197, 160, 89, 0.1);
 }
 
-/* Panel Background */
+/* Panel Background — Solid #040919 with Gold Border */
 .bg-panel {
-    background: linear-gradient(145deg, rgba(14, 25, 50, 0.9) 0%, rgba(6, 12, 26, 0.95) 100%);
-    border: 1px solid rgba(197, 160, 89, 0.22);
+    background-color: #040919;
+    border: 1px solid rgba(197, 160, 89, 0.3);
 }
 
 .bg-panel-hover:hover {
-    border-color: rgba(197, 160, 89, 0.5);
+    border-color: rgba(197, 160, 89, 0.6);
     box-shadow: 0 0 20px rgba(197, 160, 89, 0.1);
 }
 
@@ -150,9 +149,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .input-dark {
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
+    background: #040919;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    border-radius: 4px;
     padding: 0.625rem 1rem;
     font-size: 0.875rem;
     color: #fff;
@@ -167,7 +166,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .input-dark::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(197, 160, 89, 0.4);
 }
 
 /* Date input fix for dark mode */
@@ -178,9 +177,9 @@ input[type="date"].input-dark {
 /* Textarea */
 .textarea-dark {
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
+    background: #040919;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    border-radius: 4px;
     padding: 0.625rem 1rem;
     font-size: 0.875rem;
     color: #fff;
@@ -656,34 +655,37 @@ input[type="date"].input-dark {
    ======================================== */
 
 .calc-page {
-    background: linear-gradient(180deg, #000000 0%, #030611 15%, #050a14 50%, #030611 85%, #000000 100%);
+    background: transparent;
 }
 
 .calc-hero {
-    background: #000;
+    background: transparent;
     border-bottom: 1px solid rgba(197, 160, 89, 0.08);
 }
 
 /* Calculator Form Panel */
 .calc-form-panel {
-    backdrop-filter: blur(12px);
-    background: linear-gradient(145deg, rgba(10, 16, 32, 0.95) 0%, rgba(5, 8, 18, 0.98) 100%);
+    background-color: #040919;
+    border: 1px solid rgba(197, 160, 89, 0.3);
 }
 
 /* Archetype Cards */
-.calc-archetype-card {
-    background: linear-gradient(180deg, #0a0e1a 0%, #060a14 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.calc-archetype-card,
+.archetype-grid-card {
+    background-color: #040919;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.calc-archetype-card:hover {
-    box-shadow: 0 8px 40px rgba(197, 160, 89, 0.15), 0 4px 20px rgba(0, 0, 0, 0.5);
+.calc-archetype-card:hover,
+.archetype-grid-card:hover {
+    border-color: rgba(197, 160, 89, 0.7);
 }
 
 /* Result Panel */
 .calc-result-panel {
-    backdrop-filter: blur(16px);
+    background-color: #040919;
+    border: 1px solid rgba(197, 160, 89, 0.3);
 }
 
 /* Placeholder Panel shimmer */

@@ -96,7 +96,7 @@
             </div>
 
             {{-- Order Summary Box --}}
-            <div class="bg-black/60 rounded-xl p-5 border border-gold-400/30 space-y-3">
+            <div class="rounded-xl p-5 border border-gold-400/30 space-y-3">
                 <div class="flex justify-between items-center text-xs text-gray-400">
                     <span>Harga Satuan:</span>
                     <span id="summary-unit-price" class="text-white">Rp 350.000</span>
