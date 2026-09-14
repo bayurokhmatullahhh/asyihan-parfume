@@ -99,7 +99,7 @@
             <div class="bg-black/60 rounded-xl p-5 border border-gold-400/30 space-y-3">
                 <div class="flex justify-between items-center text-xs text-gray-400">
                     <span>Harga Satuan:</span>
-                    <span id="summary-unit-price" class="text-white">Rp 1.380.000</span>
+                    <span id="summary-unit-price" class="text-white">Rp 350.000</span>
                 </div>
                 <div class="flex justify-between items-center text-xs text-gray-400">
                     <span>Jumlah:</span>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="border-t border-white/10 pt-3 flex justify-between items-center">
                     <span class="text-sm font-serif text-gold-400 uppercase tracking-wider">Total Investasi:</span>
-                    <span id="summary-total" class="text-xl font-serif text-white font-bold glow-gold">Rp 1.380.000</span>
+                    <span id="summary-total" class="text-xl font-serif text-white font-bold glow-gold">Rp 350.000</span>
                 </div>
             </div>
 
@@ -133,7 +133,7 @@
 
         function updateSummary() {
             const selectedOpt = essenceSelect.options[essenceSelect.selectedIndex];
-            const price = parseInt(selectedOpt.getAttribute('data-price')) || 1380000;
+            const price = parseInt(selectedOpt.getAttribute('data-price')) || 350000;
             const qty = Math.max(1, parseInt(quantityInput.value) || 1);
             const total = price * qty;
 

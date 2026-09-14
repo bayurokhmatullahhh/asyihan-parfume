@@ -37,7 +37,7 @@ class NumerologyService
             'sugesti' => 'Gunakan saat akan memulai sesuatu yang baru, memimpin rapat, atau menghadapi tantangan besar. Semprotkan di pergelangan tangan kiri — dekat dengan nadi kehidupan.',
             'element' => 'Api',
             'color' => '#C41E3A',
-            'price' => 1380000,
+            'price' => 350000,
             'bottle_image' => 'images/cards/clean/card_1_bottle.png',
             'tokoh_inspiratif' => [
                 [
@@ -113,7 +113,7 @@ class NumerologyService
             'sugesti' => 'Gunakan saat ingin menciptakan kedekatan, mediasi, atau saat butuh ketenangan batin. Semprotkan di belakang telinga — tempat dimana bisikan terdengar paling lembut.',
             'element' => 'Air',
             'color' => '#6B9BD2',
-            'price' => 1380000,
+            'price' => 350000,
             'bottle_image' => 'images/cards/clean/card_2_bottle.png',
             'tokoh_inspiratif' => [
                 [
@@ -189,7 +189,7 @@ class NumerologyService
             'sugesti' => 'Gunakan saat akan berkarya, tampil di panggung, atau butuh inspirasi. Semprotkan di dada — dekat dengan jantung kreativitas.',
             'element' => 'Udara',
             'color' => '#FFB347',
-            'price' => 1380000,
+            'price' => 350000,
             'bottle_image' => 'images/cards/clean/card_3_bottle.png',
             'tokoh_inspiratif' => [
                 [
@@ -265,7 +265,7 @@ class NumerologyService
             'sugesti' => 'Gunakan saat perlu fokus, menyelesaikan pekerjaan penting, atau menghadapi situasi yang butuh ketabahan. Semprotkan di leher — simbol keteguhan.',
             'element' => 'Tanah',
             'color' => '#8B7355',
-            'price' => 1380000,
+            'price' => 350000,
             'bottle_image' => 'images/cards/clean/card_4_bottle.png',
             'tokoh_inspiratif' => [
                 [
@@ -341,7 +341,7 @@ class NumerologyService
             'sugesti' => 'Gunakan saat traveling, memulai petualangan baru, atau butuh keberanian untuk keluar dari zona nyaman. Semprotkan di pergelangan tangan — untuk membawa semangat petualangan.',
             'element' => 'Angin',
             'color' => '#2E8B57',
-            'price' => 1380000,
+            'price' => 350000,
             'bottle_image' => 'images/cards/clean/card_5_bottle.png',
             'tokoh_inspiratif' => [
                 [
@@ -417,7 +417,7 @@ class NumerologyService
             'sugesti' => 'Gunakan saat berkumpul keluarga, merawat orang tercinta, atau saat ingin menciptakan suasana hangat. Semprotkan di bahu — tempat di mana orang bersandar.',
             'element' => 'Bumi',
             'color' => '#CD5C5C',
-            'price' => 1380000,
+            'price' => 350000,
             'bottle_image' => 'images/cards/clean/card_6_bottle.png',
             'tokoh_inspiratif' => [
                 [
@@ -493,7 +493,7 @@ class NumerologyService
             'sugesti' => 'Gunakan saat bermeditasi, belajar, atau mencari jawaban atas pertanyaan besar dalam hidup. Semprotkan di kening — pintu intuisi.',
             'element' => 'Ether',
             'color' => '#4B0082',
-            'price' => 1380000,
+            'price' => 350000,
             'bottle_image' => 'images/cards/clean/card_7_bottle.png',
             'tokoh_inspiratif' => [
                 [
@@ -569,7 +569,7 @@ class NumerologyService
             'sugesti' => 'Gunakan saat negosiasi bisnis, presentasi penting, atau saat ingin memancarkan wibawa. Semprotkan di kedua sisi leher — simbol otoritas.',
             'element' => 'Logam',
             'color' => '#B8860B',
-            'price' => 1380000,
+            'price' => 350000,
             'bottle_image' => 'images/cards/clean/card_8_bottle.png',
             'tokoh_inspiratif' => [
                 [
@@ -645,7 +645,7 @@ class NumerologyService
             'sugesti' => 'Gunakan saat bermeditasi mendalam, melakukan kebaikan untuk orang lain, atau saat merasakan panggilan jiwa. Semprotkan di ubun-ubun — puncak spiritual.',
             'element' => 'Cahaya',
             'color' => '#9370DB',
-            'price' => 1380000,
+            'price' => 350000,
             'bottle_image' => 'images/cards/clean/card_9_bottle.png',
             'tokoh_inspiratif' => [
                 [

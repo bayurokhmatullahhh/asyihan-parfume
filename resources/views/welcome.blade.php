@@ -575,7 +575,7 @@
                             <div>
                                 <span class="text-[10px] text-gray-400 uppercase tracking-wider block font-mono">INVESTASI PERSONAL</span>
                                 <span id="res-price" class="text-base sm:text-lg text-white font-medium font-serif">
-                                    Rp 1.380.000
+                                    Rp 350.000
                                 </span>
                             </div>
                             <div class="flex flex-wrap items-center gap-2.5 w-full sm:w-auto justify-end">

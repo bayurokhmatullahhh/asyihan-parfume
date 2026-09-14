@@ -47,7 +47,7 @@ class OrderController extends Controller
             'essence_number' => $validated['essence_number'],
             'essence_name' => $essence['essence_name'] ?? 'Unknown',
             'quantity' => $validated['quantity'],
-            'total_price' => ($essence['price'] ?? 1380000) * $validated['quantity'],
+            'total_price' => ($essence['price'] ?? 350000) * $validated['quantity'],
             'notes' => $validated['notes'] ?? null,
             'status' => 'pending',
         ]);

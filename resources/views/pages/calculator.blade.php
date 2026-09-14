@@ -344,7 +344,7 @@
                                 <div class="pt-1 flex flex-wrap items-center justify-center sm:justify-between gap-3">
                                     <div class="text-xs">
                                         <span id="out-price" class="text-gold-300 font-serif font-semibold text-sm">
-                                            Rp 1.380.000
+                                            Rp 350.000
                                         </span>
                                         <span class="text-gray-400 font-light text-[11px]"> • Eau de Parfum 50ml</span>
                                     </div>
@@ -565,7 +565,7 @@
             notesBaseTitle: 'Cedarwood & Vetiver',
             notesBaseDesc: 'Kekokohan prinsip dan akar kepercayaan diri yang kuat',
             formulaExtract: 'Ekstrak murni Bergamot Calabria, Cedarwood Atlas, dan Vetiver Bourbon.',
-            price: 'Rp 1.380.000',
+            price: 'Rp 350.000',
             bottleImg: '{{ asset("images/cards/card_1_hd.png") }}',
             orderLink: '{{ route("order", ["essence" => 1]) }}',
         },
@@ -581,7 +581,7 @@
             notesBaseTitle: 'Sandalwood & White Musk',
             notesBaseDesc: 'Kehangatan pelukan batin dan harmoni cinta yang abadi',
             formulaExtract: 'Ekstrak murni Lavender Provence, Rose Damascena, dan White Musk lembut.',
-            price: 'Rp 1.380.000',
+            price: 'Rp 350.000',
             bottleImg: '{{ asset("images/cards/card_2_hd.png") }}',
             orderLink: '{{ route("order", ["essence" => 2]) }}',
         },
@@ -597,7 +597,7 @@
             notesBaseTitle: 'Patchouli & Vanilla',
             notesBaseDesc: 'Daya pikat magnetis dan imajinasi tanpa batas',
             formulaExtract: 'Ekstrak murni Neroli Tunisia, Grapefruit Segar, dan Vanilla Madagaskar.',
-            price: 'Rp 1.380.000',
+            price: 'Rp 350.000',
             bottleImg: '{{ asset("images/cards/card_3_hd.png") }}',
             orderLink: '{{ route("order", ["essence" => 3]) }}',
         },
@@ -613,7 +613,7 @@
             notesBaseTitle: 'Oakmoss & Cedarwood',
             notesBaseDesc: 'Kekuatan membumi tak tergoyahkan seperti batu karang',
             formulaExtract: 'Ekstrak murni Clary Sage, Oakmoss Perancis, dan Cedarwood Virginia.',
-            price: 'Rp 1.380.000',
+            price: 'Rp 350.000',
             bottleImg: '{{ asset("images/cards/card_4_hd.png") }}',
             orderLink: '{{ route("order", ["essence" => 4]) }}',
         },
@@ -629,7 +629,7 @@
             notesBaseTitle: 'Driftwood & Musk',
             notesBaseDesc: 'Karisma magnet perubahan yang selalu memikat sekeliling',
             formulaExtract: 'Ekstrak murni Cardamom Guatemala, Zesty Lime, dan Driftwood.',
-            price: 'Rp 1.380.000',
+            price: 'Rp 350.000',
             bottleImg: '{{ asset("images/cards/card_5_hd.png") }}',
             orderLink: '{{ route("order", ["essence" => 5]) }}',
         },
@@ -645,7 +645,7 @@
             notesBaseTitle: 'Amber & Tonka Bean',
             notesBaseDesc: 'Aura perlindungan batin dan rasa aman yang meneduhkan',
             formulaExtract: 'Ekstrak murni Bulgarian Rose, Sweet Mandarin, dan Amber Resin hangat.',
-            price: 'Rp 1.380.000',
+            price: 'Rp 350.000',
             bottleImg: '{{ asset("images/cards/card_6_hd.png") }}',
             orderLink: '{{ route("order", ["essence" => 6]) }}',
         },
@@ -661,7 +661,7 @@
             notesBaseTitle: 'Sacred Sandalwood Mysore & Amber',
             notesBaseDesc: 'Memberi ketenangan dan rasa grounding spiritual',
             formulaExtract: 'Ekstrak murni Olibanum Oman, Sandalwood Mysore, dan Bergamot Calabria.',
-            price: 'Rp 1.380.000',
+            price: 'Rp 350.000',
             bottleImg: '{{ asset("images/cards/card_7_hd.png") }}',
             orderLink: '{{ route("order", ["essence" => 7]) }}',
         },
@@ -677,7 +677,7 @@
             notesBaseTitle: 'Oud Kalimantan & Benzoin',
             notesBaseDesc: 'Otoritas tertinggi dan daya tarik kemakmuran tanpa batas',
             formulaExtract: 'Ekstrak murni Agarwood Kalimantan, Iranian Saffron, dan Smoked Leather.',
-            price: 'Rp 1.380.000',
+            price: 'Rp 350.000',
             bottleImg: '{{ asset("images/cards/card_8_hd.png") }}',
             orderLink: '{{ route("order", ["essence" => 8]) }}',
         },
@@ -693,7 +693,7 @@
             notesBaseTitle: 'Myrrh & Sacred Incense',
             notesBaseDesc: 'Koneksi dengan yang ilahi dan pencerahan spiritual abadi',
             formulaExtract: 'Ekstrak murni Tuscan Iris, Sacred Incense Kuil, dan Somalian Myrrh.',
-            price: 'Rp 1.380.000',
+            price: 'Rp 350.000',
             bottleImg: '{{ asset("images/cards/card_9_hd.png") }}',
             orderLink: '{{ route("order", ["essence" => 9]) }}',
         },
