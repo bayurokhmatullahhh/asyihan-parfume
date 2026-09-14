@@ -69,7 +69,7 @@ class NumerologyServiceTest extends TestCase
 
         $this->assertNotNull($seeker);
         $this->assertEquals(7, $seeker['number']);
-        $this->assertEquals('The Seeker', $seeker['name']);
+        $this->assertEquals('Sang Analis', $seeker['name']);
 
         $invalid = $this->service->getArchetypeBySlug('non-existent-archetype');
         $this->assertNull($invalid);
@@ -82,6 +82,6 @@ class NumerologyServiceTest extends TestCase
         $this->assertEquals('Raden Bayu', $reading['name']);
         $this->assertEquals('1990-01-01', $reading['birth_date']);
         $this->assertEquals(3, $reading['core_number']);
-        $this->assertEquals('The Creator', $reading['archetype']['name']);
+        $this->assertEquals('Sang Komunikator', $reading['archetype']['name']);
     }
 }
