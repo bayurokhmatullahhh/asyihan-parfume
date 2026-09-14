@@ -37,8 +37,8 @@ class NumerologyService
             'sugesti' => 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Fokus pada tujuanmu. Ingat siapa dirimu.',
             'element' => 'Api',
             'color' => '#C41E3A',
-            'price' => 1380000,
-            'bottle_image' => 'images/bottle/bottle_1.png',
+            'price' => 350000,
+            'bottle_image' => 'images/cards/clean/card_1_bottle.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Ir. Soekarno',
@@ -113,8 +113,8 @@ class NumerologyService
             'sugesti' => 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Rasakan kehadiran Anda. Hubungkan hati, bukan sekadar kata.',
             'element' => 'Air',
             'color' => '#6B9BD2',
-            'price' => 1380000,
-            'bottle_image' => 'images/bottle/bottle_2.jpg',
+            'price' => 350000,
+            'bottle_image' => 'images/cards/clean/card_2_bottle.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Abdurrahman Wahid (Gus Dur)',
@@ -189,8 +189,8 @@ class NumerologyService
             'sugesti' => 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Tampilkan suara dan ide Anda. Biarkan energi baik menginspirasi orang lain.',
             'element' => 'Udara',
             'color' => '#FFB347',
-            'price' => 1380000,
-            'bottle_image' => 'images/bottle/bottle_3.jpg',
+            'price' => 350000,
+            'bottle_image' => 'images/cards/clean/card_3_bottle.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Pramoedya Ananta Toer',
@@ -265,8 +265,8 @@ class NumerologyService
             'sugesti' => 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Fokus pada tujuan yang ingin Anda capai. Ingat, setiap langkah Anda membangun masa depan Anda.',
             'element' => 'Tanah',
             'color' => '#8B7355',
-            'price' => 1380000,
-            'bottle_image' => 'images/bottle/bottle_4.jpg',
+            'price' => 350000,
+            'bottle_image' => 'images/cards/clean/card_4_bottle.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Ciputra',
@@ -341,8 +341,8 @@ class NumerologyService
             'sugesti' => 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Ingat arah tujuan dan nikmati prosesnya. Bergeraklah. Dunia menanti Anda.',
             'element' => 'Angin',
             'color' => '#2E8B57',
-            'price' => 1380000,
-            'bottle_image' => 'images/bottle/bottle_5.jpg',
+            'price' => 350000,
+            'bottle_image' => 'images/cards/clean/card_5_bottle.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Richard Branson',
@@ -417,8 +417,8 @@ class NumerologyService
             'sugesti' => 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Rasakan kasih dan kehangatan yang hadir. Rawat diri dan orang di sekitar Anda dengan penuh cinta.',
             'element' => 'Bumi',
             'color' => '#CD5C5C',
-            'price' => 1380000,
-            'bottle_image' => 'images/bottle/bottle_6.jpg',
+            'price' => 350000,
+            'bottle_image' => 'images/cards/clean/card_6_bottle.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'R.A. Kartini',
@@ -493,8 +493,8 @@ class NumerologyService
             'sugesti' => 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Fokus pada analisis dan pemahaman. Terima wawasan dan ambil keputusan dengan bijaksana.',
             'element' => 'Ether',
             'color' => '#4B0082',
-            'price' => 1380000,
-            'bottle_image' => 'images/bottle/bottle_7.jpg',
+            'price' => 350000,
+            'bottle_image' => 'images/cards/clean/card_7_bottle.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Albert Einstein',
@@ -569,8 +569,8 @@ class NumerologyService
             'sugesti' => 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Fokus pada tujuan dan langkah Anda. Jalani hari dengan strategi dan keyakinan.',
             'element' => 'Logam',
             'color' => '#B8860B',
-            'price' => 1380000,
-            'bottle_image' => 'images/bottle/bottle_8.jpg',
+            'price' => 350000,
+            'bottle_image' => 'images/cards/clean/card_8_bottle.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Sandiaga Salahuddin Uno',
@@ -645,8 +645,8 @@ class NumerologyService
             'sugesti' => 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Niatkan tujuan dan langkah terbaik Anda. Jalani hari dengan inspirasi dan kebijaksanaan.',
             'element' => 'Cahaya',
             'color' => '#9370DB',
-            'price' => 1380000,
-            'bottle_image' => 'images/bottle/bottle_9.jpg',
+            'price' => 350000,
+            'bottle_image' => 'images/cards/clean/card_9_bottle.png',
             'tokoh_inspiratif' => [
                 [
                     'nama' => 'Dalai Lama XIV',

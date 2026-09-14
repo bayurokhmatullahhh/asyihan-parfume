@@ -39,7 +39,7 @@ class OrderTest extends TestCase
             'phone' => '081234567890',
             'essence_number' => 7,
             'quantity' => 2,
-            'total_price' => 2760000,
+            'total_price' => 700000,
             'status' => 'pending',
         ]);
     }
