@@ -87,9 +87,9 @@
                     </p>
 
                     <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4 animate-text-reveal" style="animation-delay: 1.1s;">
-                        <a href="#calculator-section" class="btn-gold px-8 py-3.5 text-xs tracking-[0.2em] rounded-[3px] shadow-xl inline-flex items-center gap-2 font-semibold">
-                            <span>DISCOVER MY NUMBER</span>
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                        <a href="#calculator-section" class="btn-gold px-8 py-3.5 text-xs tracking-[0.2em] rounded-[3px] shadow-xl inline-flex items-center justify-center gap-2 font-semibold">
+                            <span class="leading-none flex-shrink-0">DISCOVER MY NUMBER</span>
+                            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
                         </a>
                         <a href="{{ route('collection') }}" class="btn-gold-outline px-6 py-3.5 text-xs tracking-[0.2em] rounded-[3px] inline-block font-medium">
                             EXPLORE SCENTS
@@ -362,15 +362,51 @@
                                 </div>
                             </div>
 
+                            {{-- Field 3 & 4: Email & Nomor Telepon --}}
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {{-- Email --}}
+                                <div>
+                                    <label for="sidebar_email" class="block text-[10px] uppercase tracking-wider text-gold-400/90 mb-1.5 font-mono">
+                                        EMAIL
+                                    </label>
+                                    <input 
+                                        id="sidebar_email" 
+                                        name="email" 
+                                        type="email" 
+                                        placeholder="nama@domain.com" 
+                                        required 
+                                        class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#040919] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
+                                    >
+                                </div>
+
+                                {{-- Nomor Telepon --}}
+                                <div>
+                                    <label for="sidebar_phone" class="block text-[10px] uppercase tracking-wider text-gold-400/90 mb-1.5 font-mono">
+                                        NOMOR TELEPON
+                                    </label>
+                                    <input 
+                                        id="sidebar_phone" 
+                                        name="phone" 
+                                        type="tel" 
+                                        inputmode="numeric" 
+                                        pattern="[0-9]*" 
+                                        placeholder="081234567890" 
+                                        required 
+                                        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                        class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#040919] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
+                                    >
+                                </div>
+                            </div>
+
                             {{-- Submit Button --}}
                             <div class="pt-2">
                                 <button 
                                     id="sidebar-calc-btn" 
                                     type="submit" 
-                                    class="w-full btn-gold py-3 text-xs sm:text-sm tracking-[0.2em] rounded-[3px] uppercase shadow-xl font-semibold flex items-center justify-center gap-2 group"
+                                    class="w-full btn-gold py-3 text-xs sm:text-sm tracking-[0.2em] rounded-[3px] uppercase shadow-xl font-semibold inline-flex items-center justify-center gap-2 group"
                                 >
-                                    <span>TEMUKAN ESENSI JIWAKU</span>
-                                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <span class="leading-none flex-shrink-0">TEMUKAN ESENSI JIWAKU</span>
+                                    <svg class="w-4 h-4 flex-shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                                     </svg>
                                 </button>
@@ -570,20 +606,20 @@
                                     Rp 350.000
                                 </span>
                             </div>
-                            <div class="flex flex-wrap items-center gap-2.5 w-full sm:w-auto justify-end">
+                            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto justify-end">
                                 {{-- Download PDF Button --}}
                                 <button id="home-download-pdf-btn" type="button"
-                                    class="btn-gold-outline py-2 px-3 text-[10px] uppercase tracking-wider rounded-[2px] font-medium inline-flex items-center gap-1.5 hover:bg-gold-400/10 transition-colors cursor-pointer"
+                                    class="py-2.5 px-3.5 text-[11px] font-medium tracking-wider uppercase rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#040919] border border-gold-400/40 text-gold-300 hover:text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.98] w-full sm:w-auto"
                                     title="Unduh Hasil Numerologi (PDF)">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 shrink-0 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                     </svg>
-                                    <span>UNDUH PDF</span>
+                                    <span class="leading-none whitespace-nowrap font-semibold">UNDUH PDF</span>
                                 </button>
-                                <a id="res-detail-link" href="{{ route('collection') }}" class="text-[10px] text-gold-400/80 hover:text-white uppercase tracking-widest text-center transition-colors">
+                                <a id="res-detail-link" href="{{ route('collection') }}" class="text-[10px] sm:text-[11px] text-gold-400/80 hover:text-white uppercase tracking-widest text-center py-2 px-2 transition-colors whitespace-nowrap">
                                     Ritual Lengkap &rarr;
                                 </a>
-                                <a id="res-order-link" href="{{ route('order') }}" class="btn-gold px-5 py-2 text-xs uppercase tracking-wider rounded-[2px] font-medium text-center">
+                                <a id="res-order-link" href="{{ route('order') }}" class="btn-gold px-5 py-2.5 text-xs uppercase tracking-wider rounded-lg font-semibold text-center whitespace-nowrap w-full sm:w-auto shadow-md">
                                     ORDER SEKARANG
                                 </a>
                             </div>

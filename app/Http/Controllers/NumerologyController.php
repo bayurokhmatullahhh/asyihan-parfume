@@ -32,6 +32,8 @@ class NumerologyController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'birth_date' => 'required|date|before_or_equal:today',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:25',
         ]);
 
         try {

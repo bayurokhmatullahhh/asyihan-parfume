@@ -67,7 +67,7 @@
                 <label for="name" class="block text-xs uppercase tracking-widest text-gold-400 font-medium mb-2">
                     Nama Lengkap Pemesan
                 </label>
-                <input id="name" name="name" type="text" placeholder="Masukkan nama lengkap Anda" required class="input-dark py-3" value="{{ old('name') }}">
+                <input id="name" name="name" type="text" placeholder="Masukkan nama lengkap Anda" required class="input-dark py-3" value="{{ old('name', request('name')) }}">
             </div>
 
             {{-- Phone Number --}}
@@ -75,7 +75,7 @@
                 <label for="phone" class="block text-xs uppercase tracking-widest text-gold-400 font-medium mb-2">
                     Nomor WhatsApp
                 </label>
-                <input id="phone" name="phone" type="tel" placeholder="Contoh: 081234567890" required class="input-dark py-3" value="{{ old('phone') }}">
+                <input id="phone" name="phone" type="tel" placeholder="Contoh: 081234567890" required class="input-dark py-3" value="{{ old('phone', request('phone')) }}">
                 <span class="text-[11px] text-gray-500 mt-1 block">Pesanan akan otomatis diteruskan ke WhatsApp untuk konfirmasi pengiriman.</span>
             </div>
 
@@ -84,7 +84,7 @@
                 <label for="email" class="block text-xs uppercase tracking-widest text-gold-400 font-medium mb-2">
                     Alamat Email (Opsional)
                 </label>
-                <input id="email" name="email" type="email" placeholder="nama@domain.com" class="input-dark py-3" value="{{ old('email') }}">
+                <input id="email" name="email" type="email" placeholder="nama@domain.com" class="input-dark py-3" value="{{ old('email', request('email')) }}">
             </div>
 
             {{-- Special Notes --}}
