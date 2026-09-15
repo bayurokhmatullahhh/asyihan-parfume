@@ -158,11 +158,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const btn = document.getElementById('sidebar-calc-btn');
             const name = document.getElementById('sidebar_name')?.value?.trim();
+            const email = document.getElementById('sidebar_email')?.value?.trim() || '';
+            const phone = document.getElementById('sidebar_phone')?.value?.trim() || '';
             const resCard = document.getElementById('sidebar-result-card');
 
             if (!name) {
                 showDateError('Silakan masukkan nama lengkap Anda.');
                 document.getElementById('sidebar_name')?.focus();
+                return;
+            }
+
+            if (!email) {
+                showDateError('Silakan masukkan alamat email Anda.');
+                document.getElementById('sidebar_email')?.focus();
+                return;
+            }
+
+            if (!phone) {
+                showDateError('Silakan masukkan nomor telepon / WhatsApp Anda.');
+                document.getElementById('sidebar_phone')?.focus();
                 return;
             }
 
@@ -241,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         'X-CSRF-TOKEN': token,
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify({ name, birth_date: birthDate })
+                    body: JSON.stringify({ name, birth_date: birthDate, email, phone })
                 });
 
                 const data = await response.json();
@@ -296,7 +310,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (elBase && arch.notes) elBase.textContent = arch.notes.base;
                     if (elAjian) elAjian.textContent = `"${arch.ajian}"`;
                     if (elPrice) elPrice.textContent = `Rp ${arch.price.toLocaleString('id-ID')}`;
-                    if (elOrderLink) elOrderLink.href = `/order?essence=${arch.number}`;
+                    if (elOrderLink) {
+                        let orderUrl = `/order?essence=${arch.number}&name=${encodeURIComponent(name)}`;
+                        if (email) orderUrl += `&email=${encodeURIComponent(email)}`;
+                        if (phone) orderUrl += `&phone=${encodeURIComponent(phone)}`;
+                        elOrderLink.href = orderUrl;
+                    }
                     if (elDetailLink) elDetailLink.href = `/essence/${arch.slug}`;
 
                     // Tokoh Inspiratif Sejiwa
@@ -340,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const btn = homePdfBtn;
                 const origHtml = btn.innerHTML;
                 btn.disabled = true;
-                btn.innerHTML = `<span class="inline-block animate-spin mr-1">✦</span><span>Menyiapkan...</span>`;
+                btn.innerHTML = `<svg class="w-4 h-4 shrink-0 animate-spin text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg><span class="leading-none whitespace-nowrap">Menyiapkan...</span>`;
 
                 try {
                     const card = document.getElementById('sidebar-result-card');
@@ -488,6 +507,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const loading = document.getElementById('calc-loading');
             const name = nameInput?.value?.trim() || '';
             const birthDate = birthDateInput?.value || '';
+            const email = document.getElementById('calc_email')?.value?.trim() || '';
+            const phone = document.getElementById('calc_phone')?.value?.trim() || '';
 
             if (!name) {
                 nameInput?.focus();
@@ -511,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         'X-CSRF-TOKEN': token,
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify({ name, birth_date: birthDate })
+                    body: JSON.stringify({ name, birth_date: birthDate, email, phone })
                 });
 
                 const data = await response.json();
@@ -587,7 +608,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (priceEl) priceEl.textContent = `Rp ${arch.price.toLocaleString('id-ID')}`;
 
                     const orderLink = document.getElementById('out-order-link');
-                    if (orderLink) orderLink.href = `/order?essence=${arch.number}`;
+                    if (orderLink) {
+                        let orderUrl = `/order?essence=${arch.number}&name=${encodeURIComponent(name)}`;
+                        if (email) orderUrl += `&email=${encodeURIComponent(email)}`;
+                        if (phone) orderUrl += `&phone=${encodeURIComponent(phone)}`;
+                        orderLink.href = orderUrl;
+                    }
 
                     const bottleImg = document.getElementById('out-bottle-img');
                     if (bottleImg) {

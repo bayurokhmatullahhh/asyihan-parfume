@@ -100,9 +100,13 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     transition: all 0.3s ease;
     cursor: pointer;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     text-align: center;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .btn-gold:hover {
@@ -125,9 +129,13 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     transition: all 0.3s ease;
     cursor: pointer;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     text-align: center;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .btn-gold-outline:hover {

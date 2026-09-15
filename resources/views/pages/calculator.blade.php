@@ -90,6 +90,25 @@
                                 class="w-full py-3 px-4 text-sm rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                         </div>
 
+                        {{-- Email & Nomor Telepon --}}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                            <div>
+                                <label for="calc_email" class="block text-[10px] uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
+                                    Email
+                                </label>
+                                <input id="calc_email" name="email" type="email" value="" placeholder="nama@domain.com" required
+                                    class="w-full py-3 px-4 text-sm rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                            </div>
+                            <div>
+                                <label for="calc_phone" class="block text-[10px] uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
+                                    Nomor Telepon / WhatsApp
+                                </label>
+                                <input id="calc_phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]*" value="" placeholder="Contoh: 081234567890" required
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                    class="w-full py-3 px-4 text-sm rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                            </div>
+                        </div>
+
                         {{-- Tanggal Lahir (3 Kolom: DD - MM - YYYY) --}}
                         <div>
                             <label class="block text-[10px] uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
@@ -352,56 +371,61 @@
                     </div>
 
                     {{-- BOTTOM SHARE & PDF & CUSTOM CTA BAR --}}
-                    <div class="mt-6 pt-5 border-t border-gold-400/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        {{-- Social Share --}}
-                        <div class="flex items-center gap-3">
-                            <span class="text-[9px] uppercase tracking-wider text-gray-400 font-mono">
+                    <div class="mt-6 pt-5 border-t border-gold-400/20 space-y-4">
+
+                        {{-- Row 1: Social Share --}}
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+                            <span class="text-[9px] uppercase tracking-wider text-gray-400 font-mono shrink-0">
                                 BAGIKAN HASIL
                             </span>
                             <div class="flex items-center gap-2">
                                 {{-- WhatsApp --}}
                                 <a id="share-wa" href="https://api.whatsapp.com/send?text=Saya%20telah%20menghitung%20angka%20inti%20numerologi%20saya%20di%20ASYIHAN.%20Coba%20di%20{{ urlencode(url()->current()) }}" target="_blank"
-                                   class="w-7 h-7 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors" title="Bagikan via WhatsApp">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.983.541 1.879.827 2.796.827 3.183 0 5.768-2.587 5.769-5.767.001-3.18-2.585-5.766-5.769-5.767zm7.558 5.767c0 4.168-3.39 7.559-7.558 7.559-1.272 0-2.463-.317-3.517-.872l-4.514 1.183 1.205-4.405c-.651-1.096-1.032-2.38-1.032-3.465 0-4.168 3.39-7.558 7.558-7.558 4.168 0 7.558 3.39 7.558 7.558z"/></svg>
+                                   class="w-8 h-8 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors" title="Bagikan via WhatsApp">
+                                    <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.983.541 1.879.827 2.796.827 3.183 0 5.768-2.587 5.769-5.767.001-3.18-2.585-5.766-5.769-5.767zm7.558 5.767c0 4.168-3.39 7.559-7.558 7.559-1.272 0-2.463-.317-3.517-.872l-4.514 1.183 1.205-4.405c-.651-1.096-1.032-2.38-1.032-3.465 0-4.168 3.39-7.558 7.558-7.558 4.168 0 7.558 3.39 7.558 7.558z"/></svg>
                                 </a>
 
                                 {{-- Instagram (Copy link + notice) --}}
                                 <button id="share-ig" type="button"
-                                   class="w-7 h-7 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors cursor-pointer" title="Salin untuk Instagram Story">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                   class="w-8 h-8 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors cursor-pointer" title="Salin untuk Instagram Story">
+                                    <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                                 </button>
 
                                 {{-- Facebook --}}
                                 <a id="share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"
-                                   class="w-7 h-7 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors" title="Bagikan via Facebook">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+                                   class="w-8 h-8 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors" title="Bagikan via Facebook">
+                                    <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
                                 </a>
 
                                 {{-- Copy Link --}}
                                 <button id="copy-result-link" type="button"
-                                   class="w-7 h-7 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 text-xs transition-colors cursor-pointer" title="Salin Tautan">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                   class="w-8 h-8 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors cursor-pointer" title="Salin Tautan">
+                                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                                 </button>
                             </div>
                         </div>
 
-                        {{-- Download PDF & Custom CTA --}}
-                        <div class="flex flex-wrap items-center gap-3">
+                        {{-- Row 2: Download PDF & Custom CTA --}}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {{-- Download PDF Button --}}
                             <button id="download-pdf-btn" type="button"
-                                class="btn-gold-outline py-2.5 px-4 text-[10px] sm:text-xs tracking-[0.2em] uppercase rounded-lg font-medium inline-flex items-center gap-2 bg-[#040919] border border-gold-400/40 hover:bg-gold-400/10 transition-all cursor-pointer">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                class="h-11 px-5 text-[11px] tracking-[0.18em] uppercase rounded-lg font-semibold flex items-center justify-center gap-2.5 bg-[#040919] border border-gold-400/40 text-gold-300 hover:text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.98]"
+                                title="Unduh Hasil Numerologi (PDF)">
+                                <svg class="w-4 h-4 flex-shrink-0 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
-                                <span>UNDUH PDF</span>
+                                <span class="flex-shrink-0">UNDUH PDF</span>
                             </button>
 
                             {{-- Custom Formulation Button --}}
                             <a href="https://wa.me/6281234567890?text=Halo%20ASYIHAN,%20saya%20tertarik%20untuk%20memesan%20racikan%20custom%20sesuai%20angka%20inti%20saya" target="_blank"
-                               class="btn-gold-outline py-2.5 px-5 text-[10px] sm:text-xs tracking-[0.2em] uppercase rounded-lg font-medium inline-flex items-center gap-2 bg-[#040919] border border-gold-400/40 hover:bg-gold-400/10">
-                                <span>✦ RACIKAN CUSTOM ✦</span>
+                               class="h-11 px-5 text-[11px] tracking-[0.18em] uppercase rounded-lg font-semibold flex items-center justify-center gap-2 bg-[#040919] border border-gold-400/40 text-gold-300 hover:text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all duration-200 shadow-sm active:scale-[0.98]">
+                                <span class="flex-shrink-0 text-gold-400">✦</span>
+                                <span class="flex-shrink-0">RACIKAN CUSTOM</span>
+                                <span class="flex-shrink-0 text-gold-400">✦</span>
                             </a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -752,6 +776,8 @@
 
         const name      = document.getElementById('calc_name').value.trim();
         const birthDate = document.getElementById('calc_birth_date').value;
+        const email     = document.getElementById('calc_email')?.value?.trim() || '';
+        const phone     = document.getElementById('calc_phone')?.value?.trim() || '';
 
         if (!name || !birthDate) {
             alert('Mohon isi nama dan tanggal lahir dengan lengkap.');
@@ -790,13 +816,13 @@
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     'Accept': 'application/json',
                 },
-                body: JSON.stringify({ name, birth_date: birthDate }),
+                body: JSON.stringify({ name, birth_date: birthDate, email, phone }),
             });
 
             const json = await response.json();
 
             if (json.success) {
-                populateResult(json.data, name, birthDate);
+                populateResult(json.data, name, birthDate, email, phone);
                 expandLayout();
                 resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
@@ -808,7 +834,7 @@
             const d = parseInt(parts[2]), m = parseInt(parts[1]), y = parseInt(parts[0]);
             const core = calculateCoreNumber(d, m, y);
             const tokoh = getLocalTokoh(core, d, m, y);
-            populateResultLocal(core, name, birthDate, tokoh);
+            populateResultLocal(core, name, birthDate, tokoh, email, phone);
             expandLayout();
             resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } finally {
@@ -915,20 +941,20 @@
     // ================================================================
     // POPULATE RESULT FROM SERVER RESPONSE
     // ================================================================
-    function populateResult(data, name, birthDate) {
+    function populateResult(data, name, birthDate, email, phone) {
         const core    = data.core_number;
         const arch    = archetypeData[core];
         const tokoh   = data.tokoh;
 
-        populateResultUI(core, arch, tokoh, name);
+        populateResultUI(core, arch, tokoh, name, email, phone);
     }
 
-    function populateResultLocal(core, name, birthDate, tokoh) {
+    function populateResultLocal(core, name, birthDate, tokoh, email, phone) {
         const arch = archetypeData[core];
-        populateResultUI(core, arch, tokoh, name);
+        populateResultUI(core, arch, tokoh, name, email, phone);
     }
 
-    function populateResultUI(core, arch, tokoh, name) {
+    function populateResultUI(core, arch, tokoh, name, email, phone) {
         if (!arch) { return; }
 
         const roman = romanMap[core];
@@ -948,7 +974,15 @@
         document.getElementById('out-formula-extract').textContent= arch.formulaExtract;
         document.getElementById('out-price').textContent          = arch.price;
         document.getElementById('out-bottle-img').src             = arch.bottleImg;
-        document.getElementById('out-order-link').href            = arch.orderLink;
+
+        let orderUrl = arch.orderLink;
+        if (orderUrl) {
+            const sep = orderUrl.includes('?') ? '&' : '?';
+            let params = `name=${encodeURIComponent(name || '')}`;
+            if (email) params += `&email=${encodeURIComponent(email)}`;
+            if (phone) params += `&phone=${encodeURIComponent(phone)}`;
+            document.getElementById('out-order-link').href = `${orderUrl}${sep}${params}`;
+        }
 
         // Tokoh Inspiratif
         if (tokoh) {
@@ -988,8 +1022,9 @@
     // ================================================================
     document.getElementById('download-pdf-btn').addEventListener('click', async function () {
         const btn = this;
+        const origHtml = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = '<svg class="w-3.5 h-3.5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg><span>Menyiapkan...</span>';
+        btn.innerHTML = '<svg class="w-4 h-4 shrink-0 animate-spin text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg><span class="leading-none whitespace-nowrap">Menyiapkan...</span>';
 
         try {
             const container = document.getElementById('calculator-result-container');
@@ -1056,7 +1091,7 @@
             alert('Gagal membuat PDF. Silakan coba screenshot manual.');
         } finally {
             btn.disabled = false;
-            btn.innerHTML = '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg><span>UNDUH PDF</span>';
+            btn.innerHTML = origHtml;
         }
     });
 
