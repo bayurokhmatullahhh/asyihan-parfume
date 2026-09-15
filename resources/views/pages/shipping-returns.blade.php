@@ -41,10 +41,12 @@
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="p-6 bg-black/40 rounded-xl border border-gold-400/15 flex flex-col justify-between">
+                    <div class="p-6 bg-black/40 rounded-xl border border-gold-400/20 flex flex-col justify-between">
                         <div>
-                            <div class="w-10 h-10 rounded-full border border-gold-400/30 flex items-center justify-center text-gold-400 font-serif text-lg bg-gold-400/5 mb-4">
-                                🚚
+                            <div class="w-10 h-10 rounded-full border border-gold-400/40 flex items-center justify-center bg-gold-400/10 text-gold-400 shadow-[0_0_10px_rgba(197,160,89,0.25)] mb-4">
+                                <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 104 0m6 0a2 2 0 104 0m-4 0a2 2 0 104 0"/>
+                                </svg>
                             </div>
                             <h4 class="font-serif text-white text-sm sm:text-base mb-2">Estimasi Pengiriman</h4>
                             <p class="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
@@ -53,10 +55,12 @@
                         </div>
                     </div>
 
-                    <div class="p-6 bg-black/40 rounded-xl border border-gold-400/15 flex flex-col justify-between">
+                    <div class="p-6 bg-black/40 rounded-xl border border-gold-400/20 flex flex-col justify-between">
                         <div>
-                            <div class="w-10 h-10 rounded-full border border-gold-400/30 flex items-center justify-center text-gold-400 font-serif text-lg bg-gold-400/5 mb-4">
-                                🔄
+                            <div class="w-10 h-10 rounded-full border border-gold-400/40 flex items-center justify-center bg-gold-400/10 text-gold-400 shadow-[0_0_10px_rgba(197,160,89,0.25)] mb-4">
+                                <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                </svg>
                             </div>
                             <h4 class="font-serif text-white text-sm sm:text-base mb-2">Syarat Pengembalian</h4>
                             <p class="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
@@ -65,10 +69,12 @@
                         </div>
                     </div>
 
-                    <div class="p-6 bg-black/40 rounded-xl border border-gold-400/15 flex flex-col justify-between">
+                    <div class="p-6 bg-black/40 rounded-xl border border-gold-400/20 flex flex-col justify-between">
                         <div>
-                            <div class="w-10 h-10 rounded-full border border-gold-400/30 flex items-center justify-center text-gold-400 font-serif text-lg bg-gold-400/5 mb-4">
-                                💳
+                            <div class="w-10 h-10 rounded-full border border-gold-400/40 flex items-center justify-center bg-gold-400/10 text-gold-400 shadow-[0_0_10px_rgba(197,160,89,0.25)] mb-4">
+                                <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
                             </div>
                             <h4 class="font-serif text-white text-sm sm:text-base mb-2">Biaya Pengiriman</h4>
                             <p class="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">

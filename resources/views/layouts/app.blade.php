@@ -196,7 +196,7 @@
                         <span class="w-1.5 h-1.5 rounded-full bg-gold-400/60"></span>
                         LEGAL
                     </h5>
-                    <ul class="space-y-3 text-xs tracking-wider">
+                    <ul class="space-y-3 text-xs tracking-wider mb-4">
                         <li>
                             <a href="{{ route('privacy-policy') }}" class="{{ request()->routeIs('privacy-policy') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-400' }} transition-colors inline-flex items-center gap-1.5 group">
                                 <span class="text-gold-400/40 group-hover:text-gold-400 transition-colors">&rsaquo;</span> Privacy Policy
@@ -213,6 +213,9 @@
                             </a>
                         </li>
                     </ul>
+                    <p class="text-[10px] text-slate-400/70 leading-relaxed italic border-t border-gold-400/10 pt-2.5">
+                        * Perhitungan numerologi berfungsi sebagai penyelarasan sugesti positif &amp; bukan kebenaran mutlak.
+                    </p>
                 </div>
             </div>
 
