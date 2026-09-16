@@ -482,7 +482,10 @@
                                 </button>
                                 <div class="text-right">
                                     <span class="text-[9px] uppercase tracking-wider text-gray-400 block font-mono">ANGKA INTI</span>
-                                    <span id="res-core-number" class="text-2xl sm:text-3xl font-serif text-gold-400 font-bold glow-gold">7</span>
+                                    <div class="relative w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center ml-auto">
+                                        <img id="res-core-number-img" src="{{ asset('images/angka/7.png') }}" alt="Angka 7" class="w-full h-full object-contain drop-shadow-[0_0_12px_rgba(197,160,89,0.5)] transition-all duration-500">
+                                        <span id="res-core-number" class="sr-only">7</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

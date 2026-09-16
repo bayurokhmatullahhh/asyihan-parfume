@@ -22,23 +22,29 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
-            {{-- Left Column: Sacred Emblem & Mandala Visual --}}
+            {{-- Left Column: Perfume Bottle & Sacred Visual --}}
             <div class="lg:col-span-5 flex flex-col items-center justify-center text-center">
-                <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center my-4">
-                    {{-- Spinning Outer Ring --}}
-                    <div class="absolute inset-0 border border-gold-400/30 rounded-full animate-spin-slow"></div>
-                    <div class="absolute inset-4 border border-gold-400/20 border-dashed rounded-full animate-spin-reverse"></div>
+                <div class="relative w-72 h-80 sm:w-80 sm:h-96 rounded-2xl overflow-hidden border border-gold-400/30 bg-black/50 p-6 flex flex-col items-center justify-center shadow-[0_0_40px_rgba(197,160,89,0.15)] group">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-30 pointer-events-none" style="background-image: url('{{ asset('images/background.png') }}');"></div>
                     
-                    {{-- Center Emblem --}}
-                    <div class="w-48 h-48 rounded-full bg-gradient-to-b from-dark-300 to-black border-2 border-gold-400 flex flex-col items-center justify-center p-6 shadow-2xl animate-pulse-gold">
-                        <span class="text-5xl font-serif text-gold-400 font-bold glow-gold">
-                            {{ $essence['number'] }}
+                    {{-- Bottle Image --}}
+                    <div class="relative z-10 w-full h-full flex items-center justify-center">
+                        <img src="{{ asset($essence['bottle_image']) }}" 
+                             alt="{{ $essence['essence_name'] }}" 
+                             class="w-full h-full object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)] transition-transform duration-500 group-hover:scale-105">
+                    </div>
+
+                    {{-- Top Left Floating Number Badge --}}
+                    <div class="absolute top-3.5 left-3.5 z-20">
+                        <span class="bg-black/80 backdrop-blur-md text-gold-400 text-xs font-mono font-bold px-3 py-1 rounded-full border border-gold-400/40 shadow">
+                            No. {{ $essence['number'] }}
                         </span>
-                        <span class="text-xs uppercase tracking-[0.25em] text-white font-serif mt-2">
-                            {{ $essence['name'] }}
-                        </span>
-                        <span class="text-[10px] uppercase tracking-widest text-gold-300/80 mt-1">
-                            Elemen {{ $essence['element'] }}
+                    </div>
+
+                    {{-- Top Right Element Badge --}}
+                    <div class="absolute top-3.5 right-3.5 z-20">
+                        <span class="bg-black/80 backdrop-blur-md text-gold-300 text-[10px] uppercase font-mono tracking-wider px-2.5 py-1 rounded-full border border-gold-400/30">
+                            {{ $essence['element'] }}
                         </span>
                     </div>
                 </div>

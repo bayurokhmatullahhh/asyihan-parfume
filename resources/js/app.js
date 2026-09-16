@@ -274,6 +274,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (elUserName) elUserName.textContent = r.name;
                     if (elCoreNumber) elCoreNumber.textContent = r.core_number;
+                    const elCoreNumberImg = document.getElementById('res-core-number-img');
+                    if (elCoreNumberImg) {
+                        elCoreNumberImg.src = `/images/angka/${r.core_number}.png`;
+                        elCoreNumberImg.alt = `Angka ${r.core_number}`;
+                    }
                     if (elArchName) elArchName.textContent = arch.name;
                     if (elElementBadge) elElementBadge.textContent = `Elemen: ${arch.element}`;
                     if (elCharDesc) elCharDesc.textContent = arch.description;
@@ -365,17 +370,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     const card = document.getElementById('sidebar-result-card');
                     if (!card) return;
 
-                    const canvas = await window.html2canvas(card, {
+                    const html2canvasLib = window.html2canvas;
+                    const jsPDFClass = window.jspdf?.jsPDF || window.jsPDF;
+
+                    if (!html2canvasLib || !jsPDFClass) {
+                        throw new Error('Library PDF belum selesai dimuat. Silakan refresh halaman dan coba kembali.');
+                    }
+
+                    const canvas = await html2canvasLib(card, {
                         backgroundColor: '#030818',
-                        scale: 2,
+                        scale: 1.5,
                         useCORS: true,
-                        allowTaint: true,
+                        allowTaint: false,
                         logging: false,
+                        ignoreElements: (element) => {
+                            return element.id === 'home_calc_reset_btn' || 
+                                   element.id === 'home-download-pdf-btn' || 
+                                   element.id === 'res-order-link' ||
+                                   element.id === 'res-detail-link';
+                        }
                     });
 
                     const imgData = canvas.toDataURL('image/png');
-                    const { jsPDF } = window.jspdf;
-                    const pdf = new jsPDF({
+                    const pdf = new jsPDFClass({
                         orientation: 'portrait',
                         unit: 'mm',
                         format: 'a4',
@@ -419,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     pdf.save(`ASYIHAN-Numerologi-${archName}.pdf`);
                 } catch (err) {
                     console.error('PDF error:', err);
-                    alert('Gagal membuat PDF. Silakan coba screenshot layar.');
+                    alert('Gagal membuat PDF: ' + (err.message || 'Silakan coba beberapa saat lagi.'));
                 } finally {
                     btn.innerHTML = origHtml;
                     btn.disabled = false;
@@ -617,7 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const bottleImg = document.getElementById('out-bottle-img');
                     if (bottleImg) {
-                        bottleImg.src = `/images/cards/card_${arch.number}_hd.png`;
+                        bottleImg.src = arch.bottle_image ? `/${arch.bottle_image}` : `/images/bottle/${arch.number === 1 ? 'bottle_1.png' : 'bottle_' + arch.number + '.jpg'}`;
                     }
 
                     // Update active archetype card highlight in 9-grid

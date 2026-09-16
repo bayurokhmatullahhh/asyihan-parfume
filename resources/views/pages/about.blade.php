@@ -41,12 +41,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-10 items-center">
                 <div class="space-y-4">
-                    <h3 class="text-xl font-serif text-gold-400 tracking-wide">Dari ASIH Menjadi ASIHAN</h3>
+                    <h3 class="text-xl font-serif text-gold-400 tracking-wide">Dari ASIH Menjadi ASYIHAN</h3>
                     <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                        Dari ASIH, lahirlah <strong class="text-white font-medium">ASIHAN</strong>. Sebuah kata dari tanah Sunda yang sejak lama membawa makna tentang rasa, pesona, dan daya yang membuat seseorang dikenang.
+                        Dari ASIH, lahirlah <strong class="text-white font-medium">ASYIHAN</strong>. Sebuah kata dari tanah Sunda yang sejak lama membawa makna tentang rasa, pesona, dan daya yang membuat seseorang dikenang.
                     </p>
                     <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                        Kemudian kami memberinya sebuah perjalanan baru: <strong class="text-gold-300">ASIHAN menjadi ASYIHAN</strong>.
+                        Kemudian kami memberinya sebuah perjalanan baru: <strong class="text-gold-300">ASYIHAN menjadi ASYIHAN</strong>.
                     </p>
                 </div>
                 <div class="border border-gold-400/20 rounded-xl p-6 text-center">

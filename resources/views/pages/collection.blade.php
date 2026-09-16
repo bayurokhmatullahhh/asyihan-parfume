@@ -34,10 +34,10 @@
                     
                     {{-- HD Clean Bottle Background --}}
                     <div class="absolute inset-0 z-0">
-                        <img src="{{ asset('images/cards/clean/card_' . $essence['number'] . '_bg.png') }}" 
+                        <img src="{{ asset($essence['bottle_image']) }}" 
                              alt="{{ $essence['essence_name'] }}" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent pointer-events-none"></div>
+                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none"></div>
                     </div>
 
                     {{-- Card Number Badge --}}

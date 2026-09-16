@@ -342,7 +342,7 @@
                             {{-- Bottle Thumbnail --}}
                             <div class="w-20 h-24 sm:w-24 sm:h-28 shrink-0 rounded-lg overflow-hidden border border-gold-400/30 bg-[#050505] flex items-center justify-center p-1.5 relative group">
                                 <img id="out-bottle-img"
-                                     src="{{ asset('images/cards/card_7_hd.png') }}"
+                                     src="{{ asset('images/bottle/bottle_7.jpg') }}"
                                      alt="Essence Formula Bottle"
                                      class="w-full h-full object-contain rounded transition-transform duration-500 group-hover:scale-110">
                             </div>
@@ -588,7 +588,7 @@
             notesBaseDesc: 'Kekokohan prinsip dan akar kepercayaan diri yang kuat',
             formulaExtract: 'Ekstrak murni Bergamot Calabria, Cedarwood Atlas, dan Vetiver Bourbon.',
             price: 'Rp 350.000',
-            bottleImg: '{{ asset("images/cards/card_1_hd.png") }}',
+            bottleImg: '{{ asset("images/bottle/bottle_1.png") }}',
             orderLink: '{{ route("order", ["essence" => 1]) }}',
         },
         2: {
@@ -604,7 +604,7 @@
             notesBaseDesc: 'Kehangatan pelukan batin dan harmoni cinta yang abadi',
             formulaExtract: 'Ekstrak murni Lavender Provence, Rose Damascena, dan White Musk lembut.',
             price: 'Rp 350.000',
-            bottleImg: '{{ asset("images/cards/card_2_hd.png") }}',
+            bottleImg: '{{ asset("images/bottle/bottle_2.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 2]) }}',
         },
         3: {
@@ -620,7 +620,7 @@
             notesBaseDesc: 'Daya pikat magnetis dan imajinasi tanpa batas',
             formulaExtract: 'Ekstrak murni Neroli Tunisia, Grapefruit Segar, dan Vanilla Madagaskar.',
             price: 'Rp 350.000',
-            bottleImg: '{{ asset("images/cards/card_3_hd.png") }}',
+            bottleImg: '{{ asset("images/bottle/bottle_3.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 3]) }}',
         },
         4: {
@@ -636,7 +636,7 @@
             notesBaseDesc: 'Kekuatan membumi tak tergoyahkan seperti batu karang',
             formulaExtract: 'Ekstrak murni Clary Sage, Oakmoss Perancis, dan Cedarwood Virginia.',
             price: 'Rp 350.000',
-            bottleImg: '{{ asset("images/cards/card_4_hd.png") }}',
+            bottleImg: '{{ asset("images/bottle/bottle_4.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 4]) }}',
         },
         5: {
@@ -652,7 +652,7 @@
             notesBaseDesc: 'Karisma magnet perubahan yang selalu memikat sekeliling',
             formulaExtract: 'Ekstrak murni Cardamom Guatemala, Zesty Lime, dan Driftwood.',
             price: 'Rp 350.000',
-            bottleImg: '{{ asset("images/cards/card_5_hd.png") }}',
+            bottleImg: '{{ asset("images/bottle/bottle_5.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 5]) }}',
         },
         6: {
@@ -668,7 +668,7 @@
             notesBaseDesc: 'Aura perlindungan batin dan rasa aman yang meneduhkan',
             formulaExtract: 'Ekstrak murni Bulgarian Rose, Sweet Mandarin, dan Amber Resin hangat.',
             price: 'Rp 350.000',
-            bottleImg: '{{ asset("images/cards/card_6_hd.png") }}',
+            bottleImg: '{{ asset("images/bottle/bottle_6.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 6]) }}',
         },
         7: {
@@ -684,7 +684,7 @@
             notesBaseDesc: 'Memberi ketenangan dan rasa grounding spiritual',
             formulaExtract: 'Ekstrak murni Olibanum Oman, Sandalwood Mysore, dan Bergamot Calabria.',
             price: 'Rp 350.000',
-            bottleImg: '{{ asset("images/cards/card_7_hd.png") }}',
+            bottleImg: '{{ asset("images/bottle/bottle_7.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 7]) }}',
         },
         8: {
@@ -700,7 +700,7 @@
             notesBaseDesc: 'Otoritas tertinggi dan daya tarik kemakmuran tanpa batas',
             formulaExtract: 'Ekstrak murni Agarwood Kalimantan, Iranian Saffron, dan Smoked Leather.',
             price: 'Rp 350.000',
-            bottleImg: '{{ asset("images/cards/card_8_hd.png") }}',
+            bottleImg: '{{ asset("images/bottle/bottle_8.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 8]) }}',
         },
         9: {
@@ -716,7 +716,7 @@
             notesBaseDesc: 'Koneksi dengan yang ilahi dan pencerahan spiritual abadi',
             formulaExtract: 'Ekstrak murni Tuscan Iris, Sacred Incense Kuil, dan Somalian Myrrh.',
             price: 'Rp 350.000',
-            bottleImg: '{{ asset("images/cards/card_9_hd.png") }}',
+            bottleImg: '{{ asset("images/bottle/bottle_9.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 9]) }}',
         },
     };
@@ -1037,27 +1037,40 @@
 
         try {
             const container = document.getElementById('calculator-result-container');
-            const canvas = await html2canvas(container, {
+            const html2canvasLib = window.html2canvas;
+            const jsPDFClass = window.jspdf?.jsPDF || window.jsPDF;
+
+            if (!html2canvasLib || !jsPDFClass) {
+                throw new Error('Library PDF belum selesai dimuat. Silakan refresh halaman dan coba kembali.');
+            }
+
+            const canvas = await html2canvasLib(container, {
                 backgroundColor: '#030818',
-                scale: 2,
+                scale: 1.5,
                 useCORS: true,
-                allowTaint: true,
+                allowTaint: false,
                 logging: false,
+                ignoreElements: (el) => {
+                    return el.id === 'download-pdf-btn' || 
+                           el.id === 'share-wa' || 
+                           el.id === 'share-ig' || 
+                           el.id === 'copy-result-link' ||
+                           (el.tagName === 'A' && el.textContent.includes('RACIKAN CUSTOM'));
+                }
             });
 
-            const imgData  = canvas.toDataURL('image/png');
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF({
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDFClass({
                 orientation: 'portrait',
                 unit: 'mm',
                 format: 'a4',
             });
 
-            const pageW  = pdf.internal.pageSize.getWidth();
-            const pageH  = pdf.internal.pageSize.getHeight();
+            const pageW = pdf.internal.pageSize.getWidth();
+            const pageH = pdf.internal.pageSize.getHeight();
             const margin = 10;
-            const imgW   = pageW - margin * 2;
-            const imgH   = (canvas.height * imgW) / canvas.width;
+            const imgW = pageW - margin * 2;
+            const imgH = (canvas.height * imgW) / canvas.width;
 
             // Header
             pdf.setFillColor(3, 8, 24);
@@ -1090,14 +1103,14 @@
             pdf.setTextColor(100, 100, 120);
             pdf.setFontSize(7);
             pdf.setFont('helvetica', 'normal');
-            pdf.text('asyihan.com  •  Sacred Numerology & Fragrance  •  Dihitung dengan metode Pythagoras', pageW / 2, pageH - 4, { align: 'center' });
+            pdf.text('asyihan.com • Sacred Numerology & Fragrance • Dihitung dengan metode Pythagoras', pageW / 2, pageH - 4, { align: 'center' });
             pdf.line(margin, pageH - 7, pageW - margin, pageH - 7);
 
-            const archetypeName = document.getElementById('out-archetype-name').textContent.replace(/\s+/g, '-').toLowerCase();
+            const archetypeName = (document.getElementById('out-archetype-name')?.textContent || 'hasil').trim().replace(/\s+/g, '-').toLowerCase();
             pdf.save(`ASYIHAN-Numerologi-${archetypeName}.pdf`);
         } catch (err) {
             console.error('PDF error:', err);
-            alert('Gagal membuat PDF. Silakan coba screenshot manual.');
+            alert('Gagal membuat PDF: ' + (err.message || 'Silakan coba screenshot manual.'));
         } finally {
             btn.disabled = false;
             btn.innerHTML = origHtml;

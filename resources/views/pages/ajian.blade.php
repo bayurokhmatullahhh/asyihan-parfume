@@ -193,9 +193,7 @@
             @foreach($archetypes as $essence)
                 @php
                     $numFormatted = sprintf('%02d', $essence['number']);
-                    $cardImg = file_exists(public_path('images/cards/card_' . $essence['number'] . '_hd.png'))
-                        ? asset('images/cards/card_' . $essence['number'] . '_hd.png')
-                        : asset($essence['bottle_image']);
+                    $cardImg = asset($essence['bottle_image']);
 
                     // Categories map matching archetypes
                     $categories = [
@@ -278,14 +276,14 @@
         </div>
     </section>
 
-    {{-- RUMUS AJIAN ASIHAN --}}
+    {{-- RUMUS AJIAN ASYIHAN --}}
     <section class="bg-panel rounded-2xl p-6 sm:p-10 border border-gold-400/30 relative overflow-hidden box-glow mb-12">
         <div class="text-center mb-10 max-w-3xl mx-auto">
             <div class="inline-block px-3.5 py-1 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs tracking-[0.25em] uppercase mb-3 font-mono">
                 MANDIRI & MEMBANGKITKAN KEKUATAN
             </div>
             <h2 class="text-2xl sm:text-4xl font-serif text-white tracking-wide mb-3">
-                Rumus Ajian Asihan
+                Rumus Ajian Asyihan
             </h2>
             <p class="text-gray-300 text-sm sm:text-base font-light leading-relaxed">
                 Syarat utama kesaktian ritual Asyihan adalah mengkombinasikan niat diri, keharuman parfum, dan tindakan nyata secara seimbang.
