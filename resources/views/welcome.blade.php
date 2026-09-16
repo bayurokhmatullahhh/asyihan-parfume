@@ -12,11 +12,11 @@
     <div class="flex flex-col gap-10 lg:gap-14">
         
         {{-- 1. Hero Visual Box with Celestial/Numerology Chart --}}
-        <section class="rounded-2xl p-6 sm:p-10 lg:p-12 relative overflow-hidden border border-gold-400/30 bg-[#040919] min-h-[520px] sm:min-h-[480px] flex flex-col justify-center shadow-2xl">
+        <section class="rounded-2xl p-6 sm:p-10 lg:p-12 relative overflow-hidden border border-gold-400/30 bg-[#050505] min-h-[520px] sm:min-h-[480px] flex flex-col justify-center shadow-2xl">
             {{-- Background Chart Overlay --}}
-            <div class="absolute inset-0 z-0 bg-cover bg-center opacity-40 pointer-events-none" style="background-image: url('{{ asset('images/background.png') }}');"></div>
-            <div class="absolute inset-0 z-0 bg-gradient-to-r from-[#040919]/90 via-[#040919]/70 sm:via-[#040919]/55 to-[#040919]/25 sm:to-transparent pointer-events-none"></div>
-            <div class="absolute inset-0 z-0 bg-gradient-to-b from-[#040919]/50 via-transparent to-[#040919]/60 pointer-events-none"></div>
+            <div class="absolute inset-0 z-0 bg-cover bg-center opacity-35 pointer-events-none" style="background-image: url('{{ asset('images/background.png') }}');"></div>
+            <div class="absolute inset-0 z-0 bg-gradient-to-r from-black/95 via-black/80 sm:via-black/60 to-black/30 sm:to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 pointer-events-none"></div>
 
             {{-- SVG Constellation Particles Overlay --}}
             <div class="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
@@ -160,7 +160,7 @@
         </section>
 
         {{-- 3. Essence Collection Box (6 Cards Grid) --}}
-        <section class="rounded-2xl p-6 sm:p-9 border border-gold-400/30 bg-[#040919] relative overflow-hidden">
+        <section class="rounded-2xl p-6 sm:p-9 border border-gold-400/30 bg-[#050505] relative overflow-hidden">
             {{-- Background Sacred Geometry SVG --}}
             <svg class="absolute inset-0 w-full h-full opacity-[0.02] pointer-events-none" viewBox="0 0 600 400" fill="none">
                 <circle cx="300" cy="200" r="180" stroke="currentColor" stroke-width="0.5" class="text-gold-400" stroke-dasharray="8 16"/>
@@ -192,7 +192,7 @@
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 relative z-10">
                 @foreach(array_slice($archetypes, 0, 6, true) as $essence)
-                    <a href="{{ route('essence.detail', $essence['slug']) }}" class="mystical-card-hover border border-gold-400/30 bg-[#040919] rounded-xl p-4 text-center hover:border-gold-400/80 transition-all duration-300 group hover:-translate-y-1 block relative">
+                    <a href="{{ route('essence.detail', $essence['slug']) }}" class="mystical-card-hover border border-gold-400/30 bg-[#080808] rounded-xl p-4 text-center hover:border-gold-400/80 transition-all duration-300 group hover:-translate-y-1 block relative">
                         {{-- Mystical Number with Custom Image --}}
                         <div class="essence-num-ring mx-auto mb-2">
                             <img src="{{ asset('images/angka/' . $essence['number'] . '.png') }}" alt="Angka {{ $essence['number'] }}" class="w-10 h-10 sm:w-12 sm:h-12 object-contain relative z-10 transition-all duration-300 group-hover:scale-110 drop-shadow-[0_0_8px_rgba(197,160,89,0.4)]">
@@ -241,7 +241,7 @@
         </div>
 
         {{-- Main Calculator Card --}}
-        <div class="bg-panel rounded-2xl p-6 sm:p-10 border border-gold-400/30 bg-[#040919] relative overflow-hidden shadow-2xl">
+        <div class="bg-panel rounded-2xl p-6 sm:p-10 border border-gold-400/30 bg-[#050505] relative overflow-hidden shadow-2xl">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start relative z-10">
                 
                 {{-- LEFT COLUMN: INTERACTIVE FORM (5 Cols) --}}
@@ -279,7 +279,7 @@
                                     type="text" 
                                     placeholder="Masukkan nama lengkap Anda" 
                                     required 
-                                    class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#040919] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
+                                    class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#020202] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
                                 >
                             </div>
 
@@ -306,7 +306,7 @@
                                                 placeholder="DD" 
                                                 autocomplete="off"
                                                 required 
-                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-[#040919] border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider"
+                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-[#020202] border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider"
                                             >
                                             <span class="block text-[9px] uppercase tracking-wider text-gray-400 text-center mt-1 font-mono">TGL</span>
                                         </div>
@@ -327,7 +327,7 @@
                                                 placeholder="MM" 
                                                 autocomplete="off"
                                                 required 
-                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-[#040919] border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider"
+                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-[#020202] border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider"
                                             >
                                             <span class="block text-[9px] uppercase tracking-wider text-gray-400 text-center mt-1 font-mono">BLN</span>
                                         </div>
@@ -348,7 +348,7 @@
                                                 placeholder="YYYY" 
                                                 autocomplete="off"
                                                 required 
-                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-[#040919] border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider"
+                                                class="w-full text-center py-2.5 sm:py-3 px-1.5 bg-[#020202] border border-gold-400/30 rounded-lg text-gold-200 font-mono text-base sm:text-lg focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/60 transition-all placeholder:text-gray-600 tracking-wider"
                                             >
                                             <span class="block text-[9px] uppercase tracking-wider text-gray-400 text-center mt-1 font-mono">THN</span>
                                         </div>
@@ -375,7 +375,7 @@
                                         type="email" 
                                         placeholder="nama@domain.com" 
                                         required 
-                                        class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#040919] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
+                                        class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#020202] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
                                     >
                                 </div>
 
@@ -393,7 +393,7 @@
                                         placeholder="081234567890" 
                                         required 
                                         oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-                                        class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#040919] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
+                                        class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#020202] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
                                     >
                                 </div>
                             </div>
@@ -609,7 +609,7 @@
                             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto justify-end">
                                 {{-- Download PDF Button --}}
                                 <button id="home-download-pdf-btn" type="button"
-                                    class="py-2.5 px-3.5 text-[11px] font-medium tracking-wider uppercase rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#040919] border border-gold-400/40 text-gold-300 hover:text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.98] w-full sm:w-auto"
+                                    class="py-2.5 px-3.5 text-[11px] font-medium tracking-wider uppercase rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap bg-[#080808] border border-gold-400/40 text-gold-300 hover:text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.98] w-full sm:w-auto"
                                     title="Unduh Hasil Numerologi (PDF)">
                                     <svg class="w-4 h-4 shrink-0 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -637,10 +637,10 @@
     {{-- ============================================================ --}}
     <section class="mt-24 pt-8">
         {{-- 1. Smoke Banner Header --}}
-        <div class="relative rounded-2xl overflow-hidden border border-gold-400/20 p-8 sm:p-14 text-center bg-[#071126]/90 shadow-2xl">
+        <div class="relative rounded-2xl overflow-hidden border border-gold-400/20 p-8 sm:p-14 text-center bg-[#050505]/95 shadow-2xl">
             {{-- Background Smoke Image — Higher opacity --}}
-            <div class="absolute inset-0 bg-cover bg-center opacity-50 sm:opacity-50 pointer-events-none" style="background-image: url('{{ asset('images/background_filosofi.png') }}');"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-[#030818]/80 via-transparent to-[#030818]/90 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-cover bg-center opacity-40 pointer-events-none" style="background-image: url('{{ asset('images/background_filosofi.png') }}');"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-transparent to-black/95 pointer-events-none"></div>
 
             {{-- Side golden lines --}}
             <div class="absolute left-0 top-[20%] bottom-[20%] w-px bg-gradient-to-b from-transparent via-gold-400/20 to-transparent pointer-events-none"></div>

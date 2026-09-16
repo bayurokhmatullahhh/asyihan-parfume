@@ -26,7 +26,7 @@
 
         <div class="prose prose-invert max-w-none text-gray-300 font-light leading-relaxed space-y-8">
             {{-- Penjelasan --}}
-            <div class="bg-blue/40 border-l-2 border-gold-400 p-6 rounded-r-xl">
+            <div class="bg-black/60 border-l-2 border-gold-400 p-6 rounded-r-xl">
                 <h2 class="text-xl font-serif text-gold-300 mb-3 tracking-wide">Komitmen Layanan Pengiriman</h2>
                 <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
                     Kami berusaha memberikan layanan pengiriman terbaik.

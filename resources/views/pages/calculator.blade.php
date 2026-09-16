@@ -12,7 +12,7 @@
     <section class="calc-hero relative overflow-hidden py-16 sm:py-24 text-center">
         {{-- Ambient overlays --}}
         <div class="absolute inset-0 z-0 bg-cover bg-center opacity-25 pointer-events-none" style="background-image: url('{{ asset('images/background.png') }}');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-b from-[#040919]/90 via-transparent to-[#040919]/95 pointer-events-none"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-b from-black/95 via-transparent to-black/98 pointer-events-none"></div>
 
         {{-- Constellation Stars --}}
         <div class="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
@@ -25,7 +25,7 @@
 
         <div class="relative z-10 max-w-4xl mx-auto px-4">
             {{-- Sacred Badge --}}
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-400/30 bg-[#040919] text-gold-300 text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-6 shadow-[0_0_15px_rgba(197,160,89,0.15)]">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-400/30 bg-[#050505] text-gold-300 text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-6 shadow-[0_0_15px_rgba(197,160,89,0.15)]">
                 <span>✦</span> SACRED NUMEROLOGY CALCULATOR <span>✦</span>
             </div>
 
@@ -61,7 +61,7 @@
             <div id="calc-form-column" class="space-y-6">
 
                 {{-- CARD 1: FORMULIR RESONANSI JIWA --}}
-                <div class="calc-form-panel rounded-2xl p-6 sm:p-8 border border-gold-400/30 bg-[#040919] relative overflow-hidden shadow-2xl">
+                <div class="calc-form-panel rounded-2xl p-6 sm:p-8 border border-gold-400/30 bg-[#050505] relative overflow-hidden shadow-2xl">
                     {{-- Form Header --}}
                     <div class="flex items-center justify-between pb-4 mb-6 border-b border-gold-400/20">
                         <div>
@@ -87,7 +87,7 @@
                                 Nama Lengkap (Sesuai Akta / KTP)
                             </label>
                             <input id="calc_name" name="name" type="text" value="" placeholder="Contoh: BudiSantoso" required
-                                class="w-full py-3 px-4 text-sm rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                class="w-full py-3 px-4 text-sm rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                         </div>
 
                         {{-- Email & Nomor Telepon --}}
@@ -97,7 +97,7 @@
                                     Email
                                 </label>
                                 <input id="calc_email" name="email" type="email" value="" placeholder="nama@domain.com" required
-                                    class="w-full py-3 px-4 text-sm rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                    class="w-full py-3 px-4 text-sm rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                             </div>
                             <div>
                                 <label for="calc_phone" class="block text-[10px] uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
@@ -105,7 +105,7 @@
                                 </label>
                                 <input id="calc_phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]*" value="" placeholder="Contoh: 081234567890" required
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-                                    class="w-full py-3 px-4 text-sm rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                    class="w-full py-3 px-4 text-sm rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                             </div>
                         </div>
 
@@ -118,28 +118,28 @@
                                 {{-- Tanggal (DD) --}}
                                 <div>
                                     <input id="calc_day" type="number" min="1" max="31" value="" placeholder="DD" required
-                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                                     <span class="block text-[9px] uppercase tracking-widest text-center text-gray-400 mt-1">Tanggal</span>
                                 </div>
 
                                 {{-- Bulan (MM) --}}
                                 <div>
                                     <input id="calc_month" type="number" min="1" max="12" value="" placeholder="MM" required
-                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                                     <span class="block text-[9px] uppercase tracking-widest text-center text-gray-400 mt-1">Bulan</span>
                                 </div>
 
                                 {{-- Tahun (YYYY) --}}
                                 <div>
                                     <input id="calc_year" type="number" min="1920" max="2030" value="" placeholder="YYYY" required
-                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#040919] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                        class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                                     <span class="block text-[9px] uppercase tracking-widest text-center text-gray-400 mt-1">Tahun</span>
                                 </div>
                             </div>
                         </div>
 
                         {{-- Calculation Breakdown Preview --}}
-                        <div class="p-2.5 rounded-lg bg-[#040919] border border-gold-400/30 text-center min-h-[38px] flex items-center justify-center">
+                        <div class="p-2.5 rounded-lg bg-[#050505] border border-gold-400/30 text-center min-h-[38px] flex items-center justify-center">
                             <p class="text-[10px] text-gold-400/70 font-mono tracking-wider" id="calc-preview-text">
                                 Masukkan tanggal lahir Anda untuk melihat reduksi angka Pythagoras
                             </p>
@@ -160,7 +160,7 @@
                 </div>
 
                 {{-- CARD 2: METODE PERHITUNGAN PYTHAGORAS --}}
-                <div class="rounded-2xl p-6 sm:p-7 border border-gold-400/30 bg-[#040919] shadow-xl space-y-4">
+                <div class="rounded-2xl p-6 sm:p-7 border border-gold-400/30 bg-[#050505] shadow-xl space-y-4">
                     {{-- Header with Compass Icon --}}
                     <div class="flex items-center gap-3 pb-3 border-b border-gold-400/20">
                         <div class="w-7 h-7 rounded-full bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 shrink-0">
@@ -176,7 +176,7 @@
 
                     {{-- Step 1 --}}
                     <div class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-[#040919] border border-gold-400/30 text-gold-400 text-xs font-mono flex items-center justify-center shrink-0 mt-0.5">
+                        <div class="w-6 h-6 rounded-full bg-[#050505] border border-gold-400/30 text-gold-400 text-xs font-mono flex items-center justify-center shrink-0 mt-0.5">
                             1
                         </div>
                         <div>
@@ -189,7 +189,7 @@
 
                     {{-- Step 2 --}}
                     <div class="flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-[#040919] border border-gold-400/30 text-gold-400 text-xs font-mono flex items-center justify-center shrink-0 mt-0.5">
+                        <div class="w-6 h-6 rounded-full bg-[#050505] border border-gold-400/30 text-gold-400 text-xs font-mono flex items-center justify-center shrink-0 mt-0.5">
                             2
                         </div>
                         <div>
@@ -201,7 +201,7 @@
                     </div>
 
                     {{-- Highlight Note --}}
-                    <div class="p-3.5 rounded-xl bg-[#040919] border border-gold-400/30 flex items-start gap-2.5 mt-2">
+                    <div class="p-3.5 rounded-xl bg-[#050505] border border-gold-400/30 flex items-start gap-2.5 mt-2">
                         <span class="text-gold-400 text-xs mt-0.5 shrink-0">✦</span>
                         <p class="text-[11px] text-gray-300 font-light leading-relaxed">
                             <strong class="text-gold-300 font-medium">Angka Inti (Soul Core)</strong> adalah cetak biru energi bawaan. Memadukannya dengan wewangian resonan membantu amplifikasi vibrasi positif dalam hidup.
@@ -213,10 +213,10 @@
 
             {{-- RESULT CARD (HIDDEN INITIALLY UNTIL BUKA GERBANG RESONANSI JIWA DI-KLIK) --}}
             <div id="calc-result-wrapper" class="hidden">
-                <div id="calculator-result-container" class="calc-result-panel rounded-2xl p-6 sm:p-8 border border-gold-400/30 bg-[#040919] relative overflow-hidden shadow-2xl">
+                <div id="calculator-result-container" class="calc-result-panel rounded-2xl p-6 sm:p-8 border border-gold-400/30 bg-[#050505] relative overflow-hidden shadow-2xl">
                     {{-- TOP MEDALLION (Glowing Square Box) --}}
                     <div class="flex flex-col items-center justify-center text-center pt-2 pb-6">
-                        <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl border border-gold-400/40 bg-[#040919] flex flex-col items-center justify-center shadow-[0_0_35px_rgba(197,160,89,0.25)] p-2 group transition-transform duration-500 hover:scale-105">
+                        <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl border border-gold-400/40 bg-[#050505] flex flex-col items-center justify-center shadow-[0_0_35px_rgba(197,160,89,0.25)] p-2 group transition-transform duration-500 hover:scale-105">
                             {{-- Inner ornamental border --}}
                             <div class="absolute inset-1.5 rounded-xl border border-gold-400/20 pointer-events-none"></div>
 
@@ -244,10 +244,10 @@
 
                         {{-- Dominant Elements Badges --}}
                         <div class="flex flex-wrap items-center justify-center gap-2.5 mt-4">
-                            <span class="text-[10px] sm:text-[11px] px-3 py-1 rounded-md bg-[#040919] border border-gold-400/30 text-gray-300">
+                            <span class="text-[10px] sm:text-[11px] px-3 py-1 rounded-md bg-[#050505] border border-gold-400/30 text-gray-300">
                                 Elemen Dominan: <strong id="out-element" class="text-gold-300 font-medium">Ether</strong>
                             </span>
-                            <span class="text-[10px] sm:text-[11px] px-3 py-1 rounded-md bg-[#040919] border border-gold-400/30 text-gray-300">
+                            <span class="text-[10px] sm:text-[11px] px-3 py-1 rounded-md bg-[#050505] border border-gold-400/30 text-gray-300">
                                 Aroma Utama: <strong id="out-aroma-main" class="text-gold-300 font-medium">Woody & Frankincense</strong>
                             </span>
                         </div>
@@ -265,12 +265,12 @@
                         <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/70 font-mono block mb-3 text-center sm:text-left">
                             TOKOH INSPIRATIF SEJIWA DENGANMU
                         </span>
-                        <div class="p-4 sm:p-5 rounded-xl border border-gold-400/30 bg-[#040919] relative overflow-hidden">
+                        <div class="p-4 sm:p-5 rounded-xl border border-gold-400/30 bg-[#050505] relative overflow-hidden">
                             {{-- Decorative star --}}
                             <div class="absolute top-3 right-4 text-gold-400/20 text-4xl font-serif pointer-events-none">✦</div>
                             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                                 {{-- Icon area --}}
-                                <div class="w-14 h-14 shrink-0 rounded-xl bg-[#040919] border border-gold-400/30 flex items-center justify-center shadow-lg">
+                                <div class="w-14 h-14 shrink-0 rounded-xl bg-[#050505] border border-gold-400/30 flex items-center justify-center shadow-lg">
                                     <span class="text-2xl">⭐</span>
                                 </div>
                                 {{-- Text area --}}
@@ -301,7 +301,7 @@
                         </span>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                             {{-- Top & Heart Notes --}}
-                            <div class="p-4 rounded-xl border border-gold-400/30 bg-[#040919] space-y-1">
+                            <div class="p-4 rounded-xl border border-gold-400/30 bg-[#050505] space-y-1">
                                 <span class="text-[9px] uppercase tracking-wider text-gold-400/80 font-mono block">
                                     TOP & HEART NOTES
                                 </span>
@@ -314,7 +314,7 @@
                             </div>
 
                             {{-- Base Notes --}}
-                            <div class="p-4 rounded-xl border border-gold-400/30 bg-[#040919] space-y-1">
+                            <div class="p-4 rounded-xl border border-gold-400/30 bg-[#050505] space-y-1">
                                 <span class="text-[9px] uppercase tracking-wider text-gold-400/80 font-mono block">
                                     BASE NOTES
                                 </span>
@@ -334,9 +334,9 @@
                             REKOMENDASI FORMULA ASYIHAN
                         </span>
 
-                        <div class="p-4 sm:p-5 rounded-xl border border-gold-400/30 bg-[#040919] flex flex-col sm:flex-row items-center gap-4 sm:gap-5 relative">
+                        <div class="p-4 sm:p-5 rounded-xl border border-gold-400/30 bg-[#050505] flex flex-col sm:flex-row items-center gap-4 sm:gap-5 relative">
                             {{-- Bottle Thumbnail --}}
-                            <div class="w-20 h-24 sm:w-24 sm:h-28 shrink-0 rounded-lg overflow-hidden border border-gold-400/30 bg-[#040919] flex items-center justify-center p-1.5 relative group">
+                            <div class="w-20 h-24 sm:w-24 sm:h-28 shrink-0 rounded-lg overflow-hidden border border-gold-400/30 bg-[#050505] flex items-center justify-center p-1.5 relative group">
                                 <img id="out-bottle-img"
                                      src="{{ asset('images/cards/card_7_hd.png') }}"
                                      alt="Essence Formula Bottle"
@@ -381,25 +381,25 @@
                             <div class="flex items-center gap-2">
                                 {{-- WhatsApp --}}
                                 <a id="share-wa" href="https://api.whatsapp.com/send?text=Saya%20telah%20menghitung%20angka%20inti%20numerologi%20saya%20di%20ASYIHAN.%20Coba%20di%20{{ urlencode(url()->current()) }}" target="_blank"
-                                   class="w-8 h-8 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors" title="Bagikan via WhatsApp">
+                                   class="w-8 h-8 rounded-full bg-[#050505] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors" title="Bagikan via WhatsApp">
                                     <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.983.541 1.879.827 2.796.827 3.183 0 5.768-2.587 5.769-5.767.001-3.18-2.585-5.766-5.769-5.767zm7.558 5.767c0 4.168-3.39 7.559-7.558 7.559-1.272 0-2.463-.317-3.517-.872l-4.514 1.183 1.205-4.405c-.651-1.096-1.032-2.38-1.032-3.465 0-4.168 3.39-7.558 7.558-7.558 4.168 0 7.558 3.39 7.558 7.558z"/></svg>
                                 </a>
 
                                 {{-- Instagram (Copy link + notice) --}}
                                 <button id="share-ig" type="button"
-                                   class="w-8 h-8 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors cursor-pointer" title="Salin untuk Instagram Story">
+                                   class="w-8 h-8 rounded-full bg-[#050505] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors cursor-pointer" title="Salin untuk Instagram Story">
                                     <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                                 </button>
 
                                 {{-- Facebook --}}
                                 <a id="share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"
-                                   class="w-8 h-8 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors" title="Bagikan via Facebook">
+                                   class="w-8 h-8 rounded-full bg-[#050505] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors" title="Bagikan via Facebook">
                                     <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
                                 </a>
 
                                 {{-- Copy Link --}}
                                 <button id="copy-result-link" type="button"
-                                   class="w-8 h-8 rounded-full bg-[#040919] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors cursor-pointer" title="Salin Tautan">
+                                   class="w-8 h-8 rounded-full bg-[#050505] border border-gold-400/30 hover:border-gold-400 hover:text-gold-300 flex items-center justify-center text-gray-400 transition-colors cursor-pointer" title="Salin Tautan">
                                     <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                                 </button>
                             </div>
@@ -409,7 +409,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {{-- Download PDF Button --}}
                             <button id="download-pdf-btn" type="button"
-                                class="h-11 px-5 text-[11px] tracking-[0.18em] uppercase rounded-lg font-semibold flex items-center justify-center gap-2.5 bg-[#040919] border border-gold-400/40 text-gold-300 hover:text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.98]"
+                                class="h-11 px-5 text-[11px] tracking-[0.18em] uppercase rounded-lg font-semibold flex items-center justify-center gap-2.5 bg-[#050505] border border-gold-400/40 text-gold-300 hover:text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.98]"
                                 title="Unduh Hasil Numerologi (PDF)">
                                 <svg class="w-4 h-4 flex-shrink-0 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -419,7 +419,7 @@
 
                             {{-- Custom Formulation Button --}}
                             <a href="https://wa.me/6281234567890?text=Halo%20ASYIHAN,%20saya%20tertarik%20untuk%20memesan%20racikan%20custom%20sesuai%20angka%20inti%20saya" target="_blank"
-                               class="h-11 px-5 text-[11px] tracking-[0.18em] uppercase rounded-lg font-semibold flex items-center justify-center gap-2 bg-[#040919] border border-gold-400/40 text-gold-300 hover:text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all duration-200 shadow-sm active:scale-[0.98]">
+                               class="h-11 px-5 text-[11px] tracking-[0.18em] uppercase rounded-lg font-semibold flex items-center justify-center gap-2 bg-[#050505] border border-gold-400/40 text-gold-300 hover:text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all duration-200 shadow-sm active:scale-[0.98]">
                                 <span class="flex-shrink-0 text-gold-400">✦</span>
                                 <span class="flex-shrink-0">RACIKAN CUSTOM</span>
                                 <span class="flex-shrink-0 text-gold-400">✦</span>
@@ -454,7 +454,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             @foreach($archetypes as $arch)
                 <div id="arch-card-{{ $arch['number'] }}"
-                     class="archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border border-gold-400/30 bg-[#040919] hover:border-gold-400/70 hover:-translate-y-1">
+                     class="archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border border-gold-400/30 bg-[#050505] hover:border-gold-400/70 hover:-translate-y-1">
 
                     <div>
                         {{-- Card Header: Number Image & Badge --}}
@@ -465,7 +465,7 @@
                                      alt="Angka {{ $arch['number'] }}"
                                      class="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(197,160,89,0.5)]">
                             </div>
-                            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] px-2.5 py-1 rounded bg-[#040919] border border-gold-400/30 text-gold-300 font-mono">
+                            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] px-2.5 py-1 rounded bg-[#050505] border border-gold-400/30 text-gold-300 font-mono">
                                 {{ $arch['badge'] }}
                             </span>
                         </div>
@@ -481,18 +481,18 @@
                         </p>
 
                         {{-- Inner Inspirational Figure Box --}}
-                        <div class="p-3 rounded-xl border border-gold-400/30 bg-[#040919] mb-4 space-y-1.5">
+                        <div class="p-3 rounded-xl border border-gold-400/30 bg-[#050505] mb-4 space-y-1.5">
                             <span class="text-[9px] uppercase tracking-wider text-gold-400/80 font-mono block">
                                 TOKOH INSPIRATIF SEJIWA:
                             </span>
                             <div class="flex flex-wrap gap-1.5">
                                 @foreach(array_slice($arch['tokoh_inspiratif'] ?? [], 0, 3) as $tokoh)
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-[#040919] border border-gold-400/30 text-gold-300 font-light">
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-[#050505] border border-gold-400/30 text-gold-300 font-light">
                                         {{ $tokoh['nama'] }}
                                     </span>
                                 @endforeach
                                 @if(count($arch['tokoh_inspiratif'] ?? []) > 3)
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-[#040919] border border-gold-400/20 text-gray-400 font-light">
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-[#050505] border border-gold-400/20 text-gray-400 font-light">
                                         +{{ count($arch['tokoh_inspiratif']) - 3 }} lainnya
                                     </span>
                                 @endif
