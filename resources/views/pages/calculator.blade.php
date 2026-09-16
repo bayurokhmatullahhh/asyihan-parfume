@@ -216,17 +216,21 @@
                 <div id="calculator-result-container" class="calc-result-panel rounded-2xl p-6 sm:p-8 border border-gold-400/30 bg-[#050505] relative overflow-hidden shadow-2xl">
                     {{-- TOP MEDALLION (Glowing Square Box) --}}
                     <div class="flex flex-col items-center justify-center text-center pt-2 pb-6">
-                        <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl border border-gold-400/40 bg-[#050505] flex flex-col items-center justify-center shadow-[0_0_35px_rgba(197,160,89,0.25)] p-2 group transition-transform duration-500 hover:scale-105">
+                        <div class="relative w-32 h-32 sm:w-36 sm:h-36 rounded-2xl border border-gold-400/40 bg-[#050505] flex flex-col items-center justify-center shadow-[0_0_35px_rgba(197,160,89,0.25)] p-2.5 group transition-transform duration-500 hover:scale-105">
                             {{-- Inner ornamental border --}}
                             <div class="absolute inset-1.5 rounded-xl border border-gold-400/20 pointer-events-none"></div>
 
                             <span class="text-[8px] uppercase tracking-[0.25em] text-gold-400/80 font-mono mb-1">
                                 ANGKA INTI JIWA
                             </span>
-                            <span id="out-core-number" class="text-4xl sm:text-5xl font-serif text-gold-300 font-bold glow-gold leading-none">
-                                7
-                            </span>
-                            <div class="w-8 h-0.5 bg-gold-400/40 mt-2"></div>
+                            <div class="relative w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center my-0.5">
+                                <img id="out-core-img" 
+                                     src="{{ asset('images/angka/7.png') }}" 
+                                     alt="Angka 7" 
+                                     class="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(197,160,89,0.5)] transition-all duration-500 group-hover:scale-110">
+                                <span id="out-core-number" class="sr-only">7</span>
+                            </div>
+                            <div class="w-8 h-0.5 bg-gold-400/40 mt-1"></div>
                         </div>
 
                         {{-- Archetype Pill & Title --}}
@@ -960,6 +964,11 @@
         const roman = romanMap[core];
 
         document.getElementById('out-core-number').textContent    = core;
+        const outCoreImg = document.getElementById('out-core-img');
+        if (outCoreImg) {
+            outCoreImg.src = `{{ asset('images/angka') }}/${core}.png`;
+            outCoreImg.alt = `Angka ${core}`;
+        }
         document.getElementById('out-archetype-name').textContent = arch.name;
         document.getElementById('out-subtitle-id').textContent    = arch.subtitle;
         document.getElementById('out-element').textContent        = arch.element;
