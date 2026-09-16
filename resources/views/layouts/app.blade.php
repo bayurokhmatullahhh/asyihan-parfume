@@ -9,6 +9,11 @@
     <meta name="description" content="@yield('meta_description', 'ASYIHAN — Born from Asih. Crafted for the Soul. Parfum personal berdasarkan numerologi karakter Anda.')">
     <meta name="keywords" content="ASYIHAN, parfum, numerology, wewangian, Sunda, personal fragrance">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/logo_asy.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/logo_asy.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo_asy.png') }}">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,10 +21,24 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="antialiased" style="background-color: #040919;">
+<body class="antialiased bg-black text-slate-200 min-h-screen relative selection:bg-gold-500/30 selection:text-gold-200">
+
+    {{-- Global Mystical Atmospheric Background --}}
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <!-- Deep Pitch Black Abyss -->
+        <div class="absolute inset-0 bg-black"></div>
+        <!-- Ethereal Mystic Smoky Fog & Incense Auras -->
+        <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[950px] h-[550px] bg-gradient-to-b from-gold-500/[0.05] via-gold-600/[0.02] to-transparent rounded-full blur-[130px] animate-mystic-breath"></div>
+        <div class="absolute top-1/4 -left-40 w-[550px] h-[550px] bg-gradient-to-tr from-gold-400/[0.035] via-amber-900/[0.02] to-transparent rounded-full blur-[110px] animate-float-slow"></div>
+        <div class="absolute bottom-16 -right-40 w-[650px] h-[650px] bg-gradient-to-tl from-gold-500/[0.04] via-gold-700/[0.02] to-transparent rounded-full blur-[120px] animate-float-slow-reverse"></div>
+        <!-- Occult Vignette Darkening (Black Infinite Void) -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.45)_55%,rgba(0,0,0,0.98)_100%)]"></div>
+        <!-- Subtle Mystical Sacred Stardust -->
+        <div class="absolute inset-0 opacity-25 mystic-stardust"></div>
+    </div>
 
     {{-- Header --}}
-    <header id="main-header" class="fixed w-full top-0 z-50 bg-[#040919] border-b border-gold-400/20 shadow-[0_4px_30px_rgba(2,6,20,0.85)] transition-all duration-300">
+    <header id="main-header" class="fixed w-full top-0 z-50 bg-black/90 backdrop-blur-md border-b border-gold-400/20 shadow-[0_4px_35px_rgba(0,0,0,0.95)] transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             {{-- Logo --}}
             <a href="{{ route('home') }}" class="text-2xl font-serif text-gold-400 tracking-[0.25em] glow-gold hover:text-gold-200 transition-colors font-medium" aria-label="ASYIHAN Home">
@@ -61,7 +80,7 @@
         </div>
 
         {{-- Mobile Menu --}}
-        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-72 h-screen bg-[#040919] border-l border-gold-400/25 z-50 flex flex-col p-8 pt-20 lg:hidden shadow-2xl">
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-72 h-screen bg-[#050505]/98 backdrop-blur-xl border-l border-gold-400/25 z-50 flex flex-col p-8 pt-20 lg:hidden shadow-2xl">
             <button id="mobile-menu-close" class="absolute top-4 right-4 text-gold-400 hover:text-white transition-colors" aria-label="Close menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
@@ -90,7 +109,7 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="mt-24 border-t border-gold-400/20 bg-[#040919] pt-16 pb-12 relative z-10 shadow-[0_-12px_40px_rgba(2,5,15,0.85)]">
+    <footer class="mt-24 border-t border-gold-400/20 bg-black pt-16 pb-12 relative z-10 shadow-[0_-12px_40px_rgba(0,0,0,0.95)]">
         {{-- Ambient top highlight line --}}
         <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-400/40 to-transparent"></div>
 
@@ -105,7 +124,7 @@
                         <p class="text-xs sm:text-[13px] leading-relaxed text-slate-300/90 italic font-light max-w-sm mb-6">
                             From Asih, Comes Essence. From Character, Comes Scent. From Scent, Remains a Memory.
                         </p>
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold-400/20 bg-[#071333]/60 text-[11px] text-gold-300 font-serif tracking-wider">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold-400/20 bg-black/80 text-[11px] text-gold-300 font-serif tracking-wider">
                             <span class="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse"></span>
                             Cosmic Numerology & Haute Parfumerie
                         </div>

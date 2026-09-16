@@ -13,15 +13,9 @@
         </h1>
         <p class="text-gray-300 font-light text-xs sm:text-sm tracking-wide flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
             <span class="text-gold-400 text-xs">✦</span>
-<<<<<<<<< Temporary merge branch 1
             <span>9 Essence.</span>
             <span class="text-gold-400 text-xs">✦</span>
             <span>9 Karakter.</span>
-=========
-            <span>9 Essence,</span>
-            <span class="text-gold-400 text-xs">✦</span>
-            <span>9 Karakter,</span>
->>>>>>>>> Temporary merge branch 2
             <span class="text-gold-400 text-xs">✦</span>
             <span>9 Aroma.</span>
             <span class="text-gray-400 ml-1">Temukan yang paling sesuai dengan dirimu.</span>
@@ -75,7 +69,7 @@
     <template id="inline-detail-template">
         <div class="inline-detail-panel" 
              style="grid-column: 1 / -1; overflow: hidden;">
-            <div class="inline-detail-inner border border-gold-400/40 rounded-2xl p-5 sm:p-7 md:p-8 shadow-[0_0_40px_rgba(0,0,0,0.9),0_0_25px_rgba(197,160,89,0.25)] relative overflow-hidden">
+            <div class="inline-detail-inner bg-[#050505] border border-gold-400/40 rounded-2xl p-5 sm:p-7 md:p-8 shadow-[0_0_40px_rgba(0,0,0,0.9),0_0_25px_rgba(197,160,89,0.25)] relative overflow-hidden">
                 
                 {{-- Ambient Background Glow --}}
                 <div class="absolute -top-32 -right-32 w-80 h-80 bg-gold-400/5 rounded-full blur-3xl pointer-events-none"></div>

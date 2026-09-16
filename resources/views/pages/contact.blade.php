@@ -206,7 +206,7 @@
                 </div>
 
                 {{-- Map Container with Google Maps Embed --}}
-                <div class="relative rounded-xl overflow-hidden border border-gold-400/30 h-52 bg-[#1a1c23] group">
+                <div class="relative rounded-xl overflow-hidden border border-gold-400/30 h-52 bg-black group">
                     <iframe 
                         class="w-full h-full border-0 filter invert contrast-125 opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                         src="https://maps.google.com/maps?q=Jl.+Tamblong+No.46,+Braga,+Kec.+Sumur+Bandung,+Kota+Bandung,+Jawa+Barat+40112&t=&z=16&ie=UTF8&iwloc=&output=embed" 

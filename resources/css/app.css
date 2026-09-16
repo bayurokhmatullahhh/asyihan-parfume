@@ -25,17 +25,17 @@
     --color-gold-800: #4d3b1d;
     --color-gold-900: #332813;
 
-    /* Dark Palette — Deep Celestial Blue */
-    --color-dark-50: #1b283d;
-    --color-dark-100: #141f30;
-    --color-dark-200: #0f1826;
-    --color-dark-300: #0c131f;
-    --color-dark-400: #090f19;
-    --color-dark-500: #070c14;
-    --color-dark-600: #050910;
-    --color-dark-700: #04070d;
-    --color-dark-800: #03050a;
-    --color-dark-900: #010306;
+    /* Dark Palette — Pure Mystic Black & Obsidian */
+    --color-dark-50: #1e1e1e;
+    --color-dark-100: #171717;
+    --color-dark-200: #121212;
+    --color-dark-300: #0d0d0d;
+    --color-dark-400: #0a0a0a;
+    --color-dark-500: #080808;
+    --color-dark-600: #060606;
+    --color-dark-700: #040404;
+    --color-dark-800: #020202;
+    --color-dark-900: #000000;
 }
 
 /* ========================================
@@ -43,8 +43,8 @@
    ======================================== */
 
 body {
-    background-color: #040919;
-    color: #e0e0e0;
+    background-color: #000000;
+    color: #e2e8f0;
     font-family: var(--font-sans);
     background-image: none;
     overflow-x: hidden;
@@ -78,10 +78,11 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 30px rgba(197, 160, 89, 0.25), 0 0 60px rgba(197, 160, 89, 0.1);
 }
 
-/* Panel Background — Solid #040919 with Gold Border */
+/* Panel Background — Obsidian #050505 with Gold Border */
 .bg-panel {
-    background-color: #040919;
-    border: 1px solid rgba(197, 160, 89, 0.3);
+    background-color: #050505;
+    border: 1px solid rgba(197, 160, 89, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
 }
 
 .bg-panel-hover:hover {
@@ -157,7 +158,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .input-dark {
     width: 100%;
-    background: #040919;
+    background: #020202;
     border: 1px solid rgba(197, 160, 89, 0.3);
     border-radius: 4px;
     padding: 0.625rem 1rem;
@@ -170,7 +171,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .input-dark:focus {
     border-color: var(--color-gold-400);
-    box-shadow: 0 0 0 1px var(--color-gold-400);
+    box-shadow: 0 0 12px rgba(197, 160, 89, 0.35);
 }
 
 .input-dark::placeholder {
@@ -185,7 +186,7 @@ input[type="date"].input-dark {
 /* Textarea */
 .textarea-dark {
     width: 100%;
-    background: #040919;
+    background: #020202;
     border: 1px solid rgba(197, 160, 89, 0.3);
     border-radius: 4px;
     padding: 0.625rem 1rem;
@@ -200,7 +201,7 @@ input[type="date"].input-dark {
 
 .textarea-dark:focus {
     border-color: var(--color-gold-400);
-    box-shadow: 0 0 0 1px var(--color-gold-400);
+    box-shadow: 0 0 12px rgba(197, 160, 89, 0.35);
 }
 
 /* ========================================
@@ -300,9 +301,9 @@ input[type="date"].input-dark {
     right: 0;
     bottom: 0;
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(197, 160, 89, 0.03) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(197, 160, 89, 0.02) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 80%, rgba(139, 107, 50, 0.02) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(197, 160, 89, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(197, 160, 89, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(139, 107, 50, 0.03) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
     animation: mystical-glow 8s ease-in-out infinite;
@@ -317,10 +318,74 @@ input[type="date"].input-dark {
     right: 0;
     bottom: 0;
     background:
-        radial-gradient(circle at 30% 40%, rgba(197, 160, 89, 0.05) 0%, transparent 60%),
-        radial-gradient(circle at 70% 60%, rgba(197, 160, 89, 0.03) 0%, transparent 60%);
+        radial-gradient(circle at 30% 40%, rgba(197, 160, 89, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(197, 160, 89, 0.04) 0%, transparent 60%);
     pointer-events: none;
     z-index: 1;
+}
+
+/* Mystical Atmosphere Helpers */
+@keyframes mystic-breath {
+    0%, 100% {
+        opacity: 0.25;
+        transform: translate(-50%, 0) scale(1);
+    }
+    50% {
+        opacity: 0.55;
+        transform: translate(-50%, -15px) scale(1.08);
+    }
+}
+
+@keyframes float-slow {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(30px, -25px) rotate(4deg);
+    }
+}
+
+@keyframes float-slow-reverse {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(-30px, 20px) rotate(-4deg);
+    }
+}
+
+@keyframes occult-flicker {
+    0%, 100% { opacity: 0.7; }
+    25% { opacity: 0.45; }
+    50% { opacity: 0.85; }
+    75% { opacity: 0.55; }
+}
+
+.animate-mystic-breath {
+    animation: mystic-breath 10s ease-in-out infinite;
+}
+
+.animate-float-slow {
+    animation: float-slow 18s ease-in-out infinite;
+}
+
+.animate-float-slow-reverse {
+    animation: float-slow-reverse 22s ease-in-out infinite;
+}
+
+.animate-occult-flicker {
+    animation: occult-flicker 4s ease-in-out infinite;
+}
+
+.mystic-stardust {
+    background-image: 
+        radial-gradient(1px 1px at 25px 35px, rgba(212, 175, 55, 0.45), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 120px 160px, rgba(212, 175, 55, 0.5), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 240px 90px, rgba(255, 255, 255, 0.4), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 340px 260px, rgba(212, 175, 55, 0.45), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 480px 190px, rgba(212, 175, 55, 0.35), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 580px 340px, rgba(212, 175, 55, 0.6), rgba(0,0,0,0));
+    background-size: 600px 400px;
 }
 
 /* ========================================
@@ -673,15 +738,16 @@ input[type="date"].input-dark {
 
 /* Calculator Form Panel */
 .calc-form-panel {
-    background-color: #040919;
-    border: 1px solid rgba(197, 160, 89, 0.3);
+    background-color: #050505;
+    border: 1px solid rgba(197, 160, 89, 0.25);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.95);
 }
 
 /* Archetype Cards */
 .calc-archetype-card,
 .archetype-grid-card {
-    background-color: #040919;
-    border: 1px solid rgba(197, 160, 89, 0.3);
+    background-color: #050505;
+    border: 1px solid rgba(197, 160, 89, 0.25);
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -692,8 +758,9 @@ input[type="date"].input-dark {
 
 /* Result Panel */
 .calc-result-panel {
-    background-color: #040919;
-    border: 1px solid rgba(197, 160, 89, 0.3);
+    background-color: #050505;
+    border: 1px solid rgba(197, 160, 89, 0.25);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.95);
 }
 
 /* Placeholder Panel shimmer */
