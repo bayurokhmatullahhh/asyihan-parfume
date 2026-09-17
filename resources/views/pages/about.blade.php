@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Tentang ASYIHAN — Filosofi, Makna & Simbolisme')
-@section('meta_description', 'Kisah kelahiran ASYIHAN dari tanah Sunda hingga tradisi aroma adiluhung Timur Tengah.')
+@section('meta_description', 'Kisah kelahiran ASYIHAN dari tanah Nusantara hingga tradisi aroma adiluhung Timur Tengah.')
 
 @section('content')
 <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
@@ -32,7 +32,7 @@
 
             <div class="border-t border-b border-gold-400/15 py-8 my-8 text-center max-w-3xl mx-auto">
                 <p class="text-white font-serif text-base sm:text-lg tracking-wide">
-                    Orang Sunda mengenalnya melalui satu kata sederhana: <span class="text-gold-400 font-bold glow-gold">ASIH</span>.
+                    Orang Nusantara mengenalnya melalui satu kata sederhana: <span class="text-gold-400 font-bold glow-gold">ASIH</span>.
                 </p>
                 <p class="text-gray-400 mt-2 text-xs sm:text-sm">
                     Asih bukan sekadar mencintai. Ia adalah rasa yang membuat manusia mendekat, menjaga, mengingat, dan meninggalkan kebaikan dalam hati manusia lainnya.
@@ -43,7 +43,7 @@
                 <div class="space-y-4">
                     <h3 class="text-xl font-serif text-gold-400 tracking-wide">Dari ASIH Menjadi ASYIHAN</h3>
                     <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                        Dari ASIH, lahirlah <strong class="text-white font-medium">ASYIHAN</strong>. Sebuah kata dari tanah Sunda yang sejak lama membawa makna tentang rasa, pesona, dan daya yang membuat seseorang dikenang.
+                        Dari ASIH, lahirlah <strong class="text-white font-medium">ASYIHAN</strong>. Sebuah kata dari tanah Nusantara yang sejak lama membawa makna tentang rasa, pesona, dan daya yang membuat seseorang dikenang.
                     </p>
                     <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
                         Kemudian kami memberinya sebuah perjalanan baru: <strong class="text-gold-300">ASYIHAN menjadi ASYIHAN</strong>.
@@ -52,7 +52,7 @@
                 <div class="border border-gold-400/20 rounded-xl p-6 text-center">
                     <div class="text-2xl sm:text-3xl font-serif text-gold-400 mb-2 whitespace-nowrap overflow-hidden"><span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">S</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">Y</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">I</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">H</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">N</span></div>
                     <p class="text-[11px] text-gray-400 italic">
-                        Sebuah nama yang akarnya tetap berpijak di tanah Sunda, tetapi aromanya mengembara jauh menuju negeri-negeri tempat Oud dibakar, Musk diwariskan, Amber dihangatkan, dan wewangian menjadi bagian dari kehormatan serta identitas seseorang.
+                        Sebuah nama yang akarnya tetap berpijak di tanah Nusantara, tetapi aromanya mengembara jauh menuju negeri-negeri tempat Oud dibakar, Musk diwariskan, Amber dihangatkan, dan wewangian menjadi bagian dari kehormatan serta identitas seseorang.
                     </p>
                 </div>
             </div>
@@ -216,19 +216,19 @@
     </section>
 
     {{-- Brand Manifesto / Outro --}}
-    <section class="text-center py-12 border-t border-b border-gold-400/20 my-8">
-        <h3 class="text-2xl font-serif text-gold-400 tracking-[0.25em] mb-4 glow-gold">
+    <section class="text-center py-12 px-4 sm:px-6 border-t border-b border-gold-400/20 my-8">
+        <h3 class="text-2xl sm:text-3xl font-serif text-gold-400 tracking-[0.25em] mb-4 glow-gold">
             THE ESSENCE OF YOU
         </h3>
-        <p class="text-gray-300 text-sm max-w-xl mx-auto font-light leading-relaxed mb-6">
-            Diciptakan bukan untuk membuatmu menjadi orang lain.<br>
+        <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto font-light leading-relaxed mb-8">
+            Diciptakan bukan untuk membuatmu menjadi orang lain.<br class="hidden sm:inline">
             Tetapi untuk mengingatkan dunia tentang siapa dirimu.
         </p>
-        <div class="flex justify-center gap-4">
-            <a href="{{ route('calculator') }}" class="btn-gold px-7 py-3 text-xs tracking-widest rounded-sm">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xs sm:max-w-none mx-auto w-full">
+            <a href="{{ route('calculator') }}" class="btn-gold w-full sm:w-auto px-7 py-3 text-xs tracking-widest rounded-sm text-center">
                 Hitung Angka Intimu
             </a>
-            <a href="{{ route('collection') }}" class="btn-gold-outline px-6 py-3 text-xs tracking-widest rounded-sm">
+            <a href="{{ route('collection') }}" class="btn-gold-outline w-full sm:w-auto px-6 py-3 text-xs tracking-widest rounded-sm text-center">
                 Jelajahi Koleksi
             </a>
         </div>

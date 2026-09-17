@@ -133,7 +133,7 @@
                 BORN FROM ASIH. CRAFTED FOR THE SOUL.
             </h2>
             <p class="text-gray-300 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto font-light leading-relaxed mb-5">
-                ASYIHAN adalah pertemuan antara kearifan Sunda, kemewahan tradisi wewangian Timur Tengah, dan keunikan karakter setiap manusia.
+                ASYIHAN adalah pertemuan antara kearifan Nusantara, kemewahan tradisi wewangian Timur Tengah, dan keunikan karakter setiap manusia.
             </p>
 
             {{-- Mystical Symbol Row --}}
@@ -671,7 +671,7 @@
                     FILOSOFI ASIH
                 </h2>
                 <p class="text-gray-300 text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto">
-                    Lebih dari sekadar wewangian, ASYIHAN adalah sebuah perjalanan spiritual. Terlahir dari kearifan Sunda Kuno, memadukan tradisi mistis dengan kemewahan perfumery Timur Tengah.
+                    Lebih dari sekadar wewangian, ASYIHAN adalah sebuah perjalanan spiritual. Terlahir dari kearifan Nusantara, memadukan tradisi mistis dengan kemewahan perfumery Timur Tengah.
                 </p>
 
                 {{-- Bottom Sacred Ornament --}}
@@ -696,7 +696,7 @@
                     </svg>
 
                     <p>
-                        Dalam bahasa Sunda, 'Asih' bermakna kasih sayang yang mendalam, cinta yang tulus, dan kepedulian yang tak bersyarat. Ia adalah energi fundamental yang mengikat alam semesta.
+                        Dalam bahasa Nusantara, 'Asih' bermakna kasih sayang yang mendalam, cinta yang tulus, dan kepedulian yang tak bersyarat. Ia adalah energi fundamental yang mengikat alam semesta.
                     </p>
                     <p>
                         ASYIHAN mengambil esensi ini, meraciknya bukan hanya untuk mengharumkan raga, tetapi untuk membangkitkan 'Asih' di dalam jiwa. Setiap tetes adalah pengingat akan koneksi kita dengan Sang Pencipta dan alam semesta.
