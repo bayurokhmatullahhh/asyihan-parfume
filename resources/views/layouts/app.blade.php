@@ -10,9 +10,9 @@
     <meta name="keywords" content="ASYIHAN, parfum, numerology, wewangian, Sunda, personal fragrance">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo_asy.png') }}">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('images/logo_asy.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo_asy.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/fab_logo.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/fab_logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/fab_logo.png') }}">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     <!-- Fonts -->
