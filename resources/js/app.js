@@ -2,54 +2,159 @@
  * ASYIHAN — Client Interactivity & Numerology Engine
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+    const sanitizePdfClone = (clonedDocument) => {
+        const fallbackFor = (property) => {
+            if (property === "background-image") {
+                return "none";
+            }
+
+            if (property.includes("shadow")) {
+                return "none";
+            }
+
+            if (property.startsWith("--")) {
+                return "transparent";
+            }
+
+            return property === "color" ||
+                property === "fill" ||
+                property === "stroke"
+                ? "#d1d5db"
+                : "#374151";
+        };
+
+        const sanitizeRules = (rules) => {
+            Array.from(rules).forEach((rule) => {
+                if (rule.style) {
+                    Array.from(rule.style).forEach((property) => {
+                        const value = rule.style.getPropertyValue(property);
+
+                        if (/okl(?:ab|ch)(?:\(|\b)/i.test(value)) {
+                            rule.style.setProperty(
+                                property,
+                                fallbackFor(property),
+                                rule.style.getPropertyPriority(property),
+                            );
+                        }
+                    });
+                }
+
+                if (rule.cssRules) {
+                    sanitizeRules(rule.cssRules);
+                }
+            });
+        };
+
+        Array.from(clonedDocument.styleSheets).forEach((styleSheet) => {
+            try {
+                sanitizeRules(styleSheet.cssRules);
+            } catch {
+                // Ignore stylesheets that cannot be inspected in the cloned document.
+            }
+        });
+
+        const colorProperties = [
+            "color",
+            "background-color",
+            "background-image",
+            "border-color",
+            "box-shadow",
+            "text-shadow",
+            "outline-color",
+            "fill",
+            "stroke",
+        ];
+
+        clonedDocument.querySelectorAll("*").forEach((element) => {
+            const computedStyle =
+                clonedDocument.defaultView.getComputedStyle(element);
+
+            Array.from(computedStyle).forEach((property) => {
+                const value = computedStyle.getPropertyValue(property);
+                const sanitizedValue = /okl(?:ab|ch)(?:\(|\b)/i.test(value)
+                    ? fallbackFor(property)
+                    : value;
+
+                element.style.setProperty(property, sanitizedValue);
+            });
+
+            colorProperties.forEach((property) => {
+                const value = computedStyle.getPropertyValue(property);
+
+                if (!/okl(?:ab|ch)(?:\(|\b)/i.test(value)) {
+                    return;
+                }
+
+                element.style.setProperty(property, fallbackFor(property));
+            });
+        });
+
+        clonedDocument
+            .querySelectorAll('link[rel="stylesheet"], style')
+            .forEach((styleSheet) => styleSheet.remove());
+    };
+
     // ----------------------------------------------------
     // 1. Mobile Menu Toggle
     // ----------------------------------------------------
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenuClose = document.getElementById("mobile-menu-close");
+    const mobileMenu = document.getElementById("mobile-menu");
 
     if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        mobileMenuBtn.addEventListener("click", () => {
+            mobileMenu.classList.add("active");
+            document.body.style.overflow = "hidden";
         });
     }
 
     if (mobileMenuClose && mobileMenu) {
-        mobileMenuClose.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = '';
+        mobileMenuClose.addEventListener("click", () => {
+            mobileMenu.classList.remove("active");
+            document.body.style.overflow = "";
         });
     }
 
     // ----------------------------------------------------
     // 2. Collection Page Element Filter
     // ----------------------------------------------------
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const essenceItems = document.querySelectorAll('.essence-item');
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const essenceItems = document.querySelectorAll(".essence-item");
 
     if (filterBtns.length > 0 && essenceItems.length > 0) {
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.getAttribute('data-filter');
+        filterBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const filter = btn.getAttribute("data-filter");
 
                 // Update active state
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-gold-500', 'text-black', 'font-semibold');
-                    b.classList.add('bg-black/40', 'border', 'border-gold-400/30', 'text-gold-400');
+                filterBtns.forEach((b) => {
+                    b.classList.remove(
+                        "bg-gold-500",
+                        "text-black",
+                        "font-semibold",
+                    );
+                    b.classList.add(
+                        "bg-black/40",
+                        "border",
+                        "border-gold-400/30",
+                        "text-gold-400",
+                    );
                 });
-                btn.classList.add('bg-gold-500', 'text-black', 'font-semibold');
-                btn.classList.remove('bg-black/40', 'border-gold-400/30', 'text-gold-400');
+                btn.classList.add("bg-gold-500", "text-black", "font-semibold");
+                btn.classList.remove(
+                    "bg-black/40",
+                    "border-gold-400/30",
+                    "text-gold-400",
+                );
 
                 // Filter items
-                essenceItems.forEach(item => {
-                    const el = item.getAttribute('data-element');
-                    if (filter === 'all' || el === filter) {
-                        item.style.display = 'flex';
+                essenceItems.forEach((item) => {
+                    const el = item.getAttribute("data-element");
+                    if (filter === "all" || el === filter) {
+                        item.style.display = "flex";
                     } else {
-                        item.style.display = 'none';
+                        item.style.display = "none";
                     }
                 });
             });
@@ -59,29 +164,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 3. Numerology Form (Home page with 3 manual date inputs)
     // ----------------------------------------------------
-    const sidebarForm = document.getElementById('sidebar-calc-form');
+    const sidebarForm = document.getElementById("sidebar-calc-form");
     if (sidebarForm) {
-        const romanNumerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
-        const dayInput = document.getElementById('home_calc_day');
-        const monthInput = document.getElementById('home_calc_month');
-        const yearInput = document.getElementById('home_calc_year');
-        const dateError = document.getElementById('home_calc_date_error');
-        const dateErrorMsg = document.getElementById('home_calc_date_error_msg');
-        const placeholderBox = document.getElementById('home_calc_placeholder');
-        const resCard = document.getElementById('sidebar-result-card');
-        const resetBtn = document.getElementById('home_calc_reset_btn');
+        const romanNumerals = [
+            "",
+            "I",
+            "II",
+            "III",
+            "IV",
+            "V",
+            "VI",
+            "VII",
+            "VIII",
+            "IX",
+        ];
+        const dayInput = document.getElementById("home_calc_day");
+        const monthInput = document.getElementById("home_calc_month");
+        const yearInput = document.getElementById("home_calc_year");
+        const dateError = document.getElementById("home_calc_date_error");
+        const dateErrorMsg = document.getElementById(
+            "home_calc_date_error_msg",
+        );
+        const placeholderBox = document.getElementById("home_calc_placeholder");
+        const resCard = document.getElementById("sidebar-result-card");
+        const resetBtn = document.getElementById("home_calc_reset_btn");
 
         // Helper functions for error handling
         const showDateError = (msg) => {
             if (dateError && dateErrorMsg) {
                 dateErrorMsg.textContent = msg;
-                dateError.classList.remove('hidden');
+                dateError.classList.remove("hidden");
             }
         };
 
         const hideDateError = () => {
             if (dateError) {
-                dateError.classList.add('hidden');
+                dateError.classList.add("hidden");
             }
         };
 
@@ -90,23 +208,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const inputs = [dayInput, monthInput, yearInput];
 
             inputs.forEach((input, index) => {
-                input.addEventListener('input', (e) => {
+                input.addEventListener("input", (e) => {
                     hideDateError();
                     // Strip non-digits
-                    e.target.value = e.target.value.replace(/\D/g, '');
+                    e.target.value = e.target.value.replace(/\D/g, "");
 
                     // Auto-advance
                     if (input === dayInput && dayInput.value.length === 2) {
                         monthInput.focus();
                         monthInput.select();
-                    } else if (input === monthInput && monthInput.value.length === 2) {
+                    } else if (
+                        input === monthInput &&
+                        monthInput.value.length === 2
+                    ) {
                         yearInput.focus();
                         yearInput.select();
                     }
                 });
 
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Backspace' && input.value === '') {
+                input.addEventListener("keydown", (e) => {
+                    if (e.key === "Backspace" && input.value === "") {
                         if (index > 0) {
                             inputs[index - 1].focus();
                         }
@@ -114,9 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 // Paste support (DD-MM-YYYY, DD/MM/YYYY, YYYY-MM-DD, 17081995)
-                input.addEventListener('paste', (e) => {
-                    const pasteData = (e.clipboardData || window.clipboardData).getData('text').trim();
-                    const clean = pasteData.replace(/[^\d\/-]/g, '');
+                input.addEventListener("paste", (e) => {
+                    const pasteData = (e.clipboardData || window.clipboardData)
+                        .getData("text")
+                        .trim();
+                    const clean = pasteData.replace(/[^\d\/-]/g, "");
                     const parts = clean.split(/[\/-]/);
 
                     if (parts.length === 3) {
@@ -144,50 +267,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Reset button
         if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-                if (resCard) resCard.classList.add('hidden');
-                if (placeholderBox) placeholderBox.classList.remove('hidden');
+            resetBtn.addEventListener("click", () => {
+                if (resCard) resCard.classList.add("hidden");
+                if (placeholderBox) placeholderBox.classList.remove("hidden");
                 hideDateError();
-                document.getElementById('sidebar_name')?.focus();
+                document.getElementById("sidebar_name")?.focus();
             });
         }
 
-        sidebarForm.addEventListener('submit', async (e) => {
+        sidebarForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             hideDateError();
 
-            const btn = document.getElementById('sidebar-calc-btn');
-            const name = document.getElementById('sidebar_name')?.value?.trim();
-            const email = document.getElementById('sidebar_email')?.value?.trim() || '';
-            const phone = document.getElementById('sidebar_phone')?.value?.trim() || '';
-            const resCard = document.getElementById('sidebar-result-card');
+            const btn = document.getElementById("sidebar-calc-btn");
+            const name = document.getElementById("sidebar_name")?.value?.trim();
+            const email =
+                document.getElementById("sidebar_email")?.value?.trim() || "";
+            const phone =
+                document.getElementById("sidebar_phone")?.value?.trim() || "";
+            const resCard = document.getElementById("sidebar-result-card");
 
             if (!name) {
-                showDateError('Silakan masukkan nama lengkap Anda.');
-                document.getElementById('sidebar_name')?.focus();
+                showDateError("Silakan masukkan nama lengkap Anda.");
+                document.getElementById("sidebar_name")?.focus();
                 return;
             }
 
             if (!email) {
-                showDateError('Silakan masukkan alamat email Anda.');
-                document.getElementById('sidebar_email')?.focus();
+                showDateError("Silakan masukkan alamat email Anda.");
+                document.getElementById("sidebar_email")?.focus();
                 return;
             }
 
             if (!phone) {
-                showDateError('Silakan masukkan nomor telepon / WhatsApp Anda.');
-                document.getElementById('sidebar_phone')?.focus();
+                showDateError(
+                    "Silakan masukkan nomor telepon / WhatsApp Anda.",
+                );
+                document.getElementById("sidebar_phone")?.focus();
                 return;
             }
 
-            let birthDate = '';
+            let birthDate = "";
             if (dayInput && monthInput && yearInput) {
                 const dayVal = dayInput.value.trim();
                 const monthVal = monthInput.value.trim();
                 const yearVal = yearInput.value.trim();
 
                 if (!dayVal || !monthVal || !yearVal) {
-                    showDateError('Silakan isi ketiga kolom tanggal lahir (Hari, Bulan, Tahun).');
+                    showDateError(
+                        "Silakan isi ketiga kolom tanggal lahir (Hari, Bulan, Tahun).",
+                    );
                     return;
                 }
 
@@ -197,24 +326,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 const currentYear = new Date().getFullYear();
 
                 if (isNaN(d) || isNaN(m) || isNaN(y)) {
-                    showDateError('Format tanggal harus berupa angka.');
+                    showDateError("Format tanggal harus berupa angka.");
                     return;
                 }
 
                 if (d < 1 || d > 31) {
-                    showDateError('Hari harus di antara angka 1 sampai 31.');
+                    showDateError("Hari harus di antara angka 1 sampai 31.");
                     dayInput.focus();
                     return;
                 }
 
                 if (m < 1 || m > 12) {
-                    showDateError('Bulan harus di antara angka 1 sampai 12.');
+                    showDateError("Bulan harus di antara angka 1 sampai 12.");
                     monthInput.focus();
                     return;
                 }
 
                 if (y < 1900 || y > currentYear) {
-                    showDateError(`Tahun harus di antara 1900 sampai ${currentYear}.`);
+                    showDateError(
+                        `Tahun harus di antara 1900 sampai ${currentYear}.`,
+                    );
                     yearInput.focus();
                     return;
                 }
@@ -225,18 +356,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     checkDate.getMonth() !== m - 1 ||
                     checkDate.getDate() !== d
                 ) {
-                    showDateError('Kombinasi tanggal tidak valid untuk kalender (misal: 31 Februari).');
+                    showDateError(
+                        "Kombinasi tanggal tidak valid untuk kalender (misal: 31 Februari).",
+                    );
                     return;
                 }
 
                 if (checkDate > new Date()) {
-                    showDateError('Tanggal lahir tidak boleh di masa depan.');
+                    showDateError("Tanggal lahir tidak boleh di masa depan.");
                     return;
                 }
 
-                birthDate = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                birthDate = `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
             } else {
-                birthDate = document.getElementById('sidebar_birth_date')?.value;
+                birthDate =
+                    document.getElementById("sidebar_birth_date")?.value;
             }
 
             if (!birthDate) return;
@@ -247,15 +381,22 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
 
             try {
-                const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-                const response = await fetch('/calculator/calculate', {
-                    method: 'POST',
+                const token = document
+                    .querySelector('meta[name="csrf-token"]')
+                    ?.getAttribute("content");
+                const response = await fetch("/calculator/calculate", {
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': token,
-                        'Accept': 'application/json'
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": token,
+                        Accept: "application/json",
                     },
-                    body: JSON.stringify({ name, birth_date: birthDate, email, phone })
+                    body: JSON.stringify({
+                        name,
+                        birth_date: birthDate,
+                        email,
+                        phone,
+                    }),
                 });
 
                 const data = await response.json();
@@ -265,92 +406,134 @@ document.addEventListener('DOMContentLoaded', () => {
                     const romanNum = romanNumerals[arch.number] || arch.number;
 
                     // Bagian 1: Analisis Numerologi & Karakter
-                    const elUserName = document.getElementById('res-user-name');
-                    const elCoreNumber = document.getElementById('res-core-number');
-                    const elArchName = document.getElementById('res-archetype-name');
-                    const elElementBadge = document.getElementById('res-element-badge');
-                    const elTraitsContainer = document.getElementById('res-traits-container');
-                    const elCharDesc = document.getElementById('res-character-desc');
+                    const elUserName = document.getElementById("res-user-name");
+                    const elCoreNumber =
+                        document.getElementById("res-core-number");
+                    const elArchName =
+                        document.getElementById("res-archetype-name");
+                    const elElementBadge =
+                        document.getElementById("res-element-badge");
+                    const elTraitsContainer = document.getElementById(
+                        "res-traits-container",
+                    );
+                    const elCharDesc =
+                        document.getElementById("res-character-desc");
 
                     if (elUserName) elUserName.textContent = r.name;
                     if (elCoreNumber) elCoreNumber.textContent = r.core_number;
-                    const elCoreNumberImg = document.getElementById('res-core-number-img');
+                    const elCoreNumberImg = document.getElementById(
+                        "res-core-number-img",
+                    );
                     if (elCoreNumberImg) {
                         elCoreNumberImg.src = `/images/angka/${r.core_number}.png`;
                         elCoreNumberImg.alt = `Angka ${r.core_number}`;
                     }
                     if (elArchName) elArchName.textContent = arch.name;
-                    if (elElementBadge) elElementBadge.textContent = `Elemen: ${arch.element}`;
+                    if (elElementBadge)
+                        elElementBadge.textContent = `Elemen: ${arch.element}`;
                     if (elCharDesc) elCharDesc.textContent = arch.description;
 
                     if (elTraitsContainer && Array.isArray(arch.traits)) {
-                        elTraitsContainer.innerHTML = '';
-                        arch.traits.forEach(t => {
-                            const span = document.createElement('span');
-                            span.className = 'text-[9px] uppercase tracking-wider px-2 py-0.5 rounded bg-black/80 border border-gold-400/20 text-gold-300';
+                        elTraitsContainer.innerHTML = "";
+                        arch.traits.forEach((t) => {
+                            const span = document.createElement("span");
+                            span.className =
+                                "text-[9px] uppercase tracking-wider px-2 py-0.5 rounded bg-black/80 border border-gold-400/20 text-gold-300";
                             span.textContent = t;
                             elTraitsContainer.appendChild(span);
                         });
                     }
 
                     // Bagian 2: Rekomendasi Parfum
-                    const elRoman = document.getElementById('res-essence-roman');
-                    const elArchTitle = document.getElementById('res-archetype-title');
-                    const elBottleLabel = document.getElementById('res-bottle-label');
-                    const elFragDesc = document.getElementById('res-fragrance-desc');
-                    const elTop = document.getElementById('res-note-top');
-                    const elMid = document.getElementById('res-note-mid');
-                    const elBase = document.getElementById('res-note-base');
-                    const elAjian = document.getElementById('res-ajian-snippet');
-                    const elPrice = document.getElementById('res-price');
-                    const elOrderLink = document.getElementById('res-order-link');
-                    const elDetailLink = document.getElementById('res-detail-link');
+                    const elRoman =
+                        document.getElementById("res-essence-roman");
+                    const elArchTitle = document.getElementById(
+                        "res-archetype-title",
+                    );
+                    const elBottleLabel =
+                        document.getElementById("res-bottle-label");
+                    const elFragDesc =
+                        document.getElementById("res-fragrance-desc");
+                    const elTop = document.getElementById("res-note-top");
+                    const elMid = document.getElementById("res-note-mid");
+                    const elBase = document.getElementById("res-note-base");
+                    const elAjian =
+                        document.getElementById("res-ajian-snippet");
+                    const elPrice = document.getElementById("res-price");
+                    const elOrderLink =
+                        document.getElementById("res-order-link");
+                    const elDetailLink =
+                        document.getElementById("res-detail-link");
 
                     if (elRoman) elRoman.textContent = `ESSENCE ${romanNum}`;
-                    if (elArchTitle) elArchTitle.textContent = arch.name.toUpperCase();
-                    if (elBottleLabel) elBottleLabel.textContent = `ESSENCE ${romanNum}`;
-                    if (elFragDesc) elFragDesc.textContent = arch.fragrance_description || arch.description;
+                    if (elArchTitle)
+                        elArchTitle.textContent = arch.name.toUpperCase();
+                    if (elBottleLabel)
+                        elBottleLabel.textContent = `ESSENCE ${romanNum}`;
+                    if (elFragDesc)
+                        elFragDesc.textContent =
+                            arch.fragrance_description || arch.description;
                     if (elTop && arch.notes) elTop.textContent = arch.notes.top;
-                    if (elMid && arch.notes) elMid.textContent = arch.notes.middle;
-                    if (elBase && arch.notes) elBase.textContent = arch.notes.base;
+                    if (elMid && arch.notes)
+                        elMid.textContent = arch.notes.middle;
+                    if (elBase && arch.notes)
+                        elBase.textContent = arch.notes.base;
                     if (elAjian) elAjian.textContent = `"${arch.ajian}"`;
-                    if (elPrice) elPrice.textContent = `Rp ${arch.price.toLocaleString('id-ID')}`;
+                    if (elPrice)
+                        elPrice.textContent = `Rp ${arch.price.toLocaleString("id-ID")}`;
                     if (elOrderLink) {
                         let orderUrl = `/order?essence=${arch.number}&name=${encodeURIComponent(name)}`;
-                        if (email) orderUrl += `&email=${encodeURIComponent(email)}`;
-                        if (phone) orderUrl += `&phone=${encodeURIComponent(phone)}`;
+                        if (email)
+                            orderUrl += `&email=${encodeURIComponent(email)}`;
+                        if (phone)
+                            orderUrl += `&phone=${encodeURIComponent(phone)}`;
                         elOrderLink.href = orderUrl;
                     }
-                    if (elDetailLink) elDetailLink.href = `/essence/${arch.slug}`;
+                    if (elDetailLink)
+                        elDetailLink.href = `/essence/${arch.slug}`;
 
                     // Tokoh Inspiratif Sejiwa
                     const tokoh = r.tokoh;
-                    const elTokohName = document.getElementById('res-tokoh-name');
-                    const elTokohAsal = document.getElementById('res-tokoh-asal');
-                    const elTokohLahir = document.getElementById('res-tokoh-lahir');
-                    const elTokohDesc = document.getElementById('res-tokoh-desc');
+                    const elTokohName =
+                        document.getElementById("res-tokoh-name");
+                    const elTokohAsal =
+                        document.getElementById("res-tokoh-asal");
+                    const elTokohLahir =
+                        document.getElementById("res-tokoh-lahir");
+                    const elTokohDesc =
+                        document.getElementById("res-tokoh-desc");
 
                     if (tokoh) {
-                        if (elTokohName) elTokohName.textContent = tokoh.nama || '-';
-                        if (elTokohAsal) elTokohAsal.textContent = tokoh.asal || '-';
-                        if (elTokohLahir) elTokohLahir.textContent = 'Lahir: ' + (tokoh.lahir || '-');
-                        if (elTokohDesc) elTokohDesc.textContent = tokoh.deskripsi || '-';
+                        if (elTokohName)
+                            elTokohName.textContent = tokoh.nama || "-";
+                        if (elTokohAsal)
+                            elTokohAsal.textContent = tokoh.asal || "-";
+                        if (elTokohLahir)
+                            elTokohLahir.textContent =
+                                "Lahir: " + (tokoh.lahir || "-");
+                        if (elTokohDesc)
+                            elTokohDesc.textContent = tokoh.deskripsi || "-";
                     }
 
                     // Toggle placeholder off, result card on
                     if (placeholderBox) {
-                        placeholderBox.classList.add('hidden');
+                        placeholderBox.classList.add("hidden");
                     }
                     if (resCard) {
-                        resCard.classList.remove('hidden');
-                        resCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        resCard.classList.remove("hidden");
+                        resCard.scrollIntoView({
+                            behavior: "smooth",
+                            block: "nearest",
+                        });
                     }
                 } else if (data.message) {
                     showDateError(data.message);
                 }
             } catch (err) {
-                console.error('Calculation error:', err);
-                showDateError('Terjadi kendala saat menghitung esensi jiwa. Silakan coba kembali.');
+                console.error("Calculation error:", err);
+                showDateError(
+                    "Terjadi kendala saat menghitung esensi jiwa. Silakan coba kembali.",
+                );
             } finally {
                 btn.innerHTML = origText;
                 btn.disabled = false;
@@ -358,44 +541,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Download PDF Button for Home Calculator
-        const homePdfBtn = document.getElementById('home-download-pdf-btn');
+        const homePdfBtn = document.getElementById("home-download-pdf-btn");
         if (homePdfBtn) {
-            homePdfBtn.addEventListener('click', async () => {
+            homePdfBtn.addEventListener("click", async () => {
                 const btn = homePdfBtn;
                 const origHtml = btn.innerHTML;
                 btn.disabled = true;
                 btn.innerHTML = `<svg class="w-4 h-4 shrink-0 animate-spin text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg><span class="leading-none whitespace-nowrap">Menyiapkan...</span>`;
 
                 try {
-                    const card = document.getElementById('sidebar-result-card');
+                    const card = document.getElementById("sidebar-result-card");
                     if (!card) return;
 
                     const html2canvasLib = window.html2canvas;
                     const jsPDFClass = window.jspdf?.jsPDF || window.jsPDF;
 
                     if (!html2canvasLib || !jsPDFClass) {
-                        throw new Error('Library PDF belum selesai dimuat. Silakan refresh halaman dan coba kembali.');
+                        throw new Error(
+                            "Library PDF belum selesai dimuat. Silakan refresh halaman dan coba kembali.",
+                        );
                     }
 
                     const canvas = await html2canvasLib(card, {
-                        backgroundColor: '#030818',
+                        backgroundColor: "#030818",
                         scale: 1.5,
                         useCORS: true,
                         allowTaint: false,
                         logging: false,
+                        onclone: sanitizePdfClone,
                         ignoreElements: (element) => {
-                            return element.id === 'home_calc_reset_btn' || 
-                                   element.id === 'home-download-pdf-btn' || 
-                                   element.id === 'res-order-link' ||
-                                   element.id === 'res-detail-link';
-                        }
+                            return (
+                                element.id === "home_calc_reset_btn" ||
+                                element.id === "home-download-pdf-btn" ||
+                                element.id === "res-order-link" ||
+                                element.id === "res-detail-link"
+                            );
+                        },
                     });
 
-                    const imgData = canvas.toDataURL('image/png');
+                    const imgData = canvas.toDataURL("image/png");
                     const pdf = new jsPDFClass({
-                        orientation: 'portrait',
-                        unit: 'mm',
-                        format: 'a4',
+                        orientation: "portrait",
+                        unit: "mm",
+                        format: "a4",
                     });
 
                     const pageW = pdf.internal.pageSize.getWidth();
@@ -405,7 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const imgH = (canvas.height * imgW) / canvas.width;
 
                     pdf.setFillColor(3, 8, 24);
-                    pdf.rect(0, 0, pageW, pageH, 'F');
+                    pdf.rect(0, 0, pageW, pageH, "F");
 
                     pdf.setDrawColor(197, 160, 89);
                     pdf.setLineWidth(0.5);
@@ -413,30 +601,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     pdf.setTextColor(197, 160, 89);
                     pdf.setFontSize(10);
-                    pdf.setFont('helvetica', 'bold');
-                    pdf.text('ASYIHAN — HASIL NUMEROLOGI SAKRAL', pageW / 2, 7, { align: 'center' });
+                    pdf.setFont("helvetica", "bold");
+                    pdf.text(
+                        "ASYIHAN — HASIL NUMEROLOGI SAKRAL",
+                        pageW / 2,
+                        7,
+                        { align: "center" },
+                    );
 
                     const yStart = 14;
                     if (imgH + yStart <= pageH - margin) {
-                        pdf.addImage(imgData, 'PNG', margin, yStart, imgW, imgH);
+                        pdf.addImage(
+                            imgData,
+                            "PNG",
+                            margin,
+                            yStart,
+                            imgW,
+                            imgH,
+                        );
                     } else {
                         const scaledH = pageH - margin - yStart;
-                        const scaledW = (canvas.width * scaledH) / canvas.height;
+                        const scaledW =
+                            (canvas.width * scaledH) / canvas.height;
                         const xOffset = (pageW - scaledW) / 2;
-                        pdf.addImage(imgData, 'PNG', xOffset, yStart, scaledW, scaledH);
+                        pdf.addImage(
+                            imgData,
+                            "PNG",
+                            xOffset,
+                            yStart,
+                            scaledW,
+                            scaledH,
+                        );
                     }
 
                     pdf.setTextColor(120, 120, 140);
                     pdf.setFontSize(7);
-                    pdf.setFont('helvetica', 'normal');
-                    pdf.text('asyihan.com • Sacred Numerology & Fragrance', pageW / 2, pageH - 5, { align: 'center' });
+                    pdf.setFont("helvetica", "normal");
+                    pdf.text(
+                        "asyihan.com • Sacred Numerology & Fragrance",
+                        pageW / 2,
+                        pageH - 5,
+                        { align: "center" },
+                    );
                     pdf.line(margin, pageH - 8, pageW - margin, pageH - 8);
 
-                    const archName = (document.getElementById('res-archetype-name')?.textContent || 'Hasil').trim().replace(/\s+/g, '-').toLowerCase();
+                    const archName = (
+                        document.getElementById("res-archetype-name")
+                            ?.textContent || "Hasil"
+                    )
+                        .trim()
+                        .replace(/\s+/g, "-")
+                        .toLowerCase();
                     pdf.save(`ASYIHAN-Numerologi-${archName}.pdf`);
                 } catch (err) {
-                    console.error('PDF error:', err);
-                    alert('Gagal membuat PDF: ' + (err.message || 'Silakan coba beberapa saat lagi.'));
+                    console.error("PDF error:", err);
+                    alert(
+                        "Gagal membuat PDF: " +
+                            (err.message || "Silakan coba beberapa saat lagi."),
+                    );
                 } finally {
                     btn.innerHTML = origHtml;
                     btn.disabled = false;
@@ -448,18 +670,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 4. Full Calculator Page
     // ----------------------------------------------------
-    const fullCalcForm = document.getElementById('full-calculator-form');
+    const fullCalcForm = document.getElementById("full-calculator-form");
     if (fullCalcForm && !window.hasCustomCalcHandler) {
-        const dayInput = document.getElementById('calc_day');
-        const monthInput = document.getElementById('calc_month');
-        const yearInput = document.getElementById('calc_year');
-        const birthDateInput = document.getElementById('calc_birth_date');
-        const nameInput = document.getElementById('calc_name');
+        const dayInput = document.getElementById("calc_day");
+        const monthInput = document.getElementById("calc_month");
+        const yearInput = document.getElementById("calc_year");
+        const birthDateInput = document.getElementById("calc_birth_date");
+        const nameInput = document.getElementById("calc_name");
 
         const reduceNum = (n) => {
-            let s = String(Math.abs(n)).split('').reduce((a, b) => a + Number(b), 0);
+            let s = String(Math.abs(n))
+                .split("")
+                .reduce((a, b) => a + Number(b), 0);
             while (s > 9) {
-                s = String(s).split('').reduce((a, b) => a + Number(b), 0);
+                s = String(s)
+                    .split("")
+                    .reduce((a, b) => a + Number(b), 0);
             }
             return s;
         };
@@ -468,12 +694,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const dVal = dayInput?.value?.trim();
             const mVal = monthInput?.value?.trim();
             const yVal = yearInput?.value?.trim();
-            const previewText = document.getElementById('calc-preview-text');
+            const previewText = document.getElementById("calc-preview-text");
 
             if (!dVal || !mVal || !yVal) {
-                if (birthDateInput) birthDateInput.value = '';
+                if (birthDateInput) birthDateInput.value = "";
                 if (previewText) {
-                    previewText.innerHTML = '<span class="text-gold-400/60 font-mono text-[10px]">Masukkan tanggal lahir Anda untuk melihat reduksi angka Pythagoras</span>';
+                    previewText.innerHTML =
+                        '<span class="text-gold-400/60 font-mono text-[10px]">Masukkan tanggal lahir Anda untuk melihat reduksi angka Pythagoras</span>';
                 }
                 return;
             }
@@ -482,50 +709,65 @@ document.addEventListener('DOMContentLoaded', () => {
             const m = parseInt(mVal, 10);
             const y = parseInt(yVal, 10);
 
-            if (isNaN(d) || isNaN(m) || isNaN(y) || d < 1 || d > 31 || m < 1 || m > 12 || y < 1900 || y > 2050) {
-                if (birthDateInput) birthDateInput.value = '';
+            if (
+                isNaN(d) ||
+                isNaN(m) ||
+                isNaN(y) ||
+                d < 1 ||
+                d > 31 ||
+                m < 1 ||
+                m > 12 ||
+                y < 1900 ||
+                y > 2050
+            ) {
+                if (birthDateInput) birthDateInput.value = "";
                 return;
             }
 
             // Pad month & day
-            const dd = String(d).padStart(2, '0');
-            const mm = String(m).padStart(2, '0');
+            const dd = String(d).padStart(2, "0");
+            const mm = String(m).padStart(2, "0");
             if (birthDateInput) {
                 birthDateInput.value = `${y}-${mm}-${dd}`;
             }
 
             // Calculation preview text
             if (previewText) {
-                const dDigits = String(d).split('');
+                const dDigits = String(d).split("");
                 const dSum = dDigits.reduce((a, b) => a + Number(b), 0);
-                const dFormatted = dDigits.length > 1 ? `${d} (${dDigits.join('+')}=${dSum})` : `${d}`;
+                const dFormatted =
+                    dDigits.length > 1
+                        ? `${d} (${dDigits.join("+")}=${dSum})`
+                        : `${d}`;
 
-                const yDigits = String(y).split('');
+                const yDigits = String(y).split("");
                 const ySum = yDigits.reduce((a, b) => a + Number(b), 0);
                 const yRed = reduceNum(ySum);
-                const yFormatted = `${y} (${yDigits.join('+')}=${ySum}→${yRed})`;
+                const yFormatted = `${y} (${yDigits.join("+")}=${ySum}→${yRed})`;
 
                 previewText.innerHTML = `ANGKA DASAR: <span class="text-gold-300 font-bold">${dFormatted}</span> | BULAN: <span class="text-gold-300 font-bold">${m}</span> | TAHUN: <span class="text-gold-300 font-bold">${yFormatted}</span>`;
             }
         };
 
-        [dayInput, monthInput, yearInput].forEach(inp => {
+        [dayInput, monthInput, yearInput].forEach((inp) => {
             if (inp) {
-                inp.addEventListener('input', updateDateInputs);
-                inp.addEventListener('change', updateDateInputs);
+                inp.addEventListener("input", updateDateInputs);
+                inp.addEventListener("change", updateDateInputs);
             }
         });
 
-        fullCalcForm.addEventListener('submit', async (e) => {
+        fullCalcForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             updateDateInputs();
 
-            const btn = document.getElementById('calc-submit-btn');
-            const loading = document.getElementById('calc-loading');
-            const name = nameInput?.value?.trim() || '';
-            const birthDate = birthDateInput?.value || '';
-            const email = document.getElementById('calc_email')?.value?.trim() || '';
-            const phone = document.getElementById('calc_phone')?.value?.trim() || '';
+            const btn = document.getElementById("calc-submit-btn");
+            const loading = document.getElementById("calc-loading");
+            const name = nameInput?.value?.trim() || "";
+            const birthDate = birthDateInput?.value || "";
+            const email =
+                document.getElementById("calc_email")?.value?.trim() || "";
+            const phone =
+                document.getElementById("calc_phone")?.value?.trim() || "";
 
             if (!name) {
                 nameInput?.focus();
@@ -538,18 +780,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             btn.disabled = true;
-            if (loading) loading.classList.remove('hidden');
+            if (loading) loading.classList.remove("hidden");
 
             try {
-                const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-                const response = await fetch('/calculator/calculate', {
-                    method: 'POST',
+                const token = document
+                    .querySelector('meta[name="csrf-token"]')
+                    ?.getAttribute("content");
+                const response = await fetch("/calculator/calculate", {
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': token,
-                        'Accept': 'application/json'
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": token,
+                        Accept: "application/json",
                     },
-                    body: JSON.stringify({ name, birth_date: birthDate, email, phone })
+                    body: JSON.stringify({
+                        name,
+                        birth_date: birthDate,
+                        email,
+                        phone,
+                    }),
                 });
 
                 const data = await response.json();
@@ -558,119 +807,181 @@ document.addEventListener('DOMContentLoaded', () => {
                     const arch = r.archetype;
 
                     // Expand layout to 2 columns
-                    const mainSection = document.getElementById('calc-main-section');
+                    const mainSection =
+                        document.getElementById("calc-main-section");
                     if (mainSection) {
-                        mainSection.classList.remove('max-w-2xl');
-                        mainSection.classList.add('max-w-7xl');
+                        mainSection.classList.remove("max-w-2xl");
+                        mainSection.classList.add("max-w-7xl");
                     }
 
-                    const gridContainer = document.getElementById('calc-grid-container');
+                    const gridContainer = document.getElementById(
+                        "calc-grid-container",
+                    );
                     if (gridContainer) {
-                        gridContainer.classList.remove('space-y-6');
-                        gridContainer.classList.add('grid', 'grid-cols-1', 'lg:grid-cols-12', 'gap-6', 'lg:gap-8', 'items-start');
+                        gridContainer.classList.remove("space-y-6");
+                        gridContainer.classList.add(
+                            "grid",
+                            "grid-cols-1",
+                            "lg:grid-cols-12",
+                            "gap-6",
+                            "lg:gap-8",
+                            "items-start",
+                        );
                     }
 
-                    const formCol = document.getElementById('calc-form-column');
+                    const formCol = document.getElementById("calc-form-column");
                     if (formCol) {
-                        formCol.classList.add('lg:col-span-5');
+                        formCol.classList.add("lg:col-span-5");
                     }
 
-                    const resultWrapper = document.getElementById('calc-result-wrapper');
+                    const resultWrapper = document.getElementById(
+                        "calc-result-wrapper",
+                    );
                     if (resultWrapper) {
-                        resultWrapper.classList.remove('hidden');
-                        resultWrapper.classList.add('lg:col-span-7');
+                        resultWrapper.classList.remove("hidden");
+                        resultWrapper.classList.add("lg:col-span-7");
                     }
 
                     // Update result panel elements
-                    const coreNumEl = document.getElementById('out-core-number');
+                    const coreNumEl =
+                        document.getElementById("out-core-number");
                     if (coreNumEl) coreNumEl.textContent = r.core_number;
 
-                    const archNameEl = document.getElementById('out-archetype-name');
+                    const archNameEl =
+                        document.getElementById("out-archetype-name");
                     if (archNameEl) archNameEl.textContent = arch.name;
 
-                    const subtitleIdEl = document.getElementById('out-subtitle-id');
-                    if (subtitleIdEl) subtitleIdEl.textContent = arch.subtitle_id || '';
+                    const subtitleIdEl =
+                        document.getElementById("out-subtitle-id");
+                    if (subtitleIdEl)
+                        subtitleIdEl.textContent = arch.subtitle_id || "";
 
-                    const elementEl = document.getElementById('out-element');
+                    const elementEl = document.getElementById("out-element");
                     if (elementEl) elementEl.textContent = arch.element;
 
-                    const aromaMainEl = document.getElementById('out-aroma-main');
-                    if (aromaMainEl) aromaMainEl.textContent = arch.aroma_resonan || (arch.notes?.top + ', ' + arch.notes?.base);
+                    const aromaMainEl =
+                        document.getElementById("out-aroma-main");
+                    if (aromaMainEl)
+                        aromaMainEl.textContent =
+                            arch.aroma_resonan ||
+                            arch.notes?.top + ", " + arch.notes?.base;
 
-                    const descEl = document.getElementById('out-description');
+                    const descEl = document.getElementById("out-description");
                     if (descEl) descEl.textContent = arch.description;
 
-                    const notesTopTitle = document.getElementById('out-notes-top-title');
-                    if (notesTopTitle) notesTopTitle.textContent = arch.aroma_notes_top_title || arch.notes?.top;
+                    const notesTopTitle = document.getElementById(
+                        "out-notes-top-title",
+                    );
+                    if (notesTopTitle)
+                        notesTopTitle.textContent =
+                            arch.aroma_notes_top_title || arch.notes?.top;
 
-                    const notesTopDesc = document.getElementById('out-notes-top-desc');
-                    if (notesTopDesc) notesTopDesc.textContent = arch.aroma_notes_top_desc || 'Menenangkan pikiran dan membuka intuisi batin';
+                    const notesTopDesc =
+                        document.getElementById("out-notes-top-desc");
+                    if (notesTopDesc)
+                        notesTopDesc.textContent =
+                            arch.aroma_notes_top_desc ||
+                            "Menenangkan pikiran dan membuka intuisi batin";
 
-                    const notesBaseTitle = document.getElementById('out-notes-base-title');
-                    if (notesBaseTitle) notesBaseTitle.textContent = arch.aroma_notes_base_title || arch.notes?.base;
+                    const notesBaseTitle = document.getElementById(
+                        "out-notes-base-title",
+                    );
+                    if (notesBaseTitle)
+                        notesBaseTitle.textContent =
+                            arch.aroma_notes_base_title || arch.notes?.base;
 
-                    const notesBaseDesc = document.getElementById('out-notes-base-desc');
-                    if (notesBaseDesc) notesBaseDesc.textContent = arch.aroma_notes_base_desc || 'Memberi ketenangan dan rasa grounding spiritual';
+                    const notesBaseDesc = document.getElementById(
+                        "out-notes-base-desc",
+                    );
+                    if (notesBaseDesc)
+                        notesBaseDesc.textContent =
+                            arch.aroma_notes_base_desc ||
+                            "Memberi ketenangan dan rasa grounding spiritual";
 
-                    const formulaNum = document.getElementById('out-formula-num');
+                    const formulaNum =
+                        document.getElementById("out-formula-num");
                     if (formulaNum) formulaNum.textContent = arch.number;
 
-                    const essenceTitle = document.getElementById('out-essence-title');
-                    if (essenceTitle) essenceTitle.textContent = arch.essence_name;
+                    const essenceTitle =
+                        document.getElementById("out-essence-title");
+                    if (essenceTitle)
+                        essenceTitle.textContent = arch.essence_name;
 
-                    const formulaExtract = document.getElementById('out-formula-extract');
-                    if (formulaExtract) formulaExtract.textContent = arch.formula_extract || arch.fragrance_description;
+                    const formulaExtract = document.getElementById(
+                        "out-formula-extract",
+                    );
+                    if (formulaExtract)
+                        formulaExtract.textContent =
+                            arch.formula_extract || arch.fragrance_description;
 
-                    const priceEl = document.getElementById('out-price');
-                    if (priceEl) priceEl.textContent = `Rp ${arch.price.toLocaleString('id-ID')}`;
+                    const priceEl = document.getElementById("out-price");
+                    if (priceEl)
+                        priceEl.textContent = `Rp ${arch.price.toLocaleString("id-ID")}`;
 
-                    const orderLink = document.getElementById('out-order-link');
+                    const orderLink = document.getElementById("out-order-link");
                     if (orderLink) {
                         let orderUrl = `/order?essence=${arch.number}&name=${encodeURIComponent(name)}`;
-                        if (email) orderUrl += `&email=${encodeURIComponent(email)}`;
-                        if (phone) orderUrl += `&phone=${encodeURIComponent(phone)}`;
+                        if (email)
+                            orderUrl += `&email=${encodeURIComponent(email)}`;
+                        if (phone)
+                            orderUrl += `&phone=${encodeURIComponent(phone)}`;
                         orderLink.href = orderUrl;
                     }
 
-                    const bottleImg = document.getElementById('out-bottle-img');
+                    const bottleImg = document.getElementById("out-bottle-img");
                     if (bottleImg) {
-                        bottleImg.src = arch.bottle_image ? `/${arch.bottle_image}` : `/images/bottle/${arch.number === 1 ? 'bottle_1.png' : 'bottle_' + arch.number + '.jpg'}`;
+                        bottleImg.src = arch.bottle_image
+                            ? `/${arch.bottle_image}`
+                            : `/images/bottle/${arch.number === 1 ? "bottle_1.png" : "bottle_" + arch.number + ".jpg"}`;
                     }
 
                     // Update active archetype card highlight in 9-grid
-                    document.querySelectorAll('.archetype-grid-card').forEach(card => {
-                        card.className = 'archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border border-gold-400/20 bg-gradient-to-b from-[#0e1322] via-[#090d18] to-[#060912] hover:border-gold-400/50 hover:-translate-y-1';
-                    });
-                    const activeCard = document.getElementById(`arch-card-${arch.number}`);
+                    document
+                        .querySelectorAll(".archetype-grid-card")
+                        .forEach((card) => {
+                            card.className =
+                                "archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border border-gold-400/20 bg-gradient-to-b from-[#0e1322] via-[#090d18] to-[#060912] hover:border-gold-400/50 hover:-translate-y-1";
+                        });
+                    const activeCard = document.getElementById(
+                        `arch-card-${arch.number}`,
+                    );
                     if (activeCard) {
-                        activeCard.className = 'archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border-2 border-gold-400 bg-gradient-to-b from-[#151c30] via-[#0d1322] to-[#070b16] shadow-[0_0_25px_rgba(197,160,89,0.25)]';
+                        activeCard.className =
+                            "archetype-grid-card rounded-2xl p-6 sm:p-7 relative transition-all duration-300 flex flex-col justify-between border-2 border-gold-400 bg-gradient-to-b from-[#151c30] via-[#0d1322] to-[#070b16] shadow-[0_0_25px_rgba(197,160,89,0.25)]";
                     }
 
                     // Update social share link
-                    const shareWa = document.getElementById('share-wa');
+                    const shareWa = document.getElementById("share-wa");
                     if (shareWa) {
-                        const shareText = encodeURIComponent(`Halo! Angka inti numerologi jiwa saya adalah ${arch.number} (${arch.name} - ${arch.subtitle_id}) dengan aroma resonan ${arch.aroma_resonan}. Coba hitung getaran jiwamu di ASYIHAN: ${window.location.href}`);
+                        const shareText = encodeURIComponent(
+                            `Halo! Angka inti numerologi jiwa saya adalah ${arch.number} (${arch.name} - ${arch.subtitle_id}) dengan aroma resonan ${arch.aroma_resonan}. Coba hitung getaran jiwamu di ASYIHAN: ${window.location.href}`,
+                        );
                         shareWa.href = `https://api.whatsapp.com/send?text=${shareText}`;
                     }
 
                     // Smooth scroll to result
-                    const resultContainer = document.getElementById('calculator-result-container');
+                    const resultContainer = document.getElementById(
+                        "calculator-result-container",
+                    );
                     if (resultContainer) {
-                        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        resultContainer.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        });
                     }
                 }
             } catch (err) {
-                console.error('Calculator submission error:', err);
+                console.error("Calculator submission error:", err);
             } finally {
                 btn.disabled = false;
-                if (loading) loading.classList.add('hidden');
+                if (loading) loading.classList.add("hidden");
             }
         });
 
         // Copy Result Link
-        const copyBtn = document.getElementById('copy-result-link');
+        const copyBtn = document.getElementById("copy-result-link");
         if (copyBtn) {
-            copyBtn.addEventListener('click', async () => {
+            copyBtn.addEventListener("click", async () => {
                 try {
                     await navigator.clipboard.writeText(window.location.href);
                     const originalHTML = copyBtn.innerHTML;
@@ -679,20 +990,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         copyBtn.innerHTML = originalHTML;
                     }, 2000);
                 } catch (e) {
-                    console.error('Failed to copy link', e);
+                    console.error("Failed to copy link", e);
                 }
             });
         }
 
         // Instagram Share Button (Copy Link)
-        const igBtn = document.getElementById('share-ig');
+        const igBtn = document.getElementById("share-ig");
         if (igBtn) {
-            igBtn.addEventListener('click', async () => {
+            igBtn.addEventListener("click", async () => {
                 try {
                     await navigator.clipboard.writeText(window.location.href);
-                    alert('Tautan kalkulator ASYIHAN berhasil disalin! Anda dapat menempelkannya di Instagram Story.');
+                    alert(
+                        "Tautan kalkulator ASYIHAN berhasil disalin! Anda dapat menempelkannya di Instagram Story.",
+                    );
                 } catch (e) {
-                    console.error('Failed to copy link', e);
+                    console.error("Failed to copy link", e);
                 }
             });
         }

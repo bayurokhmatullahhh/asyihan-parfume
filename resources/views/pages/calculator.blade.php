@@ -313,7 +313,7 @@
                                 </div>
                                 <div class="flex-1 space-y-1.5">
                                     <p id="out-ajian-text" class="text-xs sm:text-sm font-serif italic text-gold-200 tracking-wide leading-relaxed">
-                                        "Saya melihat dengan jernih. Saya memahami dengan dalam. Saya melangkah dengan tepat."
+                                        "Aku melihat dengan jernih. Aku memahami dengan dalam. Aku melangkah dengan tepat."
                                     </p>
                                     <p id="out-sugesti-text" class="text-[11px] text-gray-400 font-light leading-relaxed">
                                         Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Fokus pada analisis dan pemahaman. Terima wawasan dan ambil keputusan dengan bijaksana.
@@ -612,7 +612,7 @@
             notesBaseTitle: 'Cedarwood & Vetiver',
             notesBaseDesc: 'Kekokohan prinsip dan akar kepercayaan diri yang kuat',
             formulaExtract: 'Ekstrak murni Bergamot Calabria, Cedarwood Atlas, dan Vetiver Bourbon.',
-            ajian: 'Saya tidak menunggu. Saya memulai.',
+            ajian: 'Aku tidak menunggu. Aku memulai.',
             sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Fokus pada tujuanmu. Ingat siapa dirimu.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_1.png") }}',
@@ -630,7 +630,7 @@
             notesBaseTitle: 'Sandalwood & White Musk',
             notesBaseDesc: 'Kehangatan pelukan batin dan harmoni cinta yang abadi',
             formulaExtract: 'Ekstrak murni Lavender Provence, Rose Damascena, dan White Musk lembut.',
-            ajian: 'Saya hadir. Saya terhubung.',
+            ajian: 'Aku hadir. Aku terhubung.',
             sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Rasakan kehadiran Anda. Hubungkan hati, bukan sekadar kata.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_2.jpg") }}',
@@ -648,7 +648,7 @@
             notesBaseTitle: 'Patchouli & Vanilla',
             notesBaseDesc: 'Daya pikat magnetis dan imajinasi tanpa batas',
             formulaExtract: 'Ekstrak murni Neroli Tunisia, Grapefruit Segar, dan Vanilla Madagaskar.',
-            ajian: 'Saya berani terlihat. Saya berani bersuara.',
+            ajian: 'Aku berani terlihat. Aku berani bersuara.',
             sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Tampilkan suara dan ide Anda. Biarkan energi baik menginspirasi orang lain.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_3.jpg") }}',
@@ -666,7 +666,7 @@
             notesBaseTitle: 'Oakmoss & Cedarwood',
             notesBaseDesc: 'Kekuatan membumi tak tergoyahkan seperti batu karang',
             formulaExtract: 'Ekstrak murni Clary Sage, Oakmoss Perancis, dan Cedarwood Virginia.',
-            ajian: 'Saya tenang. Saya terarah. Saya membangun.',
+            ajian: 'Aku tenang. Aku terarah. Aku membangun.',
             sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Fokus pada tujuan yang ingin Anda capai. Ingat, setiap langkah Anda membangun masa depan Anda.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_4.jpg") }}',
@@ -684,7 +684,7 @@
             notesBaseTitle: 'Driftwood & Musk',
             notesBaseDesc: 'Karisma magnet perubahan yang selalu memikat sekeliling',
             formulaExtract: 'Ekstrak murni Cardamom Guatemala, Zesty Lime, dan Driftwood.',
-            ajian: 'Saya terbuka pada kemungkinan berikutnya.',
+            ajian: 'Aku terbuka pada kemungkinan berikutnya.',
             sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Ingat arah tujuan dan nikmati prosesnya. Bergeraklah. Dunia menanti Anda.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_5.jpg") }}',
@@ -702,7 +702,7 @@
             notesBaseTitle: 'Amber & Tonka Bean',
             notesBaseDesc: 'Aura perlindungan batin dan rasa aman yang meneduhkan',
             formulaExtract: 'Ekstrak murni Bulgarian Rose, Sweet Mandarin, dan Amber Resin hangat.',
-            ajian: 'Saya merawat. Saya melindungi. Saya menumbuhkan. Saya menghangatkan.',
+            ajian: 'Aku merawat. Aku melindungi. Aku menumbuhkan. Aku menghangatkan.',
             sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Rasakan kasih dan kehangatan yang hadir. Rawat diri dan orang di sekitar Anda dengan penuh cinta.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_6.jpg") }}',
@@ -720,7 +720,7 @@
             notesBaseTitle: 'Sacred Sandalwood Mysore & Amber',
             notesBaseDesc: 'Memberi ketenangan dan rasa grounding spiritual',
             formulaExtract: 'Ekstrak murni Olibanum Oman, Sandalwood Mysore, dan Bergamot Calabria.',
-            ajian: 'Saya melihat dengan jernih. Saya memahami dengan dalam. Saya melangkah dengan tepat.',
+            ajian: 'Aku melihat dengan jernih. Aku memahami dengan dalam. Aku melangkah dengan tepat.',
             sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Fokus pada analisis dan pemahaman. Terima wawasan dan ambil keputusan dengan bijaksana.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_7.jpg") }}',
@@ -738,7 +738,7 @@
             notesBaseTitle: 'Oud Kalimantan & Benzoin',
             notesBaseDesc: 'Otoritas tertinggi dan daya tarik kemakmuran tanpa batas',
             formulaExtract: 'Ekstrak murni Agarwood Kalimantan, Iranian Saffron, dan Smoked Leather.',
-            ajian: 'Saya menyusun langkah dengan visi. Saya mewujudkan dengan aksi.',
+            ajian: 'Aku menyusun langkah dengan visi. Aku mewujudkan dengan aksi.',
             sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Fokus pada tujuan dan langkah Anda. Jalani hari dengan strategi dan keyakinan.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_8.jpg") }}',
@@ -756,7 +756,7 @@
             notesBaseTitle: 'Myrrh & Sacred Incense',
             notesBaseDesc: 'Koneksi dengan yang ilahi dan pencerahan spiritual abadi',
             formulaExtract: 'Ekstrak murni Tuscan Iris, Sacred Incense Kuil, dan Somalian Myrrh.',
-            ajian: 'Saya memimpin. Saya menginspirasi. Saya membimbing. Saya memberi arti.',
+            ajian: 'Aku memimpin. Aku menginspirasi. Aku membimbing. Aku memberi arti.',
             sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Niatkan tujuan dan langkah terbaik Anda. Jalani hari dengan inspirasi dan kebijaksanaan.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_9.jpg") }}',
@@ -1107,6 +1107,79 @@
                 useCORS: true,
                 allowTaint: false,
                 logging: false,
+                onclone: (clonedDocument) => {
+                    const fallbackFor = (property) => {
+                        if (property === 'background-image') {
+                            return 'none';
+                        }
+
+                        if (property.includes('shadow')) {
+                            return 'none';
+                        }
+
+                        if (property.startsWith('--')) {
+                            return 'transparent';
+                        }
+
+                        return property === 'color' || property === 'fill' || property === 'stroke'
+                            ? '#d1d5db'
+                            : '#374151';
+                    };
+
+                    const sanitizeRules = (rules) => {
+                        Array.from(rules).forEach((rule) => {
+                            if (rule.style) {
+                                Array.from(rule.style).forEach((property) => {
+                                    const value = rule.style.getPropertyValue(property);
+
+                                    if (/okl(?:ab|ch)(?:\(|\b)/i.test(value)) {
+                                        rule.style.setProperty(property, fallbackFor(property), rule.style.getPropertyPriority(property));
+                                    }
+                                });
+                            }
+
+                            if (rule.cssRules) {
+                                sanitizeRules(rule.cssRules);
+                            }
+                        });
+                    };
+
+                    Array.from(clonedDocument.styleSheets).forEach((styleSheet) => {
+                        try {
+                            sanitizeRules(styleSheet.cssRules);
+                        } catch {
+                            // Ignore stylesheets that cannot be inspected in the cloned document.
+                        }
+                    });
+
+                    clonedDocument.querySelectorAll('*').forEach((element) => {
+                        const computedStyle = clonedDocument.defaultView.getComputedStyle(element);
+                        const properties = ['color', 'background-color', 'background-image', 'border-color', 'box-shadow', 'text-shadow', 'outline-color', 'fill', 'stroke'];
+
+                        Array.from(computedStyle).forEach((property) => {
+                            const value = computedStyle.getPropertyValue(property);
+                            const sanitizedValue = /okl(?:ab|ch)(?:\(|\b)/i.test(value)
+                                ? fallbackFor(property)
+                                : value;
+
+                            element.style.setProperty(property, sanitizedValue);
+                        });
+
+                        properties.forEach((property) => {
+                            const value = computedStyle.getPropertyValue(property);
+
+                            if (!/okl(?:ab|ch)(?:\(|\b)/i.test(value)) {
+                                return;
+                            }
+
+                            element.style.setProperty(property, fallbackFor(property));
+                        });
+                    });
+
+                    clonedDocument
+                        .querySelectorAll('link[rel="stylesheet"], style')
+                        .forEach((styleSheet) => styleSheet.remove());
+                },
                 ignoreElements: (el) => {
                     return el.id === 'download-pdf-btn' || 
                            el.id === 'share-wa' || 

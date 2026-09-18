@@ -159,7 +159,7 @@
             </div>
         </section>
 
-        {{-- 3. Essence Collection Box (6 Cards Grid) --}}
+        {{-- 3. Essence Collection Box (9 Cards Grid) --}}
         <section class="rounded-2xl p-6 sm:p-9 border border-gold-400/30 bg-[#050505] relative overflow-hidden">
             {{-- Background Sacred Geometry SVG --}}
             <svg class="absolute inset-0 w-full h-full opacity-[0.02] pointer-events-none" viewBox="0 0 600 400" fill="none">
@@ -190,8 +190,8 @@
                 ];
             @endphp
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 relative z-10">
-                @foreach(array_slice($archetypes, 0, 6, true) as $essence)
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 relative z-10">
+                @foreach($archetypes as $essence)
                     <a href="{{ route('essence.detail', $essence['slug']) }}" class="mystical-card-hover border border-gold-400/30 bg-[#080808] rounded-xl p-4 text-center hover:border-gold-400/80 transition-all duration-300 group hover:-translate-y-1 block relative">
                         {{-- Mystical Number with Custom Image --}}
                         <div class="essence-num-ring mx-auto mb-2">

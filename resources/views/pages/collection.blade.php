@@ -98,48 +98,52 @@
                         {{-- Number, Title & Character Traits --}}
                         <div>
                             <span class="inline-detail-number text-4xl sm:text-5xl font-serif text-gold-400 font-bold block leading-none mb-1"></span>
-                            <h2 class="inline-detail-title text-xl sm:text-2xl md:text-3xl font-serif font-bold text-gold-200 tracking-wider uppercase glow-gold"></h2>
-                            <p class="inline-detail-traits text-xs sm:text-sm text-gold-300/90 font-mono tracking-widest uppercase mt-1"></p>
+                            <span class="inline-detail-badge text-sm sm:text-base text-gold-400 font-mono tracking-[0.18em] uppercase"></span>
+                            <h2 class="inline-detail-title text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-gold-100 tracking-wider uppercase glow-gold leading-tight"></h2>
+                            <p class="inline-detail-traits text-sm sm:text-base text-gold-300 font-mono tracking-wide uppercase mt-2 leading-relaxed"></p>
                         </div>
+
+                        {{-- Character Description --}}
+                        <p class="inline-detail-description text-base sm:text-lg text-gray-200 font-light leading-relaxed"></p>
 
                         {{-- Quote with Gold Accent Left Border --}}
                         <div class="border-l-2 border-gold-400/70 pl-4 py-1">
-                            <p class="inline-detail-quote text-xs sm:text-sm text-gray-300 font-light italic leading-relaxed"></p>
+                            <p class="inline-detail-quote text-base sm:text-lg text-gold-100 font-light italic leading-relaxed"></p>
                         </div>
 
                         {{-- Scent Notes & Ajian (Mantra) Grid --}}
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1 text-sm">
                             {{-- Scent Notes --}}
                             <div class="space-y-1.5 p-3 rounded-lg border border-gold-400/15">
-                                <span class="text-[10px] uppercase tracking-widest text-gold-400 font-mono font-semibold block">
-                                    Scent Notes
+                                <span class="text-xs uppercase tracking-widest text-gold-400 font-mono font-semibold block">
+                                    Essence Notes
                                 </span>
-                                <p class="text-gray-300 text-[11px] leading-relaxed">
-                                    <span class="text-gray-500 font-medium">Top:</span> <span class="inline-notes-top text-slate-200"></span>
+                                <p class="text-gray-200 text-sm leading-relaxed">
+                                    <span class="text-gold-300 font-medium">Top Essence:</span> <span class="inline-notes-top text-slate-100"></span>
                                 </p>
-                                <p class="text-gray-300 text-[11px] leading-relaxed">
-                                    <span class="text-gray-500 font-medium">Mid:</span> <span class="inline-notes-mid text-slate-200"></span>
+                                <p class="text-gray-200 text-sm leading-relaxed">
+                                    <span class="text-gold-300 font-medium">Heart Notes:</span> <span class="inline-notes-mid text-slate-100"></span>
                                 </p>
-                                <p class="text-gray-300 text-[11px] leading-relaxed">
-                                    <span class="text-gray-500 font-medium">Base:</span> <span class="inline-notes-base text-slate-200"></span>
+                                <p class="text-gray-200 text-sm leading-relaxed">
+                                    <span class="text-gold-300 font-medium">Base Essence:</span> <span class="inline-notes-base text-slate-100"></span>
                                 </p>
                             </div>
 
                             {{-- Ajian (Mantra) --}}
                             <div class="space-y-1.5 p-3 rounded-lg border border-gold-400/15">
-                                <span class="text-[10px] uppercase tracking-widest text-gold-400 font-mono font-semibold block">
+                                <span class="text-xs uppercase tracking-widest text-gold-400 font-mono font-semibold block">
                                     Ajian (Mantra)
                                 </span>
-                                <p class="inline-detail-ajian text-gold-200/90 text-[11px] italic leading-relaxed"></p>
+                                <p class="inline-detail-ajian text-gold-100 text-sm sm:text-base italic leading-relaxed"></p>
                             </div>
                         </div>
 
                         {{-- Action Buttons: VIEW DETAILS & ORDER --}}
-                        <div class="pt-3 flex flex-wrap items-center gap-3">
-                            <a class="inline-view-btn btn-gold px-6 py-2.5 text-xs font-semibold tracking-[0.2em] uppercase rounded-[2px] shadow-lg text-black hover:scale-105 transition-all inline-flex items-center gap-2" href="#">
+                        <div class="pt-4 grid grid-cols-2 items-stretch gap-3">
+                            <a class="inline-view-btn btn-gold px-3 sm:px-6 py-3 text-xs sm:text-sm font-semibold tracking-[0.12em] sm:tracking-[0.2em] uppercase rounded-[2px] shadow-lg text-black hover:scale-105 transition-all inline-flex items-center justify-center text-center" href="#">
                                 VIEW DETAILS
                             </a>
-                            <a class="inline-order-btn btn-gold-outline px-6 py-2.5 text-xs font-semibold tracking-[0.2em] uppercase rounded-[2px] text-gold-300 hover:text-white transition-all inline-flex items-center gap-2" href="#">
+                            <a class="inline-order-btn btn-gold-outline px-3 sm:px-6 py-3 text-xs sm:text-sm font-semibold tracking-[0.12em] sm:tracking-[0.2em] uppercase rounded-[2px] text-gold-300 hover:text-white transition-all inline-flex items-center justify-center text-center" href="#">
                                 ORDER
                             </a>
                         </div>
@@ -175,7 +179,7 @@
     }
 
     .inline-detail-panel.is-open {
-        max-height: 700px;
+        max-height: 1100px;
         opacity: 1;
         transform: scale(1) translateX(0);
         pointer-events: auto;
@@ -244,7 +248,7 @@
             transform: scale(0.95) translateX(0);
         }
         .inline-detail-panel.is-open {
-            max-height: 900px;
+            max-height: 1400px;
         }
     }
 </style>
@@ -327,10 +331,12 @@
             : `/images/bottle/${essence.number === 1 ? 'bottle_1.png' : 'bottle_' + essence.number + '.jpg'}`;
         panel.querySelector('.inline-bottle-img').alt = essence.name;
         panel.querySelector('.inline-detail-number').textContent = essence.number;
+        panel.querySelector('.inline-detail-badge').textContent = essence.badge || '';
         panel.querySelector('.inline-detail-title').textContent = essence.name.toUpperCase();
         panel.querySelector('.inline-detail-traits').textContent = Array.isArray(essence.traits) 
             ? essence.traits.join(' • ') 
             : essence.traits;
+        panel.querySelector('.inline-detail-description').textContent = essence.description || essence.short_desc || '';
         panel.querySelector('.inline-detail-quote').textContent = `"${essence.quote || essence.description}"`;
         panel.querySelector('.inline-notes-top').textContent = essence.notes.top;
         panel.querySelector('.inline-notes-mid').textContent = essence.notes.middle;

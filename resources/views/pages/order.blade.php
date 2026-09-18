@@ -369,10 +369,10 @@
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs tracking-[0.2em] font-mono uppercase mb-3 shadow-[0_0_15px_rgba(197,160,89,0.15)]">
                 ✦ THE SACRED CHECKOUT RITUAL ✦
             </div>
-            <h1 class="text-3xl sm:text-5xl font-serif font-bold text-white tracking-wider glow-gold mb-3 uppercase">
+            <h1 class="text-3xl sm:text-5xl font-serif font-bold text-white tracking-wider glow-gold mb-3 uppercase leading-tight">
                 PEMESANAN & PENYELARASAN TAKDIR
             </h1>
-            <p class="text-gray-300 font-light text-xs sm:text-sm max-w-xl mx-auto leading-relaxed italic">
+            <p class="text-gray-200 font-light text-base sm:text-lg max-w-2xl mx-auto leading-relaxed italic">
                 "Dari Asih menjadi wangi, dari frekuensi jiwa mengalir ke dalam botol suci yang diselaraskan khusus untuk kehadiran Anda."
             </p>
         </div>
@@ -448,9 +448,9 @@
                 {{-- 1. Informasi Pemesan --}}
                 <div class="bg-gradient-to-b from-[#141210] to-[#0c0b0a] rounded-2xl p-6 border border-gold-400/30 shadow-xl space-y-4">
                     <div class="border-b border-gold-400/20 pb-3">
-                        <h2 class="text-base font-serif font-bold text-white uppercase tracking-wider">1. Informasi Pemesan</h2>
+                        <h2 class="text-lg sm:text-xl font-serif font-bold text-white uppercase tracking-wider">1. Informasi Pemesan</h2>
                     </div>
-                    <p class="text-[11px] text-gray-400 font-light">
+                    <p class="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
                         Notifikasi pelacakan astral dan audio doa penyelarasan akan dikirimkan ke kontak ini.
                     </p>
 
