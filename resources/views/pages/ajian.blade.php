@@ -214,9 +214,7 @@
                     <div>
                         {{-- Header Row: Big Number + Category --}}
                         <div class="flex items-center justify-between mb-4">
-                            <span class="font-serif text-4xl sm:text-5xl font-bold text-gold-400/90 group-hover:text-gold-300 transition-colors">
-                                {{ $numFormatted }}
-                            </span>
+                            <img src="{{ asset('images/angka/' . $essence['number'] . '.png') }}" alt="Angka {{ $essence['number'] }}" class="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
                             <div class="text-right">
                                 <span class="text-xs tracking-wider text-gray-300 uppercase font-mono block">
                                     {{ $catTitle }}

@@ -191,7 +191,7 @@
                     </div>
                     <div class="absolute bottom-3 left-4 right-4">
                         <h3 class="text-lg font-serif text-white mb-1">Ruang Meditasi Aroma</h3>
-                        <p class="text-xs sm:text-sm text-gray-300 font-light leading-snug">
+                        <p class="text-xs text-gray-300 font-light leading-snug">
                             Stilling atelier dengan aroma kayu cendana tua, racikan kemenyan Sunda, dan minyak mawar murni.
                         </p>
                     </div>

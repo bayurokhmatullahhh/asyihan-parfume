@@ -298,6 +298,31 @@
                         </div>
                     </div>
 
+                    {{-- SECTION: AJIAN JIWA --}}
+                    <div class="mt-6 pt-5 border-t border-gold-400/20">
+                        <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/70 font-mono block mb-3 text-center sm:text-left">
+                            AJIAN JIWA
+                        </span>
+                        <div class="p-4 sm:p-5 rounded-xl border border-gold-400/30 bg-[#050505] relative overflow-hidden group shadow-lg">
+                            {{-- Ambient subtle gold glow --}}
+                            <div class="absolute -top-10 -right-10 w-32 h-32 bg-gold-400/5 rounded-full blur-2xl pointer-events-none"></div>
+
+                            <div class="flex items-start gap-3.5 relative z-10">
+                                <div class="w-10 h-10 rounded-xl bg-[#050505] border border-gold-400/30 flex items-center justify-center text-gold-400 shrink-0 shadow-md mt-0.5">
+                                    <span class="text-base glow-gold animate-pulse-gold">✦</span>
+                                </div>
+                                <div class="flex-1 space-y-1.5">
+                                    <p id="out-ajian-text" class="text-xs sm:text-sm font-serif italic text-gold-200 tracking-wide leading-relaxed">
+                                        "Saya melihat dengan jernih. Saya memahami dengan dalam. Saya melangkah dengan tepat."
+                                    </p>
+                                    <p id="out-sugesti-text" class="text-[11px] text-gray-400 font-light leading-relaxed">
+                                        Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Fokus pada analisis dan pemahaman. Terima wawasan dan ambil keputusan dengan bijaksana.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     {{-- SECTION: CATATAN AROMA (NOTES) --}}
                     <div class="mt-6 pt-5 border-t border-gold-400/20">
                         <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/70 font-mono block mb-3 text-center sm:text-left">
@@ -587,6 +612,8 @@
             notesBaseTitle: 'Cedarwood & Vetiver',
             notesBaseDesc: 'Kekokohan prinsip dan akar kepercayaan diri yang kuat',
             formulaExtract: 'Ekstrak murni Bergamot Calabria, Cedarwood Atlas, dan Vetiver Bourbon.',
+            ajian: 'Saya tidak menunggu. Saya memulai.',
+            sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Fokus pada tujuanmu. Ingat siapa dirimu.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_1.png") }}',
             orderLink: '{{ route("order", ["essence" => 1]) }}',
@@ -603,6 +630,8 @@
             notesBaseTitle: 'Sandalwood & White Musk',
             notesBaseDesc: 'Kehangatan pelukan batin dan harmoni cinta yang abadi',
             formulaExtract: 'Ekstrak murni Lavender Provence, Rose Damascena, dan White Musk lembut.',
+            ajian: 'Saya hadir. Saya terhubung.',
+            sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Rasakan kehadiran Anda. Hubungkan hati, bukan sekadar kata.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_2.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 2]) }}',
@@ -619,6 +648,8 @@
             notesBaseTitle: 'Patchouli & Vanilla',
             notesBaseDesc: 'Daya pikat magnetis dan imajinasi tanpa batas',
             formulaExtract: 'Ekstrak murni Neroli Tunisia, Grapefruit Segar, dan Vanilla Madagaskar.',
+            ajian: 'Saya berani terlihat. Saya berani bersuara.',
+            sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Tampilkan suara dan ide Anda. Biarkan energi baik menginspirasi orang lain.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_3.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 3]) }}',
@@ -635,6 +666,8 @@
             notesBaseTitle: 'Oakmoss & Cedarwood',
             notesBaseDesc: 'Kekuatan membumi tak tergoyahkan seperti batu karang',
             formulaExtract: 'Ekstrak murni Clary Sage, Oakmoss Perancis, dan Cedarwood Virginia.',
+            ajian: 'Saya tenang. Saya terarah. Saya membangun.',
+            sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Fokus pada tujuan yang ingin Anda capai. Ingat, setiap langkah Anda membangun masa depan Anda.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_4.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 4]) }}',
@@ -651,6 +684,8 @@
             notesBaseTitle: 'Driftwood & Musk',
             notesBaseDesc: 'Karisma magnet perubahan yang selalu memikat sekeliling',
             formulaExtract: 'Ekstrak murni Cardamom Guatemala, Zesty Lime, dan Driftwood.',
+            ajian: 'Saya terbuka pada kemungkinan berikutnya.',
+            sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam. Ingat arah tujuan dan nikmati prosesnya. Bergeraklah. Dunia menanti Anda.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_5.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 5]) }}',
@@ -667,6 +702,8 @@
             notesBaseTitle: 'Amber & Tonka Bean',
             notesBaseDesc: 'Aura perlindungan batin dan rasa aman yang meneduhkan',
             formulaExtract: 'Ekstrak murni Bulgarian Rose, Sweet Mandarin, dan Amber Resin hangat.',
+            ajian: 'Saya merawat. Saya melindungi. Saya menumbuhkan. Saya menghangatkan.',
+            sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Rasakan kasih dan kehangatan yang hadir. Rawat diri dan orang di sekitar Anda dengan penuh cinta.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_6.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 6]) }}',
@@ -683,6 +720,8 @@
             notesBaseTitle: 'Sacred Sandalwood Mysore & Amber',
             notesBaseDesc: 'Memberi ketenangan dan rasa grounding spiritual',
             formulaExtract: 'Ekstrak murni Olibanum Oman, Sandalwood Mysore, dan Bergamot Calabria.',
+            ajian: 'Saya melihat dengan jernih. Saya memahami dengan dalam. Saya melangkah dengan tepat.',
+            sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Fokus pada analisis dan pemahaman. Terima wawasan dan ambil keputusan dengan bijaksana.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_7.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 7]) }}',
@@ -699,6 +738,8 @@
             notesBaseTitle: 'Oud Kalimantan & Benzoin',
             notesBaseDesc: 'Otoritas tertinggi dan daya tarik kemakmuran tanpa batas',
             formulaExtract: 'Ekstrak murni Agarwood Kalimantan, Iranian Saffron, dan Smoked Leather.',
+            ajian: 'Saya menyusun langkah dengan visi. Saya mewujudkan dengan aksi.',
+            sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Fokus pada tujuan dan langkah Anda. Jalani hari dengan strategi dan keyakinan.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_8.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 8]) }}',
@@ -715,6 +756,8 @@
             notesBaseTitle: 'Myrrh & Sacred Incense',
             notesBaseDesc: 'Koneksi dengan yang ilahi dan pencerahan spiritual abadi',
             formulaExtract: 'Ekstrak murni Tuscan Iris, Sacred Incense Kuil, dan Somalian Myrrh.',
+            ajian: 'Saya memimpin. Saya menginspirasi. Saya membimbing. Saya memberi arti.',
+            sugesti: 'Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Niatkan tujuan dan langkah terbaik Anda. Jalani hari dengan inspirasi dan kebijaksanaan.',
             price: 'Rp 350.000',
             bottleImg: '{{ asset("images/bottle/bottle_9.jpg") }}',
             orderLink: '{{ route("order", ["essence" => 9]) }}',
@@ -949,16 +992,17 @@
         const core    = data.core_number;
         const arch    = archetypeData[core];
         const tokoh   = data.tokoh;
+        const serverArch = data.archetype;
 
-        populateResultUI(core, arch, tokoh, name, email, phone);
+        populateResultUI(core, arch, tokoh, name, email, phone, serverArch);
     }
 
     function populateResultLocal(core, name, birthDate, tokoh, email, phone) {
         const arch = archetypeData[core];
-        populateResultUI(core, arch, tokoh, name, email, phone);
+        populateResultUI(core, arch, tokoh, name, email, phone, null);
     }
 
-    function populateResultUI(core, arch, tokoh, name, email, phone) {
+    function populateResultUI(core, arch, tokoh, name, email, phone, serverArch) {
         if (!arch) { return; }
 
         const roman = romanMap[core];
@@ -974,6 +1018,19 @@
         document.getElementById('out-element').textContent        = arch.element;
         document.getElementById('out-aroma-main').textContent     = arch.aroma;
         document.getElementById('out-description').textContent    = arch.desc;
+
+        // Ajian Jiwa
+        const elAjian = document.getElementById('out-ajian-text');
+        const ajianVal = (serverArch && serverArch.ajian) || arch.ajian || '';
+        if (elAjian) {
+            elAjian.textContent = ajianVal ? `"${ajianVal}"` : '';
+        }
+        const elSugesti = document.getElementById('out-sugesti-text');
+        const sugestiVal = (serverArch && serverArch.sugesti) || arch.sugesti || '';
+        if (elSugesti) {
+            elSugesti.textContent = sugestiVal;
+        }
+
         document.getElementById('out-notes-top-title').textContent= arch.notesTopTitle;
         document.getElementById('out-notes-top-desc').textContent = arch.notesTopDesc;
         document.getElementById('out-notes-base-title').textContent= arch.notesBaseTitle;

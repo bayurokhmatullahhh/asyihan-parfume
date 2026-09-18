@@ -9,10 +9,17 @@
     <meta name="description" content="@yield('meta_description', 'ASYIHAN — Born from Asih. Crafted for the Soul. Parfum personal berdasarkan numerologi karakter Anda.')">
     <meta name="keywords" content="ASYIHAN, parfum, numerology, wewangian, Sunda, personal fragrance">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo_asy.png') }}">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('images/logo_asy.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo_asy.png') }}">
+            <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32.png') }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('images/favicon-48.png') }}">
+    <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('images/favicon-64.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
