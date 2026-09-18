@@ -14,7 +14,7 @@
         <h1 class="text-3xl sm:text-5xl lg:text-6xl font-serif text-white tracking-wider leading-tight mb-4">
             Kami Siap Mendampingi<br class="hidden sm:inline"> Perjalanan Esensimu
         </h1>
-        <p class="text-gray-300 text-xs sm:text-sm font-light max-w-2xl mx-auto leading-relaxed mb-6">
+        <p class="text-gray-300 text-sm sm:text-base lg:text-lg font-light max-w-2xl mx-auto leading-relaxed mb-6">
             Ingin berkonsultasi mengenai pembacaan numerologi, pemilihan aroma arketipe khusus, pemesanan sakral untuk perhelatan dan korporasi, atau sekadar menanyakan jejak pesanan Anda? Para kurator kami siap menyapa jiwa Anda.
         </p>
         <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto relative flex items-center justify-center">
@@ -34,7 +34,7 @@
                     KONSULTASI SPIRITUAL CEPAT
                 </span>
                 <h3 class="text-xl font-serif text-white mb-2">WhatsApp</h3>
-                <p class="text-gray-400 text-xs font-light leading-relaxed mb-4">
+                <p class="text-gray-300 text-xs sm:text-sm font-light leading-relaxed mb-4">
                     Respon langsung untuk analisis angka inti dan konfirmasi pesanan aroma personal.
                 </p>
                 <div class="mb-4">
@@ -57,7 +57,7 @@
                     KOLEKTIF & RITUAL MISTIS
                 </span>
                 <h3 class="text-xl font-serif text-white mb-2">Instagram</h3>
-                <p class="text-gray-400 text-xs font-light leading-relaxed mb-4">
+                <p class="text-gray-300 text-xs sm:text-sm font-light leading-relaxed mb-4">
                     Simak ajian mingguan, kupas tuntas 9 karakter wewangian, dan live sniffing virtual.
                 </p>
                 <div class="mb-4">
@@ -80,7 +80,7 @@
                     KOLABORASI & BISNIS
                 </span>
                 <h3 class="text-xl font-serif text-white mb-2">Surat Resmi</h3>
-                <p class="text-gray-400 text-xs font-light leading-relaxed mb-4">
+                <p class="text-gray-300 text-xs sm:text-sm font-light leading-relaxed mb-4">
                     Permintaan wewangian pernikahan sakral, kurasi korporasi, wawancara media, serta kemitraan diplomatik.
                 </p>
                 <div class="mb-4">
@@ -103,7 +103,7 @@
                     PRIVATE SNIFFING SESSION
                 </span>
                 <h3 class="text-xl font-serif text-white mb-2">Sanctuary</h3>
-                <p class="text-gray-400 text-xs font-light leading-relaxed mb-4">
+                <p class="text-gray-300 text-xs sm:text-sm font-light leading-relaxed mb-4">
                     Atelier wewangian hening untuk ritual pencocokan aroma secara tatap muka.
                 </p>
                 <div class="mb-4">
@@ -127,29 +127,29 @@
             <h2 class="text-2xl font-serif text-white mb-2">
                 Kirimkan Pesan Kepada Sang Peracik
             </h2>
-            <p class="text-xs text-gray-400 font-light leading-relaxed mb-6">
+            <p class="text-sm sm:text-base text-gray-300 font-light leading-relaxed mb-6">
                 Tuliskan getaran rasa Anda. Setiap pesan dibaca secara mendalam oleh sang peracik dan kurator numerologi kami untuk memberikan rekomendasi aroma yang selaras.
             </p>
 
             <form id="contact-form" class="space-y-4">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-[10px] uppercase tracking-widest text-gold-300 mb-1.5 font-mono">NAMA LENGKAP</label>
+                        <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">NAMA LENGKAP</label>
                         <input id="contact_name" type="text" placeholder="Raden Arya Damara" required class="input-dark">
                     </div>
                     <div>
-                        <label class="block text-[10px] uppercase tracking-widest text-gold-300 mb-1.5 font-mono">NOMOR WHATSAPP AKTIF</label>
+                        <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">NOMOR WHATSAPP AKTIF</label>
                         <input id="contact_info" type="text" placeholder="+62 811-xxxx-xxxx" required class="input-dark">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-[10px] uppercase tracking-widest text-gold-300 mb-1.5 font-mono">TANGGAL LAHIR / ANGKA INTI (OPSIONAL)</label>
+                        <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">TANGGAL LAHIR / ANGKA INTI (OPSIONAL)</label>
                         <input id="contact_dob" type="text" placeholder="Contoh: 14 Mei 1992 atau Angka 7" class="input-dark">
                     </div>
                     <div>
-                        <label class="block text-[10px] uppercase tracking-widest text-gold-300 mb-1.5 font-mono">FOKUS KOMUNIKASI</label>
+                        <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">FOKUS KOMUNIKASI</label>
                         <select id="contact_category" class="input-dark">
                             <option value="Konsultasi Karakter & Numerologi" class="bg-dark-800 text-white">Konsultasi Karakter & Numerologi</option>
                             <option value="Pemesanan Custom / Event" class="bg-dark-800 text-white">Pemesanan Custom / Event</option>
@@ -160,12 +160,12 @@
                 </div>
 
                 <div>
-                    <label class="block text-[10px] uppercase tracking-widest text-gold-300 mb-1.5 font-mono">CATATAN PESAN ATAU PERTANYAAN</label>
+                    <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">CATATAN PESAN ATAU PERTANYAAN</label>
                     <textarea id="contact_message" rows="4" placeholder="Tuliskan penggalan pencarian aroma Anda atau hal yang ingin Anda temukan..." required class="textarea-dark"></textarea>
                 </div>
 
                 <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center gap-2 text-[10px] text-gray-400 font-mono">
+                    <div class="flex items-center gap-2 text-[11px] text-gray-400 font-mono">
                         <span class="text-gold-400">🔒</span>
                         <span>DATA DAN PRIVASI ANDA SELALU DIJAGA KERAHASIAANNYA</span>
                     </div>
@@ -192,7 +192,7 @@
                     <div class="absolute bottom-3 left-4 right-4">
                         <h3 class="text-lg font-serif text-white mb-1">Ruang Meditasi Aroma</h3>
                         <p class="text-xs text-gray-300 font-light leading-snug">
-                            Stilling atelier dengan aroma kayu cendana tua, racikan kemenyan Nusantara, dan minyak mawar murni.
+                            Stilling atelier dengan aroma kayu cendana tua, racikan kemenyan Sunda, dan minyak mawar murni.
                         </p>
                     </div>
                 </div>
@@ -224,11 +224,11 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pt-1 text-xs">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pt-1 text-xs sm:text-sm">
                     <div class="text-gray-300 font-light max-w-xs leading-relaxed">
                         Jl. Tamblong No.46, Braga, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40112
                     </div>
-                    <span class="text-[10px] text-gold-400/90 font-mono bg-black/60 px-2.5 py-1 rounded border border-gold-400/20 shrink-0">
+                    <span class="text-[10px] sm:text-xs text-gold-400/90 font-mono bg-black/60 px-2.5 py-1 rounded border border-gold-400/20 shrink-0">
                         Hanya dengan Janji Temu
                     </span>
                 </div>
@@ -243,8 +243,8 @@
                 🕯️
             </div>
             <div>
-                <h3 class="text-lg font-serif text-gold-200 mb-1">“Aroma adalah Doa Tanpa Kata”</h3>
-                <p class="text-xs text-gray-400 font-light">
+                <h3 class="text-lg sm:text-xl font-serif text-gold-200 mb-1">“Aroma adalah Doa Tanpa Kata”</h3>
+                <p class="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
                     Setiap tetes wewangian ASYIHAN mengandung getaran frekuensi sakral energi nama dan tanggal lahir Anda.
                 </p>
             </div>
@@ -258,13 +258,13 @@
     {{-- FAQ SECTION --}}
     <div class="max-w-4xl mx-auto space-y-8 pt-4">
         <div class="text-center">
-            <div class="inline-block px-3 py-1 rounded-full bg-gold-400/10 border border-gold-400/20 text-gold-400 text-[10px] tracking-[0.2em] uppercase mb-2 font-mono">
+            <div class="inline-block px-3 py-1 rounded-full bg-gold-400/10 border border-gold-400/20 text-gold-400 text-[10px] sm:text-xs tracking-[0.2em] uppercase mb-2 font-mono">
                 PEDOMAN & KEPASTIAN
             </div>
             <h2 class="text-2xl sm:text-4xl font-serif text-white tracking-wide mb-2">
                 Pertanyaan Yang Sering Dituturkan
             </h2>
-            <p class="text-gray-400 text-xs sm:text-sm font-light">
+            <p class="text-gray-300 text-sm sm:text-base font-light">
                 Temukan kejelasan seputar pemesanan, peracikan numerologi, dan pengantaran wewangian Anda.
             </p>
         </div>
@@ -277,7 +277,7 @@
                     <span>Bagaimana jika saya tidak mengetahui jam lahir saya secara pasti?</span>
                     <span class="text-gold-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
-                <div class="px-5 pb-5 text-xs text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
+                <div class="px-5 pb-5 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
                     Numerologi ASYIHAN dihitung berdasarkan tanggal, bulan, dan tahun kelahiran (bukan jam lahir), sehingga hasil pembacaan arketipe Anda tetap 100% akurat.
                 </div>
             </details>
@@ -288,7 +288,7 @@
                     <span>Berapa lama ketahanan aroma Extrait de Parfum ASYIHAN?</span>
                     <span class="text-gold-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
-                <div class="px-5 pb-5 text-xs text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
+                <div class="px-5 pb-5 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
                     Konsentrasi Extrait de Parfum ASYIHAN (30-35% pure perfume oil) bertahan 12 hingga 18 jam di kulit, dan hingga 24+ jam pada pakaian.
                 </div>
             </details>
@@ -299,7 +299,7 @@
                     <span>Apakah pengiriman aman hingga ke seluruh penjuru Nusantara dan Mancanegara?</span>
                     <span class="text-gold-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
-                <div class="px-5 pb-5 text-xs text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
+                <div class="px-5 pb-5 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
                     Setiap botol dikemas dalam kotak kayu terlindung dengan segel lilin sakral dan bubble wrap berlapis, dijamin aman tiba di tujuan.
                 </div>
             </details>
@@ -310,7 +310,7 @@
                     <span>Dapatkah saya meracik aroma kustom untuk suvenir pernikahan atau korporasi?</span>
                     <span class="text-gold-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
-                <div class="px-5 pb-5 text-xs text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
+                <div class="px-5 pb-5 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
                     Ya, kami melayani *bespoke fragrance formulation* untuk pernikahan sakral, perhelatan eksklusif, dan cenderamata korporasi.
                 </div>
             </details>

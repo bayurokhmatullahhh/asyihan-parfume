@@ -19,7 +19,7 @@
             <h1 class="text-3xl sm:text-5xl font-serif font-bold text-white tracking-wider glow-gold mb-4 uppercase">
                 KOLEKSI MAHAKARYA & PEMESANAN SAKRAL
             </h1>
-            <p class="text-gray-300 font-light text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed italic">
+            <p class="text-gray-300 font-light text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed italic">
                 "Setiap tetes wewangian direcik dengan getaran alkimia murni — dari Extrait de Parfum tubuh berfrekuensi jiwa hingga penyelarasan atmosfer ruangan dan sanggar sakral."
             </p>
             <div class="w-32 h-0.5 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-6"></div>
@@ -259,7 +259,7 @@
                                 <h3 class="text-lg font-serif font-bold text-white group-hover:text-gold-200 transition-colors">
                                     {{ $item['title'] }}
                                 </h3>
-                                <p class="text-xs text-gray-300 font-light leading-relaxed">
+                                <p class="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
                                     {{ $item['desc'] }}
                                 </p>
                             </div>
@@ -311,7 +311,7 @@
                         </svg>
                     </div>
                     <h3 class="text-base font-serif font-bold text-white">100% Extrait De Parfum Asli</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
                         Diramu murni dari minyak atsiri murni asli. Gua Kalimantan, dan kemenyan purba tanpa pengenceran berlebih. Sertifikasi kualitas internasional.
                     </p>
                 </div>
@@ -324,7 +324,7 @@
                         </svg>
                     </div>
                     <h3 class="text-base font-serif font-bold text-white">Garansi Ketahanan 12-16 Jam</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
                         Satu memikat yang melekat melampaui waktu. Menyertai setiap langkah dan ritual harian Anda dengan pancaran aura yang stabil dan menenangkan.
                     </p>
                 </div>
@@ -337,7 +337,7 @@
                         </svg>
                     </div>
                     <h3 class="text-base font-serif font-bold text-white">Garansi Ganti Baru Tanpa Syarat</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
                         Apabila botol mengalami kerusakan atau cacat saat proses transit, kami kirimkan unit baru seketika lengkap dengan doa pembersihan ulang.
                     </p>
                 </div>

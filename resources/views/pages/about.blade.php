@@ -32,9 +32,9 @@
 
             <div class="border-t border-b border-gold-400/15 py-8 my-8 text-center max-w-3xl mx-auto">
                 <p class="text-white font-serif text-base sm:text-lg tracking-wide">
-                    Orang Nusantara mengenalnya melalui satu kata sederhana: <span class="text-gold-400 font-bold glow-gold">ASIH</span>.
+                    Orang Sunda mengenalnya melalui satu kata sederhana: <span class="text-gold-400 font-bold glow-gold">ASIH</span>.
                 </p>
-                <p class="text-gray-400 mt-2 text-xs sm:text-sm">
+                <p class="text-gray-300 mt-2 text-sm sm:text-base leading-relaxed">
                     Asih bukan sekadar mencintai. Ia adalah rasa yang membuat manusia mendekat, menjaga, mengingat, dan meninggalkan kebaikan dalam hati manusia lainnya.
                 </p>
             </div>
@@ -43,29 +43,29 @@
                 <div class="space-y-4">
                     <h3 class="text-xl font-serif text-gold-400 tracking-wide">Dari ASIH Menjadi ASYIHAN</h3>
                     <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                        Dari ASIH, lahirlah <strong class="text-white font-medium">ASYIHAN</strong>. Sebuah kata dari tanah Nusantara yang sejak lama membawa makna tentang rasa, pesona, dan daya yang membuat seseorang dikenang.
+                        Dari ASIH, lahirlah <strong class="text-white font-medium">ASYIHAN</strong>. Sebuah kata dari tanah Sunda yang sejak lama membawa makna tentang rasa, pesona, dan daya yang membuat seseorang dikenang.
                     </p>
-                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                    <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
                         Kemudian kami memberinya sebuah perjalanan baru: <strong class="text-gold-300">ASYIHAN menjadi ASYIHAN</strong>.
                     </p>
                 </div>
                 <div class="border border-gold-400/20 rounded-xl p-6 text-center">
                     <div class="text-2xl sm:text-3xl font-serif text-gold-400 mb-2 whitespace-nowrap overflow-hidden"><span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">S</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">Y</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">I</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">H</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">N</span></div>
                     <p class="text-[11px] text-gray-400 italic">
-                        Sebuah nama yang akarnya tetap berpijak di tanah Nusantara, tetapi aromanya mengembara jauh menuju negeri-negeri tempat Oud dibakar, Musk diwariskan, Amber dihangatkan, dan wewangian menjadi bagian dari kehormatan serta identitas seseorang.
+                        Sebuah nama yang akarnya tetap berpijak di tanah Sunda, tetapi aromanya mengembara jauh menuju negeri-negeri tempat Oud dibakar, Musk diwariskan, Amber dihangatkan, dan wewangian menjadi bagian dari kehormatan serta identitas seseorang.
                     </p>
                 </div>
             </div>
 
             <div class="space-y-4 pt-4">
-                <h3 class="text-xl font-serif text-gold-400 tracking-wide">Mengapa Aroma Kita Harus Sama?</h3>
-                <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                <h3 class="text-xl sm:text-2xl font-serif text-gold-400 tracking-wide">Mengapa Aroma Kita Harus Sama?</h3>
+                <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
                     ASYIHAN percaya bahwa kemewahan sejati bukanlah tentang memakai aroma yang sama dengan banyak orang. Sebab setiap manusia dilahirkan berbeda.
                 </p>
-                <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
                     Kita datang dengan tanggal yang berbeda. Membawa angka yang berbeda. Menjalani perjalanan yang berbeda. Memiliki kekuatan, kelembutan, luka, keberanian, dan impian yang berbeda.
                 </p>
-                <p class="text-xs sm:text-sm text-gold-300 font-medium">
+                <p class="text-sm sm:text-base text-gold-300 font-medium leading-relaxed">
                     Di ASYIHAN, angka bukanlah sekadar angka. Ia adalah pintu untuk memahami karakter.
                 </p>
             </div>
@@ -77,7 +77,7 @@
         <div class="text-center mb-8">
             <span class="text-xs uppercase tracking-[0.25em] text-gold-400 font-serif">The Olfactory Translation</span>
             <h2 class="text-2xl font-serif text-white tracking-wide mt-1">Karakter Diterjemahkan Menjadi Aroma</h2>
-            <p class="text-gray-400 text-xs mt-2">Setiap elemen alam merepresentasikan kedalaman jiwa manusia.</p>
+            <p class="text-gray-300 text-sm mt-2">Setiap elemen alam merepresentasikan kedalaman jiwa manusia.</p>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -90,8 +90,8 @@
                         <line x1="4" y1="20" x2="20" y2="20" stroke-linecap="round" opacity="0.5"/>
                     </svg>
                 </span>
-                <h4 class="font-serif text-gold-300 text-sm">KAYU</h4>
-                <p class="text-[11px] text-gray-400 mt-1">Untuk Keteguhan & Ketabahan</p>
+                <h4 class="font-serif text-gold-300 text-base font-medium">KAYU</h4>
+                <p class="text-xs sm:text-sm text-gray-300 mt-1">Untuk Keteguhan & Ketabahan</p>
             </div>
             <div class="p-4 rounded-xl border border-gold-400/15 text-center">
                 <span class="text-2xl mb-2 block text-gold-400">
@@ -102,8 +102,8 @@
                         <path d="M8 20c0 1.1 1.8 2 4 2s4-.9 4-2" stroke-linecap="round" opacity="0.6"/>
                     </svg>
                 </span>
-                <h4 class="font-serif text-gold-300 text-sm">OUD</h4>
-                <p class="text-[11px] text-gray-400 mt-1">Untuk Kedalaman & Spiritual</p>
+                <h4 class="font-serif text-gold-300 text-base font-medium">OUD</h4>
+                <p class="text-xs sm:text-sm text-gray-300 mt-1">Untuk Kedalaman & Spiritual</p>
             </div>
             <div class="p-4 rounded-xl border border-gold-400/15 text-center">
                 <span class="text-2xl mb-2 block text-gold-400">
@@ -114,8 +114,8 @@
                         <path d="M5.64 5.64l2.12 2.12m8.48 8.48l2.12 2.12M5.64 18.36l2.12-2.12m8.48-8.48l2.12-2.12" stroke-linecap="round" opacity="0.25"/>
                     </svg>
                 </span>
-                <h4 class="font-serif text-gold-300 text-sm">AMBER</h4>
-                <p class="text-[11px] text-gray-400 mt-1">Untuk Kehangatan & Daya Tarik</p>
+                <h4 class="font-serif text-gold-300 text-base font-medium">AMBER</h4>
+                <p class="text-xs sm:text-sm text-gray-300 mt-1">Untuk Kehangatan & Daya Tarik</p>
             </div>
             <div class="p-4 rounded-xl border border-gold-400/15 text-center">
                 <span class="text-2xl mb-2 block text-gold-400">
@@ -125,8 +125,8 @@
                         <path d="M9 11c0 0 1.5 1 3 1s3-1 3-1" stroke-linecap="round" opacity="0.4"/>
                     </svg>
                 </span>
-                <h4 class="font-serif text-gold-300 text-sm">MUSK</h4>
-                <p class="text-[11px] text-gray-400 mt-1">Untuk Keintiman & Memori</p>
+                <h4 class="font-serif text-gold-300 text-base font-medium">MUSK</h4>
+                <p class="text-xs sm:text-sm text-gray-300 mt-1">Untuk Keintiman & Memori</p>
             </div>
             <div class="p-4 rounded-xl border border-gold-400/15 text-center">
                 <span class="text-2xl mb-2 block text-gold-400">
@@ -139,8 +139,8 @@
                         <path d="M16 8c1 1 2 3 2 5s-1 4-2 6" stroke-linecap="round" opacity="0.35"/>
                     </svg>
                 </span>
-                <h4 class="font-serif text-gold-300 text-sm">REMPAH</h4>
-                <p class="text-[11px] text-gray-400 mt-1">Untuk Keberanian & Semangat</p>
+                <h4 class="font-serif text-gold-300 text-base font-medium">REMPAH</h4>
+                <p class="text-xs sm:text-sm text-gray-300 mt-1">Untuk Keberanian & Semangat</p>
             </div>
             <div class="p-4 rounded-xl border border-gold-400/15 text-center">
                 <span class="text-2xl mb-2 block text-gold-400">
@@ -150,8 +150,8 @@
                         <path d="M9 15c0 0 1.2 1 3 1s3-1 3-1" stroke-linecap="round" opacity="0.3"/>
                     </svg>
                 </span>
-                <h4 class="font-serif text-gold-300 text-sm">BUNGA</h4>
-                <p class="text-[11px] text-gray-400 mt-1">Untuk Kelembutan & Kasih Sayang</p>
+                <h4 class="font-serif text-gold-300 text-base font-medium">BUNGA</h4>
+                <p class="text-xs sm:text-sm text-gray-300 mt-1">Untuk Kelembutan & Kasih Sayang</p>
             </div>
         </div>
     </section>
@@ -170,8 +170,8 @@
                     A
                 </div>
                 <div>
-                    <h4 class="font-serif text-white text-sm">Huruf A — Awal & Authenticity</h4>
-                    <p class="text-xs text-gray-400 font-light mt-1">
+                    <h4 class="font-serif text-white text-base font-medium">Huruf A — Awal & Authenticity</h4>
+                    <p class="text-xs sm:text-sm text-gray-300 font-light mt-1 leading-relaxed">
                         Simbol perjalanan menemukan diri sendiri, keberanian untuk menjadi autentik dan merintis babak kehidupan baru.
                     </p>
                 </div>
@@ -182,8 +182,8 @@
                     ◯
                 </div>
                 <div>
-                    <h4 class="font-serif text-white text-sm">Lingkaran — Keutuhan Diri</h4>
-                    <p class="text-xs text-gray-400 font-light mt-1">
+                    <h4 class="font-serif text-white text-base font-medium">Lingkaran — Keutuhan Diri</h4>
+                    <p class="text-xs sm:text-sm text-gray-300 font-light mt-1 leading-relaxed">
                         Menggambarkan keutuhan diri, siklus kehidupan yang tanpa awal dan akhir, serta harmoni batin yang tak terputus.
                     </p>
                 </div>
@@ -194,8 +194,8 @@
                     1-9
                 </div>
                 <div>
-                    <h4 class="font-serif text-white text-sm">Angka 1–9 — Sembilan Arketipe</h4>
-                    <p class="text-xs text-gray-400 font-light mt-1">
+                    <h4 class="font-serif text-white text-base font-medium">Angka 1–9 — Sembilan Arketipe</h4>
+                    <p class="text-xs sm:text-sm text-gray-300 font-light mt-1 leading-relaxed">
                         Sembilan pola dasar karakter manusia yang menjadi fondasi personalisasi wewangian ASYIHAN.
                     </p>
                 </div>
@@ -206,8 +206,8 @@
                     ✦
                 </div>
                 <div>
-                    <h4 class="font-serif text-white text-sm">Sentuhan Emas — Nilai Abadi</h4>
-                    <p class="text-xs text-gray-400 font-light mt-1">
+                    <h4 class="font-serif text-white text-base font-medium">Sentuhan Emas — Nilai Abadi</h4>
+                    <p class="text-xs sm:text-sm text-gray-300 font-light mt-1 leading-relaxed">
                         Menggambarkan sesuatu yang bernilai, personal, dan timeless: setiap manusia mempunyai kemewahan batinnya sendiri.
                     </p>
                 </div>
@@ -220,8 +220,8 @@
         <h3 class="text-2xl sm:text-3xl font-serif text-gold-400 tracking-[0.25em] mb-4 glow-gold">
             THE ESSENCE OF YOU
         </h3>
-        <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto font-light leading-relaxed mb-8">
-            Diciptakan bukan untuk membuatmu menjadi orang lain.<br class="hidden sm:inline">
+        <p class="text-gray-300 text-sm max-w-xl mx-auto font-light leading-relaxed mb-6">
+            Diciptakan bukan untuk membuatmu menjadi orang lain.<br>
             Tetapi untuk mengingatkan dunia tentang siapa dirimu.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xs sm:max-w-none mx-auto w-full">

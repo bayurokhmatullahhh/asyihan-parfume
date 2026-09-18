@@ -38,7 +38,7 @@
             </h1>
 
             {{-- Subtitle --}}
-            <p class="text-gray-300/90 font-light text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed mb-6">
+            <p class="text-gray-300/90 font-light text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed mb-6">
                 Masukkan nama lengkap dan tanggal lahirmu untuk menemukan angka inti kelahiran, arketipe kepribadian, dan formula wewangian ASYIHAN yang selaras dengan getaran jiwamu.
             </p>
 
@@ -65,7 +65,7 @@
                     {{-- Form Header --}}
                     <div class="flex items-center justify-between pb-4 mb-6 border-b border-gold-400/20">
                         <div>
-                            <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/70 font-mono block mb-1">PENGHITUNGAN INTI</span>
+                            <span class="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold-400/80 font-mono block mb-1">PENGHITUNGAN INTI</span>
                             <h2 class="font-serif text-white text-lg sm:text-xl font-medium tracking-wide">
                                 Formulir Resonansi Jiwa
                             </h2>
@@ -83,35 +83,35 @@
 
                         {{-- Nama Lengkap --}}
                         <div>
-                            <label for="calc_name" class="block text-[10px] uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
+                            <label for="calc_name" class="block text-xs sm:text-sm uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
                                 Nama Lengkap (Sesuai Akta / KTP)
                             </label>
                             <input id="calc_name" name="name" type="text" value="" placeholder="Contoh: BudiSantoso" required
-                                class="w-full py-3 px-4 text-sm rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                class="w-full py-3 px-4 text-sm sm:text-base rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                         </div>
 
                         {{-- Email & Nomor Telepon --}}
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                             <div>
-                                <label for="calc_email" class="block text-[10px] uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
+                                <label for="calc_email" class="block text-xs sm:text-sm uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
                                     Email
                                 </label>
                                 <input id="calc_email" name="email" type="email" value="" placeholder="nama@domain.com" required
-                                    class="w-full py-3 px-4 text-sm rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                    class="w-full py-3 px-4 text-sm sm:text-base rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                             </div>
                             <div>
-                                <label for="calc_phone" class="block text-[10px] uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
+                                <label for="calc_phone" class="block text-xs sm:text-sm uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
                                     Nomor Telepon / WhatsApp
                                 </label>
                                 <input id="calc_phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]*" value="" placeholder="Contoh: 081234567890" required
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-                                    class="w-full py-3 px-4 text-sm rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                    class="w-full py-3 px-4 text-sm sm:text-base rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
                             </div>
                         </div>
 
                         {{-- Tanggal Lahir (3 Kolom: DD - MM - YYYY) --}}
                         <div>
-                            <label class="block text-[10px] uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
+                            <label class="block text-xs sm:text-sm uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
                                 Tanggal Lahir (Hari - Bulan - Tahun)
                             </label>
                             <div class="grid grid-cols-3 gap-3">
@@ -119,28 +119,28 @@
                                 <div>
                                     <input id="calc_day" type="number" min="1" max="31" value="" placeholder="DD" required
                                         class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
-                                    <span class="block text-[9px] uppercase tracking-widest text-center text-gray-400 mt-1">Tanggal</span>
+                                    <span class="block text-xs uppercase tracking-widest text-center text-gray-400 mt-1">Tanggal</span>
                                 </div>
 
                                 {{-- Bulan (MM) --}}
                                 <div>
                                     <input id="calc_month" type="number" min="1" max="12" value="" placeholder="MM" required
                                         class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
-                                    <span class="block text-[9px] uppercase tracking-widest text-center text-gray-400 mt-1">Bulan</span>
+                                    <span class="block text-xs uppercase tracking-widest text-center text-gray-400 mt-1">Bulan</span>
                                 </div>
 
                                 {{-- Tahun (YYYY) --}}
                                 <div>
                                     <input id="calc_year" type="number" min="1920" max="2030" value="" placeholder="YYYY" required
                                         class="w-full py-3 px-2 text-center text-base sm:text-lg font-mono font-medium rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
-                                    <span class="block text-[9px] uppercase tracking-widest text-center text-gray-400 mt-1">Tahun</span>
+                                    <span class="block text-xs uppercase tracking-widest text-center text-gray-400 mt-1">Tahun</span>
                                 </div>
                             </div>
                         </div>
 
                         {{-- Calculation Breakdown Preview --}}
                         <div class="p-2.5 rounded-lg bg-[#050505] border border-gold-400/30 text-center min-h-[38px] flex items-center justify-center">
-                            <p class="text-[10px] text-gold-400/70 font-mono tracking-wider" id="calc-preview-text">
+                            <p class="text-xs sm:text-sm text-gold-400/80 font-mono tracking-wider" id="calc-preview-text">
                                 Masukkan tanggal lahir Anda untuk melihat reduksi angka Pythagoras
                             </p>
                         </div>
@@ -180,8 +180,8 @@
                             1
                         </div>
                         <div>
-                            <h4 class="text-xs font-medium text-white tracking-wide">Reduksi Semua Angka Kelahiran</h4>
-                            <p class="text-[11px] text-gray-400 font-light mt-0.5 leading-relaxed">
+                            <h4 class="text-xs sm:text-sm font-medium text-white tracking-wide">Reduksi Semua Angka Kelahiran</h4>
+                            <p class="text-xs sm:text-sm text-gray-300 font-light mt-0.5 leading-relaxed">
                                 Hari, bulan, dan tahun masing-masing dijumlahkan hingga menghasilkan 1 digit angka (1–9).
                             </p>
                         </div>
@@ -193,8 +193,8 @@
                             2
                         </div>
                         <div>
-                            <h4 class="text-xs font-medium text-white tracking-wide">Penyatuan Energi (1 hingga 9)</h4>
-                            <p class="text-[11px] text-gray-400 font-light mt-0.5 leading-relaxed">
+                            <h4 class="text-xs sm:text-sm font-medium text-white tracking-wide">Penyatuan Energi (1 hingga 9)</h4>
+                            <p class="text-xs sm:text-sm text-gray-300 font-light mt-0.5 leading-relaxed">
                                 Hasil akhir adalah esensi jiwamu yang terhubung langsung dengan formula wewangian ASYIHAN.
                             </p>
                         </div>
@@ -202,8 +202,8 @@
 
                     {{-- Highlight Note --}}
                     <div class="p-3.5 rounded-xl bg-[#050505] border border-gold-400/30 flex items-start gap-2.5 mt-2">
-                        <span class="text-gold-400 text-xs mt-0.5 shrink-0">✦</span>
-                        <p class="text-[11px] text-gray-300 font-light leading-relaxed">
+                        <span class="text-gold-400 text-xs sm:text-sm mt-0.5 shrink-0">✦</span>
+                        <p class="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
                             <strong class="text-gold-300 font-medium">Angka Inti (Soul Core)</strong> adalah cetak biru energi bawaan. Memadukannya dengan wewangian resonan membantu amplifikasi vibrasi positif dalam hidup.
                         </p>
                     </div>
@@ -468,13 +468,13 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 mb-20 sm:mb-28">
         {{-- Section Header --}}
         <div class="text-center mb-12 sm:mb-16">
-            <span class="text-[10px] uppercase tracking-[0.3em] text-gold-400/80 font-mono block mb-2">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-400/90 font-mono block mb-2">
                 ARKETIPE NUMEROLOGI
             </span>
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-serif text-white tracking-wide font-normal">
                 9 Dimensi Arketipe Karakter
             </h2>
-            <p class="text-gray-400 text-xs sm:text-sm font-light mt-2.5 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-gray-300 text-sm sm:text-base font-light mt-2.5 max-w-2xl mx-auto leading-relaxed">
                 Setiap jiwa memiliki frekuensi unik dari sembilan angka dasar Pythagoras. Kenali dirimu, temukan potensimu, dan perkuat auramu dengan wewangian yang tepat.
             </p>
         </div>
@@ -494,7 +494,7 @@
                                      alt="Angka {{ $arch['number'] }}"
                                      class="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(197,160,89,0.5)]">
                             </div>
-                            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] px-2.5 py-1 rounded bg-[#050505] border border-gold-400/30 text-gold-300 font-mono">
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 rounded bg-[#050505] border border-gold-400/30 text-gold-300 font-mono">
                                 {{ $arch['badge'] }}
                             </span>
                         </div>
@@ -505,23 +505,23 @@
                         </h3>
 
                         {{-- Description --}}
-                        <p class="text-xs text-gray-400 font-light leading-relaxed mb-4">
+                        <p class="text-sm text-gray-300 font-light leading-relaxed mb-4">
                             {{ $arch['short_desc'] }}
                         </p>
 
                         {{-- Inner Inspirational Figure Box --}}
                         <div class="p-3 rounded-xl border border-gold-400/30 bg-[#050505] mb-4 space-y-1.5">
-                            <span class="text-[9px] uppercase tracking-wider text-gold-400/80 font-mono block">
+                            <span class="text-[10px] uppercase tracking-wider text-gold-400/80 font-mono block">
                                 TOKOH INSPIRATIF SEJIWA:
                             </span>
                             <div class="flex flex-wrap gap-1.5">
                                 @foreach(array_slice($arch['tokoh_inspiratif'] ?? [], 0, 3) as $tokoh)
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-[#050505] border border-gold-400/30 text-gold-300 font-light">
+                                    <span class="text-xs px-2 py-0.5 rounded bg-[#050505] border border-gold-400/30 text-gold-300 font-light">
                                         {{ $tokoh['nama'] }}
                                     </span>
                                 @endforeach
                                 @if(count($arch['tokoh_inspiratif'] ?? []) > 3)
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-[#050505] border border-gold-400/20 text-gray-400 font-light">
+                                    <span class="text-xs px-2 py-0.5 rounded bg-[#050505] border border-gold-400/20 text-gray-400 font-light">
                                         +{{ count($arch['tokoh_inspiratif']) - 3 }} lainnya
                                     </span>
                                 @endif
@@ -532,7 +532,7 @@
                     {{-- Bottom Action Link --}}
                     <div class="pt-3 border-t border-gold-400/20 flex items-center justify-between">
                         <a href="{{ route('essence.detail', $arch['slug']) }}"
-                           class="text-[10px] sm:text-[11px] text-gold-400 uppercase tracking-wider font-mono inline-flex items-center gap-1 hover:text-gold-300 transition-colors">
+                           class="text-xs text-gold-400 uppercase tracking-wider font-mono inline-flex items-center gap-1 hover:text-gold-300 transition-colors">
                             <span>LIHAT DETAIL ARKETIPE</span>
                             <span>➔</span>
                         </a>
@@ -565,7 +565,7 @@
             </blockquote>
 
             {{-- Subtitle --}}
-            <p class="text-gray-400 text-xs sm:text-sm font-light max-w-xl mx-auto leading-relaxed">
+            <p class="text-gray-300 text-sm sm:text-base font-light max-w-xl mx-auto leading-relaxed">
                 Racikan wewangian kami disesuaikan secara khusus menurut getaran frekuensi jiwamu, menghidupkan daya magnetis serta ketenangan batin secara bersamaan.
             </p>
 
