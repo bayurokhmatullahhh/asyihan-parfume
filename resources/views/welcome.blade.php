@@ -82,7 +82,7 @@
                         <span class="text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-gold-300 italic font-serif block animate-text-reveal" style="animation-delay: 0.7s;">HAS A SCENT.</span>
                     </h1>
 
-                    <p class="text-gray-300 font-light text-xs sm:text-sm lg:text-base leading-relaxed max-w-lg pt-2 animate-text-reveal mx-auto lg:mx-0" style="animation-delay: 0.9s;">
+                    <p class="text-gray-300 font-light text-sm sm:text-base lg:text-lg leading-relaxed max-w-lg pt-2 animate-text-reveal mx-auto lg:mx-0" style="animation-delay: 0.9s;">
                         Discover the fragrance crafted from the essence of your character. Born from Asih, guided by numerology, crafted for eternity.
                     </p>
 
@@ -132,7 +132,7 @@
             <h2 class="text-base sm:text-lg lg:text-2xl font-serif text-gold-400 tracking-[0.2em] uppercase glow-gold font-medium mb-3">
                 BORN FROM ASIH. CRAFTED FOR THE SOUL.
             </h2>
-            <p class="text-gray-300 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto font-light leading-relaxed mb-5">
+            <p class="text-gray-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto font-light leading-relaxed mb-5">
                 ASYIHAN adalah pertemuan antara kearifan Sunda, kemewahan tradisi wewangian Timur Tengah, dan keunikan karakter setiap manusia.
             </p>
 
@@ -178,7 +178,7 @@
                 <h2 class="text-xl sm:text-2xl lg:text-3xl font-serif text-gold-400 tracking-[0.2em] uppercase glow-gold font-medium">
                     ESSENCE COLLECTION
                 </h2>
-                <p class="text-gray-400 text-xs sm:text-sm font-light mt-1.5">
+                <p class="text-gray-300 text-sm sm:text-base font-light mt-1.5">
                     9 Essence. 9 Karakter. 9 Aroma. Temukan yang paling sesuai dengan dirimu.
                 </p>
             </div>
@@ -232,7 +232,7 @@
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-serif text-gold-400 tracking-[0.2em] uppercase glow-gold font-medium mb-3">
                 CALCULATOR NUMEROLOGY
             </h2>
-            <p class="text-gray-300 font-light text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+            <p class="text-gray-300 font-light text-sm sm:text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
                 Temukan angka intimu, selaraskan energi jiwamu, dan temukan formula aroma ASYIHAN yang ditakdirkan untukmu.
             </p>
             <div class="sacred-divider mt-4 max-w-xs mx-auto">
@@ -670,7 +670,7 @@
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-serif text-gold-400 tracking-[0.25em] uppercase glow-gold font-medium mb-4">
                     FILOSOFI ASIH
                 </h2>
-                <p class="text-gray-300 text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto">
+                <p class="text-gray-300 text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-2xl mx-auto">
                     Lebih dari sekadar wewangian, ASYIHAN adalah sebuah perjalanan spiritual. Terlahir dari kearifan Sunda Kuno, memadukan tradisi mistis dengan kemewahan perfumery Timur Tengah.
                 </p>
 
@@ -684,7 +684,7 @@
         {{-- 2. Sub-section: Asal Mula 'Asih' --}}
         <div class="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div class="lg:col-span-6 space-y-4">
-                <div class="rounded-2xl p-6 sm:p-8 border border-gold-400/20 space-y-4 text-xs sm:text-sm text-gray-300 font-light leading-relaxed relative overflow-hidden">
+                <div class="rounded-2xl p-6 sm:p-8 border border-gold-400/20 space-y-4 text-sm sm:text-base text-gray-300 font-light leading-relaxed relative overflow-hidden">
                     <h3 class="text-xl sm:text-2xl font-serif text-gold-400 font-medium tracking-wide mb-2">
                         Asal Mula 'Asih'
                     </h3>
@@ -727,7 +727,7 @@
                 <h3 class="text-2xl sm:text-3xl font-serif text-gold-400 tracking-[0.2em] font-medium uppercase glow-gold">
                     Geometri Suci
                 </h3>
-                <p class="text-gray-400 text-xs sm:text-sm font-light mt-1.5">
+                <p class="text-gray-300 text-sm sm:text-base font-light mt-1.5">
                     Mengungkap makna tersembunyi dibalik lambang ASYIHAN.
                 </p>
             </div>
@@ -740,10 +740,10 @@
                         A
                         <div class="absolute inset-[-4px] rounded-full border border-dashed border-gold-400/15 animate-sacred-rotate"></div>
                     </div>
-                    <h4 class="font-serif text-gold-300 text-sm font-medium mb-2 uppercase tracking-wider relative z-10">
+                    <h4 class="font-serif text-gold-300 text-base font-medium mb-2 uppercase tracking-wider relative z-10">
                         Aksara Awal
                     </h4>
-                    <p class="text-gray-400 text-xs font-light leading-relaxed relative z-10">
+                    <p class="text-gray-300 text-sm font-light leading-relaxed relative z-10">
                         Huruf 'A' merepresentasikan awal, sebuah pintu gerbang menuju penemuan diri. Dalam konteks spiritual, ia adalah simbol dari 'Alif', fondasi dari segala penciptaan.
                     </p>
                 </div>
@@ -754,10 +754,10 @@
                         ◯
                         <div class="absolute inset-[-4px] rounded-full border border-dashed border-gold-400/15 animate-sacred-rotate-reverse"></div>
                     </div>
-                    <h4 class="font-serif text-gold-300 text-sm font-medium mb-2 uppercase tracking-wider relative z-10">
+                    <h4 class="font-serif text-gold-300 text-base font-medium mb-2 uppercase tracking-wider relative z-10">
                         Lingkaran Keabadian
                     </h4>
-                    <p class="text-gray-400 text-xs font-light leading-relaxed relative z-10">
+                    <p class="text-gray-300 text-sm font-light leading-relaxed relative z-10">
                         Lingkaran sempurna melambangkan kesatuan, siklus kehidupan yang tak terputus, dan energi universal yang melingkupi kita. Ia mewakili ketidakterbatasan esensi jiwa.
                     </p>
                 </div>
@@ -768,10 +768,10 @@
                         1-9
                         <div class="absolute inset-[-4px] rounded-lg border border-dashed border-gold-400/15 animate-sacred-rotate"></div>
                     </div>
-                    <h4 class="font-serif text-gold-300 text-sm font-medium mb-2 uppercase tracking-wider relative z-10">
+                    <h4 class="font-serif text-gold-300 text-base font-medium mb-2 uppercase tracking-wider relative z-10">
                         Numerologi 1-9
                     </h4>
-                    <p class="text-gray-400 text-xs font-light leading-relaxed relative z-10">
+                    <p class="text-gray-300 text-sm font-light leading-relaxed relative z-10">
                         Angka-angka ini bukan sekadar urutan, melainkan representasi dari sembilan karakter dasar manusia dalam numerologi. Setiap angka memiliki frekuensi dan aromanya sendiri.
                     </p>
                 </div>
@@ -787,10 +787,10 @@
                     <circle cx="450" cy="50" r="20" stroke="currentColor" stroke-width="0.3" class="text-gold-400"/>
                 </svg>
 
-                <h4 class="font-serif text-gold-300 text-sm font-medium mb-2 uppercase tracking-wider relative z-10">
+                <h4 class="font-serif text-gold-300 text-base font-medium mb-2 uppercase tracking-wider relative z-10">
                     Garis Geometris
                 </h4>
-                <p class="text-gray-400 text-xs font-light leading-relaxed relative z-10">
+                <p class="text-gray-300 text-sm font-light leading-relaxed relative z-10">
                     Garis-garis yang menghubungkan elemen-elemen ini menggambarkan jalinan takdir. Ia menunjukkan bagaimana karakter kita (1-9) berinteraksi dengan energi semesta (Lingkaran) melalui titik awal kesadaran (A).
                 </p>
             </div>
