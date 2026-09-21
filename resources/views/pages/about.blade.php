@@ -32,7 +32,7 @@
 
             <div class="border-t border-b border-gold-400/15 py-8 my-8 text-center max-w-3xl mx-auto">
                 <p class="text-white font-serif text-base sm:text-lg tracking-wide">
-                    Orang Sunda mengenalnya melalui satu kata sederhana: <span class="text-gold-400 font-bold glow-gold">ASIH</span>.
+                    Orang Nusantara mengenalnya melalui satu kata sederhana: <span class="text-gold-400 font-bold glow-gold">ASIH</span>.
                 </p>
                 <p class="text-gray-300 mt-2 text-sm sm:text-base leading-relaxed">
                     Asih bukan sekadar mencintai. Ia adalah rasa yang membuat manusia mendekat, menjaga, mengingat, dan meninggalkan kebaikan dalam hati manusia lainnya.
@@ -43,7 +43,7 @@
                 <div class="space-y-4">
                     <h3 class="text-xl font-serif text-gold-400 tracking-wide">Dari ASIH Menjadi ASYIHAN</h3>
                     <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                        Dari ASIH, lahirlah <strong class="text-white font-medium">ASYIHAN</strong>. Sebuah kata dari tanah Sunda yang sejak lama membawa makna tentang rasa, pesona, dan daya yang membuat seseorang dikenang.
+                        Dari ASIH, lahirlah <strong class="text-white font-medium">ASYIHAN</strong>. Sebuah kata dari tanah Nusantara yang sejak lama membawa makna tentang rasa, pesona, dan daya yang membuat seseorang dikenang.
                     </p>
                     <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
                         Kemudian kami memberinya sebuah perjalanan baru: <strong class="text-gold-300">ASYIHAN menjadi ASYIHAN</strong>.
@@ -52,7 +52,7 @@
                 <div class="border border-gold-400/20 rounded-xl p-6 text-center">
                     <div class="text-2xl sm:text-3xl font-serif text-gold-400 mb-2 whitespace-nowrap overflow-hidden"><span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">S</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">Y</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">I</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">H</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">N</span></div>
                     <p class="text-[11px] text-gray-400 italic">
-                        Sebuah nama yang akarnya tetap berpijak di tanah Sunda, tetapi aromanya mengembara jauh menuju negeri-negeri tempat Oud dibakar, Musk diwariskan, Amber dihangatkan, dan wewangian menjadi bagian dari kehormatan serta identitas seseorang.
+                        Sebuah nama yang akarnya tetap berpijak di tanah Nusantara, tetapi aromanya mengembara jauh menuju negeri-negeri tempat Oud dibakar, Musk diwariskan, Amber dihangatkan, dan wewangian menjadi bagian dari kehormatan serta identitas seseorang.
                     </p>
                 </div>
             </div>

@@ -133,7 +133,7 @@
                 BORN FROM ASIH. CRAFTED FOR THE SOUL.
             </h2>
             <p class="text-gray-300 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto font-light leading-relaxed mb-5">
-                ASYIHAN adalah pertemuan antara kearifan Sunda, kemewahan tradisi wewangian Timur Tengah, dan keunikan karakter setiap manusia.
+                ASYIHAN adalah pertemuan antara kearifan Nusantara, kemewahan tradisi wewangian Timur Tengah, dan keunikan karakter setiap manusia.
             </p>
 
             {{-- Mystical Symbol Row --}}
@@ -671,7 +671,7 @@
                     FILOSOFI ASIH
                 </h2>
                 <p class="text-gray-300 text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto">
-                    Lebih dari sekadar wewangian, ASYIHAN adalah sebuah perjalanan spiritual. Terlahir dari kearifan Sunda Kuno, memadukan tradisi mistis dengan kemewahan perfumery Timur Tengah.
+                    Lebih dari sekadar wewangian, ASYIHAN adalah sebuah perjalanan spiritual. Terlahir dari kearifan Nusantara Kuno, memadukan tradisi mistis dengan kemewahan perfumery Timur Tengah.
                 </p>
 
                 {{-- Bottom Sacred Ornament --}}
@@ -706,7 +706,7 @@
 
             <div class="lg:col-span-6">
                 <div class="rounded-2xl border border-gold-400/20 overflow-hidden shadow-2xl h-full max-h-[380px] relative group">
-                    <img src="{{ asset('images/Background_asalmula.png') }}" alt="Asal Mula Asih - Manuskrip Sunda Kuno" class="w-full h-full object-cover rounded-2xl">
+                    <img src="{{ asset('images/Background_asalmula.png') }}" alt="Asal Mula Asih - Manuskrip Nusantara Kuno" class="w-full h-full object-cover rounded-2xl">
                     {{-- Hover Glow Overlay --}}
                     <div class="absolute inset-0 bg-gradient-to-t from-gold-400/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                     {{-- Corner Ornaments --}}
