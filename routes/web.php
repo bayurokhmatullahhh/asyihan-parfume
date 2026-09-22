@@ -29,6 +29,10 @@ Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 // Contact
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
+// Account
+Route::get('/account', [PageController::class, 'account'])->name('account');
+Route::get('/account/track/{orderId}', [PageController::class, 'trackPackage'])->name('account.track');
+
 // Legal Pages
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/terms-of-service', [PageController::class, 'termsOfService'])->name('terms-of-service');
