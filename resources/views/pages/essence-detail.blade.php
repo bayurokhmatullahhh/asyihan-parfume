@@ -68,6 +68,9 @@
                     <h1 class="text-2xl sm:text-4xl font-serif text-white tracking-wide glow-gold">
                         {{ $essence['essence_name'] }}
                     </h1>
+                    <div class="text-sm font-serif text-gold-400 font-medium mt-1">
+                        {{ $essence['name'] }}
+                    </div>
                     <p class="text-gold-300 text-sm font-light mt-1">
                         {{ implode(' • ', $essence['traits']) }}
                     </p>
@@ -112,12 +115,32 @@
                 </div>
 
                 {{-- Order Action --}}
-                <div class="pt-4 border-t border-gold-400/20 flex flex-wrap gap-4">
-                    <a href="{{ route('order', ['essence' => $essence['number']]) }}" class="btn-gold px-8 py-3.5 text-xs tracking-[0.2em] rounded-sm flex-1 text-center">
-                        Order Essence {{ $essence['number'] }} Sekarang
+                @php
+                    $product = null;
+                    try {
+                        if (\Illuminate\Support\Facades\Schema::hasTable('products')) {
+                            $product = \App\Models\Product::where('essence_number', $essence['number'])->first();
+                        }
+                    } catch (\Throwable $e) {
+                        $product = null;
+                    }
+                @endphp
+                <div class="pt-4 border-t border-gold-400/20 flex flex-wrap items-center gap-3">
+                    <a href="{{ route('order', ['essence' => $essence['number']]) }}" class="btn-gold px-6 py-3.5 text-xs tracking-[0.2em] rounded-sm flex-1 text-center font-bold text-black uppercase">
+                        Pesan Sekarang
                     </a>
-                    <a href="{{ route('calculator') }}" class="btn-gold-outline px-6 py-3.5 text-xs tracking-wider rounded-sm text-center">
-                        Cek Kecocokan Tanggal Lahir
+
+                    <button type="button" 
+                            onclick="window.addToCart({{ $product?->id ? $product->id : 'null' }}, {{ $essence['number'] }}, this)"
+                            class="flex-1 btn-gold-outline px-6 py-3.5 text-xs tracking-wider rounded-sm text-center flex items-center justify-center gap-2 hover:bg-gold-400/15 transition-all font-semibold cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                        <span>+ Masukkan ke Peti</span>
+                    </button>
+
+                    <a href="{{ route('calculator') }}" class="w-full sm:w-auto px-4 py-3.5 text-xs tracking-wider text-gray-400 hover:text-gold-300 text-center transition-colors">
+                        Cek Kecocokan Weton →
                     </a>
                 </div>
 

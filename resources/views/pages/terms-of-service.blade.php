@@ -67,7 +67,7 @@
                             </div>
                             <h4 class="font-serif text-white text-sm sm:text-base mb-2">Penggunaan Pribadi</h4>
                             <p class="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
-                                Konten &amp; hasil racikan hanya untuk penggunaan pribadi.
+                                Konten hanya untuk penggunaan pribadi dan non-komersial.
                             </p>
                         </div>
                     </div>

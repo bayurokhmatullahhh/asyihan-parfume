@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NumerologyLead;
 use App\Services\NumerologyService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -47,6 +48,23 @@ class NumerologyController extends Controller
                 $reading['core_number'],
                 $validated['birth_date']
             );
+
+            // Capture lead into database silently
+            try {
+                NumerologyLead::create([
+                    'full_name' => $validated['name'],
+                    'birth_date' => $validated['birth_date'],
+                    'phone' => $validated['phone'] ?? null,
+                    'email' => $validated['email'] ?? null,
+                    'core_number' => $reading['core_number'],
+                    'archetype_name' => $reading['archetype']['name'] ?? 'Essence '.$reading['core_number'],
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent(),
+                ]);
+            } catch (\Throwable $th) {
+                // Silently ignore to not disrupt calculator UX
+                report($th);
+            }
 
             return response()->json([
                 'success' => true,

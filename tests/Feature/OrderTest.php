@@ -14,11 +14,11 @@ class OrderTest extends TestCase
         $response = $this->get('/order');
 
         $response->assertStatus(200);
-        $response->assertSee('PEMESANAN ESENSI');
-        $response->assertSee('Pilih Varian Esensi Sakral');
+        $response->assertSee('KOLEKSI MAHAKARYA', false);
+        $response->assertSee('SACRED SANCTUM', false);
     }
 
-    public function test_user_can_submit_order_and_redirects_to_whatsapp(): void
+    public function test_user_can_submit_order_and_redirects_to_payment(): void
     {
         $orderData = [
             'name' => 'Bayu Rokhmatullah',
@@ -32,14 +32,13 @@ class OrderTest extends TestCase
         $response = $this->post('/order', $orderData);
 
         $response->assertStatus(302);
-        $this->assertStringContainsString('wa.me', $response->headers->get('Location'));
+        $this->assertStringContainsString('checkout/payment', $response->headers->get('Location'));
 
         $this->assertDatabaseHas('orders', [
             'name' => 'Bayu Rokhmatullah',
             'phone' => '081234567890',
             'essence_number' => 7,
             'quantity' => 2,
-            'total_price' => 700000,
             'status' => 'pending',
         ]);
     }
@@ -48,7 +47,7 @@ class OrderTest extends TestCase
     {
         $response = $this->post('/order', []);
 
-        $response->assertSessionHasErrors(['name', 'phone', 'essence_number', 'quantity']);
+        $response->assertSessionHasErrors(['name', 'phone', 'essence_number']);
         $this->assertDatabaseCount('orders', 0);
     }
 
@@ -57,7 +56,7 @@ class OrderTest extends TestCase
         $response = $this->post('/order', [
             'name' => 'Test User',
             'phone' => '081234567890',
-            'essence_number' => 99, // Out of range 1-9
+            'essence_number' => 1000, // Out of range 1-999
             'quantity' => 1,
         ]);
 

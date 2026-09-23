@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Product;
 use App\Services\NumerologyService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -63,25 +65,62 @@ class OrderController extends Controller
         $price = $essence['price'] ?? 350000;
         $shippingExtra = ($validated['expedition'] ?? '') === 'same_day' ? 150000 : 0;
         $totalPrice = ($price * $quantity) + $shippingExtra;
+        $essenceName = $essence['essence_name'] ?? ($essence['name'] ?? 'Unknown');
 
         $order = Order::create([
+            'user_id' => auth()->id(),
             'name' => $validated['name'],
             'phone' => $validated['phone'],
             'email' => $validated['email'] ?? null,
             'essence_number' => $validated['essence_number'],
-            'essence_name' => $essence['essence_name'] ?? ($essence['name'] ?? 'Unknown'),
+            'essence_name' => $essenceName,
             'quantity' => $quantity,
             'total_price' => $totalPrice,
-            'notes' => $validated['notes'] ?? $validated['address'] ?? null,
+            'address' => $validated['address'] ?? null,
+            'city' => $validated['city'] ?? null,
+            'province' => $validated['province'] ?? null,
+            'postal_code' => $validated['postal_code'] ?? null,
+            'expedition' => $validated['expedition'] ?? 'express',
+            'shipping_cost' => $shippingExtra,
+            'payment_method' => $validated['payment_method'] ?? 'qris',
+            'payment_status' => 'pending',
+            'craftsman_note' => $validated['craftsman_note'] ?? null,
+            'notes' => $validated['notes'] ?? null,
             'status' => 'pending',
         ]);
 
-        // Build WhatsApp message
-        $message = $this->buildWhatsAppMessage($order, $essence, $validated);
-        $phone = '6281234567890'; // Default WhatsApp number
-        $waUrl = 'https://wa.me/'.$phone.'?text='.urlencode($message);
+        // Create OrderItem record
+        $product = Product::where('essence_number', $validated['essence_number'])->first();
+        OrderItem::create([
+            'order_id' => $order->id,
+            'product_id' => $product?->id,
+            'product_name' => $essenceName,
+            'essence_number' => $validated['essence_number'],
+            'quantity' => $quantity,
+            'price' => $price,
+            'subtotal' => $price * $quantity,
+        ]);
 
-        return redirect()->away($waUrl);
+        // Store last order id in session for guest tracking access
+        session()->put('last_order_id', $order->id);
+
+        return redirect()->route('checkout.payment', $order)
+            ->with('success', "Pesanan #{$order->order_number} berhasil dibuat. Silakan selesaikan pembayaran sakral Anda.");
+    }
+
+    /**
+     * Display order detail and tracking.
+     */
+    public function show(Order $order): View
+    {
+        // Security check: If authenticated, must belong to user. If guest, check session
+        if (auth()->check() && $order->user_id && $order->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $order->loadMissing('items.product', 'user');
+
+        return view('orders.show', compact('order'));
     }
 
     /**

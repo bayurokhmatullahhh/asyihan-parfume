@@ -274,17 +274,30 @@
                             </div>
 
                             {{-- Bottom Row: Price & Order Action --}}
-                            <div class="pt-3 border-t border-gold-400/15 flex items-center justify-between gap-3">
+                            <div class="pt-3 border-t border-gold-400/15 flex items-center justify-between gap-2">
                                 <div>
                                     <span class="text-[9px] uppercase text-gray-400 tracking-widest font-mono block">INVESTASI JIWA</span>
-                                    <span class="text-base font-serif font-bold text-gold-300 glow-gold">Rp {{ number_format($item['price'], 0, ',', '.') }}</span>
+                                    <span class="text-sm sm:text-base font-serif font-bold text-gold-300 glow-gold">Rp {{ number_format($item['price'], 0, ',', '.') }}</span>
                                 </div>
                                 
-                                <button type="button" 
-                                        onclick="proceedToCheckout({{ $item['id'] }}, '{{ addslashes($item['label']) }}', '{{ addslashes($item['title']) }}', '{{ addslashes($item['short_notes']) }}', {{ $item['price'] }}, '{{ $item['image'] }}')"
-                                        class="btn-select-order-{{ $item['id'] }} btn-gold text-xs px-4 py-2.5 font-mono tracking-widest uppercase rounded text-black font-bold hover:scale-105 transition-all flex items-center gap-1 shadow-lg">
-                                    <span>BUAT PESANAN</span>
-                                </button>
+                                <div class="flex items-center gap-1.5">
+                                    {{-- Add to Cart Button --}}
+                                    <button type="button" 
+                                            onclick="window.addToCart(null, {{ $item['id'] }}, this)"
+                                            title="Masukkan ke Peti Persembahan"
+                                            class="w-9 h-9 rounded-lg border border-gold-400/40 bg-black/60 hover:bg-gold-400/15 text-gold-300 hover:text-gold-200 transition-all flex items-center justify-center p-2 group/cart shadow-md hover:border-gold-400">
+                                        <svg class="w-4 h-4 group-hover/cart:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                        </svg>
+                                    </button>
+
+                                    {{-- Direct Order / Sacred Checkout Button --}}
+                                    <button type="button" 
+                                            onclick="proceedToCheckout({{ $item['id'] }}, '{{ addslashes($item['label']) }}', '{{ addslashes($item['title']) }}', '{{ addslashes($item['short_notes']) }}', {{ $item['price'] }}, '{{ $item['image'] }}')"
+                                            class="btn-select-order-{{ $item['id'] }} btn-gold text-[11px] sm:text-xs px-3 sm:px-4 py-2 sm:py-2.5 font-mono tracking-widest uppercase rounded text-black font-bold hover:scale-105 transition-all flex items-center gap-1 shadow-lg">
+                                        <span>BUAT PESANAN</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 

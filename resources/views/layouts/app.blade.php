@@ -67,22 +67,73 @@
                 <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors">Contact</a>
             </nav>
 
-            {{-- Right Header Icons --}}
+            {{-- Right Header Icons & Auth --}}
             <div class="hidden sm:flex items-center gap-4 text-slate-300">
-                <a href="{{ route('order') }}" class="hover:text-gold-400 transition-colors p-1" aria-label="Shopping Bag / Order">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {{-- Cart Button with Badge --}}
+                @php
+                    $cartCount = 0;
+                    try {
+                        if (\Illuminate\Support\Facades\Schema::hasTable('carts')) {
+                            $cartCount = \App\Models\Cart::where(function($q) {
+                                if (auth()->check()) {
+                                    $q->where('user_id', auth()->id());
+                                } else {
+                                    $q->where('session_id', session()->getId());
+                                }
+                            })->sum('quantity');
+                        }
+                    } catch (\Throwable $e) {
+                        $cartCount = 0;
+                    }
+                @endphp
+                <a href="{{ route('cart.index') }}" class="relative hover:text-gold-400 transition-colors p-1.5 flex items-center group" aria-label="Keranjang Pesanan">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                     </svg>
+                    <span id="global-cart-badge" class="{{ $cartCount > 0 ? '' : 'hidden' }} absolute -top-1 -right-1.5 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow-md shadow-amber-500/40">
+                        {{ $cartCount }}
+                    </span>
                 </a>
-                <a href="{{ route('calculator') }}" class="hover:text-gold-400 transition-colors p-1" aria-label="Numerology Profile">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
-                </a>
+
+                @auth
+                    {{-- User Profile & Logout --}}
+                    <div class="relative group">
+                        <a href="{{ route('profile') }}" class="flex items-center gap-2 py-1 px-2.5 rounded-full border border-gold-400/30 bg-gold-400/5 hover:border-gold-400/60 hover:bg-gold-400/10 transition-all text-xs text-gold-300 tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                            <span class="max-w-[100px] truncate">{{ auth()->user()->name }}</span>
+                        </a>
+                        <div class="absolute right-0 mt-2 w-48 bg-[#0a0a0a] border border-gold-400/30 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.9)] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            @if(auth()->user()->isAdmin())
+                                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-xs text-amber-300 hover:bg-gold-400/10 transition-colors">
+                                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                    Gerbang Astral
+                                </a>
+                                <div class="border-t border-gold-400/10 my-1"></div>
+                            @endif
+                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-xs text-slate-300 hover:text-gold-300 hover:bg-gold-400/10 transition-colors">Profil Jiwa</a>
+                            <a href="{{ route('cart.index') }}" class="block px-4 py-2 text-xs text-slate-300 hover:text-gold-300 hover:bg-gold-400/10 transition-colors">Peti Persembahan</a>
+                            <div class="border-t border-gold-400/10 my-1"></div>
+                            <form action="{{ route('logout') }}" method="POST" class="w-full">
+                                @csrf
+                                <button type="submit" class="w-full text-left px-4 py-2 text-xs text-rose-400 hover:bg-rose-500/10 transition-colors">Keluar Portal</button>
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    {{-- Guest Auth Buttons --}}
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('login') }}" class="text-[11px] uppercase tracking-wider text-slate-300 hover:text-gold-300 px-3 py-1.5 transition-colors">
+                            Masuk
+                        </a>
+                        <a href="{{ route('register') }}" class="text-[11px] uppercase tracking-wider text-gold-300 border border-gold-400/40 hover:border-gold-400 hover:bg-gold-400/10 px-3 py-1.5 rounded-full transition-all">
+                            Daftar
+                        </a>
+                    </div>
+                @endauth
             </div>
 
             {{-- Mobile Menu Button --}}
-            <button id="mobile-menu-btn" class="lg:hidden text-gold-400 hover:text-white transition-colors" aria-label="Toggle menu">
+            <button id="mobile-menu-btn" class="lg:hidden text-gold-400 hover:text-white transition-colors p-1" aria-label="Toggle menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
                     <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
@@ -91,31 +142,88 @@
         </div>
 
         {{-- Mobile Menu --}}
-        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-72 h-screen bg-[#050505]/98 backdrop-blur-xl border-l border-gold-400/25 z-50 flex flex-col p-8 pt-20 lg:hidden shadow-2xl">
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-72 h-screen bg-[#050505]/98 backdrop-blur-xl border-l border-gold-400/25 z-50 flex flex-col p-8 pt-20 lg:hidden shadow-2xl overflow-y-auto">
             <button id="mobile-menu-close" class="absolute top-4 right-4 text-gold-400 hover:text-white transition-colors" aria-label="Close menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
 
-            <nav class="flex flex-col gap-5 text-xs uppercase tracking-[0.18em]" aria-label="Mobile Navigation">
-                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-3">Home</a>
-                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-3">About Asyihan</a>
-                <a href="{{ route('calculator') }}" class="{{ request()->routeIs('calculator') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-3">Calculator</a>
-                <a href="{{ route('collection') }}" class="{{ request()->routeIs('collection') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-3">Essence Collection</a>
-                <a href="{{ route('ajian') }}" class="{{ request()->routeIs('ajian') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-3">Ajian & Ritual</a>
-                <a href="{{ route('order') }}" class="{{ request()->routeIs('order') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-3">Order</a>
-                <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-3">Contact</a>
+            <nav class="flex flex-col gap-4 text-xs uppercase tracking-[0.18em]" aria-label="Mobile Navigation">
+                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Home</a>
+                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">About Asyihan</a>
+                <a href="{{ route('calculator') }}" class="{{ request()->routeIs('calculator') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Calculator</a>
+                <a href="{{ route('collection') }}" class="{{ request()->routeIs('collection') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Essence Collection</a>
+                <a href="{{ route('cart.index') }}" class="{{ request()->routeIs('cart.*') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5 flex items-center justify-between">
+                    <span>Keranjang</span>
+                    @if(isset($cartCount) && $cartCount > 0)
+                        <span class="bg-gold-400 text-black px-2 py-0.5 rounded-full text-[10px] font-bold">{{ $cartCount }}</span>
+                    @endif
+                </a>
+                <a href="{{ route('order') }}" class="{{ request()->routeIs('order') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Order</a>
+                <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Contact</a>
+
+                <div class="pt-4 border-t border-gold-400/20 flex flex-col gap-3">
+                    @auth
+                        @if(auth()->user()->isAdmin())
+                            <a href="{{ route('admin.dashboard') }}" class="text-amber-400 py-1.5 flex items-center gap-2">
+                                <span>⚡ Gerbang Astral (Admin)</span>
+                            </a>
+                        @endif
+                        <a href="{{ route('profile') }}" class="text-gold-300 py-1.5 flex items-center gap-2">
+                            <span>👤 Profil: {{ auth()->user()->name }}</span>
+                        </a>
+                        <form action="{{ route('logout') }}" method="POST" class="w-full">
+                            @csrf
+                            <button type="submit" class="text-rose-400 text-left w-full py-1.5 text-xs">Keluar Portal</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="text-center py-2 border border-gold-400/40 rounded text-gold-300 hover:bg-gold-400/10">Masuk</a>
+                        <a href="{{ route('register') }}" class="text-center py-2 bg-gradient-to-r from-amber-500 to-yellow-600 rounded text-black font-semibold">Daftar Akun</a>
+                    @endauth
+                </div>
             </nav>
 
-            <div class="mt-auto text-center">
+            <div class="mt-auto pt-6 text-center">
                 <p class="text-[11px] text-gold-400/80 font-serif italic">From Asih, Comes Essence.</p>
             </div>
         </div>
     </header>
 
-    {{-- Main Content --}}
+    {{-- Main Content & Flash Alerts --}}
     <main class="pt-20 relative z-10 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-4">
+            @if(session('success'))
+                <div class="mb-6 p-4 rounded-xl bg-emerald-950/70 border border-emerald-500/40 text-emerald-200 text-sm flex items-center justify-between shadow-[0_4px_20px_rgba(16,185,129,0.15)]">
+                    <div class="flex items-center gap-3">
+                        <span class="text-emerald-400 text-lg">✨</span>
+                        <span>{{ session('success') }}</span>
+                    </div>
+                    <button onclick="this.parentElement.remove()" class="text-emerald-400 hover:text-emerald-200">&times;</button>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="mb-6 p-4 rounded-xl bg-rose-950/70 border border-rose-500/40 text-rose-200 text-sm flex items-center justify-between shadow-[0_4px_20px_rgba(244,63,94,0.15)]">
+                    <div class="flex items-center gap-3">
+                        <span class="text-rose-400 text-lg">⚠️</span>
+                        <span>{{ session('error') }}</span>
+                    </div>
+                    <button onclick="this.parentElement.remove()" class="text-rose-400 hover:text-rose-200">&times;</button>
+                </div>
+            @endif
+
+            @if(session('info'))
+                <div class="mb-6 p-4 rounded-xl bg-gold-950/60 border border-gold-400/30 text-gold-200 text-sm flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-gold-400 text-lg">ℹ️</span>
+                        <span>{{ session('info') }}</span>
+                    </div>
+                    <button onclick="this.parentElement.remove()" class="text-gold-400 hover:text-gold-200">&times;</button>
+                </div>
+            @endif
+        </div>
+
         @yield('content')
     </main>
 
@@ -260,6 +368,120 @@
             </div>
         </div>
     </footer>
+
+    {{-- Sacred Toast Container --}}
+    <div id="sacred-toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none max-w-sm w-full px-4"></div>
+
+    <script>
+        // Global Add to Cart Helper Function
+        window.addToCart = function(productId, essenceNumber, btnElement) {
+            let originalContent = '';
+            if (btnElement) {
+                originalContent = btnElement.innerHTML;
+                btnElement.disabled = true;
+                btnElement.innerHTML = `
+                    <svg class="animate-spin w-4 h-4 text-amber-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                `;
+            }
+
+            const payload = {
+                _token: '{{ csrf_token() }}',
+                quantity: 1
+            };
+            if (productId) payload.product_id = productId;
+            if (essenceNumber) payload.essence_number = essenceNumber;
+
+            fetch('{{ route("cart.add") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Update badges
+                    const badge = document.getElementById('global-cart-badge');
+                    if (badge) {
+                        badge.textContent = data.cart_count;
+                        badge.classList.remove('hidden');
+                        badge.classList.add('animate-bounce');
+                        setTimeout(() => badge.classList.remove('animate-bounce'), 1000);
+                    }
+                    const mobileBadge = document.getElementById('mobile-cart-badge');
+                    if (mobileBadge) {
+                        mobileBadge.textContent = data.cart_count;
+                        mobileBadge.classList.remove('hidden');
+                    }
+
+                    // Show Sacred Toast Notification
+                    window.showSacredToast(data.product_name || 'Mahakarya Wewangian', 'Telah ditambahkan ke Peti Persembahan Sakral.');
+                } else {
+                    window.showSacredToast('Pemberitahuan Alkimia', data.message || 'Gagal menambahkan produk.', 'error');
+                }
+            })
+            .catch(err => {
+                console.error('Error adding to cart:', err);
+                window.showSacredToast('Koneksi Terputus', 'Gagal menyelaraskan persembahan. Silakan coba kembali.', 'error');
+            })
+            .finally(() => {
+                if (btnElement) {
+                    btnElement.disabled = false;
+                    btnElement.innerHTML = originalContent;
+                }
+            });
+        };
+
+        window.showSacredToast = function(title, message, type = 'success') {
+            const container = document.getElementById('sacred-toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto bg-[#12100d]/95 border border-amber-500/40 rounded-2xl p-4 shadow-2xl shadow-black/80 backdrop-blur-md flex items-start gap-3 transform translate-y-4 opacity-0 transition-all duration-300';
+            
+            const isError = type === 'error';
+            const iconSvg = isError ? 
+                `<svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>` :
+                `<svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>`;
+
+            toast.innerHTML = `
+                <div class="w-9 h-9 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center flex-shrink-0">
+                    ${iconSvg}
+                </div>
+                <div class="flex-1 min-w-0 pr-1">
+                    <div class="text-[11px] font-serif font-bold text-amber-200 uppercase tracking-wider truncate">${title}</div>
+                    <div class="text-[11px] text-zinc-300 font-light mt-0.5 leading-snug">${message}</div>
+                    <div class="mt-2 flex items-center gap-3">
+                        <a href="{{ route('cart.index') }}" class="text-[10px] font-mono uppercase tracking-widest text-amber-400 hover:text-amber-300 underline font-semibold">
+                            Lihat Peti (${document.getElementById('global-cart-badge')?.textContent || '1'}) &rarr;
+                        </a>
+                    </div>
+                </div>
+                <button type="button" onclick="this.parentElement.remove()" class="text-zinc-500 hover:text-zinc-300 p-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            // Animate in
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            });
+
+            // Auto dismiss after 4 seconds
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        };
+    </script>
 
     @stack('scripts')
 </body>

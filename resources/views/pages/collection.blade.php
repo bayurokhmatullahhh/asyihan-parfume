@@ -8,6 +8,9 @@
 
     {{-- Page Header --}}
     <div class="text-center mb-8 sm:mb-12">
+        <span class="text-[11px] uppercase tracking-[0.25em] text-gold-400/90 font-serif block mb-1">
+            Koleksi Wewangian Sakral
+        </span>
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif text-gold-300 tracking-[0.2em] uppercase glow-gold font-medium mb-3">
             ESSENCE COLLECTION
         </h1>
