@@ -90,13 +90,46 @@
                     <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                     </svg>
+                    <span id="global-cart-badge" class="{{ $cartCount > 0 ? '' : 'hidden' }} absolute -top-1 -right-1.5 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow-md shadow-amber-500/40">
+                        {{ $cartCount }}
+                    </span>
                 </a>
-                <a href="{{ route('calculator') }}" class="hover:text-gold-400 transition-colors p-1" aria-label="Numerology Profile">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
-                </a>
-            </div>
+
+                @auth
+                    {{-- User Profile & Logout --}}
+                    <div class="relative group">
+                        <a href="{{ route('profile') }}" class="flex items-center gap-2 py-1 px-2.5 rounded-full border border-gold-400/30 bg-gold-400/5 hover:border-gold-400/60 hover:bg-gold-400/10 transition-all text-xs text-gold-300 tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                            <span class="max-w-[100px] truncate">{{ auth()->user()->name }}</span>
+                        </a>
+                        <div class="absolute right-0 mt-2 w-48 bg-[#0a0a0a] border border-gold-400/30 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.9)] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            @if(auth()->user()->isAdmin())
+                                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-xs text-amber-300 hover:bg-gold-400/10 transition-colors">
+                                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                    Gerbang Astral
+                                </a>
+                                <div class="border-t border-gold-400/10 my-1"></div>
+                            @endif
+                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-xs text-slate-300 hover:text-gold-300 hover:bg-gold-400/10 transition-colors">Profil Jiwa</a>
+                            <a href="{{ route('cart.index') }}" class="block px-4 py-2 text-xs text-slate-300 hover:text-gold-300 hover:bg-gold-400/10 transition-colors">Peti Persembahan</a>
+                            <div class="border-t border-gold-400/10 my-1"></div>
+                            <form action="{{ route('logout') }}" method="POST" class="w-full">
+                                @csrf
+                                <button type="submit" class="w-full text-left px-4 py-2 text-xs text-rose-400 hover:bg-rose-500/10 transition-colors">Keluar Portal</button>
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    {{-- Guest Auth Buttons --}}
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('login') }}" class="text-[11px] uppercase tracking-wider text-slate-300 hover:text-gold-300 px-3 py-1.5 transition-colors">
+                            Masuk
+                        </a>
+                        <a href="{{ route('register') }}" class="text-[11px] uppercase tracking-wider text-gold-300 border border-gold-400/40 hover:border-gold-400 hover:bg-gold-400/10 px-3 py-1.5 rounded-full transition-all">
+                            Daftar
+                        </a>
+                    </div>
+                @endauth
 
             {{-- Mobile Menu Button --}}
             <button id="mobile-menu-btn" class="lg:hidden text-gold-400 hover:text-white transition-colors p-1" aria-label="Toggle menu">
