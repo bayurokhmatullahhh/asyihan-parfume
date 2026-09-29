@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'ASYIHAN — Born from Asih. Crafted for the Soul.')
-@section('meta_description', 'Discover the fragrance crafted from the essence of your character. Born from Asih, guided by numerology, crafted for eternity.')
+@section('meta_description', 'Temukan wewangian yang diciptakan dari esensi karakter Anda. Lahir dari Asih, dipandu oleh numerologi, dan diracik untuk keabadian.')
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6">
@@ -83,7 +83,7 @@
                     </h1>
 
                     <p class="text-gray-300 font-light text-sm sm:text-base lg:text-lg leading-relaxed max-w-lg pt-2 animate-text-reveal mx-auto lg:mx-0" style="animation-delay: 0.9s;">
-                        Discover the fragrance crafted from the essence of your character. Born from Asih, guided by numerology, crafted for eternity.
+                        Temukan wewangian yang diciptakan dari esensi karakter Anda. Lahir dari Asih, dipandu oleh numerologi, dan diracik untuk keabadian.
                     </p>
 
                     <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4 animate-text-reveal" style="animation-delay: 1.1s;">
