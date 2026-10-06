@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Services\NumerologyService;
 use Illuminate\View\View;
 
@@ -17,9 +18,17 @@ class PageController extends Controller
     public function home(): View
     {
         $archetypes = $this->numerology->getAllArchetypes();
-        $featured = $this->numerology->getArchetype(7); // The Seeker as featured
+        $featured = $this->numerology->getArchetype(7);
+        $featuredProducts = Product::where('is_active', true)
+            ->where('is_featured', true)
+            ->orderBy('essence_number')
+            ->get();
+        $products = Product::where('is_active', true)
+            ->orderBy('essence_number')
+            ->get()
+            ->keyBy('essence_number');
 
-        return view('welcome', compact('archetypes', 'featured'));
+        return view('welcome', compact('archetypes', 'featured', 'featuredProducts', 'products'));
     }
 
     /**
@@ -31,13 +40,17 @@ class PageController extends Controller
     }
 
     /**
-     * Essence Collection page.
+     * Essence Collection page — products from database merged with archetype data.
      */
     public function collection(): View
     {
         $archetypes = $this->numerology->getAllArchetypes();
+        $products = Product::where('is_active', true)
+            ->orderBy('essence_number')
+            ->get()
+            ->keyBy('essence_number');
 
-        return view('pages.collection', compact('archetypes'));
+        return view('pages.collection', compact('archetypes', 'products'));
     }
 
     /**
@@ -51,9 +64,16 @@ class PageController extends Controller
             abort(404);
         }
 
+        $product = Product::where('is_active', true)
+            ->where(function ($query) use ($slug, $essence) {
+                $query->where('slug', 'like', "%{$slug}%")
+                    ->orWhere('essence_number', $essence['number'] ?? null);
+            })
+            ->first();
+
         $allEssences = $this->numerology->getAllArchetypes();
 
-        return view('pages.essence-detail', compact('essence', 'allEssences'));
+        return view('pages.essence-detail', compact('essence', 'product', 'allEssences'));
     }
 
     /**
@@ -62,8 +82,12 @@ class PageController extends Controller
     public function ajian(): View
     {
         $archetypes = $this->numerology->getAllArchetypes();
+        $products = Product::where('is_active', true)
+            ->orderBy('essence_number')
+            ->get()
+            ->keyBy('essence_number');
 
-        return view('pages.ajian', compact('archetypes'));
+        return view('pages.ajian', compact('archetypes', 'products'));
     }
 
     /**

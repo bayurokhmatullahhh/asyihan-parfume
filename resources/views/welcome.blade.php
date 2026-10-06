@@ -188,6 +188,22 @@
                     'Fire' => '🜂', 'Water' => '🜄', 'Earth' => '🜃', 'Air' => '🜁',
                     'Ether' => '✧', 'Light' => '☀', 'Shadow' => '☽', 'Metal' => '⚙', 'Spirit' => '✦'
                 ];
+
+                if (isset($products)) {
+                    foreach ($archetypes as $num => &$arc) {
+                        if (isset($products[$num])) {
+                            $p = $products[$num];
+                            $arc['name'] = $p->name;
+                            if (!empty($p->description)) {
+                                $arc['description'] = $p->description;
+                            }
+                            if (!empty($p->image)) {
+                                $arc['bottle_image'] = $p->image;
+                            }
+                        }
+                    }
+                    unset($arc);
+                }
             @endphp
 
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 relative z-10">

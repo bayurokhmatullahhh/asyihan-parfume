@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PageTest extends TestCase
 {
+    use RefreshDatabase;
     public function test_home_page_is_accessible_and_renders_brand(): void
     {
         $response = $this->get('/');

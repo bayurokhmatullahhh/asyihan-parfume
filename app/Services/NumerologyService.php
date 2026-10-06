@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Product;
+
 class NumerologyService
 {
     /**
@@ -739,7 +741,39 @@ class NumerologyService
      */
     public function getArchetype(int $number): ?array
     {
-        return $this->archetypes[$number] ?? null;
+        $archetype = $this->archetypes[$number] ?? null;
+        if (! $archetype) {
+            return null;
+        }
+
+        try {
+            $product = Product::where('essence_number', $number)->first();
+            if ($product) {
+                if (! empty($product->name)) {
+                    $archetype['essence_name'] = $product->name;
+                    $archetype['name'] = $product->name;
+                }
+                if (! empty($product->description)) {
+                    $archetype['description'] = $product->description;
+                    $archetype['fragrance_description'] = $product->description;
+                }
+                if (! empty($product->soul_character)) {
+                    $archetype['soul_character'] = $product->soul_character;
+                }
+                if (! empty($product->tagline)) {
+                    $archetype['quote'] = $product->tagline;
+                }
+                if (! empty($product->price)) {
+                    $archetype['price'] = (int) $product->price;
+                }
+                $archetype['bottle_image_url'] = $product->image_url;
+                $archetype['bottle_image'] = $product->image_url;
+            }
+        } catch (\Throwable $e) {
+            // fallback gracefully
+        }
+
+        return $archetype;
     }
 
     /**
@@ -747,7 +781,43 @@ class NumerologyService
      */
     public function getAllArchetypes(): array
     {
-        return $this->archetypes;
+        $all = $this->archetypes;
+
+        try {
+            $products = Product::whereIn('essence_number', array_keys($all))
+                ->get()
+                ->keyBy('essence_number');
+
+            foreach ($all as $num => &$arc) {
+                if (isset($products[$num])) {
+                    $p = $products[$num];
+                    if (! empty($p->name)) {
+                        $arc['essence_name'] = $p->name;
+                        $arc['name'] = $p->name;
+                    }
+                    if (! empty($p->description)) {
+                        $arc['description'] = $p->description;
+                        $arc['fragrance_description'] = $p->description;
+                    }
+                    if (! empty($p->soul_character)) {
+                        $arc['soul_character'] = $p->soul_character;
+                    }
+                    if (! empty($p->tagline)) {
+                        $arc['quote'] = $p->tagline;
+                    }
+                    if (! empty($p->price)) {
+                        $arc['price'] = (int) $p->price;
+                    }
+                    $arc['bottle_image_url'] = $p->image_url;
+                    $arc['bottle_image'] = $p->image_url;
+                }
+            }
+            unset($arc);
+        } catch (\Throwable $e) {
+            // fallback gracefully
+        }
+
+        return $all;
     }
 
     /**

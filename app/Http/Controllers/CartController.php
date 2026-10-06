@@ -33,8 +33,12 @@ class CartController extends Controller
     /**
      * Display cart items.
      */
-    public function index(): View
+    public function index(): View|RedirectResponse
     {
+        if (! Auth::check()) {
+            return redirect()->route('register')->with('info', 'Silakan buat akun atau masuk terlebih dahulu untuk mengakses keranjang pesanan sakral Anda.');
+        }
+
         $items = $this->getCartQuery()->with('product')->get();
         $subtotal = $items->sum(fn ($item) => $item->subtotal);
 
@@ -46,6 +50,18 @@ class CartController extends Controller
      */
     public function add(Request $request): RedirectResponse|JsonResponse
     {
+        if (! Auth::check()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Silakan buat akun terlebih dahulu untuk menyimpan ke keranjang.',
+                    'redirect' => route('register'),
+                ], 401);
+            }
+
+            return redirect()->route('register')->with('info', 'Silakan buat akun terlebih dahulu untuk menyimpan ke keranjang.');
+        }
+
         $validated = $request->validate([
             'product_id' => ['nullable', 'exists:products,id'],
             'essence_number' => ['nullable', 'integer'],
@@ -198,6 +214,10 @@ class CartController extends Controller
      */
     public function checkout(Request $request): RedirectResponse
     {
+        if (! Auth::check()) {
+            return redirect()->route('register')->with('info', 'Silakan buat akun atau masuk terlebih dahulu untuk menyelesaikan pesanan sakral Anda.');
+        }
+
         $validated = $request->validate([
             'selected_ids' => 'nullable|array',
             'selected_ids.*' => 'integer',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryManagementController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LeadManagementController;
 use App\Http\Controllers\Admin\OrderManagementController;
@@ -34,7 +35,7 @@ Route::get('/ajian', [PageController::class, 'ajian'])->name('ajian');
 
 // Order & Tracking
 Route::get('/order', [OrderController::class, 'index'])->name('order');
-Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+Route::post('/order', [OrderController::class, 'store'])->name('order.store')->middleware('auth');
 Route::get('/orders/{order}', [OrderController::class, 'show'])->name('order.show');
 
 // Payment (Midtrans Snap & Webhook)
@@ -72,12 +73,12 @@ Route::middleware('auth')->prefix('profile')->name('profile')->group(function ()
 // Cart & Checkout (Guest & Auth)
 Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('index');
-    Route::post('/add', [CartController::class, 'add'])->name('add');
+    Route::post('/add', [CartController::class, 'add'])->name('add')->middleware('auth');
     Route::put('/{cart}', [CartController::class, 'update'])->name('update');
     Route::delete('/remove-selected', [CartController::class, 'removeSelected'])->name('removeSelected');
     Route::post('/clear', [CartController::class, 'clear'])->name('clear');
     Route::delete('/{cart}', [CartController::class, 'remove'])->name('remove');
-    Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout')->middleware('auth');
 });
 
 // Secret Admin Astral Gateway
@@ -101,9 +102,13 @@ Route::prefix('astral-gateway')->name('admin.')->group(function () {
         Route::delete('/leads/{lead}', [LeadManagementController::class, 'destroy'])->name('leads.destroy');
 
         // Users
-        Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
+        Route::resource('users', UserManagementController::class);
         Route::put('/users/{user}/role', [UserManagementController::class, 'toggleRole'])->name('users.toggle-role');
-        Route::delete('/users/{user}', [UserManagementController::class, 'destroy'])->name('users.destroy');
+        Route::put('/users/{user}/reset-password', [UserManagementController::class, 'resetPassword'])->name('users.reset-password');
+
+        // Categories
+        Route::resource('categories', CategoryManagementController::class)->except(['show', 'create', 'edit']);
+        Route::put('/categories/{category}/toggle', [CategoryManagementController::class, 'toggleActive'])->name('categories.toggle');
 
         // Products
         Route::resource('products', ProductManagementController::class)->except(['show']);

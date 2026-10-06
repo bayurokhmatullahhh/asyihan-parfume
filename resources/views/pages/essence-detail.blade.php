@@ -1,5 +1,23 @@
 @extends('layouts.app')
 
+@php
+    if (isset($product) && $product) {
+        $essence['essence_name'] = $product->name;
+        $essence['name'] = $product->name;
+        if (!empty($product->description)) {
+            $essence['description'] = $product->description;
+        }
+        if (!empty($product->soul_character)) {
+            $essence['soul_character'] = $product->soul_character;
+        }
+        if (!empty($product->price)) {
+            $essence['price'] = (int) $product->price;
+        }
+        $essence['bottle_image_url'] = $product->image_url;
+        $essence['bottle_image'] = $product->image_url;
+    }
+@endphp
+
 @section('title', $essence['essence_name'] . ' — ASYIHAN')
 @section('meta_description', $essence['description'])
 
@@ -29,7 +47,7 @@
                     
                     {{-- Bottle Image --}}
                     <div class="relative z-10 w-full h-full flex items-center justify-center">
-                        <img src="{{ asset($essence['bottle_image']) }}" 
+                        <img src="{{ $essence['bottle_image_url'] ?? asset($essence['bottle_image']) }}" 
                              alt="{{ $essence['essence_name'] }}" 
                              class="w-full h-full object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)] transition-transform duration-500 group-hover:scale-105">
                     </div>
@@ -78,7 +96,15 @@
 
                 <div class="prose prose-invert text-gray-300 text-xs sm:text-sm font-light leading-relaxed">
                     <p>{{ $essence['description'] }}</p>
-                    <p class="text-gray-400 italic mt-2">{{ $essence['fragrance_description'] }}</p>
+                    @if(!empty($essence['soul_character']))
+                        <div class="mt-4 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200">
+                            <span class="font-serif text-amber-300 text-xs uppercase tracking-wider font-semibold block mb-1">✦ Karakteristik Jiwamu:</span>
+                            <p class="text-xs sm:text-sm leading-relaxed">{{ $essence['soul_character'] }}</p>
+                        </div>
+                    @endif
+                    @if(!empty($essence['fragrance_description']) && $essence['fragrance_description'] !== $essence['description'])
+                        <p class="text-gray-400 italic mt-2">{{ $essence['fragrance_description'] }}</p>
+                    @endif
                 </div>
 
                 {{-- Fragrance Pyramid --}}
@@ -130,14 +156,24 @@
                         Pesan Sekarang
                     </a>
 
-                    <button type="button" 
-                            onclick="window.addToCart({{ $product?->id ? $product->id : 'null' }}, {{ $essence['number'] }}, this)"
-                            class="flex-1 btn-gold-outline px-6 py-3.5 text-xs tracking-wider rounded-sm text-center flex items-center justify-center gap-2 hover:bg-gold-400/15 transition-all font-semibold cursor-pointer">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                        </svg>
-                        <span>+ Masukkan ke Peti</span>
-                    </button>
+                    @auth
+                        <button type="button" 
+                                onclick="window.addToCart({{ $product?->id ? $product->id : 'null' }}, {{ $essence['number'] }}, this)"
+                                class="flex-1 btn-gold-outline px-6 py-3.5 text-xs tracking-wider rounded-sm text-center flex items-center justify-center gap-2 hover:bg-gold-400/15 transition-all font-semibold cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                            <span>+ Masukkan ke Peti</span>
+                        </button>
+                    @else
+                        <a href="{{ route('register') }}"
+                           class="flex-1 btn-gold-outline px-6 py-3.5 text-xs tracking-wider rounded-sm text-center flex items-center justify-center gap-2 hover:bg-gold-400/15 transition-all font-semibold cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                            <span>+ Masuk untuk Beli</span>
+                        </a>
+                    @endauth
 
                     <a href="{{ route('calculator') }}" class="w-full sm:w-auto px-4 py-3.5 text-xs tracking-wider text-gray-400 hover:text-gold-300 text-center transition-colors">
                         Cek Kecocokan Weton →

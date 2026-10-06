@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -17,13 +18,19 @@ class OrderController extends Controller
     ) {}
 
     /**
-     * Show the order page.
+     * Show the order page with product catalog from database.
      */
     public function index(): View
     {
         $archetypes = $this->numerology->getAllArchetypes();
+        $categories = Category::where('is_active', true)->orderBy('sort_order')->get();
+        $products = Product::where('is_active', true)
+            ->with('categoryRelation')
+            ->orderByRaw('CASE WHEN is_featured = 1 THEN 0 ELSE 1 END')
+            ->orderBy('essence_number')
+            ->get();
 
-        return view('pages.order', compact('archetypes'));
+        return view('pages.order', compact('archetypes', 'products', 'categories'));
     }
 
     /**

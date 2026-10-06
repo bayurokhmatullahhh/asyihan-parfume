@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -16,10 +18,14 @@ class ProductManagementController extends Controller
      */
     public function index(Request $request): View
     {
-        $query = Product::latest();
+        $query = Product::with('categoryRelation')->latest();
 
         if ($request->filled('category')) {
             $query->where('category', $request->category);
+        }
+
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
         }
 
         if ($request->filled('search')) {
@@ -31,8 +37,9 @@ class ProductManagementController extends Controller
         }
 
         $products = $query->paginate(15)->withQueryString();
+        $categories = Category::orderBy('sort_order')->get();
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     /**
@@ -40,7 +47,9 @@ class ProductManagementController extends Controller
      */
     public function create(): View
     {
-        return view('admin.products.create');
+        $categories = Category::where('is_active', true)->orderBy('sort_order')->get();
+
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
@@ -50,17 +59,37 @@ class ProductManagementController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category' => 'required|in:essence,special,talisman',
+            'category_id' => 'nullable|exists:categories,id',
+            'category' => 'nullable|string|max:50',
             'essence_number' => 'nullable|integer|min:1|max:999',
             'tagline' => 'nullable|string|max:255',
             'description' => 'nullable|string',
+            'soul_character' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'volume' => 'required|string|max:50',
-            'image' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:5120',
             'is_active' => 'boolean',
             'is_featured' => 'boolean',
         ]);
+
+        // Sync category string column for backwards compatibility
+        if (! empty($validated['category_id'])) {
+            $cat = Category::find($validated['category_id']);
+            if ($cat) {
+                $validated['category'] = $cat->slug;
+            }
+        } elseif (empty($validated['category'])) {
+            $validated['category'] = 'essence';
+        }
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products', 'public');
+            $validated['image'] = $path;
+        } else {
+            $validated['image'] = 'images/bottle/bottle_1.png';
+        }
 
         $validated['slug'] = Str::slug($validated['name']).'-'.rand(100, 999);
         $validated['is_active'] = $request->boolean('is_active', true);
@@ -76,7 +105,9 @@ class ProductManagementController extends Controller
      */
     public function edit(Product $product): View
     {
-        return view('admin.products.edit', compact('product'));
+        $categories = Category::orderBy('sort_order')->get();
+
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -86,17 +117,39 @@ class ProductManagementController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category' => 'required|in:essence,special,talisman',
+            'category_id' => 'nullable|exists:categories,id',
+            'category' => 'nullable|string|max:50',
             'essence_number' => 'nullable|integer|min:1|max:999',
             'tagline' => 'nullable|string|max:255',
             'description' => 'nullable|string',
+            'soul_character' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'volume' => 'required|string|max:50',
-            'image' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:5120',
             'is_active' => 'boolean',
             'is_featured' => 'boolean',
         ]);
+
+        // Sync category string column
+        if (! empty($validated['category_id'])) {
+            $cat = Category::find($validated['category_id']);
+            if ($cat) {
+                $validated['category'] = $cat->slug;
+            }
+        }
+
+        // Handle image upload or keep old
+        if ($request->hasFile('image')) {
+            // Delete old file if stored in storage
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+            $path = $request->file('image')->store('products', 'public');
+            $validated['image'] = $path;
+        } else {
+            unset($validated['image']);
+        }
 
         $validated['is_active'] = $request->boolean('is_active');
         $validated['is_featured'] = $request->boolean('is_featured');
@@ -122,6 +175,12 @@ class ProductManagementController extends Controller
     public function destroy(Product $product): RedirectResponse
     {
         $name = $product->name;
+
+        // Delete uploaded image if exists
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
+        }
+
         $product->delete();
 
         return redirect()->route('admin.products.index')->with('success', "Produk {$name} telah ditarik dari peredaran.");

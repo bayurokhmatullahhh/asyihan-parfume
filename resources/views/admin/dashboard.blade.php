@@ -29,15 +29,17 @@
             </div>
             <div class="mt-3">
                 <div class="font-serif text-2xl lg:text-3xl text-gold-300 font-bold glow-gold">
-                    Rp {{ number_format($totalRevenue > 0 ? $totalRevenue : 148750000, 0, ',', '.') }}
+                    Rp {{ number_format($totalRevenue, 0, ',', '.') }}
                 </div>
                 <div class="flex items-center gap-2 mt-2 text-[11px]">
-                    <span class="text-emerald-400 font-mono">↑ +18.4%</span>
-                    <span class="text-slate-500 font-light">vs siklus takdir lalu</span>
+                    <span class="{{ $revenueGrowth >= 0 ? 'text-emerald-400' : 'text-rose-400' }} font-mono">
+                        {{ $revenueGrowth >= 0 ? '↑ +' : '↓ ' }}{{ $revenueGrowth }}%
+                    </span>
+                    <span class="text-slate-500 font-light">vs siklus minggu lalu</span>
                 </div>
                 <div class="mt-3 pt-2.5 border-t border-white/5 flex justify-between text-[10px] text-slate-400 font-mono">
                     <span>Rata-rata order:</span>
-                    <span class="text-slate-200">Rp 350.000/botol</span>
+                    <span class="text-slate-200">Rp {{ number_format($averageOrderValue, 0, ',', '.') }}/order</span>
                 </div>
             </div>
         </div>
@@ -52,15 +54,17 @@
             </div>
             <div class="mt-3">
                 <div class="font-serif text-2xl lg:text-3xl text-slate-100 font-bold">
-                    {{ max(425, $totalOrders * 15 + 35) }} Flacon
+                    {{ number_format($totalFlacon, 0, ',', '.') }} Flacon
                 </div>
                 <div class="flex items-center gap-2 mt-2 text-[11px]">
-                    <span class="text-emerald-400 font-mono">↑ +12.6%</span>
+                    <span class="{{ $flaconGrowth >= 0 ? 'text-emerald-400' : 'text-rose-400' }} font-mono">
+                        {{ $flaconGrowth >= 0 ? '↑ +' : '↓ ' }}{{ $flaconGrowth }}%
+                    </span>
                     <span class="text-slate-500 font-light">dari {{ $totalOrders }} transaksi pesanan</span>
                 </div>
                 <div class="mt-3 pt-2.5 border-t border-white/5 flex justify-between text-[10px] text-slate-400 font-mono">
                     <span>Tingkat pemenuhan:</span>
-                    <span class="text-emerald-400">98.7% Berhasil</span>
+                    <span class="text-emerald-400">{{ $fulfillmentRate }}% Berhasil</span>
                 </div>
             </div>
         </div>
@@ -75,18 +79,18 @@
             </div>
             <div class="mt-3">
                 <div class="font-serif text-2xl lg:text-3xl text-slate-100 font-bold">
-                    {{ number_format(max(7420, $totalLeads * 850 + 120), 0, ',', '.') }} Audiens
+                    {{ number_format($totalUsers + $totalLeads, 0, ',', '.') }} Jiwa
                 </div>
                 <div class="flex items-center gap-2 mt-2 text-[11px]">
-                    <span class="text-emerald-400 font-mono">+31.2%</span>
-                    <span class="text-slate-500 font-light">Jiwa Baru Mingguan</span>
+                    <span class="text-emerald-400 font-mono">+{{ $newUsersThisWeek }}</span>
+                    <span class="text-slate-500 font-light">Jiwa Baru Minggu Ini</span>
                 </div>
                 <div class="mt-3 pt-2.5 border-t border-white/5 flex justify-between text-[10px] text-slate-400 font-mono">
-                    <span>Tamu: 5.890</span>
-                    <span>•</span>
                     <span class="text-gold-400">User: {{ $totalUsers }}</span>
                     <span>•</span>
                     <span class="text-purple-400">Leads: {{ $totalLeads }}</span>
+                    <span>•</span>
+                    <span class="text-sky-400">Produk: {{ $totalProducts }}</span>
                 </div>
             </div>
         </div>
@@ -101,15 +105,15 @@
             </div>
             <div class="mt-3">
                 <div class="font-serif text-2xl lg:text-3xl text-gold-300 font-bold">
-                    23.2%
+                    {{ $conversionRate }}%
                 </div>
                 <div class="flex items-center gap-2 mt-2 text-[11px]">
-                    <span class="text-slate-300 font-mono">1.725 Perhitungan</span>
-                    <span class="text-slate-500">→ Checkout</span>
+                    <span class="text-slate-300 font-mono">{{ $totalLeads }} Perhitungan</span>
+                    <span class="text-slate-500">→ {{ $totalOrders }} Order</span>
                 </div>
                 <div class="mt-3 pt-2.5 border-t border-white/5 flex justify-between text-[10px] text-slate-400 font-mono">
-                    <span>Rasio Ekstraksi:</span>
-                    <span class="text-gold-300">74.8% Sangat Tinggi</span>
+                    <span>Katalog Aktif:</span>
+                    <span class="text-gold-300">{{ $totalProducts }} Mahakarya</span>
                 </div>
             </div>
         </div>
@@ -134,28 +138,24 @@
                 </div>
             </div>
 
-            <!-- 4 Mini Metric Chips Inside Card -->
+            <!-- 4 Mini Metric Chips Inside Card (Real Data from Last 4 Days) -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-                <div class="bg-black/60 border border-white/5 p-2.5 rounded-xl">
-                    <span class="text-[9px] text-slate-500 font-mono block">Periode 1 (Awal)</span>
-                    <div class="font-mono text-xs text-slate-200 font-bold mt-0.5">Rp 28.400.000</div>
-                    <span class="text-[10px] text-slate-400">80 Flacon</span>
-                </div>
-                <div class="bg-black/60 border border-white/5 p-2.5 rounded-xl">
-                    <span class="text-[9px] text-slate-500 font-mono block">Periode 2 (Purnama)</span>
-                    <div class="font-mono text-xs text-slate-200 font-bold mt-0.5">Rp 42.000.000</div>
-                    <span class="text-[10px] text-emerald-400 font-mono">+15% Lonjakan</span>
-                </div>
-                <div class="bg-black/60 border border-gold-400/30 p-2.5 rounded-xl bg-gold-400/[0.03]">
-                    <span class="text-[9px] text-gold-400 font-mono block">Periode 3 (Puncak Energi)</span>
-                    <div class="font-mono text-xs text-gold-300 font-bold mt-0.5">Rp 41.600.000</div>
-                    <span class="text-[10px] text-gold-400/80">118 Flacon</span>
-                </div>
-                <div class="bg-black/60 border border-white/5 p-2.5 rounded-xl">
-                    <span class="text-[9px] text-slate-500 font-mono block">Periode 4 (Surut)</span>
-                    <div class="font-mono text-xs text-slate-200 font-bold mt-0.5">Rp 36.750.000</div>
-                    <span class="text-[10px] text-slate-400">107 Flacon</span>
-                </div>
+                @php
+                    $recentDays = $days->take(-4)->values();
+                    $recentRev = $revenueData->take(-4)->values();
+                    $recentQty = $ordersCountData->take(-4)->values();
+                @endphp
+                @foreach($recentDays as $idx => $dName)
+                    <div class="bg-black/60 border {{ $idx === 3 ? 'border-gold-400/30 bg-gold-400/[0.03]' : 'border-white/5' }} p-2.5 rounded-xl">
+                        <span class="text-[9px] {{ $idx === 3 ? 'text-gold-400' : 'text-slate-500' }} font-mono block">{{ $dName }}</span>
+                        <div class="font-mono text-xs {{ $idx === 3 ? 'text-gold-300' : 'text-slate-200' }} font-bold mt-0.5">
+                            Rp {{ number_format($recentRev[$idx] ?? 0, 0, ',', '.') }}
+                        </div>
+                        <span class="text-[10px] {{ $idx === 3 ? 'text-gold-400/80' : 'text-slate-400' }}">
+                            {{ $recentQty[$idx] ?? 0 }} Pesanan
+                        </span>
+                    </div>
+                @endforeach
             </div>
 
             <!-- Canvas Line Chart -->
@@ -166,9 +166,9 @@
             <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                 <div class="flex items-center gap-2">
                     <span class="text-gold-400">📍</span>
-                    <span>Saat ini puncak transaksi terjadi pada Weton Wage & Pahing (mencapai 40 pesanan serentak).</span>
+                    <span>Monitoring dinamika pergerakan omset real-time 7 hari terakhir dari database.</span>
                 </div>
-                <span class="text-gold-400 hover:underline cursor-pointer hidden sm:inline">Buka Analisis Lengkap →</span>
+                <a href="{{ route('admin.orders.index') }}" class="text-gold-400 hover:underline cursor-pointer hidden sm:inline">Buka Riwayat Order →</a>
             </div>
         </div>
 
@@ -180,56 +180,61 @@
                         <span class="text-[9px] uppercase font-mono tracking-[0.2em] text-gold-400/80 block">Komposisi Produk</span>
                         <h3 class="font-serif text-base text-slate-100 font-medium">Esensi Paling Beresonansi</h3>
                     </div>
-                    <span class="text-[10px] font-mono text-gold-400 bg-gold-400/10 px-2 py-0.5 rounded border border-gold-400/30">425 Botol</span>
+                    <span class="text-[10px] font-mono text-gold-400 bg-gold-400/10 px-2 py-0.5 rounded border border-gold-400/30">{{ $totalFlacon }} Flacon</span>
                 </div>
 
                 <!-- Doughnut Chart Container -->
                 <div class="h-44 relative flex items-center justify-center my-3">
                     <canvas id="flaconCompositionChart"></canvas>
                     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <span class="font-serif text-xl font-bold text-gold-300">425</span>
+                        <span class="font-serif text-xl font-bold text-gold-300">{{ $totalFlacon }}</span>
                         <span class="text-[8px] uppercase tracking-widest text-slate-400 font-mono">Flacon Total</span>
                     </div>
                 </div>
 
-                <!-- Breakdown Items -->
+                <!-- Breakdown Items (Real Top Products) -->
                 <div class="space-y-2 text-xs">
-                    <div class="flex justify-between items-center text-slate-300">
-                        <div class="flex items-center gap-2 truncate">
-                            <span class="w-2 h-2 rounded-full bg-[#D4AF37]"></span>
-                            <span class="truncate font-mono text-[11px]">#07 The Seeker (Sang Pencari)</span>
+                    @php
+                        $chartColors = ['#D4AF37', '#F59E0B', '#10B981', '#8B5CF6', '#38BDF8'];
+                    @endphp
+                    @forelse($topProducts as $idx => $tp)
+                        @php
+                            $pct = $totalFlacon > 0 ? round(($tp->total_qty / $totalFlacon) * 100, 1) : 0;
+                            $dotColor = $chartColors[$idx % count($chartColors)];
+                        @endphp
+                        <div class="flex justify-between items-center text-slate-300">
+                            <div class="flex items-center gap-2 truncate">
+                                <span class="w-2 h-2 rounded-full" style="background-color: {{ $dotColor }};"></span>
+                                <span class="truncate font-mono text-[11px]">{{ $tp->product_name }}</span>
+                            </div>
+                            <span class="font-mono text-gold-300 font-bold text-[11px]">{{ $pct }}% ({{ $tp->total_qty }} btl)</span>
                         </div>
-                        <span class="font-mono text-gold-300 font-bold text-[11px]">32% (136 btl)</span>
-                    </div>
-                    <div class="flex justify-between items-center text-slate-300">
-                        <div class="flex items-center gap-2 truncate">
-                            <span class="w-2 h-2 rounded-full bg-[#F59E0B]"></span>
-                            <span class="truncate font-mono text-[11px]">#01 The Leader (Sang Penggagas)</span>
+                    @empty
+                        <div class="text-center py-4 text-slate-500 font-mono text-[11px]">
+                            Belum ada distribusi pesanan flacon.
                         </div>
-                        <span class="font-mono text-slate-200 text-[11px]">24% (102 btl)</span>
-                    </div>
-                    <div class="flex justify-between items-center text-slate-300">
-                        <div class="flex items-center gap-2 truncate">
-                            <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
-                            <span class="truncate font-mono text-[11px]">#03 The Adventurer (Penjelajah)</span>
-                        </div>
-                        <span class="font-mono text-slate-200 text-[11px]">17% (72 btl)</span>
-                    </div>
-                    <div class="flex justify-between items-center text-slate-300">
-                        <div class="flex items-center gap-2 truncate">
-                            <span class="w-2 h-2 rounded-full bg-[#8B5CF6]"></span>
-                            <span class="truncate font-mono text-[11px]">#08 The Sovereign (Penguasa)</span>
-                        </div>
-                        <span class="font-mono text-slate-200 text-[11px]">14% (60 btl)</span>
-                    </div>
+                    @endforelse
                 </div>
             </div>
 
-            <!-- Inventory Alert Box -->
-            <div class="mt-4 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-[11px] text-amber-300 flex items-start gap-2">
-                <span>⚠️</span>
-                <span class="leading-tight font-light">Peringatan Persediaan: Stok Flacon #07 tersisa 14 unit. Harap lakukan peracikan sakral baru.</span>
-            </div>
+            <!-- Inventory Alert Box (Real Low Stock) -->
+            @if($lowStockProducts->isNotEmpty())
+                <div class="mt-4 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-[11px] text-amber-300 flex items-start gap-2">
+                    <span>⚠️</span>
+                    <span class="leading-tight font-light">
+                        Peringatan Persediaan: 
+                        @foreach($lowStockProducts as $lp)
+                            <strong>{{ $lp->name }}</strong> sisa {{ $lp->stock }} botol{{ !$loop->last ? ', ' : '.' }}
+                        @endforeach
+                        Harap periksa altar gudang.
+                    </span>
+                </div>
+            @else
+                <div class="mt-4 p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-[11px] text-emerald-300 flex items-start gap-2">
+                    <span>✓</span>
+                    <span class="leading-tight font-light">Persediaan Aman: Seluruh stok wewangian aktif berada dalam ambang batas optimal.</span>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -242,10 +247,10 @@
                 <p class="text-xs text-slate-400 font-light">Analisis komprehensif perilaku audiens terautentikasi dan pengunjung spiritual toko online.</p>
             </div>
             <div class="flex flex-wrap gap-1.5 bg-[#141414] p-1 rounded-xl border border-white/5 text-[10px] font-mono">
-                <button type="button" class="px-3 py-1 rounded-lg bg-gold-400 text-black font-bold">Semua Pengguna</button>
-                <button type="button" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white">User Aktif (1.420)</button>
-                <button type="button" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white">User Baru (110)</button>
-                <button type="button" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white">Tamu Anonim (5.890)</button>
+                <button type="button" class="px-3 py-1 rounded-lg bg-gold-400 text-black font-bold">Semua Jiwa ({{ $totalUsers + $totalLeads }})</button>
+                <button type="button" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white">User Terdaftar ({{ $totalUsers }})</button>
+                <button type="button" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white">User Baru ({{ $newUsersThisWeek }})</button>
+                <button type="button" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white">Leads Numerologi ({{ $totalLeads }})</button>
             </div>
         </div>
 
@@ -256,16 +261,16 @@
                 <div class="flex justify-between items-center mb-2">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                        <span class="text-xs font-mono font-bold text-slate-200">USER AKTIF (LOGIN)</span>
+                        <span class="text-xs font-mono font-bold text-slate-200">USER TERDAFTAR (LOGIN)</span>
                     </div>
-                    <span class="text-xs font-mono text-emerald-400 font-bold">1.420 Jiwa</span>
+                    <span class="text-xs font-mono text-emerald-400 font-bold">{{ $totalUsers }} Jiwa</span>
                 </div>
                 <p class="text-[11px] text-slate-400 font-light leading-relaxed">
-                    Pengguna yang login dalam 30 hari terakhir, memiliki riwayat profil Numerologi dan telah berkonsultasi seputar Archetype.
+                    Pengguna terautentikasi yang memiliki akun sakral, profil tersimpan, dan akses ke riwayat pesanan serta altar batin.
                 </p>
                 <div class="mt-3 pt-2 border-t border-white/5 flex justify-between text-[10px] font-mono text-slate-400">
-                    <span>Tingkat Repeat Order:</span>
-                    <span class="text-emerald-400 font-bold">41.8% (Sangat Tinggi)</span>
+                    <span>Transaksi Terkait:</span>
+                    <span class="text-emerald-400 font-bold">{{ $totalOrders }} Pesanan</span>
                 </div>
             </div>
 
@@ -274,16 +279,16 @@
                 <div class="flex justify-between items-center mb-2">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                        <span class="text-xs font-mono font-bold text-slate-200">USER BARU TERDAFTAR</span>
+                        <span class="text-xs font-mono font-bold text-slate-200">USER BARU MINGGU INI</span>
                     </div>
-                    <span class="text-xs font-mono text-amber-400 font-bold">110 Jiwa</span>
+                    <span class="text-xs font-mono text-amber-400 font-bold">{{ $newUsersThisWeek }} Jiwa</span>
                 </div>
                 <p class="text-[11px] text-slate-400 font-light leading-relaxed">
-                    Akun baru yang terverifikasi dalam kurun waktu ini setelah melakukan perhitungan kalkulator jiwa dan mendaftarkan koordinat batin.
+                    Akun baru yang terverifikasi dalam siklus mingguan saat ini setelah melakukan registrasi dan penyelarasan takdir.
                 </p>
                 <div class="mt-3 pt-2 border-t border-white/5 flex justify-between text-[10px] font-mono text-slate-400">
-                    <span>Aktivasi Profil Jiwa:</span>
-                    <span class="text-amber-400 font-bold">78.6% Lengkap 100%</span>
+                    <span>Pertumbuhan:</span>
+                    <span class="text-amber-400 font-bold">+{{ $newUsersThisWeek }} Akun Baru</span>
                 </div>
             </div>
 
@@ -291,121 +296,85 @@
             <div class="bg-black/60 border border-white/10 p-4 rounded-xl">
                 <div class="flex justify-between items-center mb-2">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-slate-500"></span>
-                        <span class="text-xs font-mono font-bold text-slate-200">TAMU ANONIM (GUEST)</span>
+                        <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                        <span class="text-xs font-mono font-bold text-slate-200">LEADS NUMEROLOGI</span>
                     </div>
-                    <span class="text-xs font-mono text-slate-300 font-bold">5.890 Jiwa</span>
+                    <span class="text-xs font-mono text-purple-300 font-bold">{{ $totalLeads }} Jiwa</span>
                 </div>
                 <p class="text-[11px] text-slate-400 font-light leading-relaxed">
-                    Pengunjung organik yang mengeksplorasi beranda, filosofi wewangian, dan mencoba fitur kalkulator numerologi tanpa login.
+                    Pengunjung yang telah melakukan kalkulasi frekuensi jiwa, mencatatkan nomor WhatsApp, dan menerima rekomendasi wewangian.
                 </p>
                 <div class="mt-3 pt-2 border-t border-white/5 flex justify-between text-[10px] font-mono text-slate-400">
-                    <span>Retensi ke Keranjang:</span>
-                    <span class="text-gold-300 font-bold">14.6% Tambah Flacon</span>
+                    <span>Rasio Konversi Order:</span>
+                    <span class="text-gold-300 font-bold">{{ $conversionRate }}%</span>
                 </div>
             </div>
         </div>
 
-        <!-- Mapped Users Table -->
+        <!-- Mapped Users Table (Real Data from Database) -->
         <div class="overflow-x-auto border border-white/5 rounded-xl">
             <table class="w-full text-xs text-left">
                 <thead class="bg-black/90 text-[10px] uppercase font-mono tracking-wider text-slate-400 border-b border-white/10">
                     <tr>
-                        <th class="py-3 px-4">Identitas & Tipe Pengguna</th>
-                        <th class="py-3 px-4">Angka Takdir & Resonansi</th>
-                        <th class="py-3 px-4">Status Akun</th>
-                        <th class="py-3 px-4 text-right">Total Investasi</th>
-                        <th class="py-3 px-4">Aktivitas Terakhir</th>
-                        <th class="py-3 px-4 text-center">Status Transaksi</th>
+                        <th class="py-3 px-4">Identitas & Akun</th>
+                        <th class="py-3 px-4">Role & Status</th>
+                        <th class="py-3 px-4 text-center">Jumlah Pesanan</th>
+                        <th class="py-3 px-4 text-right">Total Transaksi</th>
+                        <th class="py-3 px-4">Bergabung Sejak</th>
+                        <th class="py-3 px-4 text-center">Pesanan Terakhir</th>
                         <th class="py-3 px-4 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-white/5 bg-[#090909]">
-                    <!-- Row 1 -->
-                    <tr class="hover:bg-white/[0.02]">
-                        <td class="py-3 px-4 flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-gold-400/20 border border-gold-400/40 flex items-center justify-center font-serif text-gold-300 font-bold text-xs">
-                                RA
-                            </div>
-                            <div>
-                                <span class="font-medium text-slate-200 block">Raden Mas Arya</span>
-                                <span class="text-[10px] text-slate-500 font-mono">customer@asyihan.id</span>
-                            </div>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="font-serif text-gold-300">#07 The Seeker</span>
-                            <span class="text-[10px] text-slate-400 block">Sang Pencari Hakikat</span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">User Aktif - Terdaftar</span>
-                        </td>
-                        <td class="py-3 px-4 text-right font-mono text-gold-300">Rp 1.050.000</td>
-                        <td class="py-3 px-4 text-slate-400 font-mono text-[10px]">Order Flacon #07 (3 jam lalu)</td>
-                        <td class="py-3 px-4 text-center">
-                            <span class="px-2 py-0.5 rounded-full text-[9px] font-mono bg-emerald-500/20 text-emerald-300">Pelanggan Setia</span>
-                        </td>
-                        <td class="py-3 px-4 text-center">
-                            <a href="{{ route('admin.users.index') }}" class="px-2 py-1 rounded bg-gold-400/15 text-gold-300 text-[10px] hover:bg-gold-400/25">Lihat Profil</a>
-                        </td>
-                    </tr>
-
-                    <!-- Row 2 -->
-                    <tr class="hover:bg-white/[0.02]">
-                        <td class="py-3 px-4 flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center font-serif text-amber-300 font-bold text-xs">
-                                SI
-                            </div>
-                            <div>
-                                <span class="font-medium text-slate-200 block">Sultan Iskandar</span>
-                                <span class="text-[10px] text-slate-500 font-mono">iskandar@kerajaan.id</span>
-                            </div>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="font-serif text-gold-300">#01 The Leader</span>
-                            <span class="text-[10px] text-slate-400 block">Sang Penggagas</span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-amber-500/15 text-amber-300 border border-amber-500/30">User Baru</span>
-                        </td>
-                        <td class="py-3 px-4 text-right font-mono text-gold-300">Rp 500.000</td>
-                        <td class="py-3 px-4 text-slate-400 font-mono text-[10px]">Midnight Delivery (1 hari lalu)</td>
-                        <td class="py-3 px-4 text-center">
-                            <span class="px-2 py-0.5 rounded-full text-[9px] font-mono bg-sky-500/20 text-sky-300">Terkonfirmasi Lunas</span>
-                        </td>
-                        <td class="py-3 px-4 text-center">
-                            <a href="{{ route('admin.users.index') }}" class="px-2 py-1 rounded bg-gold-400/15 text-gold-300 text-[10px] hover:bg-gold-400/25">Lihat Profil</a>
-                        </td>
-                    </tr>
-
-                    <!-- Row 3 -->
-                    <tr class="hover:bg-white/[0.02]">
-                        <td class="py-3 px-4 flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-slate-700/50 border border-white/10 flex items-center justify-center font-serif text-slate-400 font-bold text-xs">
-                                👤
-                            </div>
-                            <div>
-                                <span class="font-medium text-slate-200 block">Anonim (Aditya N.)</span>
-                                <span class="text-[10px] text-slate-500 font-mono">IP: 182.253.xx.xx (Kalkulator)</span>
-                            </div>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="font-serif text-gold-300">#03 The Adventurer</span>
-                            <span class="text-[10px] text-slate-400 block">Sang Penjelajah</span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-slate-800 text-slate-400 border border-white/5">Tamu Anonim</span>
-                        </td>
-                        <td class="py-3 px-4 text-right font-mono text-slate-400">Rp 0 (Keranjang: Rp 350.000)</td>
-                        <td class="py-3 px-4 text-slate-400 font-mono text-[10px]">Simpan ke keranjang (27 mnt lalu)</td>
-                        <td class="py-3 px-4 text-center">
-                            <span class="px-2 py-0.5 rounded-full text-[9px] font-mono bg-amber-500/20 text-amber-300">Menaruh di Keranjang</span>
-                        </td>
-                        <td class="py-3 px-4 text-center">
-                            <a href="{{ route('admin.leads.index') }}" class="px-2 py-1 rounded bg-white/5 text-slate-300 text-[10px] hover:bg-white/10">Follow Up</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    @forelse($recentUsers as $user)
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="py-3 px-4 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-gold-400/20 border border-gold-400/40 flex items-center justify-center font-serif text-gold-300 font-bold text-xs uppercase">
+                                    {{ strtoupper(substr($user->name, 0, 2)) }}
+                                </div>
+                                <div>
+                                    <span class="font-medium text-slate-200 block">{{ $user->name }}</span>
+                                    <span class="text-[10px] text-slate-500 font-mono">{{ $user->email }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 uppercase">
+                                    {{ $user->role ?? 'User Terdaftar' }}
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 text-center font-mono text-slate-300">
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px]">
+                                    {{ $user->orders_count }} Pesanan
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 text-right font-mono text-gold-300 font-bold">
+                                Rp {{ number_format($user->total_spent ?? 0, 0, ',', '.') }}
+                            </td>
+                            <td class="py-3 px-4 text-slate-400 font-mono text-[10px]">
+                                {{ $user->created_at->isoFormat('D MMM Y') }}
+                            </td>
+                            <td class="py-3 px-4 text-center">
+                                @if($user->last_order)
+                                    <span class="px-2 py-0.5 rounded-full text-[9px] font-mono bg-sky-500/20 text-sky-300">
+                                        #{{ $user->last_order->order_number ?? $user->last_order->id }} ({{ ucfirst($user->last_order->status) }})
+                                    </span>
+                                @else
+                                    <span class="text-[10px] text-slate-600 font-mono">Belum ada order</span>
+                                @endif
+                            </td>
+                            <td class="py-3 px-4 text-center">
+                                <a href="{{ route('admin.users.index') }}" class="px-2.5 py-1 rounded bg-gold-400/15 text-gold-300 text-[10px] hover:bg-gold-400/25 transition-all inline-block">
+                                    Lihat Profil
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="py-8 text-center text-slate-500 font-mono">
+                                Belum ada data pengguna terdaftar di database.
+                            </td>
+                        </tr>
+                    @endforelse
         </div>
     </div>
 
@@ -506,13 +475,14 @@
         grad.addColorStop(0, 'rgba(212, 175, 55, 0.45)');
         grad.addColorStop(1, 'rgba(212, 175, 55, 0.01)');
 
+        // Line Chart for Weekly Sales (Real Data from Database)
         new Chart(ctxWeekly, {
             type: 'line',
             data: {
-                labels: ['1-7 Sep (Awal)', '8-14 Sep (Peningkatan)', '15-21 Sep (Puncak Energi)', '22-28 Sep (Harmoni Penutup)'],
+                labels: @json($days),
                 datasets: [{
-                    label: 'Omset Transaksi (Juta Rp)',
-                    data: [28.4, 42.0, 41.6, 36.75],
+                    label: 'Omset Transaksi (Rp)',
+                    data: @json($revenueData),
                     borderColor: '#D4AF37',
                     backgroundColor: grad,
                     borderWidth: 3,
@@ -521,7 +491,7 @@
                     pointBackgroundColor: '#F6E05E',
                     pointBorderColor: '#000',
                     pointBorderWidth: 2,
-                    pointRadius: 6,
+                    pointRadius: 5,
                     pointHoverRadius: 8
                 }]
             },
@@ -538,7 +508,7 @@
                         bodyColor: '#fff',
                         callbacks: {
                             label: function(ctx) {
-                                return 'Rp ' + ctx.parsed.y.toFixed(2) + ' Juta';
+                                return 'Rp ' + Number(ctx.parsed.y).toLocaleString('id-ID');
                             }
                         }
                     }
@@ -554,7 +524,13 @@
                             color: '#94a3b8',
                             font: { size: 10 },
                             callback: function(val) {
-                                return 'Rp ' + val + 'M';
+                                if (val >= 1000000) {
+                                    return 'Rp ' + (val / 1000000).toFixed(1) + 'M';
+                                }
+                                if (val >= 1000) {
+                                    return 'Rp ' + (val / 1000).toFixed(0) + 'k';
+                                }
+                                return 'Rp ' + val;
                             }
                         }
                     }
@@ -562,20 +538,28 @@
             }
         });
 
-        // Doughnut Chart for Flacon Composition
+        // Doughnut Chart for Flacon Composition (Real Top Products)
+        @php
+            $donutLabels = $topProducts->pluck('product_name')->all();
+            $donutData = $topProducts->pluck('total_qty')->map(fn($q) => (int)$q)->all();
+            if (empty($donutLabels)) {
+                $donutLabels = ['Belum Ada Pesanan'];
+                $donutData = [1];
+            }
+        @endphp
         const ctxDoughnut = document.getElementById('flaconCompositionChart').getContext('2d');
         new Chart(ctxDoughnut, {
             type: 'doughnut',
             data: {
-                labels: ['#07 The Seeker', '#01 The Leader', '#03 The Adventurer', '#08 The Sovereign', 'Esensi Lainnya'],
+                labels: @json($donutLabels),
                 datasets: [{
-                    data: [32, 24, 17, 14, 13],
+                    data: @json($donutData),
                     backgroundColor: [
                         '#D4AF37',
                         '#F59E0B',
                         '#10B981',
                         '#8B5CF6',
-                        '#334155'
+                        '#38BDF8'
                     ],
                     borderColor: '#0c0c0c',
                     borderWidth: 3
@@ -586,7 +570,19 @@
                 maintainAspectRatio: false,
                 cutout: '72%',
                 plugins: {
-                    legend: { display: false }
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#0c0c0c',
+                        borderColor: '#D4AF37',
+                        borderWidth: 1,
+                        titleColor: '#D4AF37',
+                        bodyColor: '#fff',
+                        callbacks: {
+                            label: function(ctx) {
+                                return ctx.label + ': ' + ctx.parsed + ' botol';
+                            }
+                        }
+                    }
                 }
             }
         });

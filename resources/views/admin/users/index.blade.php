@@ -5,6 +5,17 @@
 
 @section('content')
 <div class="space-y-6">
+    <!-- Top Action Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+            <p class="text-xs text-slate-400 font-light">Kelola akun master sanctuary, staff dan para pengelana aroma terdaftar.</p>
+        </div>
+        <a href="{{ route('admin.users.create') }}"
+            class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-gold-400 to-yellow-600 text-black font-semibold text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:brightness-110 transition-all flex items-center gap-2">
+            <span>+ Tambah Pengguna Baru</span>
+        </a>
+    </div>
+
     <!-- Filter & Search Bar -->
     <div class="bg-[#0e0e0e] border border-gold-400/20 rounded-2xl p-5 shadow-[0_4px_25px_rgba(0,0,0,0.6)]">
         <form action="{{ route('admin.users.index') }}" method="GET" class="flex flex-col sm:flex-row gap-4 justify-between items-center">
@@ -12,15 +23,15 @@
             <div class="flex flex-wrap gap-2 w-full sm:w-auto">
                 <a href="{{ route('admin.users.index') }}"
                     class="px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all {{ !request('role') ? 'bg-gold-400 text-black font-bold' : 'bg-black/60 text-slate-400 hover:text-gold-300 border border-white/5' }}">
-                    Semua
+                    Semua ({{ \App\Models\User::count() }})
                 </a>
                 <a href="{{ route('admin.users.index', ['role' => 'admin']) }}"
                     class="px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all {{ request('role') === 'admin' ? 'bg-amber-500 text-black font-bold' : 'bg-black/60 text-slate-400 hover:text-amber-300 border border-white/5' }}">
-                    Admin
+                    Admin ({{ \App\Models\User::where('role', 'admin')->count() }})
                 </a>
                 <a href="{{ route('admin.users.index', ['role' => 'user']) }}"
                     class="px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all {{ request('role') === 'user' ? 'bg-sky-500 text-black font-bold' : 'bg-black/60 text-slate-400 hover:text-sky-300 border border-white/5' }}">
-                    Pelanggan (User)
+                    Pelanggan ({{ \App\Models\User::where('role', 'user')->count() }})
                 </a>
             </div>
 
@@ -84,28 +95,31 @@
                                 {{ $user->created_at->isoFormat('D MMM Y') }}
                             </td>
                             <td class="py-4 px-4 text-center">
-                                @if($user->id !== auth()->id())
-                                    <div class="flex items-center justify-center gap-2">
+                                <div class="flex items-center justify-center gap-2">
+                                    <a href="{{ route('admin.users.edit', $user) }}"
+                                        class="px-2.5 py-1 rounded bg-gold-400/15 border border-gold-400/30 text-gold-300 text-[11px] hover:bg-gold-400/25 transition-all">
+                                        Edit
+                                    </a>
+
+                                    @if($user->id !== auth()->id())
                                         <form action="{{ route('admin.users.toggle-role', $user) }}" method="POST">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="px-2.5 py-1 rounded bg-gold-400/10 border border-gold-400/30 text-gold-300 text-[10px] hover:bg-gold-400/20 transition-all"
+                                            <button type="submit" class="px-2 py-1 rounded bg-black/60 border border-white/10 text-slate-300 text-[10px] hover:text-gold-300 hover:border-gold-400/30 transition-all"
                                                 title="Ubah peran admin/user">
-                                                Jadikan {{ $user->role === 'admin' ? 'User' : 'Admin' }}
+                                                {{ $user->role === 'admin' ? 'Jadikan User' : 'Jadikan Admin' }}
                                             </button>
                                         </form>
 
                                         <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('Hapus akun pengguna {{ $user->name }}?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="p-1 rounded text-rose-400/70 hover:text-rose-300 hover:bg-rose-500/10 transition-colors" title="Hapus">
+                                            <button type="submit" class="p-1 rounded text-rose-400/70 hover:text-rose-300 hover:bg-rose-500/10 transition-colors" title="Hapus Akun">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                             </button>
                                         </form>
-                                    </div>
-                                @else
-                                    <span class="text-slate-600 text-[10px] italic">Aktif</span>
-                                @endif
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @empty

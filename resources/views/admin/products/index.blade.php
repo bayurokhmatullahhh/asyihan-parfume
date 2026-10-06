@@ -8,12 +8,18 @@
     <!-- Header with Create Button -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-            <p class="text-xs text-slate-400 font-light">Kelola koleksi 9 esensi numerologi dan persembahan khusus.</p>
+            <p class="text-xs text-slate-400 font-light">Kelola koleksi flacon esensi numerologi, persembahan khusus, dan wewangian sakral.</p>
         </div>
-        <a href="{{ route('admin.products.create') }}"
-            class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-semibold text-xs uppercase tracking-wider shadow-md hover:brightness-110 transition-all flex items-center gap-2">
-            <span>+ Tambah Mahakarya Baru</span>
-        </a>
+        <div class="flex items-center gap-3">
+            <a href="{{ route('admin.categories.index') }}"
+                class="px-3.5 py-2 rounded-xl bg-black/80 border border-gold-400/30 text-gold-300 hover:bg-gold-400/10 font-medium text-xs transition-all flex items-center gap-1.5">
+                <span>📂 Kelola Kategori</span>
+            </a>
+            <a href="{{ route('admin.products.create') }}"
+                class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-gold-400 to-yellow-600 text-black font-semibold text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:brightness-110 transition-all flex items-center gap-2">
+                <span>+ Tambah Mahakarya Baru</span>
+            </a>
+        </div>
     </div>
 
     <!-- Filter & Search Bar -->
@@ -22,22 +28,20 @@
             <!-- Category Tabs -->
             <div class="flex flex-wrap gap-2 w-full sm:w-auto">
                 <a href="{{ route('admin.products.index') }}"
-                    class="px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all {{ !request('category') ? 'bg-gold-400 text-black font-bold' : 'bg-black/60 text-slate-400 hover:text-gold-300 border border-white/5' }}">
-                    Semua Produk
+                    class="px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all {{ !request('category_id') && !request('category') ? 'bg-gold-400 text-black font-bold' : 'bg-black/60 text-slate-400 hover:text-gold-300 border border-white/5' }}">
+                    Semua ({{ \App\Models\Product::count() }})
                 </a>
-                <a href="{{ route('admin.products.index', ['category' => 'essence']) }}"
-                    class="px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all {{ request('category') === 'essence' ? 'bg-amber-500 text-black font-bold' : 'bg-black/60 text-slate-400 hover:text-amber-300 border border-white/5' }}">
-                    9 Essence
-                </a>
-                <a href="{{ route('admin.products.index', ['category' => 'special']) }}"
-                    class="px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all {{ request('category') === 'special' ? 'bg-purple-500 text-black font-bold' : 'bg-black/60 text-slate-400 hover:text-purple-300 border border-white/5' }}">
-                    Special Offerings
-                </a>
+                @foreach($categories as $cat)
+                    <a href="{{ route('admin.products.index', ['category_id' => $cat->id]) }}"
+                        class="px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all {{ request('category_id') == $cat->id || request('category') === $cat->slug ? 'bg-gold-400 text-black font-bold' : 'bg-black/60 text-slate-400 hover:text-gold-300 border border-white/5' }}">
+                        {{ $cat->name }} ({{ $cat->products_count ?? $cat->products()->count() }})
+                    </a>
+                @endforeach
             </div>
 
             <!-- Search Input -->
             <div class="flex items-center gap-2 w-full sm:w-72">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama produk..."
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau tagline..."
                     class="w-full px-3.5 py-2 bg-black/80 border border-gold-400/25 rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-gold-400">
                 <button type="submit" class="px-3 py-2 bg-gold-400/20 border border-gold-400/40 rounded-xl text-gold-300 text-xs hover:bg-gold-400/30 transition-all">
                     Cari
@@ -53,7 +57,7 @@
                 <thead class="bg-black/80 text-[10px] uppercase font-mono tracking-wider text-slate-400 border-b border-white/10">
                     <tr>
                         <th class="py-3.5 px-4 text-center">Botol</th>
-                        <th class="py-3.5 px-4">Nama Produk</th>
+                        <th class="py-3.5 px-4">Nama Produk & Karakter</th>
                         <th class="py-3.5 px-4 text-center">Kategori</th>
                         <th class="py-3.5 px-4 text-center">Stok</th>
                         <th class="py-3.5 px-4 text-right">Harga</th>
@@ -65,25 +69,31 @@
                     @forelse($products as $product)
                         <tr class="hover:bg-white/[0.02] transition-colors">
                             <td class="py-3 px-4 text-center">
-                                <div class="w-10 h-10 mx-auto bg-black/80 rounded-lg border border-gold-400/20 p-1 flex items-center justify-center">
-                                    @if($product->image && file_exists(public_path($product->image)))
-                                        <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="max-h-full object-contain">
-                                    @else
-                                        <span class="font-serif text-gold-400 font-bold text-xs">{{ $product->essence_number ?? '✧' }}</span>
-                                    @endif
+                                <div class="w-12 h-12 mx-auto bg-black/80 rounded-xl border border-gold-400/20 p-1 flex items-center justify-center overflow-hidden">
+                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="max-h-full max-w-full object-contain">
                                 </div>
                             </td>
                             <td class="py-3 px-4">
-                                <span class="font-medium text-slate-100 block font-serif">{{ $product->name }}</span>
-                                <span class="text-[10px] text-slate-400 italic block">{{ $product->tagline }}</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-medium text-slate-100 font-serif">{{ $product->name }}</span>
+                                    @if($product->is_featured)
+                                        <span class="px-1.5 py-0.2 text-[8px] uppercase tracking-wider font-mono rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">★ Featured</span>
+                                    @endif
+                                </div>
+                                <span class="text-[10px] text-slate-400 italic block mt-0.5">{{ $product->tagline }}</span>
+                                @if($product->soul_character)
+                                    <span class="text-[9px] text-amber-400/80 font-mono block mt-1 line-clamp-1">✦ Jiwa: {{ Str::limit($product->soul_character, 70) }}</span>
+                                @endif
                             </td>
                             <td class="py-3 px-4 text-center">
-                                <span class="px-2 py-0.5 rounded text-[10px] uppercase font-mono border {{ $product->category === 'essence' ? 'bg-amber-500/15 text-amber-300 border-amber-500/30' : 'bg-purple-500/15 text-purple-300 border-purple-500/30' }}">
-                                    {{ $product->category }}
+                                <span class="px-2.5 py-1 rounded-full text-[10px] uppercase font-mono border {{ $product->category === 'essence' ? 'bg-amber-500/15 text-amber-300 border-amber-500/30' : 'bg-purple-500/15 text-purple-300 border-purple-500/30' }}">
+                                    {{ $product->categoryRelation?->name ?? strtoupper($product->category) }}
                                 </span>
                             </td>
                             <td class="py-3 px-4 text-center font-mono text-slate-300">
-                                {{ $product->stock }}
+                                <span class="{{ $product->stock <= 5 ? 'text-rose-400 font-bold' : '' }}">
+                                    {{ $product->stock }}
+                                </span>
                             </td>
                             <td class="py-3 px-4 text-right font-mono text-gold-300 font-medium">
                                 {{ $product->formatted_price }}

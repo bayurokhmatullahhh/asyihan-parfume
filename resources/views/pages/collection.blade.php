@@ -25,6 +25,35 @@
         </p>
     </div>
 
+    @php
+        if (isset($products)) {
+            foreach ($archetypes as $num => &$arc) {
+                if (isset($products[$num])) {
+                    $p = $products[$num];
+                    $arc['name'] = $p->name;
+                    if (!empty($p->description)) {
+                        $arc['description'] = $p->description;
+                    }
+                    if (!empty($p->soul_character)) {
+                        $arc['soul_character'] = $p->soul_character;
+                    }
+                    if (!empty($p->tagline)) {
+                        $arc['quote'] = $p->tagline;
+                    }
+                    $arc['bottle_image_url'] = $p->image_url;
+                    $arc['bottle_image'] = $p->image_url;
+                    if (!empty($p->notes) && is_array($p->notes)) {
+                        $arc['notes'] = array_merge($arc['notes'] ?? [], $p->notes);
+                    }
+                    if (!empty($p->price)) {
+                        $arc['price'] = (int) $p->price;
+                    }
+                }
+            }
+            unset($arc);
+        }
+    @endphp
+
     {{-- Essences Grid with Inline Detail --}}
     <div id="essence-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
         @foreach($archetypes as $essence)
@@ -37,7 +66,7 @@
                     
                     {{-- HD Clean Bottle Background --}}
                     <div class="absolute inset-0 z-0">
-                        <img src="{{ asset($essence['bottle_image']) }}" 
+                        <img src="{{ $essence['bottle_image_url'] ?? asset($essence['bottle_image']) }}" 
                              alt="{{ $essence['essence_name'] }}" 
                              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none"></div>

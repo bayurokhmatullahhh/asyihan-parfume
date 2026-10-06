@@ -185,6 +185,12 @@
                             <span>Tambah Flacon Baru</span>
                         </a>
 
+                        <a href="{{ route('admin.categories.index') }}"
+                            class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-gold-200 hover:bg-white/[0.03] {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
+                            <svg class="w-4 h-4 text-gold-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                            <span>Kategori Sakral</span>
+                        </a>
+
                         <a href="{{ route('home') }}" target="_blank"
                             class="flex items-center justify-between px-3 py-2 rounded-xl text-xs text-slate-400 hover:text-gold-300 hover:bg-white/[0.03] transition-colors">
                             <div class="flex items-center gap-3">

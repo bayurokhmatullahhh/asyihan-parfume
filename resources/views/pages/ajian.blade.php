@@ -156,22 +156,6 @@
         </div>
     </section>
 
-    <!-- {{-- MANTRA AJIAN & AFIRMASI JIWA 9 ESENSI PARFUM --}}
-    <section class="mb-20">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-white/10">
-            <div>
-                <div class="inline-block px-3.5 py-1 rounded-full bg-gold-400/10 border border-gold-400/20 text-gold-400 text-xs tracking-[0.2em] uppercase mb-2 font-mono">
-                    9 ARKETIPE ESENSI • 9 MANTRA AJIAN
-                </div>
-                <h2 class="text-2xl sm:text-4xl font-serif text-white tracking-wide">
-                    Mantra Ajian & Afirmasi Jiwa 9 Esensi Parfum
-                </h2>
-            </div>
-            <p class="text-sm text-gray-300 max-w-xs font-light leading-relaxed">
-                Pilihlah ajian yang sesuai dengan arketipe angka kelahirannya untuk hasil maksimal.
-            </p>
-        </div> -->
-
         {{-- MANTRA AJIAN & AFIRMASI JIWA 9 ESENSI PARFUM --}}
         <section class="mb-20">
             <div class="flex flex-col gap-3 mb-10 pb-4 border-b border-white/10">
@@ -189,11 +173,32 @@
             </div>
         </section>
 
+        @php
+            if (isset($products)) {
+                foreach ($archetypes as $num => &$arc) {
+                    if (isset($products[$num])) {
+                        $p = $products[$num];
+                        $arc['name'] = $p->name;
+                        $arc['essence_name'] = $p->name;
+                        if (!empty($p->description)) {
+                            $arc['description'] = $p->description;
+                        }
+                        if (!empty($p->soul_character)) {
+                            $arc['soul_character'] = $p->soul_character;
+                        }
+                        $arc['bottle_image_url'] = $p->image_url;
+                        $arc['bottle_image'] = $p->image_url;
+                    }
+                }
+                unset($arc);
+            }
+        @endphp
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($archetypes as $essence)
                 @php
                     $numFormatted = sprintf('%02d', $essence['number']);
-                    $cardImg = asset($essence['bottle_image']);
+                    $cardImg = $essence['bottle_image_url'] ?? asset($essence['bottle_image']);
 
                     // Categories map matching archetypes
                     $categories = [

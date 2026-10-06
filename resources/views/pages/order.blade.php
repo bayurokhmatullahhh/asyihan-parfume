@@ -25,23 +25,25 @@
             <div class="w-32 h-0.5 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-6"></div>
         </div>
 
-        {{-- Filter Category Pills --}}
+        {{-- Filter Category Pills (Dynamic from Database) --}}
         <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mb-8 text-xs font-mono">
             <button type="button" onclick="filterCatalog('all')" id="filter-all" class="filter-btn px-4 py-2 rounded-full border border-gold-400 bg-gold-400 text-black font-semibold shadow-[0_0_15px_rgba(197,160,89,0.4)] transition-all">
                 SEMUA KOLEKSI (ALL OFFERINGS)
             </button>
-            <button type="button" onclick="filterCatalog('extrait')" id="filter-extrait" class="filter-btn px-4 py-2 rounded-full border border-gold-400/20 bg-black/60 text-gold-300/80 hover:border-gold-400/60 hover:text-gold-200 transition-all">
-                EXTRAIT DE PARFUM (BODY SIGNATURE)
-            </button>
-            <button type="button" onclick="filterCatalog('sanctuary')" id="filter-sanctuary" class="filter-btn px-4 py-2 rounded-full border border-gold-400/20 bg-black/60 text-gold-300/80 hover:border-gold-400/60 hover:text-gold-200 transition-all">
-                RUANGAN & SANCTUARY (ROOM & SPACE MIST)
-            </button>
-            <button type="button" onclick="filterCatalog('diffuser')" id="filter-diffuser" class="filter-btn px-4 py-2 rounded-full border border-gold-400/20 bg-black/60 text-gold-300/80 hover:border-gold-400/60 hover:text-gold-200 transition-all">
-                REED DIFFUSER (ALIRAN DIFFUSER)
-            </button>
-            <button type="button" onclick="filterCatalog('botanik')" id="filter-botanik" class="filter-btn px-4 py-2 rounded-full border border-gold-400/20 bg-black/60 text-gold-300/80 hover:border-gold-400/60 hover:text-gold-200 transition-all">
-                UJI RITUAL & SETA BOTANIK
-            </button>
+            @if(isset($categories) && $categories->isNotEmpty())
+                @foreach($categories as $category)
+                    <button type="button" onclick="filterCatalog('{{ $category->slug }}')" id="filter-{{ $category->slug }}" class="filter-btn px-4 py-2 rounded-full border border-gold-400/20 bg-black/60 text-gold-300/80 hover:border-gold-400/60 hover:text-gold-200 transition-all uppercase">
+                        {{ $category->name }}
+                    </button>
+                @endforeach
+            @else
+                <button type="button" onclick="filterCatalog('essence')" id="filter-essence" class="filter-btn px-4 py-2 rounded-full border border-gold-400/20 bg-black/60 text-gold-300/80 hover:border-gold-400/60 hover:text-gold-200 transition-all">
+                    9 ESSENCE NUMEROLOGI
+                </button>
+                <button type="button" onclick="filterCatalog('special')" id="filter-special" class="filter-btn px-4 py-2 rounded-full border border-gold-400/20 bg-black/60 text-gold-300/80 hover:border-gold-400/60 hover:text-gold-200 transition-all">
+                    SPECIAL OFFERINGS
+                </button>
+            @endif
         </div>
 
         {{-- Grid Sub-header --}}
@@ -51,182 +53,28 @@
                 <span class="uppercase">MAHAKARYA PILIHAN TAKDIR</span>
             </div>
             <div id="catalog-count" class="text-gray-400 text-[11px]">
-                MENAMPILKAN 6 FORMULA MISTIK
+                MENAMPILKAN {{ $products->count() }} FORMULA MISTIK
             </div>
         </div>
 
         @php
-            $catalogItems = [
-                [
-                    'id' => 7,
-                    'category' => 'extrait',
-                    'badge_left' => 'EXTRAIT PUR 35%',
-                    'badge_right' => 'EKSTRAK SAKRAL NO. 7',
-                    'label' => 'NUMEROLOGI JIWA 7',
-                    'title' => 'Essence VII - The Seeker',
-                    'desc' => 'Gaharu Singkil, Melati Keraton, & Cendana Mistik. Membangkitkan petunjuk & kebijaksanaan batin.',
-                    'specs' => ['50ML FLACON', '30ML GRAND'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_7.jpg'),
-                    'short_notes' => '50ml Extrait de Parfum • Konsentrasi 35%',
-                ],
-                [
-                    'id' => 101,
-                    'category' => 'sanctuary',
-                    'badge_left' => 'AROMATIK INTENSIF',
-                    'badge_right' => 'RUANGAN & SANCTUARY',
-                    'label' => 'PEMERSIH SAKRAL',
-                    'title' => 'Sanctuary Mist - Hening Dugo',
-                    'desc' => 'Gaharu, Kemuning Putih, & Cendana Nusa Penida. Menyucikan aura buana dan mengundang ketenangan sanggar.',
-                    'specs' => ['100ML GLASS', 'PISAH BOTOL'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_2.jpg'),
-                    'short_notes' => '100ml Room & Space Mist Purifier',
-                ],
-                [
-                    'id' => 102,
-                    'category' => 'diffuser',
-                    'badge_left' => 'KETAHANAN 30 HARI',
-                    'badge_right' => 'DIFFUSER SAKRAL',
-                    'label' => 'ALIRAN RITUAL',
-                    'title' => 'Reed Diffuser - Asih Rembulan',
-                    'desc' => 'Melati Putih Malam, Kayu Cendana Pasang, & Kamboja Madu. Penjaga ketenangan ruang meditasi dan kamar peraduan.',
-                    'specs' => ['150ML + BOTANICAL'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_3.jpg'),
-                    'short_notes' => '150ml Reed Diffuser & Botanical Sticks',
-                ],
-                [
-                    'id' => 103,
-                    'category' => 'botanik',
-                    'badge_left' => 'LILIN SATU MALAM',
-                    'badge_right' => 'LILIN RITUAL',
-                    'label' => 'PETUNJUK JIWA',
-                    'title' => 'Lilin Sakral - Kemurnian Surya',
-                    'desc' => 'Lilin Kedelai 200g, dalam bejana tembikar hitam berukir mantra kuno. Bergamot, Cendana, & Kapulaga.',
-                    'specs' => ['220G BEJANA KERAMIK'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_4.jpg'),
-                    'short_notes' => '220g Scented Soy Candle Keramik Hitam',
-                ],
-                [
-                    'id' => 1,
-                    'category' => 'extrait',
-                    'badge_left' => 'EXTRAIT PUR 35%',
-                    'badge_right' => 'MAHAKARYA NO. 1',
-                    'label' => 'NUMEROLOGI JIWA 1',
-                    'title' => 'Essence I - The Leader',
-                    'desc' => 'Bergamot Cirebon, Black Pepper, & Resin Cedarwood. Membangkitkan aura kepemimpinan dan ketegasan aura.',
-                    'specs' => ['50ML FLACON'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_1.png'),
-                    'short_notes' => '50ml Extrait de Parfum • Konsentrasi 35%',
-                ],
-                [
-                    'id' => 104,
-                    'category' => 'botanik',
-                    'badge_left' => '3 VARIANT PEMULA',
-                    'badge_right' => 'DISCOVERY SET',
-                    'label' => 'TRILOGI ESSENCE',
-                    'title' => 'Sacred Travel Discovery Set',
-                    'desc' => 'Set berisi 3 vial esensi (3 x 10ml) pilihan pemenang. Anda selain tidak ragu memutar berbaur intrik mistik.',
-                    'specs' => ['3 X 10ML DISCOVERY SET'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_5.jpg'),
-                    'short_notes' => '3 x 10ml Sacred Discovery Vials',
-                ],
-                [
-                    'id' => 2,
-                    'category' => 'extrait',
-                    'badge_left' => 'EXTRAIT PUR 35%',
-                    'badge_right' => 'MAHAKARYA NO. 2',
-                    'label' => 'NUMEROLOGI JIWA 2',
-                    'title' => 'Essence II - The Mediator',
-                    'desc' => 'Pear, Peony, & White Musk. Menghubungkan hati, menghadirkan rasa aman dan kedamaian.',
-                    'specs' => ['50ML FLACON'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_2.jpg'),
-                    'short_notes' => '50ml Extrait de Parfum • Konsentrasi 35%',
-                ],
-                [
-                    'id' => 3,
-                    'category' => 'extrait',
-                    'badge_left' => 'EXTRAIT PUR 35%',
-                    'badge_right' => 'MAHAKARYA NO. 3',
-                    'label' => 'NUMEROLOGI JIWA 3',
-                    'title' => 'Essence III - The Creator',
-                    'desc' => 'Lemon, Neroli, & Vanilla. Membangkitkan ide, ekspresi, dan keceriaan jiwa.',
-                    'specs' => ['50ML FLACON'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_3.jpg'),
-                    'short_notes' => '50ml Extrait de Parfum • Konsentrasi 35%',
-                ],
-                [
-                    'id' => 4,
-                    'category' => 'extrait',
-                    'badge_left' => 'EXTRAIT PUR 35%',
-                    'badge_right' => 'MAHAKARYA NO. 4',
-                    'label' => 'NUMEROLOGI JIWA 4',
-                    'title' => 'Essence IV - The Builder',
-                    'desc' => 'Bergamot, Lavender, & Cedarwood. Fondasi disiplin, stabilitas, dan keteraturan.',
-                    'specs' => ['50ML FLACON'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_4.jpg'),
-                    'short_notes' => '50ml Extrait de Parfum • Konsentrasi 35%',
-                ],
-                [
-                    'id' => 5,
-                    'category' => 'extrait',
-                    'badge_left' => 'EXTRAIT PUR 35%',
-                    'badge_right' => 'MAHAKARYA NO. 5',
-                    'label' => 'NUMEROLOGI JIWA 5',
-                    'title' => 'Essence V - The Adventurer',
-                    'desc' => 'Bergamot, Marine Accord, & Ambergris. Kebebasan, petualangan, dan eksplorasi kemungkinan baru.',
-                    'specs' => ['50ML FLACON'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_5.jpg'),
-                    'short_notes' => '50ml Extrait de Parfum • Konsentrasi 35%',
-                ],
-                [
-                    'id' => 6,
-                    'category' => 'extrait',
-                    'badge_left' => 'EXTRAIT PUR 35%',
-                    'badge_right' => 'MAHAKARYA NO. 6',
-                    'label' => 'NUMEROLOGI JIWA 6',
-                    'title' => 'Essence VI - The Nurturer',
-                    'desc' => 'Bergamot, Jasmine, & Sandalwood. Kasih sayang, perlindungan, dan penyembuhan jiwa.',
-                    'specs' => ['50ML FLACON'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_6.jpg'),
-                    'short_notes' => '50ml Extrait de Parfum • Konsentrasi 35%',
-                ],
-                [
-                    'id' => 8,
-                    'category' => 'extrait',
-                    'badge_left' => 'EXTRAIT PUR 35%',
-                    'badge_right' => 'MAHAKARYA NO. 8',
-                    'label' => 'NUMEROLOGI JIWA 8',
-                    'title' => 'Essence VIII - The Achiever',
-                    'desc' => 'Bergamot, Black Pepper, & Sandalwood. Visi strategis, kewibawaan, dan kelimpahan.',
-                    'specs' => ['50ML FLACON'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_8.jpg'),
-                    'short_notes' => '50ml Extrait de Parfum • Konsentrasi 35%',
-                ],
-                [
-                    'id' => 9,
-                    'category' => 'extrait',
-                    'badge_left' => 'EXTRAIT PUR 35%',
-                    'badge_right' => 'MAHAKARYA NO. 9',
-                    'label' => 'NUMEROLOGI JIWA 9',
-                    'title' => 'Essence IX - The Philanthropist',
-                    'desc' => 'Bergamot, Rose, & Sandalwood. Bimbingan spiritual, kejelasan, dan cahaya kemanusiaan.',
-                    'specs' => ['50ML FLACON'],
-                    'price' => 350000,
-                    'image' => asset('images/bottle/bottle_9.jpg'),
-                    'short_notes' => '50ml Extrait de Parfum • Konsentrasi 35%',
-                ],
-            ];
+            $catalogItems = $products->map(function ($p) {
+                return [
+                    'id' => $p->essence_number ?: $p->id,
+                    'product_id' => $p->id,
+                    'category' => $p->display_category,
+                    'badge_left' => $p->badge_left,
+                    'badge_right' => $p->badge_right,
+                    'label' => $p->display_label,
+                    'title' => $p->name,
+                    'desc' => $p->description,
+                    'soul_character' => $p->soul_character,
+                    'specs' => $p->display_specs,
+                    'price' => (int) $p->price,
+                    'image' => $p->image_url,
+                    'short_notes' => $p->short_notes_display,
+                ];
+            })->all();
         @endphp
 
         {{-- Product Grid --}}
@@ -282,21 +130,40 @@
                                 
                                 <div class="flex items-center gap-1.5">
                                     {{-- Add to Cart Button --}}
-                                    <button type="button" 
-                                            onclick="window.addToCart(null, {{ $item['id'] }}, this)"
-                                            title="Masukkan ke Peti Persembahan"
-                                            class="w-9 h-9 rounded-lg border border-gold-400/40 bg-black/60 hover:bg-gold-400/15 text-gold-300 hover:text-gold-200 transition-all flex items-center justify-center p-2 group/cart shadow-md hover:border-gold-400">
-                                        <svg class="w-4 h-4 group-hover/cart:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                                        </svg>
-                                    </button>
+                                    @auth
+                                        <button type="button" 
+                                                onclick="window.addToCart(null, {{ $item['id'] }}, this)"
+                                                title="Masukkan ke Peti Persembahan"
+                                                class="w-9 h-9 rounded-lg border border-gold-400/40 bg-black/60 hover:bg-gold-400/15 text-gold-300 hover:text-gold-200 transition-all flex items-center justify-center p-2 group/cart shadow-md hover:border-gold-400">
+                                            <svg class="w-4 h-4 group-hover/cart:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                            </svg>
+                                        </button>
+                                    @else
+                                        <button type="button" 
+                                                onclick="promptAuthRequired('keranjang')"
+                                                title="Masuk untuk menambahkan ke keranjang"
+                                                class="w-9 h-9 rounded-lg border border-gold-400/40 bg-black/60 hover:bg-gold-400/15 text-gold-300 hover:text-gold-200 transition-all flex items-center justify-center p-2 group/cart shadow-md hover:border-gold-400">
+                                            <svg class="w-4 h-4 group-hover/cart:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                            </svg>
+                                        </button>
+                                    @endauth
 
                                     {{-- Direct Order / Sacred Checkout Button --}}
-                                    <button type="button" 
-                                            onclick="proceedToCheckout({{ $item['id'] }}, '{{ addslashes($item['label']) }}', '{{ addslashes($item['title']) }}', '{{ addslashes($item['short_notes']) }}', {{ $item['price'] }}, '{{ $item['image'] }}')"
-                                            class="btn-select-order-{{ $item['id'] }} btn-gold text-[11px] sm:text-xs px-3 sm:px-4 py-2 sm:py-2.5 font-mono tracking-widest uppercase rounded text-black font-bold hover:scale-105 transition-all flex items-center gap-1 shadow-lg">
-                                        <span>BUAT PESANAN</span>
-                                    </button>
+                                    @auth
+                                        <button type="button" 
+                                                onclick="proceedToCheckout({{ $item['id'] }}, '{{ addslashes($item['label']) }}', '{{ addslashes($item['title']) }}', '{{ addslashes($item['short_notes']) }}', {{ $item['price'] }}, '{{ $item['image'] }}')"
+                                                class="btn-select-order-{{ $item['id'] }} btn-gold text-[11px] sm:text-xs px-3 sm:px-4 py-2 sm:py-2.5 font-mono tracking-widest uppercase rounded text-black font-bold hover:scale-105 transition-all flex items-center gap-1 shadow-lg">
+                                            <span>BUAT PESANAN</span>
+                                        </button>
+                                    @else
+                                        <button type="button" 
+                                                onclick="promptAuthRequired('order', {{ $item['id'] }})"
+                                                class="btn-select-order-{{ $item['id'] }} btn-gold text-[11px] sm:text-xs px-3 sm:px-4 py-2 sm:py-2.5 font-mono tracking-widest uppercase rounded text-black font-bold hover:scale-105 transition-all flex items-center gap-1 shadow-lg">
+                                            <span>BUAT PESANAN</span>
+                                        </button>
+                                    @endauth
                                 </div>
                             </div>
                         </div>
@@ -718,6 +585,40 @@
 
     </div>
 
+    {{-- Auth Required Modal for Guests --}}
+    <div id="authRequiredModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-[#121110] border border-gold-400/40 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center">
+            <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-gold-300 transition-colors p-1 cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div class="w-14 h-14 rounded-full bg-gold-400/10 border border-gold-400/30 flex items-center justify-center text-gold-400 text-2xl mx-auto mb-4">
+                ✦
+            </div>
+
+            <div class="text-[10px] uppercase font-mono tracking-[0.25em] text-gold-400 mb-1">
+                AUTENTIKASI SAKRAL
+            </div>
+            <h3 id="authModalTitle" class="font-serif text-xl sm:text-2xl text-white font-semibold mb-2">
+                Mulai Perjalanan Takdir Anda
+            </h3>
+            <p id="authModalDesc" class="text-xs text-gray-300 leading-relaxed mb-6 font-light">
+                Untuk menyelesaikan pemesanan mahakarya atau menyimpan ke keranjang persembahan, silakan buat akun baru atau masuk terlebih dahulu.
+            </p>
+
+            <div class="space-y-3">
+                <a href="{{ route('register') }}" class="w-full btn-gold py-3 text-xs font-mono font-bold tracking-widest uppercase rounded block text-center shadow-lg">
+                    DAFTAR AKUN BARU (REGISTER)
+                </a>
+                <a href="{{ route('login') }}" class="w-full border border-gold-400/40 hover:bg-gold-400/10 text-gold-300 py-2.5 text-xs font-mono font-bold tracking-widest uppercase rounded block text-center transition-colors">
+                    SUDAH PUNYA AKUN? MASUK (LOGIN)
+                </a>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endsection
 
@@ -725,6 +626,31 @@
 <script>
     let currentBasePrice = 350000;
     let currentShippingExtra = 0;
+
+    function promptAuthRequired(type, id) {
+        const modal = document.getElementById('authRequiredModal');
+        const title = document.getElementById('authModalTitle');
+        const desc = document.getElementById('authModalDesc');
+        
+        if (type === 'keranjang') {
+            title.textContent = 'Simpan ke Keranjang Sakral';
+            desc.textContent = 'Daftarkan akun atau masuk terlebih dahulu agar wewangian pilihan Anda tersimpan aman dalam peti persembahan batin Anda.';
+        } else {
+            title.textContent = 'Mulai Perjalanan Takdir Anda';
+            desc.textContent = 'Untuk membuat dan mengonfirmasi pesanan mahakarya sakral, silakan daftarkan akun baru atau masuk terlebih dahulu.';
+        }
+
+        if (modal) {
+            modal.classList.remove('hidden');
+        } else {
+            window.location.href = "{{ route('register') }}";
+        }
+    }
+
+    function closeAuthModal() {
+        const modal = document.getElementById('authRequiredModal');
+        if (modal) modal.classList.add('hidden');
+    }
 
     // Filter catalog items in View 1
     function filterCatalog(category) {

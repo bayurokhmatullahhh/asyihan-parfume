@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class UserManagementController extends Controller
@@ -34,6 +35,87 @@ class UserManagementController extends Controller
         $users = $query->paginate(15)->withQueryString();
 
         return view('admin.users.index', compact('users'));
+    }
+
+    /**
+     * Show form for creating a new user / admin.
+     */
+    public function create(): View
+    {
+        return view('admin.users.create');
+    }
+
+    /**
+     * Store a newly created user.
+     */
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'phone' => 'nullable|string|max:20',
+            'role' => 'required|in:user,admin',
+            'birth_date' => 'nullable|date',
+            'address' => 'nullable|string|max:500',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        User::create($validated);
+
+        return redirect()->route('admin.users.index')->with('success', "Akun pengelana {$validated['name']} berhasil diciptakan.");
+    }
+
+    /**
+     * Show form for editing an existing user.
+     */
+    public function edit(User $user): View
+    {
+        return view('admin.users.edit', compact('user'));
+    }
+
+    /**
+     * Update the specified user.
+     */
+    public function update(Request $request, User $user): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'phone' => 'nullable|string|max:20',
+            'role' => 'required|in:user,admin',
+            'birth_date' => 'nullable|date',
+            'address' => 'nullable|string|max:500',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        if (empty($validated['password'])) {
+            unset($validated['password']);
+        }
+
+        // Prevent admin from removing their own admin role
+        if ($user->id === Auth::id() && $validated['role'] !== 'admin') {
+            return back()->with('error', 'Anda tidak dapat mencabut hak administrator dari akun Anda sendiri.');
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('admin.users.index')->with('success', "Data jiwa {$user->name} berhasil diperbarui.");
+    }
+
+    /**
+     * Reset user password directly by admin.
+     */
+    public function resetPassword(Request $request, User $user): RedirectResponse
+    {
+        $validated = $request->validate([
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user->update([
+            'password' => $validated['password'],
+        ]);
+
+        return back()->with('success', "Kata sandi untuk {$user->name} berhasil diperbarui.");
     }
 
     /**

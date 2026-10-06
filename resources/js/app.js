@@ -431,7 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (elArchName) elArchName.textContent = arch.name;
                     if (elElementBadge)
                         elElementBadge.textContent = `Elemen: ${arch.element}`;
-                    if (elCharDesc) elCharDesc.textContent = arch.description;
+                    if (elCharDesc) elCharDesc.textContent = arch.soul_character || arch.description;
 
                     if (elTraitsContainer && Array.isArray(arch.traits)) {
                         elTraitsContainer.innerHTML = "";
@@ -867,7 +867,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             arch.notes?.top + ", " + arch.notes?.base;
 
                     const descEl = document.getElementById("out-description");
-                    if (descEl) descEl.textContent = arch.description;
+                    if (descEl) descEl.textContent = arch.soul_character || arch.description;
 
                     const notesTopTitle = document.getElementById(
                         "out-notes-top-title",
@@ -912,7 +912,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
                     if (formulaExtract)
                         formulaExtract.textContent =
-                            arch.formula_extract || arch.fragrance_description;
+                            arch.description || arch.formula_extract || arch.fragrance_description;
 
                     const priceEl = document.getElementById("out-price");
                     if (priceEl)
@@ -930,9 +930,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const bottleImg = document.getElementById("out-bottle-img");
                     if (bottleImg) {
-                        bottleImg.src = arch.bottle_image
-                            ? `/${arch.bottle_image}`
-                            : `/images/bottle/${arch.number === 1 ? "bottle_1.png" : "bottle_" + arch.number + ".jpg"}`;
+                        if (arch.bottle_image_url) {
+                            bottleImg.src = arch.bottle_image_url;
+                        } else if (arch.bottle_image) {
+                            bottleImg.src = arch.bottle_image.startsWith('/') || arch.bottle_image.startsWith('http')
+                                ? arch.bottle_image
+                                : `/${arch.bottle_image}`;
+                        } else {
+                            bottleImg.src = `/images/bottle/${arch.number === 1 ? "bottle_1.png" : "bottle_" + arch.number + ".jpg"}`;
+                        }
                     }
 
                     // Update active archetype card highlight in 9-grid
