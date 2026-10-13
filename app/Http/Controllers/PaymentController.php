@@ -78,6 +78,16 @@ class PaymentController extends Controller
         }
 
         if ($transactionStatus === 'settlement' || $transactionStatus === 'capture') {
+            // Mark as paid and reduce stock if not already handled by webhook
+            if (! $order->isPaid()) {
+                $order->update([
+                    'payment_status' => 'paid',
+                    'status' => 'processing',
+                    'paid_at' => now(),
+                ]);
+                $order->reduceStock();
+            }
+
             return redirect()->route('order.show', $order)
                 ->with('success', '✨ Pembayaran berhasil! Pesanan sakral Anda sedang diproses oleh para peracik.');
         }

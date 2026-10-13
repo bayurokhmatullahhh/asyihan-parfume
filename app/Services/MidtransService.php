@@ -116,6 +116,12 @@ class MidtransService
                 $order->payment_status = 'paid';
                 $order->status = 'processing';
                 $order->paid_at = now();
+                $order->save();
+
+                // Reduce product stock automatically
+                $order->reduceStock();
+
+                return;
             }
         } elseif ($transactionStatus === 'pending') {
             $order->payment_status = 'pending';

@@ -52,10 +52,11 @@ class NumerologyController extends Controller
             // Capture lead into database silently
             try {
                 NumerologyLead::create([
+                    'user_id' => auth()->id(),
                     'full_name' => $validated['name'],
                     'birth_date' => $validated['birth_date'],
-                    'phone' => $validated['phone'] ?? null,
-                    'email' => $validated['email'] ?? null,
+                    'phone' => $validated['phone'] ?? auth()->user()?->phone,
+                    'email' => $validated['email'] ?? auth()->user()?->email,
                     'core_number' => $reading['core_number'],
                     'archetype_name' => $reading['archetype']['name'] ?? 'Essence '.$reading['core_number'],
                     'ip_address' => $request->ip(),

@@ -15,7 +15,15 @@ class LeadManagementController extends Controller
      */
     public function index(Request $request): View
     {
-        $query = NumerologyLead::latest();
+        $query = NumerologyLead::with('user')->latest();
+
+        if ($request->filled('user_type')) {
+            if ($request->user_type === 'registered') {
+                $query->whereNotNull('user_id');
+            } elseif ($request->user_type === 'guest') {
+                $query->whereNull('user_id');
+            }
+        }
 
         if ($request->filled('archetype')) {
             $query->where('archetype_name', $request->archetype);
@@ -40,7 +48,13 @@ class LeadManagementController extends Controller
             ->distinct()
             ->pluck('archetype_name');
 
-        return view('admin.leads.index', compact('leads', 'archetypes'));
+        $stats = [
+            'total' => NumerologyLead::count(),
+            'registered' => NumerologyLead::whereNotNull('user_id')->count(),
+            'guest' => NumerologyLead::whereNull('user_id')->count(),
+        ];
+
+        return view('admin.leads.index', compact('leads', 'archetypes', 'stats'));
     }
 
     /**

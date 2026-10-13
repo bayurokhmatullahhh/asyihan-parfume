@@ -33,7 +33,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Handle login submission.
+     * Handle login submission .
      */
     public function login(Request $request): RedirectResponse
     {

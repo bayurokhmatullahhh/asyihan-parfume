@@ -38,6 +38,11 @@
                         </svg>
                         Pembayaran Lunas
                     </span>
+                @elseif($order->isExpired() || $order->status === 'cancelled')
+                    <span class="px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/40 text-rose-400 text-xs font-mono flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+                        {{ $order->payment_status === 'expired' || $order->isExpired() ? 'Batas Waktu Habis (Kedaluwarsa)' : 'Dibatalkan' }}
+                    </span>
                 @else
                     <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-xs font-mono flex items-center gap-1.5">
                         <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
@@ -116,16 +121,37 @@
             </div>
         @endif
 
-        <!-- Unpaid Action Banner -->
-        @if(! $order->isPaid() && $order->status !== 'cancelled')
-            <div class="mt-6 p-4 sm:p-5 rounded-xl bg-amber-400/10 border border-amber-400/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <!-- Unpaid / Expiration Action Banner -->
+        @if(! $order->isPaid() && ! $order->isExpired() && $order->status !== 'cancelled')
+            <div class="mt-6 p-4 sm:p-5 rounded-xl bg-gradient-to-r from-amber-950/40 via-amber-400/10 to-transparent border border-amber-400/40 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                    <div class="text-xs font-serif text-amber-200 font-medium">Pesanan Ini Belum Dibayar</div>
-                    <div class="text-[11px] text-zinc-400 mt-0.5">Selesaikan pembayaran untuk segera memulai ritual peracikan & pengiriman sakral.</div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm">⏳</span>
+                        <div class="text-xs font-serif text-amber-200 font-medium">Batas Waktu Pembayaran 24 Jam</div>
+                    </div>
+                    <div class="text-[11px] text-zinc-400 mt-1">
+                        Selesaikan pembayaran sebelum <span class="text-amber-300 font-mono font-semibold">{{ $order->expires_at ? $order->expires_at->format('d M Y, H:i') : '-' }} WIB</span> untuk menghindari pembatalan otomatis.
+                    </div>
                 </div>
                 <a href="{{ route('checkout.payment', $order) }}"
-                    class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-serif font-bold text-xs uppercase tracking-wider hover:brightness-110 shadow-lg shadow-amber-500/20 transition-all text-center">
-                    Bayar Sekarang ({{ $order->formatted_total_price }}) →
+                    class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-serif font-bold text-xs uppercase tracking-wider hover:brightness-110 shadow-lg shadow-amber-500/20 transition-all text-center shrink-0">
+                    Lanjutkan Pembayaran ({{ $order->formatted_total_price }}) →
+                </a>
+            </div>
+        @elseif($order->isExpired() || $order->payment_status === 'expired' || ($order->status === 'cancelled' && ! $order->isPaid()))
+            <div class="mt-6 p-4 sm:p-5 rounded-xl bg-rose-950/30 border border-rose-500/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm">⚠️</span>
+                        <div class="text-xs font-serif text-rose-300 font-medium">Batas Waktu Pembayaran Telah Habis</div>
+                    </div>
+                    <div class="text-[11px] text-zinc-400 mt-1">
+                        Pesanan ini telah kedaluwarsa dan otomatis dibatalkan karena tidak dibayar dalam 24 jam. Stok botol telah dikembalikan ke etalase.
+                    </div>
+                </div>
+                <a href="{{ route('order') }}"
+                    class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-amber-300 font-serif font-bold text-xs uppercase tracking-wider transition-all text-center shrink-0 border border-amber-400/30">
+                    Pesan Kembali →
                 </a>
             </div>
         @endif

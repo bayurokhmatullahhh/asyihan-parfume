@@ -475,6 +475,8 @@
 
                                 <div class="pt-2 flex flex-wrap gap-2">
                                     <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">1. Sang Penggagas</span>
+                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">2. Sang Pencipta Harmoni</span>
+                                    
                                     <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">5. Sang Penjelajah</span>
                                     <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">7. Sang Analis</span>
                                     <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">9 Dimensi Arketipe</span>

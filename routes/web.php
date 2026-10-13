@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryManagementController;
+use App\Http\Controllers\Admin\ContactMessageManagementController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LeadManagementController;
 use App\Http\Controllers\Admin\OrderManagementController;
@@ -45,6 +46,7 @@ Route::get('/payment/finish', [PaymentController::class, 'finish'])->name('payme
 
 // Contact
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::post('/contact', [PageController::class, 'sendContactMessage'])->name('contact.send');
 
 // Legal Pages
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
@@ -100,6 +102,11 @@ Route::prefix('astral-gateway')->name('admin.')->group(function () {
         // Leads (Calculator data capture)
         Route::get('/leads', [LeadManagementController::class, 'index'])->name('leads.index');
         Route::delete('/leads/{lead}', [LeadManagementController::class, 'destroy'])->name('leads.destroy');
+
+        // Contact Messages (Pesan Jiwa)
+        Route::get('/messages', [ContactMessageManagementController::class, 'index'])->name('messages.index');
+        Route::put('/messages/{message}/read', [ContactMessageManagementController::class, 'markAsRead'])->name('messages.read');
+        Route::delete('/messages/{message}', [ContactMessageManagementController::class, 'destroy'])->name('messages.destroy');
 
         // Users
         Route::resource('users', UserManagementController::class);

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Order extends Model
 {
@@ -31,6 +32,7 @@ class Order extends Model
         'midtrans_transaction_id',
         'midtrans_payment_type',
         'paid_at',
+        'expires_at',
         'tracking_number',
         'tracking_courier',
         'shipped_at',
@@ -51,6 +53,7 @@ class Order extends Model
             'total_price' => 'integer',
             'shipping_cost' => 'decimal:2',
             'paid_at' => 'datetime',
+            'expires_at' => 'datetime',
             'shipped_at' => 'datetime',
             'delivered_at' => 'datetime',
         ];
@@ -61,6 +64,11 @@ class Order extends Model
         static::creating(function ($order) {
             if (empty($order->order_number)) {
                 $order->order_number = 'ASY-'.date('ymd').'-'.strtoupper(substr(uniqid(), -4));
+            }
+
+            // Set 24-hour expiration for pending orders
+            if (empty($order->expires_at) && $order->payment_status === 'pending') {
+                $order->expires_at = Carbon::now()->addHours(24);
             }
         });
     }
@@ -102,6 +110,82 @@ class Order extends Model
     public function isDelivered(): bool
     {
         return $this->status === 'delivered';
+    }
+
+    /**
+     * Check if order payment has expired (past 24-hour window).
+     */
+    public function isExpired(): bool
+    {
+        if ($this->isPaid() || $this->status === 'cancelled') {
+            return false;
+        }
+
+        return $this->expires_at && Carbon::now()->greaterThanOrEqualTo($this->expires_at);
+    }
+
+    /**
+     * Get remaining seconds until payment expiry.
+     */
+    public function getRemainingSecondsAttribute(): int
+    {
+        if (! $this->expires_at || $this->isPaid() || $this->status === 'cancelled') {
+            return 0;
+        }
+
+        $remaining = Carbon::now()->diffInSeconds($this->expires_at, false);
+
+        return max(0, (int) $remaining);
+    }
+
+    /**
+     * Restore stock for all items when order is cancelled.
+     */
+    public function restoreStock(): void
+    {
+        $this->loadMissing('items');
+
+        if ($this->items->isNotEmpty()) {
+            foreach ($this->items as $item) {
+                $product = $item->product_id
+                    ? Product::find($item->product_id)
+                    : Product::where('essence_number', $item->essence_number)->first();
+
+                if ($product) {
+                    $product->increment('stock', $item->quantity);
+                }
+            }
+        } elseif ($this->essence_number) {
+            $product = Product::where('essence_number', $this->essence_number)->first();
+            if ($product) {
+                $product->increment('stock', $this->quantity ?: 1);
+            }
+        }
+    }
+
+    /**
+     * Reduce stock for all items when order is paid.
+     */
+    public function reduceStock(): void
+    {
+        $this->loadMissing('items');
+
+        if ($this->items->isNotEmpty()) {
+            foreach ($this->items as $item) {
+                $product = $item->product_id
+                    ? Product::find($item->product_id)
+                    : Product::where('essence_number', $item->essence_number)->first();
+
+                if ($product && $product->stock >= $item->quantity) {
+                    $product->decrement('stock', $item->quantity);
+                }
+            }
+        } elseif ($this->essence_number) {
+            $product = Product::where('essence_number', $this->essence_number)->first();
+            if ($product && $product->stock >= ($this->quantity ?: 1)) {
+                $product->decrement('stock', $this->quantity ?: 1);
+            }
+        }
     }
 
     /**

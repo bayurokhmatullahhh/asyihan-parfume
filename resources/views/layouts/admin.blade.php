@@ -147,6 +147,20 @@
                             </div>
                             <span class="px-1.5 py-0.5 text-[9px] font-mono rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">Aura</span>
                         </a>
+
+                        <a href="{{ route('admin.messages.index') }}"
+                            class="sidebar-link flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-gold-200 hover:bg-white/[0.03] {{ request()->routeIs('admin.messages.*') ? 'active' : '' }}">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-4 h-4 text-gold-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                                <span>Pesan Jiwa</span>
+                            </div>
+                            @php $unreadMsgCount = \App\Models\ContactMessage::where('is_read', false)->count(); @endphp
+                            @if($unreadMsgCount > 0)
+                                <span class="px-1.5 py-0.5 text-[9px] font-mono rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold animate-pulse">{{ $unreadMsgCount }} Baru</span>
+                            @else
+                                <span class="px-1.5 py-0.5 text-[9px] font-mono rounded bg-slate-800 text-slate-400 border border-slate-700">Arsip</span>
+                            @endif
+                        </a>
                     </div>
                 </div>
 

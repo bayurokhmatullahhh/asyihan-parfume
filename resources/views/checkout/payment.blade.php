@@ -33,13 +33,46 @@
             <div class="bg-[#131313] border border-amber-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
                 <div class="absolute -right-12 -top-12 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
-                <!-- Status Badge -->
-                <div class="flex items-center justify-between border-b border-zinc-800 pb-4 mb-6">
-                    <div class="text-xs font-serif uppercase tracking-wider text-zinc-400">Status Pembayaran</div>
-                    <span class="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/40 text-amber-300 text-xs font-mono flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                        Menunggu Pembayaran
-                    </span>
+                <!-- Status Badge & 24-Hour Countdown Timer -->
+                <div class="border-b border-zinc-800 pb-4 mb-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="text-xs font-serif uppercase tracking-wider text-zinc-400">Status Transaksi</div>
+                        @if($order->isExpired() || $order->status === 'cancelled')
+                            <span class="px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/40 text-rose-300 text-xs font-mono flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+                                Kedaluwarsa / Dibatalkan
+                            </span>
+                        @else
+                            <span class="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/40 text-amber-300 text-xs font-mono flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                                Menunggu Pembayaran
+                            </span>
+                        @endif
+                    </div>
+
+                    <!-- 24-Hour Countdown Banner -->
+                    @if(! $order->isPaid() && ! $order->isExpired() && $order->status !== 'cancelled')
+                        <div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-950/40 via-black/80 to-amber-950/40 border border-amber-500/30 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-2.5">
+                                <span class="text-base">⏳</span>
+                                <div>
+                                    <div class="text-[10px] uppercase font-mono tracking-widest text-amber-400 font-semibold">BATAS WAKTU PEMBAYARAN (24 JAM)</div>
+                                    <div class="text-[11px] text-zinc-400">Selesaikan sebelum: <span class="text-zinc-200 font-mono">{{ $order->expires_at ? $order->expires_at->format('d M Y, H:i') : now()->addHours(24)->format('d M Y, H:i') }} WIB</span></div>
+                                </div>
+                            </div>
+                            <!-- Countdown Counter -->
+                            <div class="flex items-center gap-1 font-mono text-amber-300 font-bold text-sm bg-black/70 px-3 py-1.5 rounded-lg border border-amber-500/40 shrink-0" id="countdown-box">
+                                <span id="cd-hours">00</span><span class="text-amber-500 animate-pulse">:</span>
+                                <span id="cd-mins">00</span><span class="text-amber-500 animate-pulse">:</span>
+                                <span id="cd-secs">00</span>
+                            </div>
+                        </div>
+                    @elseif($order->isExpired() || $order->status === 'cancelled')
+                        <div class="p-3.5 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
+                            <span>⚠️</span>
+                            <span>Batas waktu pembayaran 24 jam telah berakhir. Pesanan ini telah otomatis dibatalkan oleh sistem.</span>
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Total Amount Highlight -->
@@ -52,13 +85,22 @@
                 </div>
 
                 <!-- Midtrans Snap Trigger Button -->
-                <button type="button" id="payButton"
-                    class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-black font-serif font-bold text-sm uppercase tracking-wider shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all flex items-center justify-center gap-2 group cursor-pointer">
-                    <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
-                    <span>BAYAR SEKARANG VIA MIDTRANS</span>
-                </button>
+                @if(! $order->isExpired() && $order->status !== 'cancelled')
+                    <button type="button" id="payButton"
+                        class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-black font-serif font-bold text-sm uppercase tracking-wider shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all flex items-center justify-center gap-2 group cursor-pointer">
+                        <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span>BAYAR SEKARANG VIA MIDTRANS</span>
+                    </button>
+                @else
+                    <div class="text-center py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-500 font-serif text-xs">
+                        Pembayaran telah ditutup karena pesanan melewati batas waktu 24 jam.
+                        <div class="mt-2">
+                            <a href="{{ route('order') }}" class="text-amber-400 hover:underline font-mono text-[11px]">Inisiasi Pesanan Baru →</a>
+                        </div>
+                    </div>
+                @endif
 
                 <!-- Payment Methods Info -->
                 <div class="mt-6 pt-6 border-t border-zinc-800 text-center">
@@ -185,6 +227,43 @@
                 }
             }
         });
+    }
+
+    // 24-Hour Countdown Timer Logic
+    const remainingSeconds = {{ $order->remaining_seconds }};
+    let timeLeft = remainingSeconds;
+
+    const elHours = document.getElementById('cd-hours');
+    const elMins = document.getElementById('cd-mins');
+    const elSecs = document.getElementById('cd-secs');
+
+    function updateCountdown() {
+        if (timeLeft <= 0) {
+            if (elHours) elHours.textContent = '00';
+            if (elMins) elMins.textContent = '00';
+            if (elSecs) elSecs.textContent = '00';
+            const box = document.getElementById('countdown-box');
+            if (box) {
+                box.classList.remove('text-amber-300', 'border-amber-500/40');
+                box.classList.add('text-rose-400', 'border-rose-500/40');
+            }
+            return;
+        }
+
+        const hours = Math.floor(timeLeft / 3600);
+        const minutes = Math.floor((timeLeft % 3600) / 60);
+        const seconds = timeLeft % 60;
+
+        if (elHours) elHours.textContent = String(hours).padStart(2, '0');
+        if (elMins) elMins.textContent = String(minutes).padStart(2, '0');
+        if (elSecs) elSecs.textContent = String(seconds).padStart(2, '0');
+
+        timeLeft--;
+    }
+
+    if (elHours && timeLeft > 0) {
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
     }
 </script>
 @endpush

@@ -302,7 +302,9 @@
                     <span class="text-xs font-mono text-purple-300 font-bold">{{ $totalLeads }} Jiwa</span>
                 </div>
                 <p class="text-[11px] text-slate-400 font-light leading-relaxed">
-                    Pengunjung yang telah melakukan kalkulasi frekuensi jiwa, mencatatkan nomor WhatsApp, dan menerima rekomendasi wewangian.
+                    Pengunjung kalkulator frekuensi jiwa: 
+                    <strong class="text-amber-300 font-mono">{{ \App\Models\NumerologyLead::whereNotNull('user_id')->count() }} Member</strong> • 
+                    <strong class="text-sky-300 font-mono">{{ \App\Models\NumerologyLead::whereNull('user_id')->count() }} Tamu</strong>.
                 </p>
                 <div class="mt-3 pt-2 border-t border-white/5 flex justify-between text-[10px] font-mono text-slate-400">
                     <span>Rasio Konversi Order:</span>

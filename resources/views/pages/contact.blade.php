@@ -131,26 +131,29 @@
                 Tuliskan getaran rasa Anda. Setiap pesan dibaca secara mendalam oleh sang peracik dan kurator numerologi kami untuk memberikan rekomendasi aroma yang selaras.
             </p>
 
-            <form id="contact-form" class="space-y-4">
+            <div id="contact-feedback" class="hidden mb-4 p-4 rounded-xl text-xs font-serif leading-relaxed"></div>
+
+            <form id="contact-form" action="{{ route('contact.send') }}" method="POST" class="space-y-4">
+                @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">NAMA LENGKAP</label>
-                        <input id="contact_name" type="text" placeholder="Raden Arya Damara" required class="input-dark">
+                        <input id="contact_name" name="name" type="text" value="{{ auth()->user()?->name ?? '' }}" placeholder="Raden Arya Damara" required class="input-dark">
                     </div>
                     <div>
                         <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">NOMOR WHATSAPP AKTIF</label>
-                        <input id="contact_info" type="text" placeholder="+62 811-xxxx-xxxx" required class="input-dark">
+                        <input id="contact_info" name="phone" type="text" value="{{ auth()->user()?->phone ?? '' }}" placeholder="+62 811-xxxx-xxxx" required class="input-dark">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">TANGGAL LAHIR / ANGKA INTI (OPSIONAL)</label>
-                        <input id="contact_dob" type="text" placeholder="Contoh: 14 Mei 1992 atau Angka 7" class="input-dark">
+                        <input id="contact_dob" name="birth_info" type="text" placeholder="Contoh: 14 Mei 1992 atau Angka 7" class="input-dark">
                     </div>
                     <div>
                         <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">FOKUS KOMUNIKASI</label>
-                        <select id="contact_category" class="input-dark">
+                        <select id="contact_category" name="category" class="input-dark">
                             <option value="Konsultasi Karakter & Numerologi" class="bg-dark-800 text-white">Konsultasi Karakter & Numerologi</option>
                             <option value="Pemesanan Custom / Event" class="bg-dark-800 text-white">Pemesanan Custom / Event</option>
                             <option value="Kerjasama Bisnis" class="bg-dark-800 text-white">Kerjasama Bisnis</option>
@@ -161,7 +164,7 @@
 
                 <div>
                     <label class="block text-xs sm:text-sm uppercase tracking-widest text-gold-300 mb-1.5 font-mono font-medium">CATATAN PESAN ATAU PERTANYAAN</label>
-                    <textarea id="contact_message" rows="4" placeholder="Tuliskan penggalan pencarian aroma Anda atau hal yang ingin Anda temukan..." required class="textarea-dark"></textarea>
+                    <textarea id="contact_message" name="message" rows="4" placeholder="Tuliskan penggalan pencarian aroma Anda atau hal yang ingin Anda temukan..." required class="textarea-dark"></textarea>
                 </div>
 
                 <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -169,9 +172,9 @@
                         <span class="text-gold-400">🔒</span>
                         <span>DATA DAN PRIVASI ANDA SELALU DIJAGA KERAHASIAANNYA</span>
                     </div>
-                    <button type="submit" class="w-full sm:w-auto btn-gold px-6 py-3 text-xs tracking-[0.2em] rounded flex items-center justify-center gap-2 shrink-0">
-                        <span>KIRIM PESAN JIWA</span>
-                        <span>➔</span>
+                    <button type="submit" id="contact-submit-btn" class="w-full sm:w-auto btn-gold px-6 py-3 text-xs tracking-[0.2em] rounded flex items-center justify-center gap-2 shrink-0">
+                        <span id="btn-text">KIRIM PESAN JIWA</span>
+                        <span id="btn-icon">➔</span>
                     </button>
                 </div>
             </form>
@@ -324,18 +327,59 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('contact-form');
-        if (form) {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const name = document.getElementById('contact_name').value;
-                const info = document.getElementById('contact_info').value;
-                const dob = document.getElementById('contact_dob').value;
-                const cat = document.getElementById('contact_category').value;
-                const msg = document.getElementById('contact_message').value;
+        const feedback = document.getElementById('contact-feedback');
+        const submitBtn = document.getElementById('contact-submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
 
-                const text = `✨ *PESAN KONSULTASI ASYIHAN* ✨\n\nNama: ${name}\nKontak WA: ${info}\nTanggal Lahir/Angka: ${dob || '-'}\nFokus: ${cat}\n\nPesan:\n${msg}\n\n---\nFrom Asih, Comes Essence.`;
-                const url = `https://wa.me/628112144113?text=${encodeURIComponent(text)}`;
-                window.open(url, '_blank');
+        if (form) {
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                // UI Loading state
+                submitBtn.disabled = true;
+                btnText.textContent = 'MENGARSIPKAN PESAN JIWA...';
+                btnIcon.textContent = '⌛';
+                feedback.classList.add('hidden');
+                feedback.className = 'mb-4 p-4 rounded-xl text-xs font-serif leading-relaxed';
+
+                try {
+                    const formData = new FormData(form);
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.success) {
+                        feedback.classList.remove('hidden');
+                        feedback.classList.add('bg-emerald-950/40', 'border', 'border-emerald-500/50', 'text-emerald-300');
+                        feedback.innerHTML = `✨ <strong>Pesan Sakral Terarsip:</strong> ${data.message} Menghubungkan Anda ke peracik via WhatsApp...`;
+
+                        // Open WhatsApp window with prefilled message
+                        if (data.whatsapp_url) {
+                            window.open(data.whatsapp_url, '_blank');
+                        }
+
+                        // Reset message input
+                        document.getElementById('contact_message').value = '';
+                    } else {
+                        throw new Error(data.message || 'Gagal menyimpan pesan jiwa. Silakan periksa kembali isian Anda.');
+                    }
+                } catch (err) {
+                    feedback.classList.remove('hidden');
+                    feedback.classList.add('bg-rose-950/40', 'border', 'border-rose-500/50', 'text-rose-300');
+                    feedback.innerHTML = `⚠️ <strong>Pemberitahuan:</strong> ${err.message || 'Terjadi kendala jaringan saat mengarsipkan pesan.'}`;
+                } finally {
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'KIRIM PESAN JIWA';
+                    btnIcon.textContent = '➔';
+                }
             });
         }
     });

@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * SEMUA REGSTER AKUN DARI ALL APP.
      */
     public function register(): void
     {
