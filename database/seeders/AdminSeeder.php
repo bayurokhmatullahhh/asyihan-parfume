@@ -16,8 +16,8 @@ class AdminSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@asyihan.id'],
             [
-                'name' => 'Master Asyihan Admin',
-                'role' => 'admin',
+                'name' => 'Super Master Asyihan Admin',
+                'role' => 'super_admin',
                 'phone' => '081234567890',
                 'password' => Hash::make('admin123'),
                 'email_verified_at' => now(),

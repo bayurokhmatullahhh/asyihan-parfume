@@ -8,6 +8,7 @@ use Tests\TestCase;
 class NumerologyCalculatorTest extends TestCase
 {
     use RefreshDatabase;
+
     public function test_calculator_page_is_accessible(): void
     {
         $response = $this->get('/calculator');

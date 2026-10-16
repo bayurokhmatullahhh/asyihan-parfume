@@ -3,20 +3,90 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\PaymentGatewaySetting;
 use Illuminate\Support\Facades\Log;
 use Midtrans\Config;
 use Midtrans\Notification;
 use Midtrans\Snap;
+use RuntimeException;
 
 class MidtransService
 {
+    protected ?PaymentGatewaySetting $activeSetting = null;
+
     public function __construct()
     {
-        Config::$serverKey = config('midtrans.server_key');
-        Config::$clientKey = config('midtrans.client_key');
-        Config::$isProduction = config('midtrans.is_production');
-        Config::$isSanitized = true;
-        Config::$is3ds = config('midtrans.is_3ds');
+        $this->configure();
+    }
+
+    /**
+     * Configure Midtrans SDK using database settings, falling back to .env config.
+     */
+    protected function configure(): void
+    {
+        $this->activeSetting = PaymentGatewaySetting::getActiveConfig('midtrans');
+
+        if ($this->activeSetting && $this->activeSetting->is_active && $this->activeSetting->hasValidCredentials()) {
+            Config::$serverKey = $this->activeSetting->server_key;
+            Config::$clientKey = $this->activeSetting->client_key;
+            Config::$isProduction = $this->activeSetting->active_environment === 'production';
+            Config::$isSanitized = true;
+            Config::$is3ds = $this->activeSetting->is_3ds;
+        } else {
+            // Fallback to .env config
+            Config::$serverKey = config('midtrans.server_key');
+            Config::$clientKey = config('midtrans.client_key');
+            Config::$isProduction = config('midtrans.is_production');
+            Config::$isSanitized = true;
+            Config::$is3ds = config('midtrans.is_3ds');
+        }
+    }
+
+    /**
+     * Check if the gateway is enabled and ready to process payments.
+     */
+    public function isEnabled(): bool
+    {
+        if ($this->activeSetting && $this->activeSetting->is_active) {
+            return $this->activeSetting->hasValidCredentials();
+        }
+
+        // Fallback: if .env keys are present, consider it enabled
+        return ! empty(config('midtrans.server_key')) && ! empty(config('midtrans.client_key'));
+    }
+
+    /**
+     * Get the client key for frontend use.
+     */
+    public function getClientKey(): string
+    {
+        return Config::$clientKey ?? '';
+    }
+
+    /**
+     * Check if currently in production mode.
+     */
+    public function isProduction(): bool
+    {
+        return Config::$isProduction ?? false;
+    }
+
+    /**
+     * Get the merchant name from active settings.
+     */
+    public function getMerchantName(): string
+    {
+        return $this->activeSetting?->merchant_name ?? config('app.name', 'ASYIHAN');
+    }
+
+    /**
+     * Get the Snap JS script URL based on current environment.
+     */
+    public function getSnapJsUrl(): string
+    {
+        return $this->isProduction()
+            ? 'https://app.midtrans.com/snap/snap.js'
+            : 'https://app.sandbox.midtrans.com/snap/snap.js';
     }
 
     /**
@@ -24,6 +94,10 @@ class MidtransService
      */
     public function createSnapToken(Order $order): string
     {
+        if (! $this->isEnabled()) {
+            throw new RuntimeException('Payment gateway Midtrans tidak aktif atau belum dikonfigurasi.');
+        }
+
         $order->loadMissing('items.product', 'user');
 
         $itemDetails = [];
@@ -94,6 +168,9 @@ class MidtransService
      */
     public function handleNotification(array $payload): void
     {
+        // Re-configure to ensure correct server key is used for signature verification
+        $this->configure();
+
         $notification = new Notification;
 
         $transactionStatus = $notification->transaction_status;

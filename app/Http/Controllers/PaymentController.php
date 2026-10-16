@@ -32,17 +32,30 @@ class PaymentController extends Controller
                 ->with('info', 'Pesanan ini sudah dibayar.');
         }
 
+        // Check if gateway is enabled
+        if (! $this->midtrans->isEnabled() && empty($order->snap_token)) {
+            return redirect()->route('order.show', $order)
+                ->with('error', 'Metode pembayaran online sedang dalam pemeliharaan. Silakan hubungi admin.');
+        }
+
         // Generate snap token if not exists
-        if (! $order->snap_token) {
-            $snapToken = $this->midtrans->createSnapToken($order);
-        } else {
-            $snapToken = $order->snap_token;
+        try {
+            if (! $order->snap_token) {
+                $snapToken = $this->midtrans->createSnapToken($order);
+            } else {
+                $snapToken = $order->snap_token;
+            }
+        } catch (\Throwable $e) {
+            return redirect()->route('order.show', $order)
+                ->with('error', 'Gagal memproses gerbang pembayaran: '.$e->getMessage());
         }
 
         $order->loadMissing('items.product');
-        $clientKey = config('midtrans.client_key');
+        $clientKey = $this->midtrans->getClientKey();
+        $snapJsUrl = $this->midtrans->getSnapJsUrl();
+        $isProduction = $this->midtrans->isProduction();
 
-        return view('checkout.payment', compact('order', 'snapToken', 'clientKey'));
+        return view('checkout.payment', compact('order', 'snapToken', 'clientKey', 'snapJsUrl', 'isProduction'));
     }
 
     /**

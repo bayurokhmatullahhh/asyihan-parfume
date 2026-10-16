@@ -18,6 +18,9 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -203,6 +206,23 @@
                             class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-gold-200 hover:bg-white/[0.03] {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
                             <svg class="w-4 h-4 text-gold-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
                             <span>Kategori Sakral</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Group 4: KONFIGURASI SISTEM -->
+                <div>
+                    <span class="px-3 text-[9px] uppercase tracking-[0.22em] text-gold-400/70 font-mono font-semibold block mb-2">
+                        Konfigurasi Sistem
+                    </span>
+                    <div class="space-y-1">
+                        <a href="{{ route('admin.payment-gateway.index') }}"
+                            class="sidebar-link flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-gold-200 hover:bg-white/[0.03] {{ request()->routeIs('admin.payment-gateway.*') ? 'active' : '' }}">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-4 h-4 text-gold-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                                <span>Payment Gateway</span>
+                            </div>
+                            <span class="px-1.5 py-0.5 text-[9px] font-mono rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">Midtrans</span>
                         </a>
 
                         <a href="{{ route('home') }}" target="_blank"

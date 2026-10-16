@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ContactMessageManagementController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LeadManagementController;
 use App\Http\Controllers\Admin\OrderManagementController;
+use App\Http\Controllers\Admin\PaymentGatewayController;
 use App\Http\Controllers\Admin\ProductManagementController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Auth\LoginController;
@@ -120,5 +121,9 @@ Route::prefix('astral-gateway')->name('admin.')->group(function () {
         // Products
         Route::resource('products', ProductManagementController::class)->except(['show']);
         Route::put('/products/{product}/toggle', [ProductManagementController::class, 'toggleActive'])->name('products.toggle');
+
+        // Payment Gateway Settings (Midtrans)
+        Route::get('/payment-gateway', [PaymentGatewayController::class, 'index'])->name('payment-gateway.index');
+        Route::put('/payment-gateway', [PaymentGatewayController::class, 'update'])->name('payment-gateway.update');
     });
 });

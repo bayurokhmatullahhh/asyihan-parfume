@@ -54,7 +54,7 @@ class UserManagementController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'phone' => 'nullable|string|max:20',
-            'role' => 'required|in:user,admin',
+            'role' => 'required|in:user,admin,super_admin',
             'birth_date' => 'nullable|date',
             'address' => 'nullable|string|max:500',
             'password' => 'required|string|min:8|confirmed',
@@ -82,7 +82,7 @@ class UserManagementController extends Controller
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'phone' => 'nullable|string|max:20',
-            'role' => 'required|in:user,admin',
+            'role' => 'required|in:user,admin,super_admin',
             'birth_date' => 'nullable|date',
             'address' => 'nullable|string|max:500',
             'password' => 'nullable|string|min:8|confirmed',
@@ -92,8 +92,8 @@ class UserManagementController extends Controller
             unset($validated['password']);
         }
 
-        // Prevent admin from removing their own admin role
-        if ($user->id === Auth::id() && $validated['role'] !== 'admin') {
+        // Prevent admin from removing their own administrative role
+        if ($user->id === Auth::id() && ! in_array($validated['role'], ['admin', 'super_admin'])) {
             return back()->with('error', 'Anda tidak dapat mencabut hak administrator dari akun Anda sendiri.');
         }
 
