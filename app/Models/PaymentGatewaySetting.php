@@ -103,11 +103,11 @@ class PaymentGatewaySetting extends Model
         $errors = [];
 
         if ($this->environment === 'sandbox') {
-            if ($this->client_key && ! str_starts_with($this->client_key, 'SB-Mid-client-')) {
-                $errors[] = 'Client Key harus diawali dengan "SB-Mid-client-" untuk environment Sandbox.';
+            if ($this->client_key && ! str_starts_with($this->client_key, 'SB-Mid-client-') && ! str_starts_with($this->client_key, 'Mid-client-')) {
+                $errors[] = 'Client Key Sandbox harus diawali dengan "SB-Mid-client-" atau "Mid-client-".';
             }
-            if ($this->server_key && ! str_starts_with($this->server_key, 'SB-Mid-server-')) {
-                $errors[] = 'Server Key harus diawali dengan "SB-Mid-server-" untuk environment Sandbox.';
+            if ($this->server_key && ! str_starts_with($this->server_key, 'SB-Mid-server-') && ! str_starts_with($this->server_key, 'Mid-server-')) {
+                $errors[] = 'Server Key Sandbox harus diawali dengan "SB-Mid-server-" atau "Mid-server-".';
             }
         } elseif ($this->environment === 'production') {
             if ($this->client_key && str_starts_with($this->client_key, 'SB-')) {

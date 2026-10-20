@@ -445,7 +445,7 @@
                         {{-- Subtle background glow --}}
                         <div class="absolute inset-0 bg-radial-gradient from-gold-400/10 via-transparent to-transparent pointer-events-none"></div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center relative z-10">
+                        <div class="grid grid-cols-1 md:grid-cols-19 gap-5 items-center relative z-10">
                             {{-- Mystic Portal Artwork --}}
                             <div class="md:col-span-5 rounded-lg overflow-hidden border border-gold-400/30 relative">
                                 <img src="{{ asset('images/mystic_calculator_element.png') }}" alt="Mystic Numerology Portal" class="w-full h-48 md:h-56 object-cover group-hover:scale-105 transition-transform duration-700">
@@ -473,14 +473,7 @@
                                     Kombinasi hari, bulan, dan tahun kelahiranmu adalah frekuensi kosmik yang menentukan kepribadian terdalammu. ASYIHAN menerjemahkan getaran tersebut menjadi racikan aroma sakral.
                                 </p>
 
-                                <div class="pt-2 flex flex-wrap gap-2">
-                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">1. Sang Penggagas</span>
-                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">2. Sang Pencipta Harmoni</span>
-                                    
-                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">5. Sang Penjelajah</span>
-                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">7. Sang Analis</span>
-                                    <span class="text-[10px] px-2.5 py-1 rounded bg-black/60 border border-gold-400/20 text-gold-300 font-mono">9 Dimensi Arketipe</span>
-                                </div>
+
                             </div>
                         </div>
                     </div>

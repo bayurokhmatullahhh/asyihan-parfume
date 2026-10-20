@@ -91,7 +91,7 @@
                         <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
-                        <span>BAYAR SEKARANG VIA MIDTRANS</span>
+                        <span>BAYAR SEKARANG — {{ $order->formatted_total_price }}</span>
                     </button>
                 @else
                     <div class="text-center py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-500 font-serif text-xs">
@@ -102,31 +102,29 @@
                     </div>
                 @endif
 
-                <!-- Payment Methods Info -->
-                <div class="mt-6 pt-6 border-t border-zinc-800 text-center">
-                    <div class="text-[10px] uppercase tracking-widest text-zinc-500 font-mono mb-3">METODE PEMBAYARAN DIDUKUNG</div>
-                    <div class="flex flex-wrap justify-center items-center gap-3 text-xs text-zinc-400 font-mono">
-                        <span class="px-2.5 py-1 rounded bg-black/60 border border-zinc-800">QRIS (GoPay, OVO, Dana)</span>
-                        <span class="px-2.5 py-1 rounded bg-black/60 border border-zinc-800">BCA / Mandiri / BNI / BRI VA</span>
-                        <span class="px-2.5 py-1 rounded bg-black/60 border border-zinc-800">Kartu Kredit / Debit</span>
+                <!-- Active Payment Method -->
+                <div class="mt-6 pt-6 border-t border-zinc-800">
+                    <div class="text-[10px] uppercase tracking-widest text-zinc-500 font-mono mb-3 text-center">METODE PEMBAYARAN TERPILIH</div>
+                    <div class="flex flex-wrap justify-center items-center gap-3 text-xs font-mono">
+                        @php
+                            $paymentMethodLabels = [
+                                'qris' => ['label' => 'QRIS INSTAN', 'desc' => 'GoPay, OVO, Dana'],
+                                'va' => ['label' => 'VIRTUAL ACCOUNT', 'desc' => 'BCA, Mandiri, BRI, BNI'],
+                                'cc' => ['label' => 'KARTU KREDIT', 'desc' => 'Visa, Mastercard'],
+                                'shopeepay' => ['label' => 'SHOPEEPAY', 'desc' => 'Auto Redirection'],
+                            ];
+                            $activeMethod = $order->payment_method ?? 'qris';
+                        @endphp
+                        @foreach($paymentMethodLabels as $key => $method)
+                            <div class="px-3 py-2 rounded-lg text-center {{ $key === $activeMethod ? 'bg-amber-400/10 border border-amber-400/60 text-amber-200' : 'bg-black/60 border border-zinc-800 text-zinc-500' }}">
+                                <div class="text-xs font-bold {{ $key === $activeMethod ? 'text-amber-200' : 'text-zinc-500' }}">{{ $method['label'] }}</div>
+                                <div class="text-[9px] {{ $key === $activeMethod ? 'text-amber-400/80' : 'text-zinc-600' }}">{{ $method['desc'] }}</div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
-                <!-- Fallback / Simulated Mode Box (Visible when testing in sandbox or fallback token) -->
-                @if(str_starts_with($snapToken, 'mock-snap-') || config('midtrans.server_key') === 'SB-Mid-server-YOUR_SERVER_KEY' || empty(config('midtrans.server_key')))
-                    <div class="mt-6 p-4 rounded-xl bg-amber-950/30 border border-amber-500/40 text-left">
-                        <div class="flex items-center gap-2 text-xs font-serif text-amber-300 font-medium mb-1">
-                            <span>✦</span> Mode Simulasi Sandbox / Testing
-                        </div>
-                        <p class="text-[11px] text-zinc-400 leading-relaxed">
-                            Kunci API Midtrans masih dalam mode pengujian lokal. Anda dapat menguji alur pembayaran berhasil secara langsung di bawah:
-                        </p>
-                        <a href="{{ route('payment.finish', ['order_id' => $order->order_number, 'transaction_status' => 'settlement']) }}"
-                            class="mt-3 inline-block w-full text-center py-2 px-4 rounded-lg bg-emerald-600/30 border border-emerald-500/50 hover:bg-emerald-600/40 text-emerald-300 text-xs font-mono uppercase tracking-wider transition-colors">
-                            Simulasikan Pembayaran Berhasil (Success) →
-                        </a>
-                    </div>
-                @endif
+
             </div>
 
             <!-- Alternative / Customer Support -->
@@ -205,27 +203,25 @@
 
     if (payButton) {
         payButton.addEventListener('click', function() {
-            if (typeof window.snap !== 'undefined' && snapToken && !snapToken.startsWith('mock-snap-')) {
-                window.snap.pay(snapToken, {
-                    onSuccess: function(result) {
-                        window.location.href = "{{ route('payment.finish') }}?order_id={{ $order->order_number }}&transaction_status=settlement";
-                    },
-                    onPending: function(result) {
-                        window.location.href = "{{ route('payment.finish') }}?order_id={{ $order->order_number }}&transaction_status=pending";
-                    },
-                    onError: function(result) {
-                        alert('Pembayaran gagal atau dibatalkan. Silakan coba metode lain.');
-                    },
-                    onClose: function() {
-                        // User closed the popup without finishing payment
-                    }
-                });
-            } else {
-                // Fallback simulation or snap not loaded
-                if (confirm('Midtrans Snap SDK dijalankan dalam mode sandbox simulasi. Tandai transaksi ini sebagai berhasil sekarang?')) {
-                    window.location.href = "{{ route('payment.finish') }}?order_id={{ $order->order_number }}&transaction_status=settlement";
-                }
+            if (typeof window.snap === 'undefined') {
+                alert('Midtrans Snap SDK belum termuat. Pastikan koneksi internet Anda stabil dan refresh halaman ini.');
+                return;
             }
+
+            window.snap.pay(snapToken, {
+                onSuccess: function(result) {
+                    window.location.href = "{{ route('payment.finish') }}?order_id={{ $order->order_number }}&transaction_status=settlement";
+                },
+                onPending: function(result) {
+                    window.location.href = "{{ route('payment.finish') }}?order_id={{ $order->order_number }}&transaction_status=pending";
+                },
+                onError: function(result) {
+                    alert('Pembayaran gagal atau dibatalkan. Silakan coba metode lain.');
+                },
+                onClose: function() {
+                    // User closed the popup without finishing payment
+                }
+            });
         });
     }
 

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Order;
 use App\Models\PaymentGatewaySetting;
-use Illuminate\Support\Facades\Log;
 use Midtrans\Config;
 use Midtrans\Notification;
 use Midtrans\Snap;
@@ -40,6 +39,27 @@ class MidtransService
             Config::$isSanitized = true;
             Config::$is3ds = config('midtrans.is_3ds');
         }
+
+        // Configure cURL options for Midtrans to avoid SSL issues on local Windows/Laragon environments.
+        // NOTE: Midtrans SDK requires CURLOPT_HTTPHEADER in $curlOptions to not be empty,
+        // otherwise its remoteCall() method wipes out the Authorization header.
+        $curlOptions = [
+            CURLOPT_HTTPHEADER => ['X-Client-Platform: Laravel'],
+        ];
+
+        $localCaCert = storage_path('certs/cacert.pem');
+        if (file_exists($localCaCert)) {
+            $curlOptions[CURLOPT_CAINFO] = $localCaCert;
+        }
+
+        // On local Windows dev or Sandbox environment, disable SSL peer verification
+        // so that Windows cURL local issuer certificate errors (SSL error 20) are permanently bypassed.
+        if (app()->environment('local') || ! $this->isProduction()) {
+            $curlOptions[CURLOPT_SSL_VERIFYPEER] = false;
+            $curlOptions[CURLOPT_SSL_VERIFYHOST] = 0;
+        }
+
+        Config::$curlOptions = $curlOptions;
     }
 
     /**
@@ -87,6 +107,22 @@ class MidtransService
         return $this->isProduction()
             ? 'https://app.midtrans.com/snap/snap.js'
             : 'https://app.sandbox.midtrans.com/snap/snap.js';
+    }
+
+    /**
+     * Map user-selected payment method to Midtrans enabled_payments array.
+     *
+     * @return array<int, string>|null
+     */
+    public static function mapEnabledPayments(?string $paymentMethod): ?array
+    {
+        return match ($paymentMethod) {
+            'qris' => ['gopay', 'shopeepay', 'other_qris'],
+            'va' => ['bank_transfer', 'echannel', 'permata_va', 'bca_va', 'bni_va', 'bri_va', 'cimb_va'],
+            'cc' => ['credit_card'],
+            'shopeepay' => ['shopeepay'],
+            default => null, // null = all methods available in Snap
+        };
     }
 
     /**
@@ -149,12 +185,13 @@ class MidtransService
             'customer_details' => $customerDetails,
         ];
 
-        try {
-            $snapToken = Snap::getSnapToken($payload);
-        } catch (\Throwable $e) {
-            Log::warning('Midtrans Snap error: '.$e->getMessage().'. Using fallback token for development.');
-            $snapToken = 'mock-snap-'.md5($order->order_number.time());
+        // Restrict Snap to only the user-selected payment method
+        $enabledPayments = self::mapEnabledPayments($order->payment_method);
+        if ($enabledPayments !== null) {
+            $payload['enabled_payments'] = $enabledPayments;
         }
+
+        $snapToken = Snap::getSnapToken($payload);
 
         $order->update(['snap_token' => $snapToken]);
 

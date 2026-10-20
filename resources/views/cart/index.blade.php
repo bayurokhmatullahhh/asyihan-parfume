@@ -35,13 +35,13 @@
                     KERANJANG ({{ $items->count() }} ITEM)
                 </span>
 
-                <form action="{{ route('cart.clear') }}" method="POST" onsubmit="return confirm('Kosongkan keranjang untuk simulasi empty state?');">
+                <form action="{{ route('cart.clear') }}" method="POST" onsubmit="return confirm('Kosongkan keranjang untuk Semua pesanan?');">
                     @csrf
                     <button type="submit" class="px-3.5 py-2 rounded-lg border border-zinc-800 hover:border-zinc-600 bg-zinc-900/60 text-zinc-400 hover:text-zinc-200 text-xs font-mono tracking-wider uppercase flex items-center gap-1.5 transition-colors">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                         </svg>
-                        SIMULASI KOSONG
+                        HAPUS SEMUA PESANAN
                     </button>
                 </form>
             @endif

@@ -46,8 +46,13 @@ class PaymentController extends Controller
                 $snapToken = $order->snap_token;
             }
         } catch (\Throwable $e) {
+            $message = $e->getMessage();
+            if (str_contains($message, '401') || str_contains(strtolower($message), 'unauthorized')) {
+                $message = 'Kredensial Midtrans (Server Key) tidak valid atau unauthorized (401). Silakan periksa kembali Server Key Anda di Dashboard Admin.';
+            }
+
             return redirect()->route('order.show', $order)
-                ->with('error', 'Gagal memproses gerbang pembayaran: '.$e->getMessage());
+                ->with('error', 'Gagal memproses gerbang pembayaran: '.$message);
         }
 
         $order->loadMissing('items.product');
