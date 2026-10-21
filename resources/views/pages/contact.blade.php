@@ -366,7 +366,7 @@
                             window.open(data.whatsapp_url, '_blank');
                         }
 
-                        // Reset message input
+                        // Reset message input 
                         document.getElementById('contact_message').value = '';
                     } else {
                         throw new Error(data.message || 'Gagal menyimpan pesan jiwa. Silakan periksa kembali isian Anda.');
