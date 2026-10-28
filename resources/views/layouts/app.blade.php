@@ -31,6 +31,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        /* Silent Google Translate Integration */
+        .goog-te-banner-frame,
+        .goog-te-banner-frame.skiptranslate,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        div#goog-gt-,
+        .goog-tooltip,
+        .goog-tooltip:hover {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        body {
+            top: 0px !important;
+            position: static !important;
+        }
+        .goog-text-highlight {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        #google_translate_element,
+        .skiptranslate:not(.goog-te-gadget) {
+            display: none !important;
+        }
+        .goog-te-gadget {
+            font-size: 0px !important;
+            color: transparent !important;
+        }
+    </style>
 </head>
 <body class="antialiased bg-black text-slate-200 min-h-screen relative selection:bg-gold-500/30 selection:text-gold-200">
 
@@ -57,18 +88,35 @@
             </a>
 
             {{-- Desktop Navigation --}}
-            <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-[11px] uppercase tracking-[0.18em] font-light" aria-label="Main Navigation">
-                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors">Home</a>
-                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors">About Asyihan</a>
-                <a href="{{ route('calculator') }}" class="{{ request()->routeIs('calculator') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors">Calculator</a>
-                <a href="{{ route('collection') }}" class="{{ request()->routeIs('collection', 'essence.detail') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors">Essence Collection</a>
-                <a href="{{ route('ajian') }}" class="{{ request()->routeIs('ajian') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors">Ajian & Ritual</a>
-                <a href="{{ route('order') }}" class="{{ request()->routeIs('order') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors">Order</a>
-                <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors">Contact</a>
+            <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-[11px] uppercase tracking-[0.15em] font-light" aria-label="Main Navigation">
+                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors whitespace-nowrap py-1">Beranda</a>
+                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors whitespace-nowrap py-1">About</a>
+                <a href="{{ route('calculator') }}" class="{{ request()->routeIs('calculator') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors whitespace-nowrap py-1">Calculator</a>
+                <a href="{{ route('collection') }}" class="{{ request()->routeIs('collection', 'essence.detail') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors whitespace-nowrap py-1">Collection</a>
+                <a href="{{ route('ajian') }}" class="{{ request()->routeIs('ajian') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors whitespace-nowrap py-1">Ajian & Ritual</a>
+                <a href="{{ route('order') }}" class="{{ request()->routeIs('order') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors whitespace-nowrap py-1">Order</a>
+                <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-gold-400 font-normal drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]' : 'text-slate-300 hover:text-gold-300' }} transition-colors whitespace-nowrap py-1">Contact</a>
             </nav>
 
             {{-- Right Header Icons & Auth --}}
             <div class="hidden sm:flex items-center gap-4 text-slate-300">
+                {{-- Language Switcher (Desktop) --}}
+                <div class="relative group" data-no-translate>
+                    <button id="lang-switcher-btn" type="button" class="flex items-center gap-1.5 py-1 px-2 rounded-full border border-gold-400/25 bg-gold-400/5 hover:border-gold-400/50 hover:bg-gold-400/10 transition-all text-[10px] text-gold-300 tracking-wider cursor-pointer" aria-label="Change Language">
+                        <svg class="w-3.5 h-3.5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                        <span id="lang-switcher-label" class="font-mono font-semibold">ID</span>
+                        <svg class="w-2.5 h-2.5 text-gold-400/60 group-hover:text-gold-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div id="lang-switcher-menu" class="absolute right-0 mt-2 w-36 bg-[#0a0a0a] border border-gold-400/30 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.9)] py-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <button id="lang-btn-id" data-lang="id" data-lang-switch class="w-full text-left px-4 py-2 text-xs flex items-center gap-2.5 bg-gold-400 text-black font-semibold hover:bg-gold-400/90 transition-colors cursor-pointer">
+                            <span class="text-sm">🇮🇩</span> Indonesia
+                        </button>
+                        <button id="lang-btn-en" data-lang="en" data-lang-switch class="w-full text-left px-4 py-2 text-xs flex items-center gap-2.5 text-slate-300 hover:text-gold-300 hover:bg-gold-400/10 transition-colors cursor-pointer">
+                            <span class="text-sm">🇬🇧</span> English
+                        </button>
+                    </div>
+                </div>
+
                 {{-- Cart Button with Badge --}}
                 @php
                     $cartCount = 0;
@@ -150,7 +198,7 @@
             </button>
 
             <nav class="flex flex-col gap-4 text-xs uppercase tracking-[0.18em]" aria-label="Mobile Navigation">
-                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Home</a>
+                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Beranda</a>
                 <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">About Asyihan</a>
                 <a href="{{ route('calculator') }}" class="{{ request()->routeIs('calculator') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Calculator</a>
                 <a href="{{ route('collection') }}" class="{{ request()->routeIs('collection') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Essence Collection</a>
@@ -162,6 +210,19 @@
                 </a>
                 <a href="{{ route('order') }}" class="{{ request()->routeIs('order') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Order</a>
                 <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-gold-400 font-medium' : 'text-slate-200 hover:text-gold-400' }} transition-colors border-b border-gold-400/10 pb-2.5">Contact</a>
+
+                {{-- Language Switcher (Mobile) --}}
+                <div class="pt-3 border-t border-gold-400/10 flex items-center justify-between" data-no-translate>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-400/60 font-mono">Language</span>
+                    <div class="flex items-center gap-1.5">
+                        <button id="lang-btn-id-mobile" data-lang="id" data-lang-switch class="px-3 py-1.5 text-[10px] uppercase tracking-wider rounded border bg-gold-400 text-black font-semibold border-gold-400 transition-all cursor-pointer">
+                            ID
+                        </button>
+                        <button id="lang-btn-en-mobile" data-lang="en" data-lang-switch class="px-3 py-1.5 text-[10px] uppercase tracking-wider rounded border text-gold-300 border-gold-400/30 hover:border-gold-400/60 transition-all cursor-pointer">
+                            EN
+                        </button>
+                    </div>
+                </div>
 
                 <div class="pt-4 border-t border-gold-400/20 flex flex-col gap-3">
                     @auth
@@ -259,7 +320,7 @@
                     <ul class="space-y-3 text-xs tracking-wider">
                         <li>
                             <a href="{{ route('home') }}" class="text-slate-300 hover:text-gold-400 transition-colors inline-flex items-center gap-1.5 group">
-                                <span class="text-gold-400/40 group-hover:text-gold-400 transition-colors">&rsaquo;</span> Home
+                                <span class="text-gold-400/40 group-hover:text-gold-400 transition-colors">&rsaquo;</span> Beranda
                             </a>
                         </li>
                         <li>
@@ -470,6 +531,11 @@
 
             container.appendChild(toast);
 
+            // Translate toast if current language is English
+            if (window.AsyihanTranslator && window.AsyihanTranslator.getCurrentLang() === 'en') {
+                window.AsyihanTranslator.translateElement(toast, 'en');
+            }
+
             // Animate in
             requestAnimationFrame(() => {
                 toast.classList.remove('translate-y-4', 'opacity-0');
@@ -482,6 +548,21 @@
             }, 4000);
         };
     </script>
+
+    {{-- Google Translate Automatic Engine (Silent / Non-intrusive) --}}
+    <div id="google_translate_element" style="display:none;" class="notranslate" translate="no"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            if (window.google && window.google.translate) {
+                new window.google.translate.TranslateElement({
+                    pageLanguage: 'id',
+                    includedLanguages: 'id,en',
+                    autoDisplay: false
+                }, 'google_translate_element');
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
 
     @stack('scripts')
 </body>

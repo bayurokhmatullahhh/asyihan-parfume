@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,6 +21,8 @@ class OrderTest extends TestCase
 
     public function test_user_can_submit_order_and_redirects_to_payment(): void
     {
+        $user = User::factory()->create();
+
         $orderData = [
             'name' => 'Bayu Rokhmatullah',
             'phone' => '081234567890',
@@ -29,7 +32,7 @@ class OrderTest extends TestCase
             'notes' => 'Tolong kirim ke Bandung',
         ];
 
-        $response = $this->post('/order', $orderData);
+        $response = $this->actingAs($user)->post('/order', $orderData);
 
         $response->assertStatus(302);
         $this->assertStringContainsString('checkout/payment', $response->headers->get('Location'));
@@ -45,7 +48,9 @@ class OrderTest extends TestCase
 
     public function test_order_submission_validates_required_fields(): void
     {
-        $response = $this->post('/order', []);
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post('/order', []);
 
         $response->assertSessionHasErrors(['name', 'phone', 'essence_number']);
         $this->assertDatabaseCount('orders', 0);
@@ -53,7 +58,9 @@ class OrderTest extends TestCase
 
     public function test_order_submission_validates_essence_number_range(): void
     {
-        $response = $this->post('/order', [
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post('/order', [
             'name' => 'Test User',
             'phone' => '081234567890',
             'essence_number' => 1000, // Out of range 1-999

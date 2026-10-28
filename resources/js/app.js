@@ -1,6 +1,7 @@
 /**
  * ASYIHAN — Client Interactivity & Numerology Engine
  */
+import './translations.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     const sanitizePdfClone = (clonedDocument) => {
@@ -405,6 +406,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     const arch = r.archetype;
                     const romanNum = romanNumerals[arch.number] || arch.number;
 
+                    const isEn = window.AsyihanTranslator && window.AsyihanTranslator.getCurrentLang() === 'en';
+                    const t = (str) => (isEn && str) ? window.AsyihanTranslator.translateText(str, 'id', 'en') : str;
+
                     // Bagian 1: Analisis Numerologi & Karakter
                     const elUserName = document.getElementById("res-user-name");
                     const elCoreNumber =
@@ -428,18 +432,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         elCoreNumberImg.src = `/images/angka/${r.core_number}.png`;
                         elCoreNumberImg.alt = `Angka ${r.core_number}`;
                     }
-                    if (elArchName) elArchName.textContent = arch.name;
+                    if (elArchName) elArchName.textContent = t(arch.name);
                     if (elElementBadge)
-                        elElementBadge.textContent = `Elemen: ${arch.element}`;
-                    if (elCharDesc) elCharDesc.textContent = arch.soul_character || arch.description;
+                        elElementBadge.textContent = isEn ? `Element: ${t(arch.element)}` : `Elemen: ${arch.element}`;
+                    if (elCharDesc) elCharDesc.textContent = t(arch.soul_character || arch.description);
 
                     if (elTraitsContainer && Array.isArray(arch.traits)) {
                         elTraitsContainer.innerHTML = "";
-                        arch.traits.forEach((t) => {
+                        arch.traits.forEach((traitItem) => {
                             const span = document.createElement("span");
                             span.className =
                                 "text-[9px] uppercase tracking-wider px-2 py-0.5 rounded bg-black/80 border border-gold-400/20 text-gold-300";
-                            span.textContent = t;
+                            span.textContent = t(traitItem);
                             elTraitsContainer.appendChild(span);
                         });
                     }
@@ -467,18 +471,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     if (elRoman) elRoman.textContent = `ESSENCE ${romanNum}`;
                     if (elArchTitle)
-                        elArchTitle.textContent = arch.name.toUpperCase();
+                        elArchTitle.textContent = t(arch.name).toUpperCase();
                     if (elBottleLabel)
                         elBottleLabel.textContent = `ESSENCE ${romanNum}`;
                     if (elFragDesc)
                         elFragDesc.textContent =
-                            arch.fragrance_description || arch.description;
-                    if (elTop && arch.notes) elTop.textContent = arch.notes.top;
+                            t(arch.fragrance_description || arch.description);
+                    if (elTop && arch.notes) elTop.textContent = t(arch.notes.top);
                     if (elMid && arch.notes)
-                        elMid.textContent = arch.notes.middle;
+                        elMid.textContent = t(arch.notes.middle);
                     if (elBase && arch.notes)
-                        elBase.textContent = arch.notes.base;
-                    if (elAjian) elAjian.textContent = `"${arch.ajian}"`;
+                        elBase.textContent = t(arch.notes.base);
+                    if (elAjian) elAjian.textContent = `"${t(arch.ajian)}"`;
                     if (elPrice)
                         elPrice.textContent = `Rp ${arch.price.toLocaleString("id-ID")}`;
                     if (elOrderLink) {
@@ -507,12 +511,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (elTokohName)
                             elTokohName.textContent = tokoh.nama || "-";
                         if (elTokohAsal)
-                            elTokohAsal.textContent = tokoh.asal || "-";
+                            elTokohAsal.textContent = t(tokoh.asal) || "-";
                         if (elTokohLahir)
                             elTokohLahir.textContent =
-                                "Lahir: " + (tokoh.lahir || "-");
+                                (isEn ? "Born: " : "Lahir: ") + (tokoh.lahir || "-");
                         if (elTokohDesc)
-                            elTokohDesc.textContent = tokoh.deskripsi || "-";
+                            elTokohDesc.textContent = t(tokoh.deskripsi) || "-";
                     }
 
                     // Toggle placeholder off, result card on
@@ -525,6 +529,11 @@ document.addEventListener("DOMContentLoaded", () => {
                             behavior: "smooth",
                             block: "nearest",
                         });
+
+                        // Translate result card if in English mode
+                        if (window.AsyihanTranslator && window.AsyihanTranslator.getCurrentLang() === "en") {
+                            window.AsyihanTranslator.translateElement(resCard, "en");
+                        }
                     }
                 } else if (data.message) {
                     showDateError(data.message);
@@ -843,21 +852,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                     // Update result panel elements
+                    const isEnCalc = window.AsyihanTranslator && window.AsyihanTranslator.getCurrentLang() === 'en';
+                    const tCalc = (str) => (isEnCalc && str) ? window.AsyihanTranslator.translateText(str, 'id', 'en') : str;
+
                     const coreNumEl =
                         document.getElementById("out-core-number");
                     if (coreNumEl) coreNumEl.textContent = r.core_number;
 
                     const archNameEl =
                         document.getElementById("out-archetype-name");
-                    if (archNameEl) archNameEl.textContent = arch.name;
+                    if (archNameEl) archNameEl.textContent = tCalc(arch.name);
 
                     const subtitleIdEl =
                         document.getElementById("out-subtitle-id");
                     if (subtitleIdEl)
-                        subtitleIdEl.textContent = arch.subtitle_id || "";
+                        subtitleIdEl.textContent = tCalc(arch.subtitle_id || "");
 
                     const elementEl = document.getElementById("out-element");
-                    if (elementEl) elementEl.textContent = arch.element;
+                    if (elementEl) elementEl.textContent = tCalc(arch.element);
 
                     const aromaMainEl =
                         document.getElementById("out-aroma-main");
@@ -867,7 +879,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             arch.notes?.top + ", " + arch.notes?.base;
 
                     const descEl = document.getElementById("out-description");
-                    if (descEl) descEl.textContent = arch.soul_character || arch.description;
+                    if (descEl) descEl.textContent = tCalc(arch.soul_character || arch.description);
 
                     const notesTopTitle = document.getElementById(
                         "out-notes-top-title",
@@ -880,8 +892,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         document.getElementById("out-notes-top-desc");
                     if (notesTopDesc)
                         notesTopDesc.textContent =
-                            arch.aroma_notes_top_desc ||
-                            "Menenangkan pikiran dan membuka intuisi batin";
+                            tCalc(arch.aroma_notes_top_desc ||
+                            "Menenangkan pikiran dan membuka intuisi batin");
 
                     const notesBaseTitle = document.getElementById(
                         "out-notes-base-title",
@@ -895,8 +907,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
                     if (notesBaseDesc)
                         notesBaseDesc.textContent =
-                            arch.aroma_notes_base_desc ||
-                            "Memberi ketenangan dan rasa grounding spiritual";
+                            tCalc(arch.aroma_notes_base_desc ||
+                            "Memberi ketenangan dan rasa grounding spiritual");
 
                     const formulaNum =
                         document.getElementById("out-formula-num");
@@ -912,7 +924,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
                     if (formulaExtract)
                         formulaExtract.textContent =
-                            arch.description || arch.formula_extract || arch.fragrance_description;
+                            tCalc(arch.description || arch.formula_extract || arch.fragrance_description);
 
                     const priceEl = document.getElementById("out-price");
                     if (priceEl)
@@ -974,6 +986,11 @@ document.addEventListener("DOMContentLoaded", () => {
                             behavior: "smooth",
                             block: "start",
                         });
+
+                        // Translate result container if in English mode
+                        if (window.AsyihanTranslator && window.AsyihanTranslator.getCurrentLang() === "en") {
+                            window.AsyihanTranslator.translateElement(resultContainer, "en");
+                        }
                     }
                 }
             } catch (err) {

@@ -277,33 +277,33 @@
             {{-- FAQ 1 --}}
             <details class="bg-panel border border-gold-400/20 rounded-xl group overflow-hidden">
                 <summary class="p-5 font-serif text-sm sm:text-base text-white hover:text-gold-300 cursor-pointer flex justify-between items-center list-none select-none">
-                    <span>Bagaimana jika saya tidak mengetahui jam lahir saya secara pasti?</span>
+                    <span>Apa itu ASYIHAN?</span>
                     <span class="text-gold-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
                 <div class="px-5 pb-5 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
-                    Numerologi ASYIHAN dihitung berdasarkan tanggal, bulan, dan tahun kelahiran (bukan jam lahir), sehingga hasil pembacaan arketipe Anda tetap 100% akurat.
+                    ASYIHAN adalah brand parfum yang menghadirkan pengalaman wewangian dengan pendekatan personal. Melalui koleksi parfum dan konsep numerologi, ASYIHAN mengajak pelanggan menemukan aroma yang sesuai dengan preferensi dan karakter mereka.
                 </div>
             </details>
 
             {{-- FAQ 2 --}}
             <details class="bg-panel border border-gold-400/20 rounded-xl group overflow-hidden">
                 <summary class="p-5 font-serif text-sm sm:text-base text-white hover:text-gold-300 cursor-pointer flex justify-between items-center list-none select-none">
-                    <span>Berapa lama ketahanan aroma Extrait de Parfum ASYIHAN?</span>
+                    <span>Apakah parfum ASYIHAN cocok untuk pria dan wanita?</span>
                     <span class="text-gold-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
                 <div class="px-5 pb-5 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
-                    Konsentrasi Extrait de Parfum ASYIHAN (30-35% pure perfume oil) bertahan 12 hingga 18 jam di kulit, dan hingga 24+ jam pada pakaian.
+                    Pilihan parfum dapat disesuaikan dengan karakter aroma yang disukai, bukan hanya berdasarkan gender. Silakan lihat deskripsi setiap produk atau hubungi tim kami untuk mendapatkan rekomendasi.
                 </div>
             </details>
 
             {{-- FAQ 3 --}}
             <details class="bg-panel border border-gold-400/20 rounded-xl group overflow-hidden">
                 <summary class="p-5 font-serif text-sm sm:text-base text-white hover:text-gold-300 cursor-pointer flex justify-between items-center list-none select-none">
-                    <span>Apakah pengiriman aman hingga ke seluruh penjuru Nusantara dan Mancanegara?</span>
+                    <span>Apa itu numerologi ASYIHAN?</span>
                     <span class="text-gold-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
                 <div class="px-5 pb-5 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
-                    Setiap botol dikemas dalam kotak kayu terlindung dengan segel lilin sakral dan bubble wrap berlapis, dijamin aman tiba di tujuan.
+                    Numerologi ASYIHAN merupakan pendekatan personal yang menghubungkan tanggal lahir dengan interpretasi numerologi untuk membantu pelanggan mengeksplorasi pengalaman aroma. 
                 </div>
             </details>
 
@@ -314,7 +314,7 @@
                     <span class="text-gold-400 text-xl group-open:rotate-45 transition-transform duration-300">+</span>
                 </summary>
                 <div class="px-5 pb-5 text-xs sm:text-sm text-gray-300 font-light leading-relaxed border-t border-white/5 pt-3">
-                    Ya, kami melayani *bespoke fragrance formulation* untuk pernikahan sakral, perhelatan eksklusif, dan cenderamata korporasi.
+                    Tidak, Saat ini kami belum melayani *bespoke fragrance formulation* untuk pernikahan sakral, perhelatan eksklusif, dan cenderamata korporasi, dll.
                 </div>
             </details>
         </div>

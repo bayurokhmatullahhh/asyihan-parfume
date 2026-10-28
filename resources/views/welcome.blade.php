@@ -445,35 +445,33 @@
                         {{-- Subtle background glow --}}
                         <div class="absolute inset-0 bg-radial-gradient from-gold-400/10 via-transparent to-transparent pointer-events-none"></div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-19 gap-5 items-center relative z-10">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
                             {{-- Mystic Portal Artwork --}}
                             <div class="md:col-span-5 rounded-lg overflow-hidden border border-gold-400/30 relative">
-                                <img src="{{ asset('images/mystic_calculator_element.png') }}" alt="Mystic Numerology Portal" class="w-full h-48 md:h-56 object-cover group-hover:scale-105 transition-transform duration-700">
+                                <img src="{{ asset('images/mystic_calculator_element.png') }}" alt="Mystic Numerology Portal" class="w-full h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                                <div class="absolute bottom-2 left-2 right-2 text-center">
-                                    <span class="text-[9px] uppercase tracking-widest text-gold-300 font-mono bg-black/70 px-2 py-0.5 rounded border border-gold-400/20 inline-block">
+                                <div class="absolute bottom-3 left-3 right-3 text-center">
+                                    <span class="text-[9px] uppercase tracking-widest text-gold-300 font-mono bg-black/70 px-3 py-1 rounded border border-gold-400/20 inline-block">
                                         GERBANG ESENSI
                                     </span>
                                 </div>
                             </div>
 
                             {{-- Explanatory copy --}}
-                            <div class="md:col-span-7 space-y-3 text-left">
-                                <div class="inline-flex items-center gap-1.5 text-gold-400 text-xs font-mono">
+                            <div class="md:col-span-7 space-y-4 text-left">
+                                <div class="inline-flex items-center gap-2 text-gold-400 text-[11px] font-mono">
                                     <span>☽</span>
-                                    <span class="uppercase tracking-widest">Koneksi Karakter & Scent</span>
+                                    <span class="uppercase tracking-[0.2em]">Koneksi Karakter & Scent</span>
                                     <span>☾</span>
                                 </div>
 
-                                <h4 class="font-serif text-white text-base sm:text-lg font-medium leading-snug">
+                                <h4 class="font-serif text-white text-lg sm:text-xl lg:text-2xl font-medium leading-snug tracking-wide">
                                     Setiap Angka Kelahiran Menyimpan Aroma Sejati
                                 </h4>
 
-                                <p class="text-gray-300 text-xs font-light leading-relaxed">
+                                <p class="text-gray-300 text-xs sm:text-sm font-light leading-relaxed max-w-md">
                                     Kombinasi hari, bulan, dan tahun kelahiranmu adalah frekuensi kosmik yang menentukan kepribadian terdalammu. ASYIHAN menerjemahkan getaran tersebut menjadi racikan aroma sakral.
                                 </p>
-
-
                             </div>
                         </div>
                     </div>
