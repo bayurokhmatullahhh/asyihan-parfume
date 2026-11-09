@@ -266,6 +266,113 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        // Email & Phone Verification Helpers
+        const isValidEmail = (str) => {
+            if (!str || typeof str !== "string") return false;
+            const trimmed = str.trim();
+            const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+            if (!regex.test(trimmed)) return false;
+            const parts = trimmed.split("@");
+            if (parts.length !== 2) return false;
+            const domain = parts[1].toLowerCase();
+            const domainParts = domain.split(".");
+            if (domainParts.length < 2) return false;
+            const tld = domainParts[domainParts.length - 1];
+            if (tld.length < 2 || !/^[a-z]+$/.test(tld)) return false;
+            const dummy = ["test.test", "asdf.com", "example.com", "dummy.com", "test.com"];
+            if (dummy.includes(domain)) return false;
+            return true;
+        };
+
+        const cleanPhoneInput = (val) => {
+            if (!val) return "";
+            let digits = String(val).replace(/\D/g, "");
+            while (digits.startsWith("0")) {
+                digits = digits.substring(1);
+            }
+            if (digits.startsWith("62")) {
+                digits = digits.substring(2);
+            }
+            return digits;
+        };
+
+        // Real-time listener for Sidebar Email
+        const sidebarEmailInput = document.getElementById("sidebar_email");
+        const sidebarEmailStatus = document.getElementById("sidebar_email_status");
+        const sidebarEmailIcon = document.getElementById("sidebar_email_icon");
+        const sidebarEmailBadge = document.getElementById("sidebar_email_badge");
+
+        const updateSidebarEmailStatus = () => {
+            if (!sidebarEmailInput) return;
+            const val = sidebarEmailInput.value.trim();
+            if (!val) {
+                if (sidebarEmailStatus) sidebarEmailStatus.classList.add("hidden");
+                if (sidebarEmailIcon) sidebarEmailIcon.classList.add("hidden");
+                if (sidebarEmailBadge) {
+                    sidebarEmailBadge.textContent = "Verifikasi Format";
+                    sidebarEmailBadge.className = "text-[9px] text-gray-500 font-mono";
+                }
+                sidebarEmailInput.classList.remove("border-emerald-500/60", "border-rose-500/60");
+                sidebarEmailInput.classList.add("border-gold-400/30");
+                return;
+            }
+
+            if (isValidEmail(val)) {
+                if (sidebarEmailStatus) {
+                    sidebarEmailStatus.textContent = "✓ Format email valid";
+                    sidebarEmailStatus.className = "text-[10px] mt-1 text-emerald-400 font-mono";
+                    sidebarEmailStatus.classList.remove("hidden");
+                }
+                if (sidebarEmailIcon) sidebarEmailIcon.classList.remove("hidden");
+                if (sidebarEmailBadge) {
+                    sidebarEmailBadge.textContent = "Terverifikasi ✓";
+                    sidebarEmailBadge.className = "text-[9px] text-emerald-400 font-mono font-semibold";
+                }
+                sidebarEmailInput.classList.remove("border-rose-500/60", "border-gold-400/30");
+                sidebarEmailInput.classList.add("border-emerald-500/60");
+            } else {
+                if (sidebarEmailStatus) {
+                    sidebarEmailStatus.textContent = "⚠ Format email belum valid (contoh: nama@domain.com)";
+                    sidebarEmailStatus.className = "text-[10px] mt-1 text-rose-400 font-mono";
+                    sidebarEmailStatus.classList.remove("hidden");
+                }
+                if (sidebarEmailIcon) sidebarEmailIcon.classList.add("hidden");
+                if (sidebarEmailBadge) {
+                    sidebarEmailBadge.textContent = "Format Belum Tepat";
+                    sidebarEmailBadge.className = "text-[9px] text-rose-400 font-mono";
+                }
+                sidebarEmailInput.classList.remove("border-emerald-500/60", "border-gold-400/30");
+                sidebarEmailInput.classList.add("border-rose-500/60");
+            }
+        };
+
+        if (sidebarEmailInput) {
+            sidebarEmailInput.addEventListener("input", updateSidebarEmailStatus);
+            sidebarEmailInput.addEventListener("blur", updateSidebarEmailStatus);
+        }
+
+        // Real-time listener for Sidebar Phone
+        const sidebarPhoneInput = document.getElementById("sidebar_phone");
+        const sidebarPhoneStatus = document.getElementById("sidebar_phone_status");
+        if (sidebarPhoneInput) {
+            sidebarPhoneInput.addEventListener("input", (e) => {
+                const cleaned = cleanPhoneInput(e.target.value);
+                e.target.value = cleaned;
+                if (sidebarPhoneStatus) {
+                    if (cleaned.length >= 9 && cleaned.length <= 13) {
+                        sidebarPhoneStatus.textContent = `✓ Nomor resmi: +62 ${cleaned}`;
+                        sidebarPhoneStatus.className = "text-[9px] mt-1 text-emerald-400 font-mono";
+                    } else if (cleaned.length > 0) {
+                        sidebarPhoneStatus.textContent = `Minimal 9 digit (terisi: ${cleaned.length} digit)`;
+                        sidebarPhoneStatus.className = "text-[9px] mt-1 text-gold-400/70 font-mono";
+                    } else {
+                        sidebarPhoneStatus.textContent = "Contoh: 812-3456-7890";
+                        sidebarPhoneStatus.className = "text-[9px] mt-1 text-gray-500 font-mono";
+                    }
+                }
+            });
+        }
+
         // Reset button
         if (resetBtn) {
             resetBtn.addEventListener("click", () => {
@@ -300,13 +407,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            if (!phone) {
+            if (!isValidEmail(email)) {
+                showDateError("Alamat email tidak valid. Masukkan format resmi (contoh: nama@gmail.com).");
+                document.getElementById("sidebar_email")?.focus();
+                return;
+            }
+
+            const cleanPhone = cleanPhoneInput(phone);
+            if (!cleanPhone || cleanPhone.length < 9) {
                 showDateError(
-                    "Silakan masukkan nomor telepon / WhatsApp Anda.",
+                    "Silakan masukkan nomor telepon / WhatsApp resmi yang valid (minimal 9 digit, otomatis +62).",
                 );
                 document.getElementById("sidebar_phone")?.focus();
                 return;
             }
+            const fullPhone = `+62${cleanPhone}`;
 
             let birthDate = "";
             if (dayInput && monthInput && yearInput) {
@@ -396,7 +511,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         name,
                         birth_date: birthDate,
                         email,
-                        phone,
+                        phone: fullPhone,
                     }),
                 });
 
@@ -463,6 +578,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     const elBase = document.getElementById("res-note-base");
                     const elAjian =
                         document.getElementById("res-ajian-snippet");
+                    const elAjianText =
+                        document.getElementById("res-ajian-text");
+                    const elSugestiText =
+                        document.getElementById("res-sugesti-text");
                     const elPrice = document.getElementById("res-price");
                     const elOrderLink =
                         document.getElementById("res-order-link");
@@ -483,14 +602,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (elBase && arch.notes)
                         elBase.textContent = t(arch.notes.base);
                     if (elAjian) elAjian.textContent = `"${t(arch.ajian)}"`;
+                    if (elAjianText) elAjianText.textContent = arch.ajian ? `"${t(arch.ajian)}"` : "";
+                    if (elSugestiText) elSugestiText.textContent = t(arch.sugesti) || "";
                     if (elPrice)
                         elPrice.textContent = `Rp ${arch.price.toLocaleString("id-ID")}`;
                     if (elOrderLink) {
                         let orderUrl = `/order?essence=${arch.number}&name=${encodeURIComponent(name)}`;
                         if (email)
                             orderUrl += `&email=${encodeURIComponent(email)}`;
-                        if (phone)
-                            orderUrl += `&phone=${encodeURIComponent(phone)}`;
+                        if (fullPhone)
+                            orderUrl += `&phone=${encodeURIComponent(fullPhone)}`;
                         elOrderLink.href = orderUrl;
                     }
                     if (elDetailLink)
@@ -758,6 +879,82 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
+        // Real-time listener for Full Calculator Email & Phone
+        const calcEmailInput = document.getElementById("calc_email");
+        const calcEmailStatus = document.getElementById("calc_email_status");
+        const calcEmailIcon = document.getElementById("calc_email_icon");
+        const calcEmailBadge = document.getElementById("calc_email_badge");
+
+        const updateCalcEmailStatus = () => {
+            if (!calcEmailInput) return;
+            const val = calcEmailInput.value.trim();
+            if (!val) {
+                if (calcEmailStatus) calcEmailStatus.classList.add("hidden");
+                if (calcEmailIcon) calcEmailIcon.classList.add("hidden");
+                if (calcEmailBadge) {
+                    calcEmailBadge.textContent = "Verifikasi Format";
+                    calcEmailBadge.className = "text-[10px] text-gray-400 font-mono";
+                }
+                calcEmailInput.classList.remove("border-emerald-500/60", "border-rose-500/60");
+                calcEmailInput.classList.add("border-gold-400/30");
+                return;
+            }
+
+            if (isValidEmail(val)) {
+                if (calcEmailStatus) {
+                    calcEmailStatus.textContent = "✓ Format email valid";
+                    calcEmailStatus.className = "text-[11px] mt-1.5 text-emerald-400 font-mono";
+                    calcEmailStatus.classList.remove("hidden");
+                }
+                if (calcEmailIcon) calcEmailIcon.classList.remove("hidden");
+                if (calcEmailBadge) {
+                    calcEmailBadge.textContent = "Terverifikasi ✓";
+                    calcEmailBadge.className = "text-[10px] text-emerald-400 font-mono font-semibold";
+                }
+                calcEmailInput.classList.remove("border-rose-500/60", "border-gold-400/30");
+                calcEmailInput.classList.add("border-emerald-500/60");
+            } else {
+                if (calcEmailStatus) {
+                    calcEmailStatus.textContent = "⚠ Format email belum valid (contoh: nama@domain.com)";
+                    calcEmailStatus.className = "text-[11px] mt-1.5 text-rose-400 font-mono";
+                    calcEmailStatus.classList.remove("hidden");
+                }
+                if (calcEmailIcon) calcEmailIcon.classList.add("hidden");
+                if (calcEmailBadge) {
+                    calcEmailBadge.textContent = "Format Belum Tepat";
+                    calcEmailBadge.className = "text-[10px] text-rose-400 font-mono";
+                }
+                calcEmailInput.classList.remove("border-emerald-500/60", "border-gold-400/30");
+                calcEmailInput.classList.add("border-rose-500/60");
+            }
+        };
+
+        if (calcEmailInput) {
+            calcEmailInput.addEventListener("input", updateCalcEmailStatus);
+            calcEmailInput.addEventListener("blur", updateCalcEmailStatus);
+        }
+
+        const calcPhoneInput = document.getElementById("calc_phone");
+        const calcPhoneStatus = document.getElementById("calc_phone_status");
+        if (calcPhoneInput) {
+            calcPhoneInput.addEventListener("input", (e) => {
+                const cleaned = cleanPhoneInput(e.target.value);
+                e.target.value = cleaned;
+                if (calcPhoneStatus) {
+                    if (cleaned.length >= 9 && cleaned.length <= 13) {
+                        calcPhoneStatus.textContent = `✓ Nomor resmi: +62 ${cleaned}`;
+                        calcPhoneStatus.className = "text-[11px] mt-1.5 text-emerald-400 font-mono";
+                    } else if (cleaned.length > 0) {
+                        calcPhoneStatus.textContent = `Minimal 9 digit (terisi: ${cleaned.length} digit)`;
+                        calcPhoneStatus.className = "text-[11px] mt-1.5 text-gold-400/70 font-mono";
+                    } else {
+                        calcPhoneStatus.textContent = "Contoh: 812-3456-7890";
+                        calcPhoneStatus.className = "text-[11px] mt-1.5 text-gray-500 font-mono";
+                    }
+                }
+            });
+        }
+
         [dayInput, monthInput, yearInput].forEach((inp) => {
             if (inp) {
                 inp.addEventListener("input", updateDateInputs);
@@ -788,6 +985,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            if (!email) {
+                alert("Silakan masukkan alamat email Anda.");
+                calcEmailInput?.focus();
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                alert("Format email tidak valid. Masukkan format resmi (contoh: nama@gmail.com).");
+                calcEmailInput?.focus();
+                return;
+            }
+
+            const cleanPhone = cleanPhoneInput(phone);
+            if (!cleanPhone || cleanPhone.length < 9) {
+                alert("Silakan masukkan nomor telepon / WhatsApp resmi yang valid (minimal 9 digit, otomatis +62).");
+                calcPhoneInput?.focus();
+                return;
+            }
+            const fullPhone = `+62${cleanPhone}`;
+
             btn.disabled = true;
             if (loading) loading.classList.remove("hidden");
 
@@ -806,7 +1023,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         name,
                         birth_date: birthDate,
                         email,
-                        phone,
+                        phone: fullPhone,
                     }),
                 });
 
@@ -926,6 +1143,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         formulaExtract.textContent =
                             tCalc(arch.description || arch.formula_extract || arch.fragrance_description);
 
+                    const elAjianOut = document.getElementById("out-ajian-text");
+                    const elSugestiOut = document.getElementById("out-sugesti-text");
+                    if (elAjianOut) elAjianOut.textContent = arch.ajian ? `"${tCalc(arch.ajian)}"` : "";
+                    if (elSugestiOut) elSugestiOut.textContent = tCalc(arch.sugesti) || "";
+
                     const priceEl = document.getElementById("out-price");
                     if (priceEl)
                         priceEl.textContent = `Rp ${arch.price.toLocaleString("id-ID")}`;
@@ -935,8 +1157,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         let orderUrl = `/order?essence=${arch.number}&name=${encodeURIComponent(name)}`;
                         if (email)
                             orderUrl += `&email=${encodeURIComponent(email)}`;
-                        if (phone)
-                            orderUrl += `&phone=${encodeURIComponent(phone)}`;
+                        if (fullPhone)
+                            orderUrl += `&phone=${encodeURIComponent(fullPhone)}`;
                         orderLink.href = orderUrl;
                     }
 

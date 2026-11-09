@@ -93,19 +93,37 @@
                         {{-- Email & Nomor Telepon --}}
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                             <div>
-                                <label for="calc_email" class="block text-xs sm:text-sm uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
-                                    Email
-                                </label>
-                                <input id="calc_email" name="email" type="email" value="" placeholder="nama@domain.com" required
-                                    class="w-full py-3 px-4 text-sm sm:text-base rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label for="calc_email" class="block text-xs sm:text-sm uppercase tracking-[0.18em] text-gold-400/90 font-medium">
+                                        Email
+                                    </label>
+                                    <span id="calc_email_badge" class="text-[10px] text-gray-400 font-mono">Verifikasi Format</span>
+                                </div>
+                                <div class="relative">
+                                    <input id="calc_email" name="email" type="email" value="" placeholder="nama@domain.com" required
+                                        class="w-full py-3 px-4 text-sm sm:text-base rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                    <div id="calc_email_icon" class="absolute right-3.5 top-1/2 -translate-y-1/2 hidden pointer-events-none">
+                                        <span class="text-sm text-emerald-400">✓</span>
+                                    </div>
+                                </div>
+                                <p id="calc_email_status" class="text-[11px] mt-1.5 text-gray-500 font-mono hidden"></p>
                             </div>
                             <div>
-                                <label for="calc_phone" class="block text-xs sm:text-sm uppercase tracking-[0.18em] text-gold-400/90 mb-2 font-medium">
-                                    Nomor Telepon / WhatsApp
-                                </label>
-                                <input id="calc_phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]*" value="" placeholder="Contoh: 081234567890" required
-                                    oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-                                    class="w-full py-3 px-4 text-sm sm:text-base rounded-lg bg-[#050505] border border-gold-400/30 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label for="calc_phone" class="block text-xs sm:text-sm uppercase tracking-[0.18em] text-gold-400/90 font-medium">
+                                        Nomor Telepon / WhatsApp
+                                    </label>
+                                    <span class="text-[10px] text-gray-400 font-mono">Resmi</span>
+                                </div>
+                                <div id="calc_phone_wrapper" class="flex rounded-lg overflow-hidden border border-gold-400/30 bg-[#050505] focus-within:border-gold-400 focus-within:ring-1 focus-within:ring-gold-400 transition-colors">
+                                    <div class="flex items-center gap-1.5 px-3 py-3 bg-gold-400/10 border-r border-gold-400/25 text-gold-300 font-mono text-xs sm:text-sm select-none shrink-0" title="Indonesia (+62)">
+                                        <span class="text-base">🇮🇩</span>
+                                        <span class="font-semibold text-gold-300 tracking-wider">+62</span>
+                                    </div>
+                                    <input id="calc_phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]*" value="" placeholder="81234567890" required
+                                        class="w-full py-3 px-3.5 text-sm sm:text-base bg-transparent text-white placeholder-gray-500 focus:outline-none font-mono">
+                                </div>
+                                <p id="calc_phone_status" class="text-[11px] mt-1.5 text-gray-500 font-mono">Contoh: 812-3456-7890</p>
                             </div>
                         </div>
 
@@ -811,6 +829,113 @@
     [dayEl, monthEl, yearEl].forEach(el => el && el.addEventListener('input', updatePreview));
 
     // ================================================================
+    // EMAIL & PHONE REAL-TIME VALIDATION HELPERS
+    // ================================================================
+    function isValidEmail(str) {
+        if (!str || typeof str !== 'string') return false;
+        const trimmed = str.trim();
+        const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+        if (!regex.test(trimmed)) return false;
+        const parts = trimmed.split('@');
+        if (parts.length !== 2) return false;
+        const domain = parts[1].toLowerCase();
+        const domainParts = domain.split('.');
+        if (domainParts.length < 2) return false;
+        const tld = domainParts[domainParts.length - 1];
+        if (tld.length < 2 || !/^[a-z]+$/.test(tld)) return false;
+        const dummy = ['test.test', 'asdf.com', 'example.com', 'dummy.com', 'test.com'];
+        if (dummy.includes(domain)) return false;
+        return true;
+    }
+
+    function cleanPhoneInput(val) {
+        if (!val) return '';
+        let digits = String(val).replace(/\D/g, '');
+        while (digits.startsWith('0')) {
+            digits = digits.substring(1);
+        }
+        if (digits.startsWith('62')) {
+            digits = digits.substring(2);
+        }
+        return digits;
+    }
+
+    const calcEmailInput = document.getElementById('calc_email');
+    const calcEmailStatus = document.getElementById('calc_email_status');
+    const calcEmailIcon = document.getElementById('calc_email_icon');
+    const calcEmailBadge = document.getElementById('calc_email_badge');
+
+    function updateCalcEmailStatus() {
+        if (!calcEmailInput) return;
+        const val = calcEmailInput.value.trim();
+        if (!val) {
+            if (calcEmailStatus) calcEmailStatus.classList.add('hidden');
+            if (calcEmailIcon) calcEmailIcon.classList.add('hidden');
+            if (calcEmailBadge) {
+                calcEmailBadge.textContent = 'Verifikasi Format';
+                calcEmailBadge.className = 'text-[10px] text-gray-400 font-mono';
+            }
+            calcEmailInput.classList.remove('border-emerald-500/60', 'border-rose-500/60');
+            calcEmailInput.classList.add('border-gold-400/30');
+            return;
+        }
+
+        if (isValidEmail(val)) {
+            if (calcEmailStatus) {
+                calcEmailStatus.textContent = '✓ Format email valid';
+                calcEmailStatus.className = 'text-[11px] mt-1.5 text-emerald-400 font-mono';
+                calcEmailStatus.classList.remove('hidden');
+            }
+            if (calcEmailIcon) calcEmailIcon.classList.remove('hidden');
+            if (calcEmailBadge) {
+                calcEmailBadge.textContent = 'Terverifikasi ✓';
+                calcEmailBadge.className = 'text-[10px] text-emerald-400 font-mono font-semibold';
+            }
+            calcEmailInput.classList.remove('border-rose-500/60', 'border-gold-400/30');
+            calcEmailInput.classList.add('border-emerald-500/60');
+        } else {
+            if (calcEmailStatus) {
+                calcEmailStatus.textContent = '⚠ Format email belum valid (contoh: nama@domain.com)';
+                calcEmailStatus.className = 'text-[11px] mt-1.5 text-rose-400 font-mono';
+                calcEmailStatus.classList.remove('hidden');
+            }
+            if (calcEmailIcon) calcEmailIcon.classList.add('hidden');
+            if (calcEmailBadge) {
+                calcEmailBadge.textContent = 'Format Belum Tepat';
+                calcEmailBadge.className = 'text-[10px] text-rose-400 font-mono';
+            }
+            calcEmailInput.classList.remove('border-emerald-500/60', 'border-gold-400/30');
+            calcEmailInput.classList.add('border-rose-500/60');
+        }
+    }
+
+    if (calcEmailInput) {
+        calcEmailInput.addEventListener('input', updateCalcEmailStatus);
+        calcEmailInput.addEventListener('blur', updateCalcEmailStatus);
+    }
+
+    const calcPhoneInput = document.getElementById('calc_phone');
+    const calcPhoneStatus = document.getElementById('calc_phone_status');
+    if (calcPhoneInput) {
+        calcPhoneInput.addEventListener('input', function (e) {
+            const cleaned = cleanPhoneInput(e.target.value);
+            e.target.value = cleaned;
+            if (calcPhoneStatus) {
+                if (cleaned.length >= 9 && cleaned.length <= 13) {
+                    calcPhoneStatus.textContent = `✓ Nomor resmi: +62 ${cleaned}`;
+                    calcPhoneStatus.className = 'text-[11px] mt-1.5 text-emerald-400 font-mono';
+                } else if (cleaned.length > 0) {
+                    calcPhoneStatus.textContent = `Minimal 9 digit (terisi: ${cleaned.length} digit)`;
+                    calcPhoneStatus.className = 'text-[11px] mt-1.5 text-gold-400/70 font-mono';
+                } else {
+                    calcPhoneStatus.textContent = 'Contoh: 812-3456-7890';
+                    calcPhoneStatus.className = 'text-[11px] mt-1.5 text-gray-500 font-mono';
+                }
+            }
+        });
+    }
+
+    // ================================================================
     // FORM SUBMIT — AJAX
     // ================================================================
     const form        = document.getElementById('full-calculator-form');
@@ -830,6 +955,26 @@
             alert('Mohon isi nama dan tanggal lahir dengan lengkap.');
             return;
         }
+
+        if (!email) {
+            alert('Silakan masukkan alamat email Anda.');
+            calcEmailInput?.focus();
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            alert('Format email tidak valid. Masukkan format resmi (contoh: nama@gmail.com).');
+            calcEmailInput?.focus();
+            return;
+        }
+
+        const cleanPhone = cleanPhoneInput(phone);
+        if (!cleanPhone || cleanPhone.length < 9) {
+            alert('Silakan masukkan nomor telepon / WhatsApp resmi yang valid (minimal 9 digit, otomatis +62).');
+            calcPhoneInput?.focus();
+            return;
+        }
+        const fullPhone = `+62${cleanPhone}`;
 
         // Show loading
         submitBtn.classList.add('opacity-50', 'pointer-events-none');
@@ -863,13 +1008,13 @@
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     'Accept': 'application/json',
                 },
-                body: JSON.stringify({ name, birth_date: birthDate, email, phone }),
+                body: JSON.stringify({ name, birth_date: birthDate, email, phone: fullPhone }),
             });
 
             const json = await response.json();
 
             if (json.success) {
-                populateResult(json.data, name, birthDate, email, phone);
+                populateResult(json.data, name, birthDate, email, fullPhone);
                 expandLayout();
                 resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
@@ -881,7 +1026,7 @@
             const d = parseInt(parts[2]), m = parseInt(parts[1]), y = parseInt(parts[0]);
             const core = calculateCoreNumber(d, m, y);
             const tokoh = getLocalTokoh(core, d, m, y);
-            populateResultLocal(core, name, birthDate, tokoh, email, phone);
+            populateResultLocal(core, name, birthDate, tokoh, email, fullPhone);
             expandLayout();
             resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } finally {

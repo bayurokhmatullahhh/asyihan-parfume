@@ -33,9 +33,20 @@ class NumerologyController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'birth_date' => 'required|date|before_or_equal:today',
-            'email' => 'nullable|email|max:255',
+            'email' => 'nullable|email:rfc,filter|max:255',
             'phone' => 'nullable|string|max:25',
         ]);
+
+        // Normalize phone number to international E.164 (+62...)
+        $phone = $validated['phone'] ?? null;
+        if ($phone) {
+            $phone = preg_replace('/[^\d+]/', '', trim($phone));
+            if (str_starts_with($phone, '0')) {
+                $phone = '+62'.substr($phone, 1);
+            } elseif (! str_starts_with($phone, '+')) {
+                $phone = str_starts_with($phone, '62') ? '+'.$phone : '+62'.$phone;
+            }
+        }
 
         try {
             $reading = $this->numerology->getReading(
@@ -55,7 +66,7 @@ class NumerologyController extends Controller
                     'user_id' => auth()->id(),
                     'full_name' => $validated['name'],
                     'birth_date' => $validated['birth_date'],
-                    'phone' => $validated['phone'] ?? auth()->user()?->phone,
+                    'phone' => $phone ?? auth()->user()?->phone,
                     'email' => $validated['email'] ?? auth()->user()?->email,
                     'core_number' => $reading['core_number'],
                     'archetype_name' => $reading['archetype']['name'] ?? 'Essence '.$reading['core_number'],

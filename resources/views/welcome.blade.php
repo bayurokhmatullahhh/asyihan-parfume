@@ -382,35 +382,53 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {{-- Email --}}
                                 <div>
-                                    <label for="sidebar_email" class="block text-[10px] uppercase tracking-wider text-gold-400/90 mb-1.5 font-mono">
-                                        EMAIL
-                                    </label>
-                                    <input 
-                                        id="sidebar_email" 
-                                        name="email" 
-                                        type="email" 
-                                        placeholder="nama@domain.com" 
-                                        required 
-                                        class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#020202] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
-                                    >
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <label for="sidebar_email" class="block text-[10px] uppercase tracking-wider text-gold-400/90 font-mono">
+                                            EMAIL
+                                        </label>
+                                        <span id="sidebar_email_badge" class="text-[9px] text-gray-500 font-mono">Verifikasi Format</span>
+                                    </div>
+                                    <div class="relative">
+                                        <input 
+                                            id="sidebar_email" 
+                                            name="email" 
+                                            type="email" 
+                                            placeholder="nama@domain.com" 
+                                            required 
+                                            class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#020202] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
+                                        >
+                                        <div id="sidebar_email_icon" class="absolute right-3 top-1/2 -translate-y-1/2 hidden pointer-events-none">
+                                            <span class="text-xs text-emerald-400">✓</span>
+                                        </div>
+                                    </div>
+                                    <p id="sidebar_email_status" class="text-[10px] mt-1 text-gray-500 font-mono hidden"></p>
                                 </div>
 
-                                {{-- Nomor Telepon --}}
+                                {{-- Nomor Telepon dengan Kode Negara --}}
                                 <div>
-                                    <label for="sidebar_phone" class="block text-[10px] uppercase tracking-wider text-gold-400/90 mb-1.5 font-mono">
-                                        NOMOR TELEPON
-                                    </label>
-                                    <input 
-                                        id="sidebar_phone" 
-                                        name="phone" 
-                                        type="tel" 
-                                        inputmode="numeric" 
-                                        pattern="[0-9]*" 
-                                        placeholder="081234567890" 
-                                        required 
-                                        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-                                        class="input-dark text-xs sm:text-sm py-2.5 px-3.5 w-full bg-[#020202] border border-gold-400/30 rounded-lg text-white focus:border-gold-400 focus:outline-none focus:ring-1 focus:ring-gold-400/50 transition-all placeholder:text-gray-500"
-                                    >
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <label for="sidebar_phone" class="block text-[10px] uppercase tracking-wider text-gold-400/90 font-mono">
+                                            NOMOR WHATSAPP / TELEPON
+                                        </label>
+                                        <span class="text-[9px] text-gray-500 font-mono">Resmi</span>
+                                    </div>
+                                    <div id="sidebar_phone_wrapper" class="flex rounded-lg overflow-hidden border border-gold-400/30 bg-[#020202] focus-within:border-gold-400 focus-within:ring-1 focus-within:ring-gold-400/50 transition-all">
+                                        <div class="flex items-center gap-1 px-2.5 py-2.5 bg-gold-400/10 border-r border-gold-400/25 text-gold-300 font-mono text-xs select-none shrink-0" title="Indonesia (+62)">
+                                            <span class="text-xs">🇮🇩</span>
+                                            <span class="font-semibold text-[11px] text-gold-300 tracking-wider">+62</span>
+                                        </div>
+                                        <input 
+                                            id="sidebar_phone" 
+                                            name="phone" 
+                                            type="tel" 
+                                            inputmode="numeric" 
+                                            pattern="[0-9]*" 
+                                            placeholder="81234567890" 
+                                            required 
+                                            class="text-xs sm:text-sm py-2.5 px-3 w-full bg-transparent text-white focus:outline-none placeholder:text-gray-600 font-mono"
+                                        >
+                                    </div>
+                                    <p id="sidebar_phone_status" class="text-[9px] mt-1 text-gray-500 font-mono">Contoh: 812-3456-7890</p>
                                 </div>
                             </div>
 
@@ -595,17 +613,39 @@
                                 <p id="res-fragrance-desc" class="text-gray-300 text-xs font-light leading-relaxed"></p>
 
                                 {{-- Notes Pyramid --}}
-                                <div class="rounded-xl p-3 border border-gold-400/20 space-y-1">
+                                <div class="rounded-xl p-3.5 border border-gold-400/20 bg-black/40 space-y-1.5">
                                     <p class="text-gold-400 text-[9px] uppercase tracking-widest font-semibold mb-1 font-mono">NOTES PYRAMID</p>
                                     <div class="text-[11px] flex justify-between"><span class="text-gray-500">Top:</span> <span id="res-note-top" class="text-gray-300">Bergamot, Black Pepper</span></div>
                                     <div class="text-[11px] flex justify-between"><span class="text-gray-500">Middle:</span> <span id="res-note-mid" class="text-gray-300">Oud, Frankincense</span></div>
                                     <div class="text-[11px] flex justify-between"><span class="text-gray-500">Base:</span> <span id="res-note-base" class="text-gray-300">Dark Musk, Amber</span></div>
                                 </div>
+                                <span id="res-ajian-snippet" class="hidden"></span>
+                            </div>
+                        </div>
 
-                                {{-- Ajian Snippet --}}
-                                <div class="bg-gold-400/5 rounded-xl p-2.5 border border-gold-400/20">
-                                    <p class="text-gold-400 text-[8px] uppercase tracking-widest font-semibold mb-0.5 font-mono">AJIAN JIWA</p>
-                                    <p id="res-ajian-snippet" class="text-[10px] text-gold-200 italic font-light leading-relaxed"></p>
+                        {{-- BAGIAN 3: AJIAN JIWA SAKRAL (DEDICATED SECTION) --}}
+                        <div class="rounded-xl p-4 sm:p-5 border border-gold-400/30 bg-[#050505] relative overflow-hidden shadow-lg group">
+                            {{-- Ambient subtle gold glow --}}
+                            <div class="absolute -top-10 -right-10 w-32 h-32 bg-gold-400/5 rounded-full blur-2xl pointer-events-none"></div>
+
+                            <div class="flex items-center justify-between mb-2.5">
+                                <span class="text-[9px] uppercase tracking-[0.25em] text-gold-400/80 font-mono block">
+                                    ✦ AJIAN JIWA SAKRALMU ✦
+                                </span>
+                                <span class="text-[9px] text-gold-400/60 font-mono">Ritual Penyelarasan Batin</span>
+                            </div>
+
+                            <div class="flex items-start gap-3.5 relative z-10">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-400/5 border border-gold-400/30 flex items-center justify-center text-gold-400 shrink-0 shadow-md mt-0.5">
+                                    <span class="text-base glow-gold animate-pulse-gold">✦</span>
+                                </div>
+                                <div class="flex-1 space-y-1.5">
+                                    <p id="res-ajian-text" class="text-xs sm:text-sm font-serif italic text-gold-200 tracking-wide leading-relaxed">
+                                        "Aku melihat dengan jernih. Aku memahami dengan dalam. Aku melangkah dengan tepat."
+                                    </p>
+                                    <p id="res-sugesti-text" class="text-[11px] text-gray-300 font-light leading-relaxed">
+                                        Semprotkan pada titik nadi Anda. Tarik napas dalam-dalam. Fokus pada analisis dan pemahaman. Terima wawasan dan ambil keputusan dengan bijaksana.
+                                    </p>
                                 </div>
                             </div>
                         </div>
