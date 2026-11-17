@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NumerologyLead;
+use App\Rules\RealEmail;
 use App\Services\NumerologyService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -33,7 +34,7 @@ class NumerologyController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'birth_date' => 'required|date|before_or_equal:today',
-            'email' => 'nullable|email:rfc,filter|max:255',
+            'email' => ['nullable', 'email:rfc,filter', 'max:255', new RealEmail],
             'phone' => 'nullable|string|max:25',
         ]);
 

@@ -116,9 +116,37 @@
                                     <span class="text-[10px] text-gray-400 font-mono">Resmi</span>
                                 </div>
                                 <div id="calc_phone_wrapper" class="flex rounded-lg overflow-hidden border border-gold-400/30 bg-[#050505] focus-within:border-gold-400 focus-within:ring-1 focus-within:ring-gold-400 transition-colors">
-                                    <div class="flex items-center gap-1.5 px-3 py-3 bg-gold-400/10 border-r border-gold-400/25 text-gold-300 font-mono text-xs sm:text-sm select-none shrink-0" title="Indonesia (+62)">
-                                        <span class="text-base">🇮🇩</span>
-                                        <span class="font-semibold text-gold-300 tracking-wider">+62</span>
+                                    <div class="relative flex items-center bg-gold-400/10 border-r border-gold-400/25 shrink-0">
+                                        <select 
+                                            id="calc_country_code" 
+                                            name="country_code" 
+                                            class="appearance-none bg-transparent pl-3 pr-7 py-3 text-gold-300 font-mono text-xs sm:text-sm font-semibold focus:outline-none cursor-pointer tracking-wider"
+                                            title="Pilih Kode Negara"
+                                        >
+                                            <option value="+62" class="bg-[#121212] text-white" selected>🇮🇩 +62</option>
+                                            <option value="+60" class="bg-[#121212] text-white">🇲🇾 +60</option>
+                                            <option value="+65" class="bg-[#121212] text-white">🇸🇬 +65</option>
+                                            <option value="+673" class="bg-[#121212] text-white">🇧🇳 +673</option>
+                                            <option value="+63" class="bg-[#121212] text-white">🇵🇭 +63</option>
+                                            <option value="+66" class="bg-[#121212] text-white">🇹🇭 +66</option>
+                                            <option value="+84" class="bg-[#121212] text-white">🇻🇳 +84</option>
+                                            <option value="+966" class="bg-[#121212] text-white">🇸🇦 +966</option>
+                                            <option value="+971" class="bg-[#121212] text-white">🇦🇪 +971</option>
+                                            <option value="+974" class="bg-[#121212] text-white">🇶🇦 +974</option>
+                                            <option value="+965" class="bg-[#121212] text-white">🇰🇼 +965</option>
+                                            <option value="+90" class="bg-[#121212] text-white">🇹🇷 +90</option>
+                                            <option value="+1" class="bg-[#121212] text-white">🇺🇸 +1</option>
+                                            <option value="+44" class="bg-[#121212] text-white">🇬🇧 +44</option>
+                                            <option value="+61" class="bg-[#121212] text-white">🇦🇺 +61</option>
+                                            <option value="+81" class="bg-[#121212] text-white">🇯🇵 +81</option>
+                                            <option value="+82" class="bg-[#121212] text-white">🇰🇷 +82</option>
+                                            <option value="+49" class="bg-[#121212] text-white">🇩🇪 +49</option>
+                                            <option value="+33" class="bg-[#121212] text-white">🇫🇷 +33</option>
+                                            <option value="+31" class="bg-[#121212] text-white">🇳🇱 +31</option>
+                                        </select>
+                                        <div class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-gold-400/60">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                        </div>
                                     </div>
                                     <input id="calc_phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]*" value="" placeholder="81234567890" required
                                         class="w-full py-3 px-3.5 text-sm sm:text-base bg-transparent text-white placeholder-gray-500 focus:outline-none font-mono">
@@ -848,13 +876,18 @@
         return true;
     }
 
-    function cleanPhoneInput(val) {
+    function cleanPhoneInput(val, code = '') {
         if (!val) return '';
         let digits = String(val).replace(/\D/g, '');
         while (digits.startsWith('0')) {
             digits = digits.substring(1);
         }
-        if (digits.startsWith('62')) {
+        if (code) {
+            const rawCode = code.replace(/\D/g, '');
+            if (digits.startsWith(rawCode)) {
+                digits = digits.substring(rawCode.length);
+            }
+        } else if (digits.startsWith('62')) {
             digits = digits.substring(2);
         }
         return digits;
@@ -916,23 +949,32 @@
 
     const calcPhoneInput = document.getElementById('calc_phone');
     const calcPhoneStatus = document.getElementById('calc_phone_status');
-    if (calcPhoneInput) {
-        calcPhoneInput.addEventListener('input', function (e) {
-            const cleaned = cleanPhoneInput(e.target.value);
-            e.target.value = cleaned;
-            if (calcPhoneStatus) {
-                if (cleaned.length >= 9 && cleaned.length <= 13) {
-                    calcPhoneStatus.textContent = `✓ Nomor resmi: +62 ${cleaned}`;
-                    calcPhoneStatus.className = 'text-[11px] mt-1.5 text-emerald-400 font-mono';
-                } else if (cleaned.length > 0) {
-                    calcPhoneStatus.textContent = `Minimal 9 digit (terisi: ${cleaned.length} digit)`;
-                    calcPhoneStatus.className = 'text-[11px] mt-1.5 text-gold-400/70 font-mono';
-                } else {
-                    calcPhoneStatus.textContent = 'Contoh: 812-3456-7890';
-                    calcPhoneStatus.className = 'text-[11px] mt-1.5 text-gray-500 font-mono';
-                }
+    const calcCountryCode = document.getElementById('calc_country_code');
+
+    function updateCalcPhoneStatus() {
+        if (!calcPhoneInput) return;
+        const code = calcCountryCode?.value || '+62';
+        const cleaned = cleanPhoneInput(calcPhoneInput.value, code);
+        calcPhoneInput.value = cleaned;
+        if (calcPhoneStatus) {
+            if (cleaned.length >= 6) {
+                calcPhoneStatus.textContent = `✓ Nomor: ${code} ${cleaned}`;
+                calcPhoneStatus.className = 'text-[11px] mt-1.5 text-emerald-400 font-mono';
+            } else if (cleaned.length > 0) {
+                calcPhoneStatus.textContent = `Format nomor dengan kode ${code}`;
+                calcPhoneStatus.className = 'text-[11px] mt-1.5 text-gold-400/70 font-mono';
+            } else {
+                calcPhoneStatus.textContent = 'Contoh: 812-3456-7890';
+                calcPhoneStatus.className = 'text-[11px] mt-1.5 text-gray-500 font-mono';
             }
-        });
+        }
+    }
+
+    if (calcPhoneInput) {
+        calcPhoneInput.addEventListener('input', updateCalcPhoneStatus);
+    }
+    if (calcCountryCode) {
+        calcCountryCode.addEventListener('change', updateCalcPhoneStatus);
     }
 
     // ================================================================
@@ -968,13 +1010,14 @@
             return;
         }
 
-        const cleanPhone = cleanPhoneInput(phone);
-        if (!cleanPhone || cleanPhone.length < 9) {
-            alert('Silakan masukkan nomor telepon / WhatsApp resmi yang valid (minimal 9 digit, otomatis +62).');
+        const countryCode = calcCountryCode?.value || '+62';
+        const cleanPhone = cleanPhoneInput(phone, countryCode);
+        if (!cleanPhone || cleanPhone.length < 6) {
+            alert(`Silakan masukkan nomor telepon / WhatsApp yang valid untuk kode negara ${countryCode}.`);
             calcPhoneInput?.focus();
             return;
         }
-        const fullPhone = `+62${cleanPhone}`;
+        const fullPhone = `${countryCode}${cleanPhone}`;
 
         // Show loading
         submitBtn.classList.add('opacity-50', 'pointer-events-none');

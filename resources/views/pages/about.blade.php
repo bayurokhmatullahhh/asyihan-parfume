@@ -51,7 +51,7 @@
                 </div>
                 <div class="border border-gold-400/20 rounded-xl p-6 text-center">
                     <div class="text-2xl sm:text-3xl font-serif text-gold-400 mb-2 whitespace-nowrap overflow-hidden"><span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">S</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">Y</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">I</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">H</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">A</span> <span class="text-gold-400/40">•</span> <span class="inline-block tracking-[0.15em] sm:tracking-[0.2em]">N</span></div>
-                    <p class="text-[11px] text-gray-400 italic">
+                    <p class="text-[13px] text-gray-400 italic">
                         Sebuah nama yang akarnya tetap berpijak di tanah Nusantara, tetapi aromanya mengembara jauh menuju negeri-negeri tempat Oud dibakar, Musk diwariskan, Amber dihangatkan, dan wewangian menjadi bagian dari kehormatan serta identitas seseorang.
                     </p>
                 </div>

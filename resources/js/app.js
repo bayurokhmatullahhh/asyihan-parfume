@@ -267,30 +267,82 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Email & Phone Verification Helpers
-        const isValidEmail = (str) => {
-            if (!str || typeof str !== "string") return false;
-            const trimmed = str.trim();
+        // Disposable, Temporary & Fake Email Blocklist
+        const disposableEmailDomains = [
+            'mailinator.com', 'guerrillamail.com', 'guerrillamail.net', 'guerrillamail.org',
+            'tempmail.com', 'temp-mail.org', 'temp-mail.io', '10minutemail.com', '10minutemail.net',
+            'yopmail.com', 'yopmail.fr', 'yopmail.net', 'trashmail.com', 'trashmail.net',
+            'sharklasers.com', 'dispostable.com', 'getnada.com', 'inboxkitten.com', 'crazymailing.com',
+            'throwawaymail.com', 'fakemailgenerator.com', 'mohmal.com', 'burnermail.io', 'maildrop.cc',
+            'emailondeck.com', 'nada.ltd', 'dropmail.me', 'tempail.com', 'mytemp.email', 'fakemail.net',
+            'generator.email', 'disposablemail.com', 'tempmail.net', 'temporary-mail.net', 'armyspy.com',
+            'cuvox.de', 'dayrep.com', 'fleckens.hu', 'gustr.com', 'jourrapide.com', 'rhyta.com',
+            'superrito.com', 'teleworm.us', 'einrot.com', 'spamgourmet.com', 'mytempemail.com',
+            'fakemail.com', 'fake.com', 'test.com', 'test.test', 'asdf.com', 'dummy.com',
+            'contoh.com', 'sample.com', 'mailcatch.com', 'binkmail.com', 'bobmail.info',
+            'chacuo.net', 'devnullmail.com', 'letthemeatspam.com', 'mailinater.com', 'veryrealemail.com',
+            'discard.email', 'discardmail.com', 'spambog.com', 'spambog.de', 'fastacura.com'
+        ];
+
+        const fakeEmailUsernames = [
+            'test', 'testing', 'tester', 'fake', 'dummy', 'asdf', 'asdfgh', 'qwerty',
+            'admin', 'root', 'sample', 'contoh', 'user', 'someone', '12345', '123456',
+            'noreply', 'no-reply'
+        ];
+
+        // Comprehensive Real Email Verification
+        const verifyRealEmail = (str) => {
+            if (!str || typeof str !== "string") {
+                return { valid: false, message: "Silakan masukkan alamat email Anda." };
+            }
+            const trimmed = str.trim().toLowerCase();
             const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
-            if (!regex.test(trimmed)) return false;
+            if (!regex.test(trimmed)) {
+                return { valid: false, message: "Format email tidak valid (contoh: nama@gmail.com)." };
+            }
+
             const parts = trimmed.split("@");
-            if (parts.length !== 2) return false;
-            const domain = parts[1].toLowerCase();
+            if (parts.length !== 2) {
+                return { valid: false, message: "Format email tidak valid." };
+            }
+
+            const [user, domain] = parts;
+
+            if (fakeEmailUsernames.includes(user)) {
+                return { valid: false, message: "Mohon gunakan email pribadi asli Anda, bukan email contoh/testing." };
+            }
+
             const domainParts = domain.split(".");
-            if (domainParts.length < 2) return false;
+            if (domainParts.length < 2) {
+                return { valid: false, message: "Domain email tidak lengkap (contoh: @gmail.com)." };
+            }
+
             const tld = domainParts[domainParts.length - 1];
-            if (tld.length < 2 || !/^[a-z]+$/.test(tld)) return false;
-            const dummy = ["test.test", "asdf.com", "example.com", "dummy.com", "test.com"];
-            if (dummy.includes(domain)) return false;
-            return true;
+            if (tld.length < 2 || !/^[a-z]+$/.test(tld)) {
+                return { valid: false, message: "Ekstensi domain email tidak valid." };
+            }
+
+            if (disposableEmailDomains.includes(domain) || disposableEmailDomains.some(d => domain.endsWith("." + d))) {
+                return { valid: false, message: "Email sementara (disposable/temp mail) dilarang. Gunakan email aktif Anda." };
+            }
+
+            return { valid: true, message: "✓ Email aktif terverifikasi" };
         };
 
-        const cleanPhoneInput = (val) => {
+        const isValidEmail = (str) => verifyRealEmail(str).valid;
+
+        const cleanPhoneInput = (val, code = "") => {
             if (!val) return "";
             let digits = String(val).replace(/\D/g, "");
             while (digits.startsWith("0")) {
                 digits = digits.substring(1);
             }
-            if (digits.startsWith("62")) {
+            if (code) {
+                const rawCode = code.replace(/\D/g, "");
+                if (digits.startsWith(rawCode)) {
+                    digits = digits.substring(rawCode.length);
+                }
+            } else if (digits.startsWith("62")) {
                 digits = digits.substring(2);
             }
             return digits;
@@ -317,9 +369,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            if (isValidEmail(val)) {
+            const check = verifyRealEmail(val);
+            if (check.valid) {
                 if (sidebarEmailStatus) {
-                    sidebarEmailStatus.textContent = "✓ Format email valid";
+                    sidebarEmailStatus.textContent = check.message;
                     sidebarEmailStatus.className = "text-[10px] mt-1 text-emerald-400 font-mono";
                     sidebarEmailStatus.classList.remove("hidden");
                 }
@@ -332,14 +385,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 sidebarEmailInput.classList.add("border-emerald-500/60");
             } else {
                 if (sidebarEmailStatus) {
-                    sidebarEmailStatus.textContent = "⚠ Format email belum valid (contoh: nama@domain.com)";
+                    sidebarEmailStatus.textContent = `⚠ ${check.message}`;
                     sidebarEmailStatus.className = "text-[10px] mt-1 text-rose-400 font-mono";
                     sidebarEmailStatus.classList.remove("hidden");
                 }
                 if (sidebarEmailIcon) sidebarEmailIcon.classList.add("hidden");
                 if (sidebarEmailBadge) {
-                    sidebarEmailBadge.textContent = "Format Belum Tepat";
-                    sidebarEmailBadge.className = "text-[9px] text-rose-400 font-mono";
+                    sidebarEmailBadge.textContent = "Email Tidak Valid";
+                    sidebarEmailBadge.className = "text-[9px] text-rose-400 font-mono font-semibold";
                 }
                 sidebarEmailInput.classList.remove("border-emerald-500/60", "border-gold-400/30");
                 sidebarEmailInput.classList.add("border-rose-500/60");
@@ -354,23 +407,32 @@ document.addEventListener("DOMContentLoaded", () => {
         // Real-time listener for Sidebar Phone
         const sidebarPhoneInput = document.getElementById("sidebar_phone");
         const sidebarPhoneStatus = document.getElementById("sidebar_phone_status");
-        if (sidebarPhoneInput) {
-            sidebarPhoneInput.addEventListener("input", (e) => {
-                const cleaned = cleanPhoneInput(e.target.value);
-                e.target.value = cleaned;
-                if (sidebarPhoneStatus) {
-                    if (cleaned.length >= 9 && cleaned.length <= 13) {
-                        sidebarPhoneStatus.textContent = `✓ Nomor resmi: +62 ${cleaned}`;
-                        sidebarPhoneStatus.className = "text-[9px] mt-1 text-emerald-400 font-mono";
-                    } else if (cleaned.length > 0) {
-                        sidebarPhoneStatus.textContent = `Minimal 9 digit (terisi: ${cleaned.length} digit)`;
-                        sidebarPhoneStatus.className = "text-[9px] mt-1 text-gold-400/70 font-mono";
-                    } else {
-                        sidebarPhoneStatus.textContent = "Contoh: 812-3456-7890";
-                        sidebarPhoneStatus.className = "text-[9px] mt-1 text-gray-500 font-mono";
-                    }
+        const sidebarCountryCode = document.getElementById("sidebar_country_code");
+
+        const updateSidebarPhoneStatus = () => {
+            if (!sidebarPhoneInput) return;
+            const code = sidebarCountryCode?.value || "+62";
+            const cleaned = cleanPhoneInput(sidebarPhoneInput.value, code);
+            sidebarPhoneInput.value = cleaned;
+            if (sidebarPhoneStatus) {
+                if (cleaned.length >= 6) {
+                    sidebarPhoneStatus.textContent = `✓ Nomor: ${code} ${cleaned}`;
+                    sidebarPhoneStatus.className = "text-[9px] mt-1 text-emerald-400 font-mono";
+                } else if (cleaned.length > 0) {
+                    sidebarPhoneStatus.textContent = `Format nomor dengan kode ${code}`;
+                    sidebarPhoneStatus.className = "text-[9px] mt-1 text-gold-400/70 font-mono";
+                } else {
+                    sidebarPhoneStatus.textContent = "Contoh: 812-3456-7890";
+                    sidebarPhoneStatus.className = "text-[9px] mt-1 text-gray-500 font-mono";
                 }
-            });
+            }
+        };
+
+        if (sidebarPhoneInput) {
+            sidebarPhoneInput.addEventListener("input", updateSidebarPhoneStatus);
+        }
+        if (sidebarCountryCode) {
+            sidebarCountryCode.addEventListener("change", updateSidebarPhoneStatus);
         }
 
         // Reset button
@@ -407,21 +469,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            if (!isValidEmail(email)) {
-                showDateError("Alamat email tidak valid. Masukkan format resmi (contoh: nama@gmail.com).");
+            const emailCheck = verifyRealEmail(email);
+            if (!emailCheck.valid) {
+                showDateError(emailCheck.message);
                 document.getElementById("sidebar_email")?.focus();
                 return;
             }
 
-            const cleanPhone = cleanPhoneInput(phone);
-            if (!cleanPhone || cleanPhone.length < 9) {
+            const countryCode = sidebarCountryCode?.value || "+62";
+            const cleanPhone = cleanPhoneInput(phone, countryCode);
+            if (!cleanPhone || cleanPhone.length < 6) {
                 showDateError(
-                    "Silakan masukkan nomor telepon / WhatsApp resmi yang valid (minimal 9 digit, otomatis +62).",
+                    `Silakan masukkan nomor telepon / WhatsApp yang valid untuk kode negara ${countryCode}.`,
                 );
                 document.getElementById("sidebar_phone")?.focus();
                 return;
             }
-            const fullPhone = `+62${cleanPhone}`;
+            const fullPhone = `${countryCode}${cleanPhone}`;
 
             let birthDate = "";
             if (dayInput && monthInput && yearInput) {
@@ -656,8 +720,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             window.AsyihanTranslator.translateElement(resCard, "en");
                         }
                     }
-                } else if (data.message) {
-                    showDateError(data.message);
+                } else {
+                    let errMsg = data.message || "Terjadi kendala saat menghitung esensi jiwa. Silakan coba kembali.";
+                    if (data.errors) {
+                        const firstErr = Object.values(data.errors)[0];
+                        errMsg = Array.isArray(firstErr) ? firstErr[0] : firstErr;
+                    }
+                    showDateError(errMsg);
                 }
             } catch (err) {
                 console.error("Calculation error:", err);
@@ -936,23 +1005,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const calcPhoneInput = document.getElementById("calc_phone");
         const calcPhoneStatus = document.getElementById("calc_phone_status");
-        if (calcPhoneInput) {
-            calcPhoneInput.addEventListener("input", (e) => {
-                const cleaned = cleanPhoneInput(e.target.value);
-                e.target.value = cleaned;
-                if (calcPhoneStatus) {
-                    if (cleaned.length >= 9 && cleaned.length <= 13) {
-                        calcPhoneStatus.textContent = `✓ Nomor resmi: +62 ${cleaned}`;
-                        calcPhoneStatus.className = "text-[11px] mt-1.5 text-emerald-400 font-mono";
-                    } else if (cleaned.length > 0) {
-                        calcPhoneStatus.textContent = `Minimal 9 digit (terisi: ${cleaned.length} digit)`;
-                        calcPhoneStatus.className = "text-[11px] mt-1.5 text-gold-400/70 font-mono";
-                    } else {
-                        calcPhoneStatus.textContent = "Contoh: 812-3456-7890";
-                        calcPhoneStatus.className = "text-[11px] mt-1.5 text-gray-500 font-mono";
-                    }
+        const calcCountryCode = document.getElementById("calc_country_code");
+
+        const updateCalcPhoneStatus = () => {
+            if (!calcPhoneInput) return;
+            const code = calcCountryCode?.value || "+62";
+            const cleaned = cleanPhoneInput(calcPhoneInput.value, code);
+            calcPhoneInput.value = cleaned;
+            if (calcPhoneStatus) {
+                if (cleaned.length >= 6) {
+                    calcPhoneStatus.textContent = `✓ Nomor: ${code} ${cleaned}`;
+                    calcPhoneStatus.className = "text-[11px] mt-1.5 text-emerald-400 font-mono";
+                } else if (cleaned.length > 0) {
+                    calcPhoneStatus.textContent = `Format nomor dengan kode ${code}`;
+                    calcPhoneStatus.className = "text-[11px] mt-1.5 text-gold-400/70 font-mono";
+                } else {
+                    calcPhoneStatus.textContent = "Contoh: 812-3456-7890";
+                    calcPhoneStatus.className = "text-[11px] mt-1.5 text-gray-500 font-mono";
                 }
-            });
+            }
+        };
+
+        if (calcPhoneInput) {
+            calcPhoneInput.addEventListener("input", updateCalcPhoneStatus);
+        }
+        if (calcCountryCode) {
+            calcCountryCode.addEventListener("change", updateCalcPhoneStatus);
         }
 
         [dayInput, monthInput, yearInput].forEach((inp) => {
@@ -997,13 +1075,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const cleanPhone = cleanPhoneInput(phone);
-            if (!cleanPhone || cleanPhone.length < 9) {
-                alert("Silakan masukkan nomor telepon / WhatsApp resmi yang valid (minimal 9 digit, otomatis +62).");
+            const countryCode = calcCountryCode?.value || "+62";
+            const cleanPhone = cleanPhoneInput(phone, countryCode);
+            if (!cleanPhone || cleanPhone.length < 6) {
+                alert(`Silakan masukkan nomor telepon / WhatsApp yang valid untuk kode negara ${countryCode}.`);
                 calcPhoneInput?.focus();
                 return;
             }
-            const fullPhone = `+62${cleanPhone}`;
+            const fullPhone = `${countryCode}${cleanPhone}`;
 
             btn.disabled = true;
             if (loading) loading.classList.remove("hidden");

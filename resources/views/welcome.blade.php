@@ -213,10 +213,10 @@
                         <div class="essence-num-ring mx-auto mb-2">
                             <img src="{{ asset('images/angka/' . $essence['number'] . '.png') }}" alt="Angka {{ $essence['number'] }}" class="w-10 h-10 sm:w-12 sm:h-12 object-contain relative z-10 transition-all duration-300 group-hover:scale-110 drop-shadow-[0_0_8px_rgba(197,160,89,0.4)]">
                         </div>
-                        <h3 class="text-[10px] sm:text-xs uppercase tracking-widest text-white mb-1 font-medium group-hover:text-gold-200 relative z-10">
+                        <h3 class="text-[12px] sm:text-[12px] uppercase tracking-widest text-white mb-1 font-medium group-hover:text-gold-200 relative z-10">
                             {{ $essence['name'] }}
                         </h3>
-                        <p class="text-[9px] sm:text-[10px] text-gray-400 font-light truncate relative z-10">
+                        <p class="text-[11px] sm:text-[12px] text-gray-400 font-light truncate relative z-10">
                             {{ implode(' · ', $essence['traits']) }}
                         </p>
                         {{-- Element Icon Badge --}}
@@ -413,9 +413,37 @@
                                         <span class="text-[9px] text-gray-500 font-mono">Resmi</span>
                                     </div>
                                     <div id="sidebar_phone_wrapper" class="flex rounded-lg overflow-hidden border border-gold-400/30 bg-[#020202] focus-within:border-gold-400 focus-within:ring-1 focus-within:ring-gold-400/50 transition-all">
-                                        <div class="flex items-center gap-1 px-2.5 py-2.5 bg-gold-400/10 border-r border-gold-400/25 text-gold-300 font-mono text-xs select-none shrink-0" title="Indonesia (+62)">
-                                            <span class="text-xs">🇮🇩</span>
-                                            <span class="font-semibold text-[11px] text-gold-300 tracking-wider">+62</span>
+                                        <div class="relative flex items-center bg-gold-400/10 border-r border-gold-400/25 shrink-0">
+                                            <select 
+                                                id="sidebar_country_code" 
+                                                name="country_code" 
+                                                class="appearance-none bg-transparent pl-2.5 pr-6 py-2.5 text-gold-300 font-mono text-[11px] font-semibold focus:outline-none cursor-pointer tracking-wider"
+                                                title="Pilih Kode Negara"
+                                            >
+                                                <option value="+62" class="bg-[#121212] text-white" selected>🇮🇩 +62</option>
+                                                <option value="+60" class="bg-[#121212] text-white">🇲🇾 +60</option>
+                                                <option value="+65" class="bg-[#121212] text-white">🇸🇬 +65</option>
+                                                <option value="+673" class="bg-[#121212] text-white">🇧🇳 +673</option>
+                                                <option value="+63" class="bg-[#121212] text-white">🇵🇭 +63</option>
+                                                <option value="+66" class="bg-[#121212] text-white">🇹🇭 +66</option>
+                                                <option value="+84" class="bg-[#121212] text-white">🇻🇳 +84</option>
+                                                <option value="+966" class="bg-[#121212] text-white">🇸🇦 +966</option>
+                                                <option value="+971" class="bg-[#121212] text-white">🇦🇪 +971</option>
+                                                <option value="+974" class="bg-[#121212] text-white">🇶🇦 +974</option>
+                                                <option value="+965" class="bg-[#121212] text-white">🇰🇼 +965</option>
+                                                <option value="+90" class="bg-[#121212] text-white">🇹🇷 +90</option>
+                                                <option value="+1" class="bg-[#121212] text-white">🇺🇸 +1</option>
+                                                <option value="+44" class="bg-[#121212] text-white">🇬🇧 +44</option>
+                                                <option value="+61" class="bg-[#121212] text-white">🇦🇺 +61</option>
+                                                <option value="+81" class="bg-[#121212] text-white">🇯🇵 +81</option>
+                                                <option value="+82" class="bg-[#121212] text-white">🇰🇷 +82</option>
+                                                <option value="+49" class="bg-[#121212] text-white">🇩🇪 +49</option>
+                                                <option value="+33" class="bg-[#121212] text-white">🇫🇷 +33</option>
+                                                <option value="+31" class="bg-[#121212] text-white">🇳🇱 +31</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gold-400/60">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                            </div>
                                         </div>
                                         <input 
                                             id="sidebar_phone" 
@@ -719,7 +747,7 @@
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-serif text-gold-400 tracking-[0.25em] uppercase glow-gold font-medium mb-4">
                     FILOSOFI ASIH
                 </h2>
-                <p class="text-gray-300 text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto">
+                <p class="text-gray-300 text-[12px] sm:text-[12px] font-light leading-relaxed max-w-2xl mx-auto">
                     Lebih dari sekadar wewangian, ASYIHAN adalah sebuah perjalanan spiritual. Terlahir dari kearifan Nusantara Kuno, memadukan tradisi mistis dengan kemewahan perfumery Timur Tengah.
                 </p>
 
